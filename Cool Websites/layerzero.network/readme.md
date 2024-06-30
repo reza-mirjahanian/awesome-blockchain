@@ -1,6 +1,9 @@
 
 ### Core Principles
 
+
+
+
 **Layer Zero's Core Principles:**
 
 -   **Permissionless:** Anyone can interact with Layer Zero.
