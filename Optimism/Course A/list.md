@@ -1,0 +1,6 @@
+https://l2beat.com/scaling/summary
+
+https://coinmarketcap.com/view/layer-2/
+
+
+https://www.alchemy.com/list-of/layer-2-blockchains-on-ethereum
