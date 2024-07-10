@@ -4,3 +4,9 @@ https://coinmarketcap.com/view/layer-2/
 
 
 https://www.alchemy.com/list-of/layer-2-blockchains-on-ethereum
+
+
+
+https://static.optimism.io/
+
+https://status.optimism.io/
