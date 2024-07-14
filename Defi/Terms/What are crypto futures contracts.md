@@ -1,3 +1,88 @@
+
+# Some Terms:
+
+ 1. **Futures Contract**: An agreement to buy or sell an asset at a predetermined price at a specified time in the future.
+
+ 2. **Crypto Futures**: Futures contracts where the underlying asset is a cryptocurrency like Bitcoin or Ethereum.
+
+ 3. **Underlying Asset**: The specific cryptocurrency on which a futures contract is based.
+
+ 4. **Expiration Date**: The date on which the futures contract must be settled.
+
+ 5. **Leverage**: Using borrowed funds to increase the potential return of an investment.
+
+ 6. **Margin**: The initial deposit required to enter into a futures contract, which acts as collateral.
+
+ 7. **Initial Margin**: The amount of money that must be deposited to open a futures position.
+
+ 8. **Maintenance Margin**: The minimum amount of equity that must be maintained in a futures account to keep a position open.
+
+ 9. **Mark to Market**: Daily adjustment of an account to reflect profits and losses from changes in the futures price.
+
+ 10. **Settlement**: The process of closing a futures contract by delivering the underlying asset or through cash payment.
+
+ 11. **Open Interest**: The total number of outstanding futures contracts that have not been settled.
+
+ 12. **Long Position**: Buying a futures contract with the expectation that the underlying asset's price will rise.
+
+ 13. **Short Position**: Selling a futures contract with the expectation that the underlying asset's price will fall.
+
+ 14. **Hedging**: Using futures contracts to reduce the risk of price fluctuations in an investment portfolio.
+
+ 15. **Speculation**: Engaging in futures trading with the aim of making a profit from price movements.
+
+ 16. **Contract Size**: The amount of the underlying asset covered by a futures contract.
+
+ 17. **Tick Size**: The minimum price movement of a futures contract.
+
+ 18. **Contango**: A situation where the futures price is higher than the expected future spot price.
+
+ 19. **Backwardation**: A situation where the futures price is lower than the expected future spot price.
+
+ 20. **Basis**: The difference between the spot price and the futures price of an asset.
+
+ 21. **Futures Exchange**: A marketplace where futures contracts are traded.
+
+ 22. **Clearing House**: An entity that ensures the proper execution of futures contracts, managing margin requirements and settlement processes.
+
+ 23. **Liquidation**: The process of closing a futures position by entering into an offsetting trade.
+
+ 24. **Volume**: The number of futures contracts traded during a given period.
+
+ 25. **Futures Commission Merchant (FCM)**: A firm or individual that solicits or accepts orders for futures contracts and accepts money or other assets from customers.
+
+
+ 26. **Funding Rate:** Periodic payments between long and short traders to keep the futures price close to the spot price.
+
+ 27. **Perpetual Futures**: Futures contracts without an expiration date.
+
+
+ 28. **Open Interest:** The total number of outstanding futures contracts.
+
+ 29. **Volume**: The number of contracts traded in a given period.
+
+
+ 30. **Delivery:** Physical transfer of the underlying asset (rare in crypto futures).
+
+ 31. **Cash Settlement:** Settling the contract with cash instead of physical delivery.
+
+ 32. **Order Book:** A list of buy and sell orders for futures contracts.
+
+ 33. **Spread:** The difference between the bid and ask prices in the order book.
+
+
+ 34. **Counterparty Risk**: The risk that the other party in the contract defaults on their obligations.
+
+
+ 35.  **Spot market:** The market where assets are traded for immediate delivery and payment.
+    
+ 36.  **Basis**: The difference between the spot price and the futures price of an asset.
+
+ 37. **Arbitrage:** Exploiting price differences between the futures market and the spot market to make a profit.
+
+
+
+
 ## crypto futures contract
 A crypto futures contract is an agreement between two parties to exchange the fiat-equivalent value of a cryptoasset, or the asset itself, on a future date.
 
