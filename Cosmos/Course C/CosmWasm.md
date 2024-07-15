@@ -1,9 +1,9 @@
 CosmWasm - multi-chain smart contracts
 --------------------------------------
 
-[CosmWasm (opens new window)](https://cosmwasm.com/)is a multi-chain solution for smart contracts on the interchain - that is the Cosm part. It is a way of using WebAssembly in the interchain universe - that is the Wasm part.
+[CosmWasm ](https://cosmwasm.com/) is a multi-chain solution for smart contracts on the interchain - that is the Cosm part. It is a way of using WebAssembly in the interchain universe - that is the Wasm part.
 
-With [CosmWasm (opens new window)](https://cosmwasm.com/)you can create robust decentralized applications (dApps) for the interchain using smart contracts and building on Tendermint and the Cosmos SDK. Its key features are:
+With [CosmWasm](https://cosmwasm.com/) you can create robust decentralized applications (dApps) for the interchain using smart contracts and building on Tendermint and the Cosmos SDK. Its key features are:
 
 -   Mature tools for the development and testing of smart contracts
 -   Close integration with the Cosmos SDK and ecosystem
