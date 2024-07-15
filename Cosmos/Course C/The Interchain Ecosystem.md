@@ -23,3 +23,11 @@ The [Inter-Blockchain Communication Protocol (IBC) (opens new window)](https:/
 
 The interchain implements a **modular architecture with two blockchain classes**: **hubs** and **zones**.
 
+----
+
+The Cosmos Hub
+---------------
+
+The Cosmos Hub was the first blockchain built with the Interchain Stack. It is a public Proof-of-Stake (PoS) blockchain with a native token, ATOM. ATOM is used to secure the network and pay transaction fees but is also the token that has funded the development of the Interchain Stack and other projects in the wider ecosystem.
+
+The Cosmos Hub can be understood as a router facilitating transactions between the chains connected to it. For example, the Cosmos Hub allows for transaction **fees to be paid in different tokens**, as long as the zone trusts the Cosmos Hub and the other zones connected to it.
