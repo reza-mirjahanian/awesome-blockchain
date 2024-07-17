@@ -1,4 +1,5 @@
-### crypto derivatives:
+### 
+:
 
 1. Crypto derivatives are financial tools based on cryptocurrency prices, without owning actual crypto.
 
