@@ -28,3 +28,6 @@ However, instead of working to "solve" the hash functions to produce a new block
 Next, let us clear up a few misconceptions about Solana. Many sources label Solana's consensus as Delegated Proof of Stake DPoS. This is not accurate, and the Solana team [has noted this](https://www.youtube.com/watch?v=wSAq1J_MJQQ) many times. It is an easy mistake to make because there are various roles on the Solana blockchain (leaders, validators, archivers, etc.).
 
 Whereas DPoS cryptocurrencies will essentially delegate these roles among network participants, Solana does not. Simply put, all nodes on Solana play a part in fulfilling all network roles.
+
+In contrast to other PoS cryptocurrencies, there is [no minimum stake](https://www.youtube.com/watch?v=wSAq1J_MJQQ) required to be a node on the Solana blockchain. For example, Ethereum node operators must stake 32 ETH, which is a considerable amount of money. Naturally, the amount of block rewards you get is proportional to the amount of SOL tokens you have staked on the network. While Leader selection is pseudorandom, the amount of SOL you stake also influences your likelihood of becoming a Leader which actually produces blocks. Misbehaving nodes see their stakes slashed and the slashed funds are added to block generation rewards.
+
