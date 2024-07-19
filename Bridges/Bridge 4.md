@@ -30,6 +30,10 @@ Example: StarkWare's StarkEx bridge
 
 8.  **Liquidity Bridges**: These bridges focus on providing liquidity between chains, enabling the seamless transfer of assets and facilitating decentralized finance (DeFi) applications.
 
+9.  **CCIP**: With CCIP token transfers, your protocol can start transferring tokens across chains in a fraction of the time it would take for you to build a solution on your own. CCIP provides audited token pool contracts that handle the complexity of burning/minting or locking/minting of your token across chains. Importantly, token sponsors maintain full control over their token pool contract while using CCIP.
+
+https://chain.link/cross-chain
+
 Example: Uniswap's v3 bridge
 
 **Related Terms and Idioms:**
