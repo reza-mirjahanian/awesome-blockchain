@@ -139,3 +139,27 @@ MPTs incorporate the following four node types for data management:
 
 Let’s understand this with the aid of a diagram:
 
+![alt text](img/diagram.png)
+
+In the top right corner, we have the **World State**, which is a key-value store that was indexed with 3 bytes, the first three chars, 6 nibbles (6 hexadecimal characters) that contain a value, in this case, an integer that represents the account balance.
+
+Looking at the top of the tree, we have the **Root Extension Node** that goes through the different nibbles, which has the **a7** prefix, as shown in the MPT diagram. Here, we have different keys that need to be traversed. So that leads us to the **Branch Node**, which is the child of the extension node that contains 3 different keys.
+
+If we decide to go for key **1** in the **a71** row, we end up with the **Leaf Node** that has the remaining keys. In this case, **1355**. Likewise, for the key **f** in the **a7f** row. As we traverse from the root node to the leaf, we have the keys that store the different values.
+
+However, if we look at the second and the fourth rows, we see that the key **7** appears twice, which also proceeds with the same nibble **d3**. This creates a new extension node and a branch node to get to the leaf node.
+
+The F**unctionality of Merkle Patricia Tries**
+----------------------------------------------
+
+Let's explore the key functionalities of MPTs:
+
+*   **Efficient Proofs of Inclusion and Exclusion:** One of the remarkable features of the Merkle Patricia Trie is the efficiency in proving whether a specific piece of data is included or excluded from the tree. By providing a path from the root of the tree to the data in question, MPTs enable quick verification of data existence or absence. This property is crucial for validating transactions and account balances in Ethereum. Further reading:
+    
+    *   [Merkle proof verification for Ethereum Patricia tree](https://ouvrard-pierre-alain.medium.com/merkle-proof-verification-for-ethereum-patricia-tree-48f29658eec)
+        
+    *   [Verify Ethereum Account Balance with State Proof](https://medium.com/@chiqing/verify-ethereum-account-balance-with-state-proof-83b51ceb15cf)
+        
+*   **Storage Optimization and Eliminating Redundancy:** MPTs help optimize storage space in blockchain networks by eliminating data redundancy. Nodes with identical data share the same hash, and this data is stored only once. This feature significantly reduces the storage requirements for blockchain nodes, making it more efficient and scalable. Further reading:
+    
+    *   [mLSM: Making Authenticated Storage Faster in Ethereum](https://www.usenix.org/system/files/conference/hotstorage18/hotstorage18-paper-raju.pdf)
