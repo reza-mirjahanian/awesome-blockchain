@@ -6,7 +6,7 @@ Chain stacks at the node level direct transaction data to the L2 and L1 networks
 
 The diagram below details the Polygon Solidity smart contract architecture minus the bridging contracts.
 
-![Polygon Solidity smart contract architecture](Overview%20-%20Polygon%20Knowledge%20Layer/smart-contracts-full-view.png)
+![Polygon Solidity smart contract architecture](img/smart-contracts-full-view.png)
 
 There are four key contract types built into the system design:
 
@@ -19,7 +19,7 @@ There are four key contract types built into the system design:
 
 In the Ethereum realm, the set of consensus contracts and the functions they expose fuel the sequencing and verification mechanisms triggered by stack components, such as the sequencer and aggregator, at the node level.
 
-![Polygon Solidity smart contract consensus contract set](Overview%20-%20Polygon%20Knowledge%20Layer/consensus-contracts.png)
+![Polygon Solidity smart contract consensus contract set](img/consensus-contracts.png)
 
 These contracts define the type of chain, i.e. validium or non-validium, and there is usually a single contract per CDK chain that supplies custom functionality.
 
@@ -27,17 +27,17 @@ These contracts define the type of chain, i.e. validium or non-validium, and the
 
 The [PolygonRollupManager.sol](https://github.com/0xPolygonHermez/zkevm-contracts/blob/main/contracts/v2/PolygonRollupManager.sol) contract is responsible for creating, updating, and verifying CDK rollup and validium chains.
 
-![Polygon Solidity smart contract rollup manager](Overview%20-%20Polygon%20Knowledge%20Layer/rollup-manager.png)
+![Polygon Solidity smart contract rollup manager](img/rollup-manager.png)
 
 ## Bridge[¶](https://docs.polygon.technology/zkEVM/architecture/high-level/smart-contracts/overview/#bridge "Link to this section")
 
 The class diagram below describes the unified bridge interactions.
 
-![Polygon Solidity smart contract bridging architecture](Overview%20-%20Polygon%20Knowledge%20Layer/bridging-class-diagram.png)
+![Polygon Solidity smart contract bridging architecture](img/bridging-class-diagram.png)
 
 The unified bridge contract [PolygonZkEVMBridgeV2.sol](https://github.com/0xPolygonHermez/zkevm-contracts/blob/main/contracts/v2/PolygonZkEVMBridgeV2.sol) is responsible for bridging and claiming activity across L1 and L2 chains.
 
-![Polygon Solidity smart contract bridge](Overview%20-%20Polygon%20Knowledge%20Layer/bridge.png)
+![Polygon Solidity smart contract bridge](img/bridge.png)
 
 In the L1 network, the bridge also manages the complex exit root mechanism governing system state. In the L2 network, there is a lighter exit root mechanism that governs state at this layer.
 
@@ -45,7 +45,7 @@ In the L1 network, the bridge also manages the complex exit root mechanism gover
 
 The class diagram below describes the exit root interactions.
 
-![Polygon Solidity smart contract bridging architecture](Overview%20-%20Polygon%20Knowledge%20Layer/exit-root-class-diagram.png)
+![Polygon Solidity smart contract bridging architecture](img/exit-root-class-diagram.png)
 
 System state as a whole is stored on binary trees with data and/or exit roots written into their leaves.
 
@@ -53,11 +53,11 @@ Local updates at the leaf-level trigger exit root updates at the top of the tree
 
 The [PolygonZkEVMGlobalExitRootV2.sol](https://github.com/0xPolygonHermez/zkevm-contracts/blob/main/contracts/v2/PolygonZkEVMGlobalExitRootV2.sol) contract manages the exit roots across multiple networks at the Ethereum L1 level.
 
-![Polygon Solidity smart contract exit root L1](Overview%20-%20Polygon%20Knowledge%20Layer/l1-exit-root.png)
+![Polygon Solidity smart contract exit root L1](img/l1-exit-root.png)
 
 The L2 exit root management contract, [PolygonZkEVMGlobalExitRootL2.sol](https://github.com/0xPolygon/cdk-validium-contracts/blob/main/contracts/PolygonZkEVMGlobalExitRootL2.sol), has a lighter-weight exit root mechanism.
 
-![Polygon Solidity smart contract exit root L2](Overview%20-%20Polygon%20Knowledge%20Layer/l2-exit-root.png)
+![Polygon Solidity smart contract exit root L2](img/l2-exit-root.png)
 
 ## Validium stacks[¶](https://docs.polygon.technology/zkEVM/architecture/high-level/smart-contracts/overview/#validium-stacks "Link to this section")
 
