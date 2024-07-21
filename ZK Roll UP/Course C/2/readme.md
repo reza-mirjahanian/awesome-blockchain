@@ -1,6 +1,6 @@
 [](https://github.com/0xPolygon/polygon-docs/edit/main/docs/zkEVM/architecture/high-level/smart-contracts/overview.md "Edit this page")
 
-## Polygon smart contract architecture[¶](https://docs.polygon.technology/zkEVM/architecture/high-level/smart-contracts/overview/#polygon-smart-contract-architecture "Link to this section")
+## Polygon smart contract architecture
 
 Chain stacks at the node level direct transaction data to the L2 and L1 networks via smart contract calls. The system stores state in binary tree structures containing verifiable local and global exit roots.
 
@@ -15,7 +15,7 @@ There are four key contract types built into the system design:
 -   The [bridge contract](https://docs.polygon.technology/zkEVM/architecture/high-level/smart-contracts/overview/#bridge).
 -   [Exit root management contracts](https://docs.polygon.technology/zkEVM/architecture/high-level/smart-contracts/overview/#global-exit-roots).
 
-## Consensus contracts[¶](https://docs.polygon.technology/zkEVM/architecture/high-level/smart-contracts/overview/#consensus-contracts "Link to this section")
+## Consensus contracts
 
 In the Ethereum realm, the set of consensus contracts and the functions they expose fuel the sequencing and verification mechanisms triggered by stack components, such as the sequencer and aggregator, at the node level.
 
@@ -23,13 +23,13 @@ In the Ethereum realm, the set of consensus contracts and the functions they exp
 
 These contracts define the type of chain, i.e. validium or non-validium, and there is usually a single contract per CDK chain that supplies custom functionality.
 
-## Rollup manager[¶](https://docs.polygon.technology/zkEVM/architecture/high-level/smart-contracts/overview/#rollup-manager "Link to this section")
+## Rollup manager
 
 The [PolygonRollupManager.sol](https://github.com/0xPolygonHermez/zkevm-contracts/blob/main/contracts/v2/PolygonRollupManager.sol) contract is responsible for creating, updating, and verifying CDK rollup and validium chains.
 
 ![Polygon Solidity smart contract rollup manager](img/rollup-manager.png)
 
-## Bridge[¶](https://docs.polygon.technology/zkEVM/architecture/high-level/smart-contracts/overview/#bridge "Link to this section")
+## Bridge
 
 The class diagram below describes the unified bridge interactions.
 
@@ -41,7 +41,7 @@ The unified bridge contract [PolygonZkEVMBridgeV2.sol](https://github.com/0xPoly
 
 In the L1 network, the bridge also manages the complex exit root mechanism governing system state. In the L2 network, there is a lighter exit root mechanism that governs state at this layer.
 
-## Global exit roots[¶](https://docs.polygon.technology/zkEVM/architecture/high-level/smart-contracts/overview/#global-exit-roots "Link to this section")
+## Global exit roots
 
 The class diagram below describes the exit root interactions.
 
@@ -59,7 +59,7 @@ The L2 exit root management contract, [PolygonZkEVMGlobalExitRootL2.sol](https:/
 
 ![Polygon Solidity smart contract exit root L2](img/l2-exit-root.png)
 
-## Validium stacks[¶](https://docs.polygon.technology/zkEVM/architecture/high-level/smart-contracts/overview/#validium-stacks "Link to this section")
+## Validium stacks
 
 CDK validium stacks use the [cdk-validium-contracts](https://github.com/0xPolygon/cdk-validium-contracts/tree/main) which has slightly adjusted behavior to take account of validium components and CDK custom requirements.
 
