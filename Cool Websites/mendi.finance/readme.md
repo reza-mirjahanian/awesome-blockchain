@@ -45,3 +45,32 @@ When an account’s borrow balance exceeds the limits set by collateral factors,
 Each absorption is paid for by the protocol’s reserves of the base asset. In return, the protocol receives the collateral assets. If the remaining reserves are less than the target, liquidators are able to buy the collateral at a discount using the base asset, which increases the protocol’s base asset reserves.
 
 Our liquidation process is permissionless, and everyone is eligible to set up a liquidator to decrease the amount of bad debt in the protocol.
+
+
+Linea Surge is live! To celebrate the launch of LXP-L, we’re introducing MLP-L to match, which can be used to multiply one’s exposure to the potential future rewards. Through the Mendi Loyalty Points system, we have successfully distributed the Pyth airdrop to the community - and there might be more coming in the future! **MLP-L = MLP-Liquidity** MLP-L works the same as the traditional Mendi Loyalty Points, but can be accumulated by _supplying_ assets to Mendi Finance (rather than _borrow_ with traditional MLP). In case of future rewards the protocol receives, we will distribute it proportionally to MLP-L and MLP holders.
+
+Mendi Finance has seen immense growth after the launch of MLP, with TVL and total protocol borrows both surpassing $30 million just a few months after. The success of MLP can be tied to its unique non-inflationary model, securing a user’s share of potential future rewards for their contribution like no other point system out there.
+
+MLP-L adds on to this fair and apparent successful system, further incentivizing Linea Surge participants to take part in the full Mendi ecosystem to take advantage of maximizing rewards.
+
+About MLP-L
+
+
+---------------
+
+MLP-L has the same value and utility as MLP — sharing the potential future Linea airdrop to holders proportionally.
+
+**Where does MLP-L come from?** The original MLP system was designed in a way that at the final milestone, 50% of potential future rewards will be given to the community while the other 50% goes to protocol reserves.
+
+With the introduction of MLP-L, we’re shifting 10% of the protocol reserve’s over to the community making the new ratio 60–40. Using this methodology, we still ensure that value of MLP does not inflate in the end of the day.
+
+MLP-L Distribution
+
+
+----------------------
+
+200,000 MLP-L (10% shifted from protocol reserve’s share) will be distributed proportionally among suppliers at the end of each Volt during the Linea Surge. At the end of Volt 6, all MLP-L will be distributed. One Volt will last approximately one month.
+
+Just like MLP, we are using on-chain data to calculate the time-weighted pro-rata for each address’ total supply balance between each Volt. This means that the amount of time your supply assets for will directly impact the amount of MLP-L you earn for that Volt. Your total supply $-value between a given Volt will matter. This prevents gaming the system and rewards those who commit to supplying assets over time. If you have assets supplied already, they will be accounted for at the start of the Surge, no need to withdraw and resupply. MLP-L time-weighted calculations will automatically begin at the start of the Volt.
+
+MLP-L distribution will follow Linea’s early adopter multiplier. The earlier you contribute to supply, the more MLP-L and potential future airdrop you will receive. It’s worth to act on time.
