@@ -16,6 +16,11 @@
   - Optimistic rollups (e.g., Arbitrum, Optimism)
   - Zk-rollups (e.g., ZkSync, Starknet)
 
+
+![alt text](image.png)
+
+![alt text](image-1.png)
+
 ### Comparison with Other Rollups
 
 1. **Optimistic rollups**:
