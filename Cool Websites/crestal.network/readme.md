@@ -1,3 +1,5 @@
+https://medium.com/@crestalnetwork
+
 
 ## Dynamic Modular Services Platform
 **Crestal Enables** **Dynamic** **Modular Service Economy**
