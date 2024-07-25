@@ -12,6 +12,9 @@
 # Stage 4 — Read/Write/Execute/Verify
 # Stage 5 — Read/Write/Execute/Verify/Incentivize
 
+![alt text](image-1.png)
+
+
 **More Modular Categories**
 
 -   Beyond Data Availability (DA), we plan to support more categories, broadening the scope of our platform.
