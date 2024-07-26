@@ -23,3 +23,17 @@ correctly performed.
 
 After processing the last L2 transaction of the batch, the remaining root will be the new
 state root.
+
+
+Storage State Machine ii
+
+![alt text](image.png)
+
+Storing the State: HashDB
+
+
+
+•	All the hashes (nodes) of the Merkle tree of the L2 state are stored in a database called prover HashDB or HashDB for short.
+•	The executor, when performing operations of the Storage State Machine, needs to read and write the HashDB to create appropriate execution trace that proves the L2 state reads and writes.
+
+![alt text](image-1.png)
