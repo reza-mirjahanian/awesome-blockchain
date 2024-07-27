@@ -62,3 +62,20 @@ and potential security issues
 This check occurs when the zkEVM initiates the processing of a block. The aim of this
 check is to verify that the block’s timestamp is greater than the minTimestamp, which
 corresponds to the timestamp of the globalExitRoot utilized by this block.
+
+
+![alt text](image-10.png)
+
+## Upper Timestamp Bound
+The aim of this check is to verify that the timestamp of each block within these batches is
+earlier than the timestampLimit. In other words, we ensure that the blocks were created
+before being sequenced. For this check, a new parameter, timestampLimit, is introduced
+in the accInputHash, as shown in Figure 10. This parameter represents the timestamp of
+the transaction calling the function sequenceBatches, which sequences multiple batches.
+
+
+![alt text](image-11.png)
+
+
+![alt text](image-12.png)
+
