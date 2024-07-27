@@ -85,3 +85,39 @@ Solution In order to solve the previous situation, we will recommend a slightly 
 percentage of the gas price to the user, employing a **SuggesterFactor** of 0.15 ≈ 4 ·
 L1GasPriceFactor:
 GasPriceSuggested = L1GasPrice · SuggestedFactor
+
+
+## Cost Discrepancies Challenges
+
+
+As we have said before, in Ethereum, gas accounts for the resources used by a transaction.
+In particular, it takes into account two elements in particular: the data availability,
+that is, the transactions bytes and the processing resources, like CPU, Memory and
+Storage. A notable challenge arises when certain operations consume low gas in Layer 1
+but represent a major cost in Layer 2. In other words, the reduction factor expressed in
+
+- L2GasPrice = L1GasPrice · L1GasPriceFactor
+
+may not be constant among all the computational resources, introducing a problem.
+L2 execution costs are variable, depending on the state of the transaction and typically
+offer a smaller cost per gas. However, the costs associated with data availability are fixed
+once the transaction is known, and they are directly proportional to L1 data availability
+costs. Consequently, in our pricing schema, L2 transactions with high **data availability**
+costs and small execution costs are a significant challenge. This presents another pricing
+misalignment issue we need to face.
+---
+giving us two ways of solving the misalignment problem between costs in L1 and L2:
+
+- (A) Arbitrum Approach. Increase gasUsed. This approach involves modifying
+the gas schema to elevate the Gas costs associated with data availability. While this
+strategy is relatively straightforward to implement and comprehend, it comes with
+a notable implication: it changes the Ethereum protocol. An L1 Ethereum
+transaction may execute different when compared to the same transaction executed
+in L2.
+- (B) Effective Gas Price Approach. Increase gasPrice. If we aim to avoid modifying the gas, the alternative is to increase the gas price to cover the costs. Unlike
+the previous approach, this doesn’t alter the Ethereum specifications. However, determining a fair gas price becomes a complex task. Moreover, we have to take into
+account that L2 users should be able to prioritize its transactions also increasing gas
+price, as they are used to. This is actually our approach.
+
+
+## Effective Gas Price Approach
