@@ -16,3 +16,16 @@ The core logic of the **LXLY** bridge is implemented in smart contracts. In part
 ![alt text](image-1.png)
 
 ![alt text](image-2.png)
+
+
+The LXLY bridge follows a bridge-claim model (See Figure 4). Let us suppose we
+ are in the situation where some LX user wants to transfer an asset (or, alternatively, a
+ message) to some LY user. In the origin layer LX, the source user sends a transaction to
+ the bridge() function providing the destination network LY. From now on, transactions
+ to the bridge function will also be known as **deposits**.
+  Later on, in the destination layer
+ LY, the user sends a transaction to the claim() function providing the origin network LX
+ in order to claim the transferred (we will explore the meaning of that later on) asset (or
+ message). To maintain a record of exchanges across layers, within the zkEVMBridge.sol
+ smart contracts we need a compact way of storing the information of calls to the bridge
+ function. These data, often referred to **as exits or outgoing transmissions**
