@@ -10,3 +10,9 @@ The objective of the bridge component is to enable the exchange of both assets a
 
 The bridge is an infrastructure component that allows migration of assets and commu-nication between diﬀerent layers. From the point of view of the user, they should be able to transfer an asset from one network to another without changing its value or its functionality, as well as being able to send data payloads between networks (cross-chain messaging).
 For sake of simplicity, we will start the bridge description by deﬁning exchanges be-tween L1 and an L2 but our intention is to be general, that is, to enable exchanges between multiple layers LX and LY. This is why we call this subsystem the LXLY bridge. For the explanations, we will use three layers denoted as LX, LY and LZ as represented in Figure 1.
+
+The core logic of the **LXLY** bridge is implemented in smart contracts. In particular, the main contract is called zkEVMBridge.sol that is deployed in any layer in which we want exchanging to be enabled. One of the design goals is that this smart contract is exactly the **same in all layers** (See Figure 3). This uniformity is intentional to maintain consistency in the logic whether exchanging assets or messages from a lower layer LY to an upper layer LX, or vice versa and hence externalizing the complexity associated with the layer position distinction from the core contract.
+
+![alt text](image-1.png)
+
+![alt text](image-2.png)
