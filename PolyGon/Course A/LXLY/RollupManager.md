@@ -52,3 +52,25 @@ will be explained in another document
 
 
 ![alt text](image-2.png)
+
+
+## Creating a Rollup
+Each rollup is associated with either none or a single rollup type. In order to create a
+rollup of a certain rollup type, we can use the function **createNewRollup**() by specifying:
+
+- The associated non obsolete rollup type identifier, which should exist.
+- The chainID of the rollup among the Polygon network, which should be new.
+- The address of the admin of the rollup, which will be able to update several parameters of the consensus contract (such that setting a trusted sequencer or a force
+batches address).
+- The address of the trusted sequencer, which will be the one responsible for sending
+the transaction to execute the sequenceBatches() function.
+- The address of the token address that will be used to pay gas fees in the newly
+created rollup (more info on this later on).
+When creating a new rollup, we employ the transparent proxy pattern (See Figure 4),
+by generating an instance of the PolygonTransparentProxy contract, with the consensus
+contract specified by the rollup type serving as its implementation. The RollupData is partially filled (because the rollup is not currently initialized) and stored in the **rollupIDToRollupData**
+mapping within the contract’s storage. To end up, the rollup creation calls the initialize()
+function of the consensus, which is in charge of setting the previously specified addresses
+in the consensus contract.
+
+![alt text](image-3.png)
