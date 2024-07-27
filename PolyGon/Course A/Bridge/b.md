@@ -52,3 +52,5 @@ We can see how the parameters contained in **accInputHash** have changed with re
  which it is placed the transaction that inserts the **globalExitRoot** in the **L1InfoTree**.
  Recall that the header of an Ethereum block includes the L1 state root, so making
  available the blockhashL1 provides the L1 state to L2 contracts
+
+ 
