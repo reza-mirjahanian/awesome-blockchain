@@ -28,3 +28,4 @@ Cargo.lock
 **/.history
 
 **/*.bak
+**/.idea
