@@ -143,3 +143,30 @@ of batches that can be aggregated.
 
 ![alt text](image-6.png)
 
+
+
+## zkEVM Recursion and Aggregation
+In this section, we provide the concrete blocks and steps used to prove the correct execution
+of a several batches by our zkEVM using recursion and aggregation. An overview of the
+overall process can be observed in Figure 8.
+
+![alt text](image-7.png)
+
+The first proving system generates such a big proof since it has a lot of high degree
+**polynomials**. Henceforth, a first Compression Stage its invoked in each batch’s proof,
+aiming to reduce the number of polynomials used, allowing to reduce the proof size.
+Once the compression step has been completed, a proof aggregation stage will be in
+charge of joining several batches proofs into a single proof proving each of the single
+proofs all at once. The way of proceeding will be to construct a binary tree of proofs by
+aggregating two by two each of them. We will call this the Aggregation Stage.
+Next, a Normalization Stage is invoked, allowing each aggregator verifiers and the
+normalization verifiers to be exactly the same, permitting successful aggregation via a
+recursion.
+Once the normalization step has been finished, its time for aggregation. In this step
+we are going to join two batches’ proofs together, which will be done many times until
+only one proof spares. Observe that the Aggregation Stage needs to be designed in order
+to accept either already aggregated proofs or only compressed ones.
+The Final Stage is the very last STARK step among the recursion process, which is in
+charge of verifying a proof over a completely different finite field, the one defined by the
+bn128 elliptic curve. This is done in this way because, in the next step of the process, a
+SNARK Groth16 proof, which works over elliptic curves, will be generated.
