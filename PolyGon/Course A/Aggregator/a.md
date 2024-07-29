@@ -130,7 +130,16 @@ verification of the proof πbig, reducing the size of the proof due to the succi
 SNARKs, which dictates that the verification time should way less than the proving time.
 
 
-## Illustration of Proof Recursion. 
-The Outer Prover is responsible for proving the correct
-verification of the proof πbig, reducing the size of the proof due to the succinctness property of
-SNARKs, which dictates that the verification time should way less than the proving time.
+## Proof Aggregation
+In the context of zkEVM, Aggregation is a technique that allows the prover to generate
+a single proof that covers **multiple L2 batches**. This reduces the number of proofs to
+verify, increasing the throughput of the system. With proof aggregation, we can send a
+single L1 transaction that aggregates multiple batches, improving the batch consolidation
+rate. The proving system restricts aggregation to only consecutive batches. Notice that
+we can aggregate proofs that prove a single batch with other that prove multiple batches,
+as shown in Figure 7, thanks to a technique in the cryptographic backend that we call
+**normalization**. Finally, remark that the smart contract also limits the maximum number
+of batches that can be aggregated.
+
+![alt text](image-6.png)
+
