@@ -37,3 +37,8 @@ The proof generation process requires several inputs, as shown in **Figure 11**,
 
 ![alt text](image-9.png)
 
+The aggregator generates three outputs: the updated state root (newStateRoot), the
+new accumulated input hash (newAccInputHash) and the batch number of the last batch
+included in the the aggregated proof once it has been successfully generated (finalNewBatch).
+At the moment all the inputs and outputs are public, presenting an efficiency problem as
+we will see below
