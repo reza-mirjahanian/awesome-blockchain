@@ -2,8 +2,8 @@
 The aggregator is the component within the zkEVM architecture that will be in charge of
 performing the proof aggregation schema. The aggregator invokes the verifyBatches()
 function (See Figure 9) on the smart contract, passing parameters such as the initial batch
-number initNumBatch, the final batch number (finalNewBatch), the newStateRoot, and
-the aggregated proof π. The previous root is stored in the smart contract, eliminating
+number **initNumBatch**, the final batch number (**finalNewBatch**), the **newStateRoot**, and
+the **aggregated proof π**. The previous root is stored in the smart contract, eliminating
 the need to transmit it. Recall that the smart contract contains a summary of the batch
 information in the accumulated input hash.
 
@@ -22,4 +22,18 @@ avoid an accumulation of extra batches awaiting consolidation. The aggregator ke
 record of authorized provers. Both the aggregator and the provers operate in a cloudbased environment (See Figure 10), with the provers being configured as high-resource
 instances. This configuration enables effective and scalable control of evidence processing,
 guaranteeing the system can handle different workloads and maintain an efficient batch
-consolidation rate
+**consolidation rate**
+
+
+Inputs and Outputs of the Proof
+
+The proof generation process requires several inputs, as shown in **Figure 11**, to ensure its soundness:
+
+- The **aggregator address**, serving as a safeguard against malleability in the `verifyBatches()` function, ensuring that no one can use another aggregator's proof.
+- The contract state root (**oldStateRoot**), which is already included in the smart contract and does not require explicit sending.
+- The previous accumulated input hash (**oldAccInputHash**).
+- Initial batch number (**initNumBatch**)
+- The **chainID** and the **forkID** ensure that the proof is valid only within the intended chain and version of the zkEVM.
+
+![alt text](image-9.png)
+
