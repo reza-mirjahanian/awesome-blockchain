@@ -36,3 +36,20 @@ Below we describe some errors in transactions that will cause the state to remai
 
 - **Reverted transaction:** A transaction may revert during execution due to many reasons such as running out of gas, having a stack that is too large, or encountering a revert call in the code. This is a common scenario in EVM processing.
 - **Invalid intrinsic transaction:** It is a transaction that is unable to be processed and has no impact on the current state. Keep in mind that this transaction could have implications on network resources.
+
+be part of a virtual batch. Example of errors in this scenario are: incorrect nonce,
+insufficient balance, etc. Our trusted sequencer is unlikely to input an incorrect
+nonce. However, any member of the community can submit a batch, which may
+result in an error
+
+
+![alt text](image-1.png)
+
+### Invalid Batches
+Errors might also occur at the batch level. Below we describe some problems in batches that will cause the state to remain unchanged, as shown in **Figure 3**.
+
+- **Invalid Data.** We are unable to decode (RLP-encoded) transactions, so we have garbage input.
+
+- **Prover resources exhaustion.** The zkEVM manages this via row counters, also known as zkCounters. The batch cannot be processed due to running out of counters.
+
+![alt text](image-2.png)
