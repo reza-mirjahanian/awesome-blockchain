@@ -72,3 +72,65 @@ authenticate all information provided by the untrusted actor sending the L2 batc
 The forced batches technique will be explained in the part that covers the security mechanisms incorporated into the zkEVM.
 
 
+## zkCounters
+After addressing counters before, it is crucial to highlight their significance. Counters are
+used to monitor the row count in each State Machine, including the Main SM, during the
+execution of a particular batch.
+The management of these counters is incorporated inside the computation process. By
+doing so, when the computation uses up all its assigned resources while generating the
+proof, the system is able to proof that a batch does not cause a change in the state. This
+issue is referred to as a **Out Of Counters** (OOC) error. This error is very specific to
+our zkEVM State Machine-like design, because of having fixed number of rows. Figure 4
+shows an out of counters situation.
+Although at the present there exists this backend limitation in the proving system that
+forces execution traces for all the States Machines to have the same amount of rows, it
+is expected to be removed with the forthcoming introduction of **VADCOPs**: Variable
+Degree Composite Proofs. Currently in development, VADCOPs will provide the capability to partition a large State Machine, originally comprising a high amount of rows,
+into smaller execution traces with fewer rows. This will offer several advantages, with
+the most notable one being the elimination of zkCounters for prover’s resource management. The main idea for VADCOPs is depicted in Figure 5. The ongoing development
+of VADCOPs includes a rewriting of both the cryptographic backend and the constraint
+language, which will be called **PIL2**
+
+![alt text](image-3.png)
+
+Figure 4: Out of counters error. Consider a scenario where our Keccak arithmetization permits only up to 4 Keccak operations before exhausting the available rows. An out of counters error will occur if the transaction involves invoking 5 (or more) Keccaks
+
+
+## Discussing the Proof
+The preceding section introduced VADCOPs. The concept of VADCOPs suggests that we
+can somehow aggregate proofs together. This allows verification to be performed only once,
+albeit with more effort on the prover’s part. However, this scenario is of interest to us as
+it enables the aggregation of multiple proofs for different batches, creating a single unified
+proof that enables the verification of various batches simultaneously, ensuring the correct execution of all of them at once, incrementing the throughput of the system. There are
+two interesting techniques in this direction: proof recursion and proof aggregation.
+
+![alt text](image-4.png)
+
+Figure 5: Example of VADCOPs with KECCAKs. In this scenario, it becomes feasible to
+execute 5 Keccak operations despite the limit being 4 due to the State Machine’s length. At a
+high level, the solution involves splitting the proof into two parts, each containing fewer rows,
+and then aggregating them to demonstrate the execution of 5 Keccak operations.
+
+
+
+## Proof Recursion
+**Recursion (also called compression)** in proof systems enables the prover to transition
+from large, time-consuming proofs to smaller, quicker-to-verify proofs. Essentially, the
+prover of the next stage proofs that the verification of the previous stage is correctly
+performed. In general, by the succinctness property of **SNARKs**, this makes the final
+proofs smaller and faster to verify. Notice that we can also change the set of public
+values from one stage to the next one. The diagram shown in Figure 6 illustrates the
+core principle of proof recursion. This graphic representation highlights the efficiency
+improvements obtained through proof recursion, where each next proof is optimized in
+size compared to the previous one.
+
+![alt text](image-5.png)
+Illustration of Proof Recursion. The Outer Prover is responsible for proving the correct
+verification of the proof πbig, reducing the size of the proof due to the succinctness property of
+SNARKs, which dictates that the verification time should way less than the proving time.
+
+
+## Illustration of Proof Recursion. 
+The Outer Prover is responsible for proving the correct
+verification of the proof πbig, reducing the size of the proof due to the succinctness property of
+SNARKs, which dictates that the verification time should way less than the proving time.
