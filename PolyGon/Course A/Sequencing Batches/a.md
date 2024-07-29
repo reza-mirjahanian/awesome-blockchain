@@ -36,3 +36,37 @@ During the batch pre-execution, for closing both the sequencer and executor also
 
 
 ## performance problems 
+
+The throughput of the zkEVM highly depends on the speed at which we are able
+ to close batches which is highly impacted by the batch **pre-execution process**. So, those
+ involved are the **Sequencer**, the **Executor** and the **Prover HashDB**. In fact, here occur most
+ of the performance problems because interacting to much with the HashDB is inefficient.
+ Currently, efforts are underway to optimize this process by accumulating all changes made
+ to a transaction and updating the HashDB only at the conclusion of the transaction,
+ aiming to mitigate the time spent on frequent updates during transaction processing.
+
+ ## Send the Sequenced Batch to L1
+
+ The next step is to send a transaction to the **Smart Contract** to sequence this batch. After
+ the batch is closed, the sequencer stores the data of the batch into the **node’s StateDB**.
+ Then, the sequenceSender looks for closed batches and sends them to **L1 Smart contract**
+ using the **EthTxManager**, who makes sure that the transaction is included in a batch. This
+ process is depicted in Figure 4
+
+ ![alt text](image-3.png)
+
+ To sequence the batch, the sequencer calls the `sequenceBatches()` function in the L1 Smart Contract. The name of the function is in plural because we can **sequence several batches** in a single transaction. This step provides L2 data availability in the L1 execution layer, because we are registering in L1 all the bytes of the L2 transactions.
+
+The calldata for the L1 `sequenceBatches()` function needs to include the following information: the L2 transactions' data, which is an array containing data for each batch, which encompasses all transactions within the batch along with a timestamp indicating its closure time. Additionally, the L2 **coinbase address**, representing the Ethereum address for receiving user fees. Lastly, a timestamp indicating when the L2 transactions were sequenced.
+
+## coinbase address
+
+The L2 coinbase address serves as a critical destination for rewards earned by the sequencer in the Layer 2 environment. The sequencer undertakes the responsibility of paying for data availability in Layer 1 using L1 Ether. When the sequencer successfully closes a batch and executes transactions, they receive a reward for their services. This reward, denominated in L2 Ether, is routed to the L2 coinbase address.
+
+Crucially, the L2 coinbase address is situated **within Layer 2** because users compensate the sequencer with L2 Ether. **This L2 Ether**, representing the reward, is a reflection of the Ether in L1 that users have previously transferred to L2 through transactions via the Bridge. Importantly, there exists a direct and **fixed 1:1** correspondence between L1 ETH and L2 ETH, as we can observe in Figure 5.
+
+![alt text](image-4.png)
+
+
+## Accumulated Input Hash Pointers
+
