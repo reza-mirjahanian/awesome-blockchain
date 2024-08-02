@@ -68,3 +68,48 @@ which means it uses a single shared memory for both **data** and **instructions*
 -   **Stack** is used for storing small values, such as integers and booleans, values needed for immediate use, such as function parameters, local variables, and return values.
     
 -   **Memory** is used for storing large data structures, such as arrays and strings.
+
+
+## EVM computational costs
+The EVM has its own instruction set or list of available opcodes, which is a set of low-level commands used to manipulate data in the stack, memory and storage components.
+
+The instruction set includes operations such as Arithmetic, bit manipulation and control flow.
+
+Additionally, in order to prevent spam and denial of service (DoS) attacks, the EVM employs a gas system. Gas is a unit of measurement for the computational resources required to execute a smart contract, and each operation in the instruction set has its own gas cost
+
+Stack
+-----
+
+The EVM is a stack-based machine because it uses a stack data structure to execute its operations. When an operation is performed, values that are currently top of the stack are popped off, used in the executed operation, and then the result of the operation is pushed back onto the stack.
+
+Some of the main stack operations executed in the EVM are:
+
+1.  PUSH: This opcode pushes a value onto the stack. It is usually followed by:
+    
+    *   A byte which indicates the number of bytes to be pushed onto the stack, and
+        
+    *   The actual bytes to be pushed onto the stack.
+        
+    
+    For example, the opcode PUSH2 0x0123 pushes the bytes 0x01 and 0x23 onto the stack as one word 0x0123.
+    
+2.  POP: Removes the top value from the stack and discards it.
+    
+3.  DUP: Duplicates the top value on the stack and pushes the duplicate onto the stack.
+    
+4.  SWAP: Swaps the top two values on the stack.
+    
+5.  ADD, SUB, MUL, DIV, MOD: These opcodes perform specific Arithmetic operations on the top two values of the stack, and push the result back onto the stack.
+    
+6.  AND, OR, XOR, NOT: These opcodes perform bitwise logic operations on the top two values of the stack, and push the result back onto the stack.
+    
+7.  EQ, LT, GT: These opcodes perform comparison operations on the top two values of the stack, and push the result back onto the stack as a Boolean.
+    
+8.  SHA3: Computes the SHA3 hash of the top value on the stack, and pushes the hash onto the stack.
+    
+9.  JUMP, JUMPI: These opcodes modify the _program counter_, allowing the program to jump to a different part of the code.
+    
+
+The EVM stack is limited to **1024** elements. This yields the capacity of (1024×256) bits because each EVM word is **256** bits long.
+
+If a contract attempts to PUSH more elements onto the stack, exceeding the 1024-limit, a _stack overflow error_ occurs, causing the transaction to fail.
