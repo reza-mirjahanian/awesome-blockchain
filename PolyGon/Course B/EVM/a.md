@@ -148,3 +148,17 @@ It is worth noting that if a smart contract does not actually use the memory it 
 -   MSTORE8 is an opcode similar to MSTORE, except that it stores a single byte of data instead of a  32-byte word. It takes a Memory address and a byte value from the stack as its input, and stores the byte at the specified address.
     
 -   MSIZE is an opcode that returns the size of the current Memory area in bytes.
+
+
+## Storage
+
+EVM storage is a persistent key-value storage associated with each smart contract. It is organized as a large array of  32-byte words and each word is identified by a unique  256-bit key, which is used to access and modify the value stored in that word. Since the EVM Storage is non-volatile, data stored in it persists even after the smart contract execution has been completed.
+
+Accessing and modifying storage is a relatively expensive operation in terms of gas costs. EVM storage is implemented as a modified version of the **Merkle Patricia Tree** data structure, which allows for efficient access and modification of the storage data.
+
+A Patricia Tree is a specific type of a trie designed to be **more space-efficient** than a standard trie, by storing only the unique parts of the keys in the tree. Patricia Trees are particularly useful in scenarios where keys share common prefixes, as they allow for more efficient use of memory and faster lookups compared to standard tries.
+
+The following opcodes are used to manipulate the storage of a smart contract:
+
+-   **SLOAD** loads a  256-bit word from Storage at a given index, and pushes it onto the stack.
+-   **SSTORE** stores a  256-bit word to Storage at a given index. The value to be stored is popped from the stack, and its index is specified as the next value on the stack.
