@@ -1,3 +1,9 @@
+https://ethereum.github.io/yellowpaper/paper.pdf
+
+https://github.com/chronaeon/beigepaper/tree/master
+
+
+
 The terms **state machine** and **virtual machine** are used interchangeably in this documentation.
 
 
@@ -206,3 +212,22 @@ The 32-byte size limit for stack elements is a fundamental design choice in Ethe
 ### Summary
 
 The EVM sequentially executes the opcodes in the bytecode, by following the  _program counter_. It also manipulates  32-byte values on the stack and in Memory, in accordance with computations required to be performed, and permanently stores relevant values as required.
+
+## EVM interpreter
+
+EVM interpreter is a software component that processes and executes Ethereum transactions.
+
+Ethereum smart contracts are written in a high-level programming language such as Solidity, Vyper, Fe or Yul, but are compiled into bytecodes. A bytecode is a set of instructions which the EVM nterpreter processes and executes.
+
+Each bytecode is a sequence of Ethereum opcodes. The Ethereum opcodes are low-level instructions set for the EVM, and represent the basic operations that the EVM can perform during the execution of a smart contract triggered by a transaction.
+
+A complete list of Ethereum opcodes includes over 200 different operations, ranging from general Arithmetic and Logical operations to more advanced and blockchain environment-specific operations, like calls to other contracts, contract creation, and storage management.
+
+Some of the most commonly used opcodes include:
+
+-   ADD, SUB, MUL, DIV, which are basic arithmetic operations.
+-   CALL, DELEGATECALL, CALLCODE, which are calls to other contracts.
+-   PUSH, POP, which are stack management operations.
+-   JUMP, JUMPI, which respectively refer to jumps and conditional jumps, from one line of a program to another.
+-   SLOAD, SSTORE, which are Storage management operations.
+-   MLOAD, MSTORE, which are Memory management operations.
