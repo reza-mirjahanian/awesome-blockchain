@@ -162,3 +162,47 @@ The following opcodes are used to manipulate the storage of a smart contract:
 
 -   **SLOAD** loads a  256-bit word from Storage at a given index, and pushes it onto the stack.
 -   **SSTORE** stores a  256-bit word to Storage at a given index. The value to be stored is popped from the stack, and its index is specified as the next value on the stack.
+
+
+## Transaction process
+
+Processing transactions in the EVM involves,
+
+-   the Recursive Length Prefix (RLP) encoding and decoding of transaction data,
+-   the verification of signatures,
+-   the execution of transactions,
+-   storing output values.
+
+### RLP decoding
+
+Transaction data are encoded for storage and decoded for processing. The Recursive Length Prefix (RLP) encoding and decoding is used for this purpose. The first step in processing an Ethereum transaction is to therefore decode the transaction.
+
+Transactions are decoded so as to obtain relevant information such as; the recipient’s address, the amount of ETH being transferred, and the data payload.
+
+### Signature verification
+
+Every transaction is digitally signed with a signature, which is generated using the Elliptic Curve Digital Signature Algorithm (ECDSA).
+
+The ECDSA signature is represented by three (3) values, generally denoted as  **r,s,v.**
+
+Since the signature, or in particular the triplet  (r,s,v), was computed from the secret key which is uniquely associated with the address of the Ethereum account (being debited), the three values  (r,s,v)  are sufficient to accurately verify that the transaction has been signed by the owner of the Ethereum account.
+
+The Ethereum account is identified by a 20-byte (160-bit) address. The address is derived from the public key associated with the Ethereum account. It is in fact the last 20 bytes of the 256-bit **Keccak** hash of the public key.
+
+### Processing a transaction
+
+The EVM begins by creating a context with an empty stack and memory space.
+
+The bytecode instructions are then executed. The execution involves values being pushed and popped onto and from the stack as required.
+
+EVM uses a  _**program counter**_  to keep track of which instruction to execute next. Each opcode has a fixed number of bytes, so the  _program counter_  increments by the appropriate number of bytes after each instruction is executed.
+
+### Stack elements and word size
+
+Stack elements are 32 bytes in size. This means each value pushed onto the stack by an opcode, as well as each value popped off the stack by an opcode, are each 32 bytes in size.
+
+The 32-byte size limit for stack elements is a fundamental design choice in Ethereum, and is purely based on the size of the EVM word. The EVM word is the basic unit of storage and processing in the EVM, defined as a 256-bit (32-byte) unsigned integer. Since the EVM word is the **smallest unit of data that can be processed by the EVM**, the stack elements are conveniently set to be of the same size.
+
+### Summary
+
+The EVM sequentially executes the opcodes in the bytecode, by following the  _program counter_. It also manipulates  32-byte values on the stack and in Memory, in accordance with computations required to be performed, and permanently stores relevant values as required.
