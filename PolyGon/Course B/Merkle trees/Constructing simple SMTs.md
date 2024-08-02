@@ -18,3 +18,14 @@ A NULL or empty SMT has a zero root. That is, it has no key and no value recorde
 ## Solution to the Fake-leaf attack
 
 https://docs.polygon.technology/zkEVM/concepts/sparse-merkle-trees/detailed-smt/#scenario-fake-smt-leaf
+
+
+
+https://docs.polygon.technology/zkEVM/concepts/sparse-merkle-trees/basic-smt-ops/#delete-leaves-with-zero-siblings
+
+
+The operations discussed in this document are in fact the very actions the main state machine instructs the storage state machine to perform.
+
+The **prover and the verifier**, as used in the above explanations, can loosely be interpreted as the executor of the **storage state machine** and the **storage SM’s PIL** code, respectively. The zero-knowledge Assembly (zkASM) of the storage state machine plays the facilitator’s role.
+
+The zkASM is the **interpreter between** the storage state machine and the main state machine, also between the storage state machine and the Poseidon state machine. The two hash functions used in building the storage binary SMTs, are special versions of the Poseidon family of hash functions.
