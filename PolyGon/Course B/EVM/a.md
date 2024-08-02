@@ -113,3 +113,38 @@ Some of the main stack operations executed in the EVM are:
 The EVM stack is limited to **1024** elements. This yields the capacity of (1024×256) bits because each EVM word is **256** bits long.
 
 If a contract attempts to PUSH more elements onto the stack, exceeding the 1024-limit, a _stack overflow error_ occurs, causing the transaction to fail.
+
+Memory
+------
+
+The EVM Memory is used for storing large data structures, such as arrays and strings. It is a linear array of bytes used by smart contracts to store and retrieve data. The size of the memory is dynamically allocated at runtime, meaning that the amount of memory available to a smart contract can grow depending on its needs.
+
+EVM Memory is byte-addressable, which means that each byte in the memory can be individually addressed using a unique index.
+
+EVM word size is 256 bits (or 32 bytes), which means data is typically loaded and stored in 32-byte chunks. The EVM also provides instructions for loading and storing smaller chunks of data, such as individual bytes or 16-bit words.
+
+EVM Memory is referred to as non-persistent or volatile, because the data it stores gets cleared as soon as the execution of a smart contract is completed. This means the EVM needs to have a special component, called the EVM Storage, for permanently storing results of smart contract execution.
+
+It’s also worth noting that, since accessing and modifying EVM Memory consumes computational resources, which are paid for in the form of gas, its use is subject to gas costs.
+
+
+### Managing EVM memory
+
+-   When a contract calls another contract, a new execution environment is created with its own memory space.
+    
+-   The **parent contract’s memory space** is saved, and the new contract’s memory space is initialized. The new contract can then make use of its memory as needed.
+    
+-   When the called contract’s execution is completed, the memory space is released and the parent contract’s saved memory is restored.
+    
+
+It is worth noting that if a smart contract does not actually use the memory it has been allocated, that memory cannot be reclaimed or reused in the execution context of another contract.
+
+### The opcodes related to memory are as follows:
+
+-   MLOAD is an opcode used to load a  32-byte word from Memory into the stack. It takes a Memory address as its input and pushes the value stored at that address onto the stack.
+    
+-   MSTORE is an opcode used to store a  32-byte word from the stack into Memory. It takes a Memory address and a value from the stack as its input, and stores the value at the specified address.
+    
+-   MSTORE8 is an opcode similar to MSTORE, except that it stores a single byte of data instead of a  32-byte word. It takes a Memory address and a byte value from the stack as its input, and stores the byte at the specified address.
+    
+-   MSIZE is an opcode that returns the size of the current Memory area in bytes.
