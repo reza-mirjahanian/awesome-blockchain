@@ -41,3 +41,10 @@ In cases where several state machines are proved: - Each polynomial is identifie
 For example, mFibonacci.ISLAST is the identifier of ISLAST where the mFibonacci state machine has the namespace mFibonacci.
 
 See the figure below for a description of the mFibonacci state machine in PIL, as an mFibonacci.pil file.
+
+
+### Compiling PIL into JSON[¶](https://docs.polygon.technology/zkEVM/concepts/mfibonacci/verification-scheme/#compiling-pil-into-json "Link to this section")
+
+Due to the modular design of the zkProver, it is possible to take a  .pil  file describing computations of any state machine and compile it into a parsed version, a  .json  file, that can be interpreted by the other software components.
+
+We demonstrate compiling the  mFibonacci.pil  file into a  .json  file with a novel Polynomial Identities Language Compiler, dubbed  PILCOM. The details of  PILCOM  are documented elsewhere, but its repo can be found  [here](https://github.com/0xPolygonHermez/pilcom). We treat it as a ‘blackbox’ in this demonstration.
