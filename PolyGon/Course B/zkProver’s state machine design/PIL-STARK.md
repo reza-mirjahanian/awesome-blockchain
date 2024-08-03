@@ -33,3 +33,17 @@ Since the SM-prover and the SM-verifier, who are separate and independent entiti
 The PIL-STARK proof-verification process therefore consists of three (3) phases, the setup, the proving, and the verification. These are outlined below
 
 ![alt text](image-2.png)
+
+
+
+## PIL-STARK proving phase
+
+The proving phase consists of two main components: - the  SM-prover  executor. - the PIL-STARK proof  Generator.
+
+### SM-prover’s executor
+
+The executor in the SM-prover’s takes as inputs; the PIL  .json  file from  PILCOM  and another  .json  file of inputs, called  input.json  . In the case of our mFibonacci SM, the inputs in  input.json  includes the initial values of the registries  A  and  B.
+
+The SM-prover’s executor builds the values of polynomials that are to be committed. Its output is the evaluations of the committed polynomials, per proof. These evaluations of committed polynomials are actually the SM’s execution trace.
+
+Note that the input values in the  input.json  file can be varied without altering the actual state machine. The reason the state machine remains intact is due to fact that the  .pil  file, that was initially compiled in the setup phase, is not affected by any change in the input values of the SM-prover’s executor.
