@@ -27,3 +27,47 @@ The net Ether value earned by the Sequencer for sequencing a batch sequence is r
 -   `batchFee` is the storage variable in **PolygonZkEVM.sol** contract,
 -   `nBatches` is the number of batches in the sequence,
 -   `MATIC/ETH` is the price of MATIC token expressed in ETH.
+
+
+
+Aggregation reward
+-------------------------------------------------------------------------------------------------------------------------------------------------
+
+The Aggregator also needs compensation for correctly fulfilling its role.
+
+The **number of MATIC tokens earned** by the Aggregator each time it aggregates a sequence, denoted by `batchReward`, is determined by the **total contract MATIC balance** and the **number of batches aggregated**.
+
+The MATIC earned per batch aggregated is calculated by the L1 `PolygonZkEVM.sol` contract prior to sequence aggregation using the following expression:
+
+![alt text](image-2.png)
+
+where:
+
+-   `L1AggTxGasFee` is the Aggregation transaction gas fee paid in L1,
+-   `batchReward` is the quantity of MATIC earned per batch aggregated,
+-   `nBatches` is the number of batches in the sequence,
+-   `MATIC/ETH` is the price of MATIC token expressed in ETH.
+
+
+
+## Variable batchFee re-adjustments
+
+The  `batchFee`  is automatically adjusted with every aggregation of a sequence by an independent Aggregator.
+
+This happens when the trusted aggregator isn’t working properly and the  `batchFee`  variable needs to be changed to encourage aggregation. Further information on the trusted aggregator’s inactivity or malfunctioning is provided in upcoming sections.
+
+An internal method called  `_updateBatchFee`, is used to adjust  `batchFee`  storage variable.
+
+`function _updateBatchFee(uint64 newLastVerifiedBatch) internal` 
+
+The admin defines two storage variables that are used to  **tune the fee adjustment function**:
+
+-   `veryBatchTimeTarget`, which is  **the targeted time of the verification of a batch**, so the  `batchFee`  variable is updated to achieve this target, and
+-   `multiplierBatchFee`, which is the batch fee multiplier, with 3 decimals ranging from 1000 to 1024.
+
+The function  `_updateBatchFee`  first determines how many of the aggregated batches are late. That is, those who are in the sequence but have not yet been aggregated.
+
+Second, how much time has passed, as indicated by  `veryBatchTimeTarget`.
+
+The  `diffBatches`  variable represents the difference between late batches and those below the target, and its value is limited by a constant called  `MAX BATCH MULTIPLIER`, which is set to 12.
+
