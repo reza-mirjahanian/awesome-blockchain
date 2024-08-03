@@ -47,3 +47,14 @@ The executor in the SM-prover’s takes as inputs; the PIL  .json  file from  PI
 The SM-prover’s executor builds the values of polynomials that are to be committed. Its output is the evaluations of the committed polynomials, per proof. These evaluations of committed polynomials are actually the SM’s execution trace.
 
 Note that the input values in the  input.json  file can be varied without altering the actual state machine. The reason the state machine remains intact is due to fact that the  .pil  file, that was initially compiled in the setup phase, is not affected by any change in the input values of the SM-prover’s executor.
+
+
+![alt text](image-3.png)
+
+![alt text](image-4.png)
+
+PIL-STARK is, all-in-all, a specific implementation of a STARK that can be used as a generic tool for proving state machines' polynomial identities.
+
+The actual implementation of PIL-STARK uses recursion. That is, hundreds of STARK proofs are proved with another STARK proof, and these STARK proofs of other STARK proofs are also proved with a single STARK proof. This achieves exponential scalability than it would otherwise be possible.
+
+The code for implementing PIL-STARK is found in the zkEVM repository [here](https://github.com/0xPolygonHermez/pil-stark)
