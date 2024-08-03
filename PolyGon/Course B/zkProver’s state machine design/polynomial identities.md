@@ -12,3 +12,14 @@ Polynomial Identities in Zero-Knowledge (ZK) Proofs: Polynomial identities are *
     -   You can create polynomials using your secret number.
     -   These polynomials will have certain properties or relationships (identities).
     -   You can show these relationships are true without revealing the actual number.
+
+
+
+
+
+    Commitment scheme
+=================
+
+The framework for the proof-verification system of our mFibonacci state machine is that of a *polynomial commitment scheme*. The mechanism for proving correctness of the computations carried out by the mFibonacci state machine (or, any state machine in the zkEVM setting), is best described in terms of an interactive zero-knowledge proof system. One therefore thinks of the proof-verification system as enabled by an interaction of two parties, traditionally called the *verifier* and the *prover*.
+
+https://docs.polygon.technology/zkEVM/concepts/mfibonacci/commitment-scheme/
