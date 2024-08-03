@@ -36,3 +36,13 @@ In order to keep track of which line of the program is currently being executed,
 We denote it by zkPC because it is verified in a zero-knowledge manner.
 
 The zkPC is therefore a new column of the execution trace and it contains, at each clock, the line in the zkASM program of the instruction being executed.
+
+
+Plookup
+=======
+
+The main state machine executor sends various instructions to the secondary state machines within the zkProver. Although secondary state machines specialize in specific types of computations, they frequently use [Plookup](https://eprint.iacr.org/2020/315.pdf) in their PIL codes to complete tasks mandated by the Main state machine executor.
+
+This subsection is part of the generic state machine and its goal is to define Plookup before showing how it is used in PIL verification.
+
+![alt text](image-3.png)
