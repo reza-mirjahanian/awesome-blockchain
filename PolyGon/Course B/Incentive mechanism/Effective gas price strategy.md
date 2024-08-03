@@ -1,5 +1,8 @@
 # Effective gas price strategy
 
+https://github.com/0xPolygonHermez/zkevm-rom/issues/316
+
+
 This document presents an outline of Polygon zkEVM’s strategy for executing transactions with the most accurate effective gas price.
 
 -   **Poll for L1 gas price regularly**
