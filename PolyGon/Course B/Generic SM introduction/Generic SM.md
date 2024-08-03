@@ -22,3 +22,17 @@ In this document we discuss how the correctness of the execution trace is ensure
 The first step is to build a mechanism for verifying correctness of the execution trace. This requires creating a set of arithmetic constraints that only hold true when the execution trace is correct. These arithmetic constraints are equations that registry values in any two consecutive rows of the correct execution trace, must satisfy.
 
 Similar to the mFibonacci SM, where each state had to conform to polynomial identities, the arithmetic constraints of the generic state machine are translated into polynomial identities and ultimately into the PIL language.
+
+![alt text](image-1.png)
+
+![alt text](image-2.png)
+
+
+Checking sequence of instructions
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+In order to keep track of which line of the program is currently being executed, a new registry called "program counter" is added to the state machine.
+
+We denote it by zkPC because it is verified in a zero-knowledge manner.
+
+The zkPC is therefore a new column of the execution trace and it contains, at each clock, the line in the zkASM program of the instruction being executed.
