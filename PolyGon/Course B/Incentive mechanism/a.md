@@ -15,3 +15,15 @@ The **Sequencer** earns the transaction fees paid by L2 users for submitting tra
 To incentivize the **Aggregator** for each batch sequenced, the Sequencer must lock a number of MATIC tokens in the L1 `PolygonZkEVM.sol` Contract proportional to the number of batches in the sequence. The number of MATIC tokens **locked per batch** sequenced is saved in the variable `batchFee`.
 
 ![alt text](image.png)
+
+
+The net Ether value earned by the Sequencer for sequencing a batch sequence is represented by the following expression:
+
+![alt text](image-1.png)
+
+
+-   `totalL2TxGasFees` is the total sum of fees gathered from all L2 transactions included in the sequence of batches,
+-   `L1SeqTxGasFee` is the Sequencing transaction gas fee paid in L1,
+-   `batchFee` is the storage variable in **PolygonZkEVM.sol** contract,
+-   `nBatches` is the number of batches in the sequence,
+-   `MATIC/ETH` is the price of MATIC token expressed in ETH.
