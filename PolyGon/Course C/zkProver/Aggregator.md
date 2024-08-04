@@ -135,3 +135,63 @@ Recall that the smart contract contains a summary of the batch information in th
 
 ![alt text](image-10.png)
 
+
+### Proof inputs and outputs
+
+The proof generation process requires several inputs to ensure its soundness:
+
+-   The aggregator address, serves as a safeguard against malleability in the  verifyBatches()  function, ensuring that no one can use another aggregator’s proof.
+-   The previous state root (oldStateRoot), which is already included in the smart contract and does not require explicit sending.
+-   The previous accumulated input hash (oldAccInputHash).
+-   The initial batch number (initNumBatch).
+-   The chainID and the forkID ensure that the proof is valid only within the intended chain and version of the zkEVM.
+
+The figure below, depicts the aggregator inputs and outputs.
+
+![alt text](image-14.png)
+
+The aggregator generates the following outputs:
+
+-   The updated state root,  newStateRoot.
+    
+-   The new accumulated input hash,  newAccInputHash.
+    
+-   The aggregated proof,  π.
+    
+-   The batch number of the last batch included in the aggregated proof once it has been successfully generated (finalNewBatch).
+    
+
+Currently, all the inputs and outputs are public. And this presents an efficiency problem, which we discuss below.
+
+The smart contract structure shown in the figure below, enables upgradeability or alteration of the verifier, as necessary.
+
+Currently we only provide a verifier called  `FflonkVerifier.sol`.
+
+![alt text](image-13.png)
+
+In this approach, the verifier must utilize a list of publics. But, a verifier with a single input is more cost-effective.
+
+In Groth16, for instance, there is one  _scalar multiplication_  operation per public input, which costs approximately  10,000  gas units per public.
+
+The key strategy is therefore to:
+
+-   Create a single public input, which is the hash of all the previous public keys.
+    
+-   Transform all other public inputs into private inputs.
+    
+
+The figure below depicts this configuration, where public inputs are in green while private inputs are in red.
+
+![alt text](image-12.png)
+
+Hence, for the outer proof, there is a single public input in the aggregator called  inputSnark, which is a Keccak hash of all the previous public inputs and outputs.
+
+Therefore, when  `ZkEVM.sol`  contract interacts with the  `VerifierRollups.sol`  contract, only a single public parameter is passed, minimizing data transmission costs.
+
+![alt text](image-11.png)
+
+This optimized approach requires two verifications:
+
+-   Checking that the hash of all private inputs, arranged in the correct order, corresponds to the given  inputSnark.
+    
+-   Verifying that the total input hash, calculated for all processed batches by the aggregator, matches the specified  newAccInputHash.
