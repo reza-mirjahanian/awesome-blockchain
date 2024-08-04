@@ -42,3 +42,96 @@ Keep in mind that this transaction could be part of a virtual batch. Examples of
 The zkEVM's trusted sequencer is unlikely to input an incorrect nonce. However, any member of the community can submit a batch, which may result in an error.
 
 ![alt text](image-7.png)
+
+
+The *prove anything* approach allows the system to implement an anti-censorship measure called *forced batches*.
+
+That is, in the case where the trusted sequencer does not process a user's transactions, the user can take the role of a sequencer by taking their L2 transactions into the virtual state.
+
+The main use case is to allow a user to send bridge transactions to withdraw assets from L2 without the risk of censorship, which would otherwise make fund withdrawals impossible.
+
+Since every user who sends L2 batch data is, by default, 'untrusted,' the system must ensure that anything sent by any user can be verified.
+
+The *forced batches* mechanism is elaborated on in the [Malfunction resistance subsection](https://docs.polygon.technology/zkEVM/architecture/protocol/malfunction-resistance/sequencer-resistance/).
+
+
+### VADCOPs
+
+Although the current version of the proving system has this limitation in the backend (forcing execution traces of all state machines to have the same amount of rows), it is expected to be resolved with the implementation of a proving technique called *variable degree composite proofs* (VADCOPs).
+
+VADCOPs are designed to partition large execution traces with many rows into smaller execution traces with fewer rows.
+
+The main advantage with VADCOPs is the elimination of zkCounters.
+
+See the figure below for a simplified illustration of the basic idea of what VADCOPs can achieve.
+
+In this scenario, it becomes feasible to execute five Keccak operations despite the limit of executing only four operations at a time.
+
+At a high level, the solution involves splitting the proof into two parts, each containing fewer rows, and then aggregating them to demonstrate the execution of five Keccak operations
+
+
+Consequently, since the succinctness property of SNARKs dictates that verification time should be relatively smaller than the proving time, the final SNARK proofs are much smaller and faster to verify than the proofs in the initial stages.
+
+![alt text](image-8.png)
+
+### Proof aggregation
+
+In the zkEVM context, aggregation is a technique that allows the prover to generate a single proof that covers multiple L2 batches.
+
+This reduces the number of proofs to be verified, and thus increases the system throughput.
+
+Proof aggregation means sending a single L1 transaction that aggregates multiple batches, and this improves the batch consolidation rate.
+
+Note that the proving system limits aggregation to consecutive batches only.
+
+Also, we can aggregate single-batch proofs with multiple-batch proofs, as shown in the figure below.
+
+This is achievable because of a technique, used in the cryptographic backend, called *normalization*.
+
+
+![alt text](image-9.png)
+
+
+The first proving system generates such a big proof since it has a lot of high degree polynomials.
+
+Thereafter, the *Compression Stage* is invoked and applied on in each batch proof, aiming to reduce the number of polynomials used, and hence allowing reduction in the proof size.
+
+Next, the *Normalization Stage* is invoked, allowing each aggregator verifier and the normalization verifier to be exactly the same, permitting successful aggregation via a recursion.
+
+Once the normalization step has been finished, the proofs go through aggregation.
+
+The procedure is to construct a binary tree of proofs by aggregating every pair of proofs into one. We call this step, the *Aggregation Stage*.
+
+In this step, two batch proofs are put together into one, and this repeated for as long as there's more than one proof to aggregate.
+
+Observe that the *Aggregation Stage* is designed to accept:
+
+-   Two compressed proofs.
+
+-   Two aggregated proofs.
+
+-   One compressed proof and an aggregated proof.
+
+
+
+## Introducing the aggregator
+
+In the Polygon zkEVM architecture, the aggregator is the component responsible for performing proof aggregation.
+
+Its role is to aggregate several proofs into one, and send the aggregated proof to the L1 Smart Contract through the  verifyBatches()  function.
+
+The aggregator invokes the  verifyBatches()  function on the smart contract, passing the following parameters:
+
+-   The initial batch number,  initNumBatch.
+-   The final batch number,  finalNewBatch.
+-   The root,  newStateRoot.
+-   The aggregated proof,  πa,b,c,....
+
+See the figure below, depicting a single, aggregated proof,  πa,b,c,..., as an input to the verifier smart contract.
+
+The previous root is stored in the smart contract, eliminating the need to transmit it.
+
+Recall that the smart contract contains a summary of the batch information in the  _accumulated input hash_.
+
+![alt text](image-10.png)
+
