@@ -82,3 +82,39 @@ Here is a step-by-step outline of how the system achieves proof / verification o
 While the polynomial constraints are written in the PIL language, the instructions are initially written in zkASM but subsequently expressed and stored in JSON format. Although not all verification involves a Plookup, the diagram below, briefly illustrates the wide role Plookup plays in the zkProver.
 
 ![alt text](image-2.png)
+
+
+Components of zkProver
+-------------------------------------------------------------------------------------------------------------------------------------
+
+For the sake of simplicity, one can think of the zkProver as being composed of the following four components;
+
+-   The Executor or the Main state machine executor.
+
+-   The STARK Recursion Component.
+
+-   The CIRCOM library.
+
+-   The zk-SNARK Prover.
+
+In the nutshell, the zkProver uses these four components to generates verifiable proofs. As a result, the constraints that each proposed batch must meet are polynomial constraints or polynomial identities. All valid batches must satisfy specific polynomial constraints.
+
+![alt text](image-3.png)
+
+Strategy to achieving succinctness
+-------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+zk-STARK proofs are used because of their speed, and they require no trusted setup. They are however much larger compared to zk-SNARK proofs. It is for this reason, and the succinctness of the zk-SNARKs, that the zkProver uses a zk-SNARK to attest to the correctness of the zk-STARK proofs. zk-SNARKs are therefore published as the validity proofs to state changes. This strategy has huge benefits as it results in gas costs reducing from 5M to 350K
+
+
+The general-computation executor approach suits the zkEVM context best, because both the EVM and the zkEVM evolve. Also, it is more efficient to keep modifying the assembly code than the whole executor.
+
+The zkASM program that processes EVM transactions is called **zkEVM ROM** (as in "Read Only Memory") or simply the ROM.
+
+By changing the ROM, we can make the L2 zkEVM more and more closer to the L1 EVM.
+
+Hence, we have different versions of the zkEVM ROM. Each of these versions will be denoted with a unique identifier called **forkID**.
+
+It is worth mentioning that another advantage of using a ROM-based approach is that we can test small parts of the assembly program in isolation.
+
+Since each approach to executor design serves a different purpose, the zkEVM utilizes both approaches.
