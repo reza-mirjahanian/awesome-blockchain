@@ -27,3 +27,15 @@ An example of a Merkle proof can be found in the [Concepts section](https://doc
 Verifying a Merkle proof involves using the given information to compute the Merkle root and checking if it matches the actual Merkle root.
 
 After processing the last L2 transaction in a batch, the resulting root becomes the *new state root*.
+
+
+The storage state machine's executor and HashDB
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+All essential hashes required for computing execution traces are stored in the HashDB.
+
+During the execution of the L2 state's related zkEVM opcodes, such as `SSTORE` or `SLOAD`, the storage state machine's executor consistently retrieves values from the HashDB and uses them to construct the corresponding execution traces.
+
+The HashDB contains all the hashes, which are all the nodes of the Merkle tree of the L2 state.
+
+![alt text](image-15.png)
