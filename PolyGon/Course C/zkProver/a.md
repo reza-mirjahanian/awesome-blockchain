@@ -80,3 +80,5 @@ Here is a step-by-step outline of how the system achieves proof / verification o
 -   [Plookup](https://eprint.iacr.org/2020/315.pdf) is one of the ways to check if the Prover's committed polynomials produce correct traces.
 
 While the polynomial constraints are written in the PIL language, the instructions are initially written in zkASM but subsequently expressed and stored in JSON format. Although not all verification involves a Plookup, the diagram below, briefly illustrates the wide role Plookup plays in the zkProver.
+
+![alt text](image-2.png)
