@@ -36,3 +36,6 @@ The Admin owns the Ethereum account that controls the Consensus contract, and it
 All **ProxyAdmin.sol** instances that can upgrade the contract implementations of the zkEVM Protocol belong to the Admin account.
 
 Moreover, all proxies are owned by the Admin account, making it the only account (other than the Security Council Multisig) authorized to make modifications to the contracts used to implement the zkEVM Protocol.
+
+
+![alt text](image.png)
