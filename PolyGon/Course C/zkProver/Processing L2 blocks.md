@@ -40,3 +40,38 @@ Henceforth, during each batch processing, the system records all block numbers i
 ![alt text](image-16.png)
 
 
+The `BLOCKHASH` opcode
+--------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+In the EVM, the BLOCKHASH Opcode provides the keccak-256 digest of the Ethereum L1 block header, which includes: root of the state trie, root of transactions trie, root of receipt trie, logs, gas used, gas limit, block number, timestamp, etc.
+
+A complete list of all parameters stored in an Ethereum block and block header is given in the [Ethereum organisation documentation](https://ethereum.org/en/developers/docs/blocks/#block-anatomy).
+
+You can use the [Geth library](https://github.com/ethereum/go-ethereum/blob/407f779c8ef6fe662d723e95b2ae1c72756b97b2/core/types/block.go#L65C21-L65C21) to compute an Ethereum block hash.
+
+See the figure below for an example of an Ethereum L1 block header reflecting some of these parameters
+L2 native vs. L2 RPC Ethereum-like `BLOCKHASH`
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+In Ethereum, the block header is secure because it is computed and validated by all the nodes within the network.
+
+However, in the Polygon zkEVM, the prover is the only entity responsible for proving that the parameters related to block execution are correct, and these parameters form part of the state.
+
+Ethereum takes the approach that block parameters, providing information about execution of transactions in each block, are hashed to obtain the block hash.
+
+And, the resulting state root is one of these parameters.
+
+Since the aim is to prove that the block hash computation and its parameters are correct, the native block hash in the Polygon zkEVM context has to be the L2 state root.
+
+The zkEVM prover is in charge of proving that the changes in the L2 state root are correctly performed.
+
+So, if we want to provide a verifiable proof of the execution parameters of a block (such as `gasUsed`, transaction logs, etc.,) we have to work these parameters into the Polygon zkEVM processing, including them in the L2 state.
+
+Incorporating block execution parameters into the L2 state is facilitated through the `0x5ca1ab1e` smart contract.
+
+Thus, the L2 state root is a hash that contains all the parameters that provide information about block execution.
+
+The figure below depicts the differences.
+
+
+![alt text](image-17.png)
