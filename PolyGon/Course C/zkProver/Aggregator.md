@@ -40,3 +40,5 @@ An invalid intrinsic transaction is a transaction that cannot be processed, and 
 Keep in mind that this transaction could be part of a virtual batch. Examples of errors in this scenario are: incorrect nonce, insufficient balance, etc.
 
 The zkEVM's trusted sequencer is unlikely to input an incorrect nonce. However, any member of the community can submit a batch, which may result in an error.
+
+![alt text](image-7.png)
