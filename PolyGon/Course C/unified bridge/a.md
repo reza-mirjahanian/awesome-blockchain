@@ -1,0 +1,86 @@
+The LxLy bridge is an interoperability solution aimed at enabling cross-chain communication among Polygon chains. It facilitates interaction between two L2 chains or between an L2 chain and Ethereum as the L1.
+
+The LxLy bridge SC (or [PolygonZkEVMBridgeV2](https://github.com/0xPolygonHermez/zkevm-contracts/blob/feature/v2ForkID5/contracts/v2/PolygonZkEVMBridgeV2.sol)) is an improved and a more robust version of the [zkEVM bridge](https://github.com/0xPolygonHermez/zkevm-contracts/blob/feature/v2ForkID5/contracts/PolygonZkEVMBridge.sol) deployed in the Polygon zkEVM mainnet\_beta version\_.
+
+Its modular design capacitates projects to deploy their own rollups and connect them to the Polygon ecosystem.
+
+
+Ideal attributes
+--------------------------------------------------------------------------------------------------------------------------------------------------
+
+The LxLy bridge is deployed in the Polygon ecosystem to enable the following features and functionalities:
+
+-   **Accessibility**: Projects can request creation of a rollup and connect it to the Polygon ecosystem.
+-   **Unified liquidity**: All rollups can connect through the same bridge, enabling L2 to L2 bridges.
+-   **Polygon CDK**: All the rollups can use the same stack.
+-   **Rollup-project oriented**: Every project can have its own rollup.
+-   **Cross-rollup communication**: All the rollups connect and communicate using the LxLy bridge, enabling seamless L2 to L2 bridging.
+-   **Rollup upgradability**: All the deployed rollups should be upgradeable in accordance with its own governance mechanism.
+
+These functionalities are accomplished by modifying a few key components in the architecture of the zkEVM bridge version-1
+
+
+
+zkEVM bridge version-1
+--------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Here is a brief review of the zkEVM bridge's architecture.
+
+Version-1 consists mainly of three (3) smart contracts:
+
+-   The bridge contract ([PolygonZkEVMBridge.sol](https://github.com/0xPolygonHermez/zkevm-contracts/blob/feature/v2ForkID5/contracts/PolygonZkEVMBridge.sol)), which handles transfer of assets and messages between networks.
+-   The global exit root manager contract ([PolygonZkEVMGlobalExitRoot.sol](https://github.com/0xPolygonHermez/zkevm-contracts/blob/feature/v2ForkID5/contracts/PolygonZkEVMGlobalExitRoot.sol)), which facilitates synchronization of state-info between the L2 and the L1.
+-   The Polygon zkEVM consensus contract ([PolygonZkEVM.sol](https://github.com/0xPolygonHermez/zkevm-contracts/blob/feature/v2ForkID5/contracts/PolygonZkEVM.sol)), which handles the sequencing and verification of transactions in the form of batches.
+
+
+### Global exit trees review
+
+Critical to the design of the LxLy bridge are exit trees and the global exit tree.
+
+Each chain has a Merkle tree called an *exit tree*, to which a leaf containing data of each **asset-transfer** is appended. Since such a leaf records data of the asset exiting the chain, it is called an ***Exit Leaf***.
+
+Another Merkle tree whose leaves are roots of the various exit trees is formed, and it is called the *global exit tree*.
+
+The root of the global exit tree is the single source of state-truth communicated between rollups.
+
+It is the global exit root manager contract's responsibility to update the global exit tree root and acts as a custodian for the global exit tree's history.
+
+A complete transfer of assets in version-1 involves invoking three smart contracts; `PolygonZkEVM.sol`, `PolygonZkEVMBridge.sol` and `PolygonZkEVMGlobalExitRoot.sol`.
+
+The below figure depicts a *bridge* of assets and a *claim* of assets;
+
+
+![alt text](image.png)
+
+Observe, in the above figure, that the consensus contract (`PolygonZkEVM.sol`) is able to:
+
+-   Retrieve the global exit root from the mainnet, and make it available in L2
+-   Update the exit tree root in the global exit tree root manager.
+
+
+
+LxLy bridge version-2 design
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Multiple ZK rollups such as zkEVMs, zk-Validiums or zk-VMs, can be created and connected through the same LxLy bridge.
+
+Thanks to the introduction of an additional smart contract called the [*rollup manager*](https://github.com/0xPolygonHermez/zkevm-contracts/blob/feature/v2ForkID5/contracts/v2/PolygonRollupManager.sol).
+
+Although the logic for *bridging* or *claiming* assets from one network to another remains the same, individual L2 consensus contracts no longer handle verification of their own network's sequenced batches.
+
+In the context of the LxLy bridge, the *rollup manager* contract verifies sequenced batches from various networks.
+
+In addition to verification of sequenced batches, the *rollup manager* contract also creates consensus contracts for networks connecting via the LxLy bridge.
+
+
+### What remains unchanged from version-1?
+
+The strategy to separate the *bridge logic* from the *global exit root logic* remains intact. This is key to achieving interoperability.
+
+Consensus contracts of each connected network handle the sequencing of their own batches, but send the batch data to the *rollup manager* contract for verification.
+
+The *rollup manager* contract stores the information of the sequenced batches in the form of an *accumulated input hash*, as in the version-1 of the zkEVM bridge.
+
+Once sequenced batches have been verified, the *global exit tree* gets updated, in an approach similar to the zkEVM bridge version-1.
+
+![alt text](image-1.png)
