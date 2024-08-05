@@ -84,3 +84,60 @@ The *rollup manager* contract stores the information of the sequenced batches 
 Once sequenced batches have been verified, the *global exit tree* gets updated, in an approach similar to the zkEVM bridge version-1.
 
 ![alt text](image-1.png)
+
+
+
+### Rollup manager's role
+
+The rollup manager is in charge of the following lists of availability:
+
+-   Rollup consensus mechanisms: The list may consist of consensus contracts such as `PolygonZkEVM.sol` or `zkValidium.sol`.
+-   Verifier contracts: For example, the `PolygonZkEVM.sol` uses the `Verifier.sol` contract for verification of batches.
+
+The governance contract oversees consensus mechanisms and verifiers that can be added to the respective lists.
+
+The [rollup manager contract](https://github.com/0xPolygonHermez/zkevm-contracts/blob/feature/v2ForkID5/contracts/v2/PolygonRollupManager.sol) has the relevant function for adding a new rollup:
+
+```
+`functionaddNewRollupType(
+addressconsensusImplementation,
+IVerifierRollupverifier,
+uint64forkID,
+bytes32genesis,
+uint8rollupCompatibilityID,
+stringmemorydescription
+)...
+`
+```
+
+-   To create and connect a rollup to the LxLy bridge,
+
+-   The developer selects the consensus and verifier for the required rollup amongst those available in the rollup manager's lists,
+
+-   Requests creation of a rollup with the selected specifications,
+-   Governance contract invokes the rollup manager's `addNewRollupType()` function,
+-   Once a rollup is created, the transfer of assets can be processed in the usual manner.
+
+
+### Overall flow of events
+The following diagram captures the following flow of events, most of which are handled by the rollup manager contract:
+
+-   Updating rollup manager's lists.
+-   Creating rollups.
+-   Sequencing of batches.
+-   Aggregation or proving of batches.
+-   Verification of batches.
+-   Updating the global exit root.
+
+
+![alt text](image-2.png)
+
+Although the LxLy bridge is still in development, it is a central component to the AggLayer which offers multi-chain interoperability.
+
+The LxLy bridge currently works with the Polygon zkEVM as the L2 and the Ethereum network as L1.
+
+The next step is to enable developers wishing to create a zk-rollup to choose between a zkEVM and a zkValidium rollup.
+
+The idea of handling verification of several networks in a single contract, is a pre-cursor to the ultimate and envisaged *interop layer* for the Polygon ecosystem.
+
+The code for the LxLy bridge version-2 can be found [here](https://github.com/0xPolygonHermez/zkevm-contracts/tree/feature/v2ForkID5/contracts/v2).
