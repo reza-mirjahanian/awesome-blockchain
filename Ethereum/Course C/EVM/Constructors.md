@@ -15,3 +15,25 @@ Note:
 ●   The Data of the transaction is treated as code for contract deployment.
 
 ![alt text](image-4.png)
+
+
+
+##  public storage variables automatically have “getter” view calls created.
+
+```
+contract 
+Simple {
+ uint256 public val1;
+ uint256 public val2;
+ constructor() 
+     val2 = 3;
+   }
+ function public {
+   }
+ }
+ set(
+ uint256 
+     val1 = _param;
+ _param) 
+external {
+```
