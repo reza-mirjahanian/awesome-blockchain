@@ -24,6 +24,9 @@
         -   Tokens can also be organized into collections, creating hierarchies or flat lists of independent tokens.
         -   **Use Cases:** Subscriptions, unique financial contracts, ownership management.
 
+
+![alt text](image-9.png)
+
 #### **3\. Scalability of Tokens in TON:**
 
 -   **Independent Contracts:** In TON, tokens are managed by multiple independent contracts (token wallets), each handling a user's balance.
@@ -35,3 +38,16 @@
 
 -   **Technical Representation:** Tokens can be used to represent different states of value in a system, not just as currencies but also as technical markers for various stages of a transaction.
 -   **User Interaction:** Tokens can be displayed to users with additional information (e.g., availability conditions) while keeping the system scalable.
+  
+
+**Implementation of Fungible Tokens**
+
+-   Unlike other blockchains, TON does not have a single contract that keeps track of all accounts that own portions of a token
+-   Instead, there are multiple independent contracts with the same code, called token balances or token wallets
+-   Each user's wallet communicates directly with their own token wallet, which passes messages to increment or decrement token amounts
+
+**Scalability of Tokens**
+
+-   The architecture of TON's token implementation allows for full scalability of tokens
+-   This means that transactions of the same token between different users do not interfere with each other
+-   The scalability of tokens is one of the most important features of the TON platform
