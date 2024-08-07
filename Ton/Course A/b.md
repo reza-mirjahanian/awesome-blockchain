@@ -23,6 +23,7 @@
     -   Each contract's data is encapsulated, meaning a contract only sees its own storage and balance.
     -   Changes to one contract are independent of changes to others, which is crucial for the scalability of TON.
 
+![alt text](image-4.png)
 #### **3\. Types of Contracts:**
 
 -   **Wallet Contracts:**
@@ -34,6 +35,7 @@
     -   Tokens in TON are separate contracts with their own state and attributes, such as ownership.
     -   To transfer a token, a message is sent to the token contract to update its owner attribute.
 
+![alt text](image-5.png)
 #### **4\. Contract Fees and Costs:**
 
 -   **Gas Costs:**
