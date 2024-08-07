@@ -46,6 +46,11 @@
     -   Rent is calculated based on the contract's data size and duration.
     -   When a contract makes a transaction after a long period of inactivity, the first transaction may have a higher fee due to accumulated rent.
 
+
+![alt text](image-6.png)
+
+
+
 #### **5\. Handling Frozen Contracts:**
 
 -   **Frozen Contracts:**
