@@ -4,11 +4,15 @@
 
 * * * *
 
+![alt text](image-2.png)
+
 #### **1\. Overview of Accounts and Contracts:**
 
 -   **Interchangeable Terms:** In TON, "accounts" and "contracts" are often used interchangeably.
 -   **Components of Contracts:** Contracts in TON are built from three basic components: data, code, and TON coin balance.
 -   **Functions:** Contracts receive incoming messages, process them, emit outgoing messages, and update their internal state.
+
+![alt text](image-3.png)
 
 #### **2\. Contract Structure:**
 
