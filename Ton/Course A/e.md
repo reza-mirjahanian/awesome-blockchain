@@ -35,7 +35,7 @@
     -   Helps extend contract features without conflicts.
 
 * * * *
-
+![alt text](image-16.png)
 ### **Understanding Transactions**
 
 -   **Definition:**
@@ -47,6 +47,8 @@
 
 * * * *
 
+![alt text](image-17.png)
+
 ### **Phases of a Transaction**
 
 1.  **Storage Phase:**
@@ -56,26 +58,33 @@
         -   Rent is calculated based on a price per bit per second.
         -   If the contract lacks funds, execution aborts, and the contract is frozen.
         -   Frozen contracts remain inactive until unfrozen by their owner.
-2.  **Credit Phase:**
+ 
+
+![alt text](image-18.png)
+1.  **Credit Phase:**
 
     -   **Objective:** Credit the contract with coins attached to the incoming message.
     -   **Note:**
         -   Applies only to internal messages (as external messages do not carry coins).
-3.  **Computation Phase:**
+2.  **Computation Phase:**
 
     -   **Objective:** Execute the contract code.
     -   **Mechanism:**
         -   TVM executes the code and monitors gas usage.
         -   The gas limit can be adjusted based on the message source or the contract's balance.
         -   Proper gas management ensures the contract does not run out of funds during execution.
-4.  **Action Phase:**
+
+![alt text](image-19.png)
+3.  **Action Phase:**
 
     -   **Objective:** Process the contract's new state and outgoing messages.
     -   **Key Actions:**
         -   Create and record a new state.
         -   Route outgoing messages to other contracts.
         -   Example: A wallet contract may send coins to another wallet address.
-5.  **Bounce Phase:**
+
+![alt text](image-20.png)
+4.  **Bounce Phase:**
 
     -   **Objective:** Handle transaction failures.
     -   **Mechanism:**
