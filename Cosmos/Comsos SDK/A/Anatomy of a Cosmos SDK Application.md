@@ -54,3 +54,57 @@ See an example of application type definition from `simapp`, the Cosmos SDK's o
 
 https://github.com/cosmos/cosmos-sdk/blob/v0.50.0-alpha.0/simapp/app.go#L173-L212
 
+### Constructor Function
+
+Also defined in `app.go` is the constructor function, which constructs a new application of the type defined in the preceding section. The function must fulfill the `AppCreator` signature in order to be used in the [`start` command](https://docs.cosmos.network/v0.50/learn/advanced/node#start-command) of the application's daemon command.
+
+```
+server/types/app.go
+// AppCreator is a function that allows us to lazily initialize an
+// application using various configurations.
+AppCreator func(log.Logger, dbm.DB, io.Writer, AppOptions) Application
+```
+https://github.com/cosmos/cosmos-sdk/blob/v0.50.0-alpha.0/server/types/app.go#L66-L68
+
+
+Here are the main actions performed by this function:
+
+-   Instantiate a new [`codec`](https://docs.cosmos.network/v0.50/learn/advanced/encoding) and initialize the `codec` of each of the application's modules using the [basic manager](https://docs.cosmos.network/v0.50/build/building-modules/module-manager#basicmanager).
+-   Instantiate a new application with a reference to a `baseapp` instance, a codec, and all the appropriate store keys.
+-   Instantiate all the [`keeper`](https://docs.cosmos.network/v0.50/learn/beginner/app-anatomy#keeper) objects defined in the application's `type` using the `NewKeeper` function of each of the application's modules. Note that keepers must be instantiated in the **correct order**, as the `NewKeeper` of one module might require a reference to another module's `keeper`.
+-   Instantiate the application's [module manager](https://docs.cosmos.network/v0.50/build/building-modules/module-manager#manager) with the [`AppModule`](https://docs.cosmos.network/v0.50/learn/beginner/app-anatomy#application-module-interface) object of each of the application's modules.
+-   With the module manager, initialize the application's [`Msg` services](https://docs.cosmos.network/v0.50/learn/advanced/baseapp#msg-services), [gRPC `Query` services](https://docs.cosmos.network/v0.50/learn/advanced/baseapp#grpc-query-services), [legacy `Msg` routes](https://docs.cosmos.network/v0.50/learn/advanced/baseapp#routing), and [legacy query routes](https://docs.cosmos.network/v0.50/learn/advanced/baseapp#query-routing). When a transaction is relayed to the application by CometBFT via the ABCI, it is routed to the appropriate module's [`Msg` service](https://docs.cosmos.network/v0.50/learn/beginner/app-anatomy#msg-services) using the routes defined here. Likewise, when a gRPC query request is received by the application, it is routed to the appropriate module's [`gRPC query service`](https://docs.cosmos.network/v0.50/learn/beginner/app-anatomy#grpc-query-services) using the gRPC routes defined here. The Cosmos SDK still supports legacy `Msg`s and legacy CometBFT queries, which are routed using the legacy `Msg` routes and the legacy query routes, respectively.
+-   With the module manager, register the [application's modules' invariants](https://docs.cosmos.network/v0.50/build/building-modules/invariants). Invariants are variables (e.g. total supply of a token) that are evaluated at the end of each block. The process of checking invariants is done via a special module called the [`InvariantsRegistry`](https://docs.cosmos.network/v0.50/build/building-modules/invariants#invariant-registry). The value of the invariant should be equal to a predicted value defined in the module. Should the value be different than the predicted one, special logic defined in the invariant registry is triggered (usually the chain is halted). This is useful to make sure that no critical bug goes unnoticed, producing long-lasting effects that are hard to fix.
+-   With the module manager, set the order of execution between the `InitGenesis`, `PreBlocker`, `BeginBlocker`, and `EndBlocker` functions of each of the [application's modules](https://docs.cosmos.network/v0.50/learn/beginner/app-anatomy#application-module-interface). Note that not all modules implement these functions.
+-   Set the remaining application parameters:
+    -   [`InitChainer`](https://docs.cosmos.network/v0.50/learn/beginner/app-anatomy#initchainer): used to initialize the application when it is first started.
+    -   [`PreBlocker`](https://docs.cosmos.network/v0.50/learn/beginner/app-anatomy#preblocker): called before BeginBlock.
+    -   [`BeginBlocker`, `EndBlocker`](https://docs.cosmos.network/v0.50/learn/beginner/app-anatomy#beginblocker-and-endblocker): called at the beginning and at the end of every block.
+    -   [`anteHandler`](https://docs.cosmos.network/v0.50/learn/advanced/baseapp#antehandler): used to handle fees and signature verification.
+-   Mount the stores.
+-   Return the application.
+-   
+
+---------------------
+------------
+Note that the constructor function only creates an instance of the app, while the actual state is either carried over from the `~/.app/data` folder if the node is restarted, or generated from the genesis file if the node is started for the first time.
+
+See an example of application constructor from `simapp`
+
+
+
+https://github.com/cosmos/cosmos-sdk/blob/v0.50.0-alpha.0/simapp/app.go#L223-L575
+
+
+simapp/app.go
+```
+// NewSimApp returns a reference to an initialized SimApp.
+funcNewSimApp(
+	logger log.Logger,
+	db dbm.DB,
+	traceStore io.Writer,
+	loadLatest bool,
+	appOpts servertypes.AppOptions,
+	baseAppOptions ...func(*baseapp.BaseApp),
+)*SimApp {
+```
