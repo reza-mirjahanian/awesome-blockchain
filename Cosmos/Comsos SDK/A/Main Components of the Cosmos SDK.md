@@ -81,3 +81,61 @@ Here is a simplified view of how a transaction is processed by the application o
                                        | (0=Ok, 1=Err)
                                        v
 ```
+
+
+Each module can be seen as a little **state-machine**. Developers need to define the subset of the state handled by the module, as well as custom message types that modify the state (Note: messages are extracted from transactions by baseapp). In general, each module declares its own KVStore in the multistore to persist the subset of the state it defines. Most developers will need to access other 3rd party modules when building their own modules. Given that the Cosmos SDK is an open framework, some of the modules may be malicious, which means there is a need for security principles to reason about inter-module interactions. These principles are based on object-capabilities. In practice, this means that instead of having each module keep an access control list for other modules, each module implements special objects called keepers that can be passed to other modules to grant a pre-defined set of capabilities.
+
+Cosmos SDK modules are defined in the x/ folder of the Cosmos SDK. Some core modules include:
+
+x/auth: Used to manage accounts and signatures.
+x/bank: Used to enable tokens and token transfers.
+x/staking + x/slashing: Used to build Proof-Of-Stake blockchains.
+In addition to the already existing modules in x/, that anyone can use in their app, the Cosmos SDK lets you build your own custom modules. You can check an example of that in the tutorial.
+
+
+#### **Module Structure and State Management**
+
+-   **State-Machine Concept:**
+
+    -   Each module functions as a small state-machine.
+    -   Developers must define:
+        -   The subset of the state managed by the module.
+        -   Custom message types that modify the state.
+-   **KVStore Usage:**
+
+    -   Each module declares its own `KVStore` in the `multistore` to persist the subset of the state it handles.
+
+* * * *
+
+#### **Interacting with Other Modules**
+
+-   **3rd Party Module Access:**
+
+    -   Developers often need to access other 3rd party modules when building their own.
+-   **Security Considerations:**
+
+    -   **Open Framework Caution:**
+        -   Be aware that some modules might be malicious due to the open nature of the Cosmos SDK.
+    -   **Object-Capability Principles:**
+        -   Modules should not keep access control lists for other modules.
+        -   Implement "keepers" to grant a pre-defined set of capabilities securely.
+
+* * * *
+
+#### **Core Modules in the Cosmos SDK**
+
+-   **Location:**
+
+    -   Cosmos SDK modules are located in the `x/` folder of the Cosmos SDK.
+-   **Examples of Core Modules:**
+
+    -   **x/auth:** Manages accounts and signatures.
+    -   **x/bank:** Enables tokens and token transfers.
+    -   **x/staking + x/slashing:** Used for building Proof-Of-Stake blockchains.
+
+* * * *
+
+#### **Custom Module Development**
+
+-   **Building Custom Modules:**
+    -   In addition to existing modules in the `x/` folder, the Cosmos SDK allows developers to build their own custom modules for specific applications.
