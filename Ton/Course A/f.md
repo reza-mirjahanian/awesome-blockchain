@@ -1,3 +1,5 @@
+![alt text](image-25.png)
+
 ### **1\. Classic Authentication with a Signature**
 
 -   **External Messages:**
@@ -65,7 +67,7 @@
     -   This method provides a powerful way to verify that interacting contracts are running the same trusted code.
 
 * * * *
-
+![alt text](image-24.png)
 ### **4\. Lack of Authentication**
 
 -   **Concept:**
