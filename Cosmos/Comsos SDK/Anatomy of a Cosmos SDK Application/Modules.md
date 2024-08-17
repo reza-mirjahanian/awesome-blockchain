@@ -84,3 +84,43 @@ Some external clients may not wish to use gRPC. In this case, the Cosmos SDK pro
 The REST endpoints are defined in the Protobuf files, along with the gRPC services, using Protobuf annotations. Modules that want to expose REST queries should add `google.api.http` annotations to their `rpc` methods. By default, all REST endpoints defined in the SDK have a URL starting with the `/cosmos/` prefix.
 
 The Cosmos SDK also provides a development endpoint to generate [Swagger](https://swagger.io/) definition files for these REST endpoints. This endpoint can be enabled inside the [`app.toml`](https://docs.cosmos.network/v0.50/user/run-node/run-node#configuring-the-node-using-apptoml-and-configtoml) config file, under the `api.swagger` key.
+
+
+
+Application Interface
+---------------------------------------------------------------------------------------------------------------------------------------------------
+
+[Interfaces](https://docs.cosmos.network/v0.50/learn/beginner/app-anatomy#command-line-grpc-services-and-rest-interfaces) let end-users interact with full-node clients. This means querying data from the full-node or creating and sending new transactions to be relayed by the full-node and eventually included in a block.
+
+The main interface is the [Command-Line Interface](https://docs.cosmos.network/v0.50/learn/advanced/cli). The CLI of a Cosmos SDK application is built by aggregating [CLI commands](https://docs.cosmos.network/v0.50/learn/beginner/app-anatomy#cli) defined in each of the modules used by the application. The CLI of an application is the same as the daemon (e.g. `appd`), and is defined in a file called `appd/main.go`. The file contains the following:
+
+-   **A `main()` function**, which is executed to build the `appd` interface client. This function prepares each command and adds them to the `rootCmd` before building them. At the root of `appd`, the function adds generic commands like `status`, `keys`, and `config`, query commands, tx commands, and `rest-server`.
+-   **Query commands**, which are added by calling the `queryCmd` function. This function returns a Cobra command that contains the query commands defined in each of the application's modules (passed as an array of `sdk.ModuleClients` from the `main()` function), as well as some other lower level query commands such as block or validator queries. Query command are called by using the command `appd query [query]` of the CLI.
+-   **Transaction commands**, which are added by calling the `txCmd` function. Similar to `queryCmd`, the function returns a Cobra command that contains the tx commands defined in each of the application's modules, as well as lower level tx commands like transaction signing or broadcasting. Tx commands are called by using the command `appd tx [tx]` of the CLI.
+
+See an example of an application's main command-line file from the [Cosmos Hub](https://github.com/cosmos/gaia)
+
+```
+cmd/gaiad/cmd/root.go
+// NewRootCmd creates a new root command for simd. It is called once in the
+// main function.
+func NewRootCmd() (*cobra.Command, params.EncodingConfig) {
+	encodingConfig := gaia.MakeTestEncodingConfig()
+	initClientCtx := client.Context{}.
+		WithCodec(encodingConfig.Codec).
+		WithInterfaceRegistry(encodingConfig.InterfaceRegistry).
+		WithTxConfig(encodingConfig.TxConfig).
+		WithLegacyAmino(encodingConfig.Amino
+```
+
+
+Dependencies and Makefile
+---------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+This section is optional, as developers are free to choose their dependency manager and project building method. That said, the current most used framework for versioning control is [`go.mod`](https://github.com/golang/go/wiki/Modules). It ensures each of the libraries used throughout the application are imported with the correct version.
+
+The following is the `go.mod` of the [Cosmos Hub](https://github.com/cosmos/gaia), provided as an example.
+
+For building the application, a [Makefile](https://en.wikipedia.org/wiki/Makefile) is generally used. The Makefile primarily ensures that the `go.mod` is run before building the two entrypoints to the application, [`Node Client`](https://docs.cosmos.network/v0.50/learn/beginner/app-anatomy#node-client) and [`Application Interface`](https://docs.cosmos.network/v0.50/learn/beginner/app-anatomy#application-interface).
+
+Here is an example of the [Cosmos Hub Makefile](https://github.com/cosmos/gaia/blob/main/Makefile).
