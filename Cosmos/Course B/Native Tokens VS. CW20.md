@@ -55,103 +55,92 @@
 * **Get All Accounts**: You can get all accounts that hold a CW20 token using the `accounts` query.
 * **Get All Allowances**: You can get all allowances of a CW20 token using the `allowances` query.
 
+
+![alt text](image-3.png)
+![alt text](image-4.png)
 --------------------------------------
 =========================
 
-Cosmos Token Types
-1. Native Tokens
-Characteristics
-
-Ease of use for developers and users
-Queried through the banks module
-Represented as integers with denomination names
-Utilize the Token Factory module
-
-Benefits
-
-CLI-friendly: Easy to send tokens via command line
-Simplified airdropping: State can be exported from nodes
-Efficient queries and transactions
-Enhanced contract interactions: Funds can be pinned during execution
-
-Token Denominations
-
-u: micro (10^6)
-n: nano (10^9)
-a: ato (10^18, used by Ethereum)
-
-2. CW20 Tokens
-Characteristics
-
-Smart contract-based, similar to ERC20 tokens
-Require CosmWasm (km wasm) to be enabled on the chain
-Stored as a contract address in a database
-
-Limitations
-
-More complex to interact with compared to native tokens
-Require knowledge of contract address for queries and executions
-Harder to index without querying the contract every block
-
-Token Factory Module
-
-Allows developers to create namespace tokens
-Prevents name collisions
-Examples:
-
-Joel's token
-Personal tokens
-Web app-specific tokens
 
 
+# Cosmos Token Types
 
-Token Amounts and Conversion
+## 1. Native Tokens
 
-Represented as unsigned integers
-Conversion needed between developer and user-facing amounts
-Example:
+### Characteristics
+- **Ease of use** for developers and users
+- Queried through the **banks module**
+- Represented as **integers** with denomination names
+- Utilize the **Token Factory module**
 
-1 token (user-facing) = 1,000,000 u-tokens (developer-side)
+### Benefits
+- **CLI-friendly**: Easy to send tokens via command line
+- **Simplified airdropping**: State can be exported from nodes
+- **Efficient queries and transactions**
+- **Enhanced contract interactions**: Funds can be pinned during execution
 
+### Token Denominations
+- **u**: micro (10^6)
+- **n**: nano (10^9)
+- **a**: ato (10^18, used by Ethereum)
 
+## 2. CW20 Tokens
 
-Migration from CW20 to Native Tokens
+### Characteristics
+- **Smart contract-based**, similar to ERC20 tokens
+- Require **CosmWasm (km wasm)** to be enabled on the chain
+- Stored as a **contract address** in a database
 
-Possible using Cosmos Contracts Token Factory
-Allows for one-to-one bidirectional change
-Documentation available for upload and store keys
+### Limitations
+- More complex to interact with compared to native tokens
+- Require knowledge of contract address for queries and executions
+- Harder to index without querying the contract every block
 
-CW20 Contract Examples
-Queries
+## Token Factory Module
 
-Contract Info
+- Allows developers to create **namespace tokens**
+- Prevents name collisions
+- Examples:
+  - Joel's token
+  - Personal tokens
+  - Web app-specific tokens
 
-Admin
-Store code ID
-Creator
-Label
-IBC ports IDs (if applicable)
+## Token Amounts and Conversion
 
+- Represented as **unsigned integers**
+- Conversion needed between developer and user-facing amounts
+- Example:
+  - 1 token (user-facing) = 1,000,000 u-tokens (developer-side)
 
-Token Info
+## Migration from CW20 to Native Tokens
 
-Decimals
-Name
-Symbol
-Total supply
+- Possible using **Cosmos Contracts Token Factory**
+- Allows for one-to-one bidirectional change
+- Documentation available for upload and store keys
 
+## CW20 Contract Examples
 
-User Tokens
+### Queries
+1. **Contract Info**
+   - Admin
+   - Store code ID
+   - Creator
+   - Label
+   - IBC ports IDs (if applicable)
 
-Can query both user and smart contract balances
-Balance calculation: divide by 10^6 for human-readable form
+2. **Token Info**
+   - Decimals
+   - Name
+   - Symbol
+   - Total supply
 
+3. **User Tokens**
+   - Can query both user and smart contract balances
+   - Balance calculation: divide by 10^6 for human-readable form
 
-
-Additional Features
-
-Smart contracts can hold CW20 token balances
-Multiple query types available (logo, marketing info, accounts, allowances, etc.)
+### Additional Features
+- Smart contracts can hold CW20 token balances
+- Multiple query types available (logo, marketing info, accounts, allowances, etc.)
 
 
 =======================
