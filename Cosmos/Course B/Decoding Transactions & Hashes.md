@@ -1,3 +1,6 @@
+![alt text](image-6.png)
+![alt text](image-7.png)
+
 Decoding transactions in Cosmos can be challenging. This guide explains how to decode transactions found via the REST API or RPC on cosmos.directory.
 
 Initial Approach
