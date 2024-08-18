@@ -116,3 +116,5 @@ return KeyOutput{
 ```
 
 [See full example on GitHub](https://github.com/cosmos/cosmos-sdk/blob/v0.50.0-alpha.0/client/keys/output.go#L23-L39)
+
+
