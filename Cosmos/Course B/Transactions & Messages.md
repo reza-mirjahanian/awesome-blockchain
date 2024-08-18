@@ -1,3 +1,5 @@
+![alt text](image-5.png)
+
 #### **Introduction to Transactions in Cosmos**
 
 -   **Transactions:** In Cosmos, interactions with the blockchain are conducted via transactions.
