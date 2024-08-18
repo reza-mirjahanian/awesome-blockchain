@@ -1,3 +1,43 @@
+
+# Important Tips for Cosmos SDK Accounts and Keys
+
+## Account Basics
+- **Definition**: An account is a pair of **public key (PubKey)** and **private key (PrivKey)**
+- **Purpose**: 
+  - PubKey derives **Addresses** to identify users
+  - PrivKey generates **digital signatures** to approve messages
+
+## Key Derivation
+- Uses **BIP32 standard** for HD (Hierarchical Deterministic) key derivation
+- Allows creation of **HD wallets** (as per BIP44)
+- Derived from an **initial secret seed**
+  - Usually created from a 12- or 24-word mnemonic
+  - *Most sensitive information*
+
+## Key Management
+- Keys are stored and managed using a **Keyring** object
+
+## Authentication
+- Users authenticate via **digital signatures**
+- Signature verification uses the associated **public key**
+- Public key is stored in an **Account object** for on-chain verification
+
+## Data Storage
+- All data in the node is stored using **Protocol Buffers serialization**
+
+## Supported Digital Key Schemes
+1. **secp256k1**
+   - Implemented in `crypto/keys/secp256k1` package
+2. **secp256r1**
+   - Implemented in `crypto/keys/secp256r1` package
+3. **tm-ed25519**
+   - Implemented in `crypto/keys/ed25519` package
+   - *Note*: Supported only for consensus validation
+
+## Security Tip
+- **Mnemonic preservation** is crucial
+  - Private keys can always be re-generated if the mnemonic is preserved
+
 in the Cosmos SDK, an *account* designates a pair of *public key* `PubKey` and *private key* `PrivKey`. The `PubKey` can be derived to generate various `Addresses`, which are used to identify users (among other parties) in the application. `Addresses` are also associated with [`message`s](https://docs.cosmos.network/v0.50/build/building-modules/messages-and-queries#messages) to identify the sender of the `message`. The `PrivKey` is used to generate [digital signatures](https://docs.cosmos.network/v0.50/learn/beginner/accounts#signatures) to prove that an `Address` associated with the `PrivKey` approved of a given `message`.
 
 For HD key derivation the Cosmos SDK uses a standard called [BIP32](https://github.com/bitcoin/bips/blob/master/bip-0032.mediawiki). The BIP32 allows users to create an HD wallet (as specified in [BIP44](https://github.com/bitcoin/bips/blob/master/bip-0044.mediawiki)) - a set of accounts derived from an initial secret seed. A seed is usually created from a 12- or 24-word mnemonic. A single seed can derive any number of `PrivKey`s using a one-way cryptographic function. Then, a `PubKey` can be derived from the `PrivKey`. Naturally, the mnemonic is the most sensitive information, as private keys can always be re-generated if the mnemonic is preserved
