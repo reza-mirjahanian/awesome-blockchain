@@ -117,3 +117,9 @@ Let us go through the most important components.
 
 
 -   [`CommitMultiStore`](https://docs.cosmos.network/v0.50/learn/advanced/store#commitmultistore): This is the main store of the application, which holds the canonical state that is committed at the [end of each block](https://docs.cosmos.network/v0.50/learn/advanced/baseapp#commit). This store is **not** cached, meaning it is not used to update the application's volatile (un-committed) states. The `CommitMultiStore` is a multi-store, meaning a store of stores. Each module of the application uses one or multiple `KVStores` in the multi-store to persist their subset of the state.
+-   
+
+
+-   `voteInfos`: This parameter carries the list of validators whose precommit is missing, either because they did not vote or because the proposer did not include their vote. This information is carried by the [Context](https://docs.cosmos.network/v0.50/learn/advanced/context) and can be used by the application for various things like punishing absent validators.
+-   `minGasPrices`: This parameter defines the minimum gas prices accepted by the node. This is a **local** parameter, meaning each full-node can set a different `minGasPrices`. It is used in the `AnteHandler` during [`CheckTx`](https://docs.cosmos.network/v0.50/learn/advanced/baseapp#checktx), mainly as a spam protection mechanism. The transaction enters the [mempool](https://github.com/cometbft/cometbft/blob/v0.37.x/spec/abci/abci++_basic_concepts.md#mempool-methods) only if the gas prices of the transaction are greater than one of the minimum gas price in `minGasPrices` (e.g. if `minGasPrices == 1uatom,1photon`, the `gas-price` of the transaction must be greater than `1uatom` OR `1photon`).
+-   `appVersion`: Version of the application. It is set in the [application's constructor function](https://docs.cosmos.network/v0.50/learn/beginner/app-anatomy#constructor-function).
