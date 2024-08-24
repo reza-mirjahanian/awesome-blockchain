@@ -1,0 +1,6 @@
+Transactions[​](https://docs.cosmos.network/v0.50/learn/advanced/transactions#transactions-1 "Direct link to Transactions")
+---------------------------------------------------------------------------------------------------------------------------
+
+Transactions are comprised of metadata held in [contexts](https://docs.cosmos.network/v0.50/learn/advanced/context) and [`sdk.Msg`s](https://docs.cosmos.network/v0.50/build/building-modules/messages-and-queries) that trigger state changes within a module through the module's Protobuf [`Msg` service](https://docs.cosmos.network/v0.50/build/building-modules/msg-services).
+
+When users want to interact with an application and make state changes (e.g. sending coins), they create transactions. Each of a transaction's `sdk.Msg` must be signed using the private key associated with the appropriate account(s), before the transaction is broadcasted to the network. A transaction must then be included in a block, validated, and approved by the network through the consensus process. To read more about the lifecycle of a transaction, click [here](https://docs.cosmos.network/v0.50/learn/beginner/tx-lifecycle).
