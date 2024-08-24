@@ -1,0 +1,1 @@
+-   [gRPC Query Router](https://docs.cosmos.network/v0.50/learn/advanced/baseapp#grpc-query-router): The `grpcQueryRouter` facilitates the routing of gRPC queries to the appropriate module for it to be processed. These queries are not ABCI messages themselves, but they are relayed to the relevant module's gRPC `Query` service.
