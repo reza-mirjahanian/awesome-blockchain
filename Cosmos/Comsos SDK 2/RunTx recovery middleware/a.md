@@ -1,0 +1,3 @@
+`BaseApp.runTx()` function handles Go panics that might occur during transactions execution, for example, keeper has faced an invalid state and paniced. Depending on the panic type different handler is used, for instance the default one prints an error log message. Recovery middleware is used to add custom panic recovery for Cosmos SDK application developers.
+
+More context can found in the corresponding [ADR-022](https://docs.cosmos.network/v0.50/build/architecture/adr-022-custom-panic-handling) and the implementation in [recovery.go](https://github.com/cosmos/cosmos-sdk/blob/v0.50.0-alpha.0/baseapp/recovery.go).
