@@ -27,3 +27,5 @@ Transaction objects are Cosmos SDK types that implement the [`Tx` ](https://gi
 This function is different from the [`ValidateBasic` ](https://github.com/cosmos/cosmos-sdk/blob/v0.45.4/types/tx_msg.go#L16)functions for `sdk.Msg`, which perform basic validity checks on messages only. For example, `runTX` first runs `ValidateBasic` on each message when it checks a transaction created from the auth module. Then it runs the auth module's [`AnteHandler` ](https://github.com/cosmos/cosmos-sdk/blob/v0.45.4/types/handler.go#L8), which calls `ValidateBasic` for the transaction itself.
 
 You should rarely manipulate a `Tx` object directly. It is an intermediate type used for transaction generation. Developers usually use the [`TxBuilder` ](https://github.com/cosmos/cosmos-sdk/blob/v0.45.4/client/tx_config.go#L36-L46)interface.
+
+
