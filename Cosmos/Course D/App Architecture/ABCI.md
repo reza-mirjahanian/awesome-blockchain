@@ -65,3 +65,8 @@
     -   **Storage Layout and State**
     -   **Application Governance**
 -   Instead of implementing these as contracts on a state machine, they become properties of a unique, purpose-built blockchain.
+-   
+
+
+
+Developers are free to create blockchains in **any language** that supports sockets since the ABCI is a socket protocol, provided their application implements ABCI. ABCI defines the boundary between replication concerns and the application, which is a state machine.
