@@ -1,5 +1,10 @@
 Tendermint modules **attend to consensus and networking**
 
+
+
+   CometBFT as a DPoS consensus module with pBFT, through which the top 150 nodes (as ranked by total stake) serve as validators for the blockchain. These duties are divided between validators in proportion to their voting power, and delegating users can assign or withdraw staked ATOM to share in the risks and rewards, and to influence validators in favor of good behavior.
+
+
 This frees developers to focus on the application level without descending into lower-level blockchain concerns such as peer discovery, block propagation, consensus, and transaction finalization.
 
 
