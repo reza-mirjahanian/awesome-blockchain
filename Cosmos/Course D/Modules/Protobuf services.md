@@ -27,3 +27,12 @@ Protobuf generates a `QueryServer` interface containing all the service method
 
 
 gRPC-Gateway REST endpoints support external clients that may not wish to use gRPC. The Cosmos SDK provides a gRPC-gateway REST endpoint for each gRPC service.
+
+
+### Command-line commands
+
+Each module defines commands for a command-line interface (CLI). Commands related to a module are defined in a folder called `client/cli`. The CLI divides commands into two categories: transactions and queries. These are the same as those which you defined in `tx.go` and `query.go` respectively.
+
+
+
+Starting with Cosmos SDK v0.50, the `autocli.go` facility lets developers create CLI commands in a succinct descriptive way
