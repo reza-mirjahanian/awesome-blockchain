@@ -1,0 +1,5 @@
+Consensus parameters define the overall consensus state:
+
+-   **`voteInfos`:** this parameter carries the list of validators whose pre-commit is missing, either because they did not vote or because the proposer did not include their vote. This information is carried by the context and can be used by the application for various things, like punishing absent validators.
+-   **`minGasPrices`:** this parameter defines the minimum gas prices accepted by the node. This is a local parameter, meaning each full-node can set a different `minGasPrices`. It is used in the `AnteHandler` during `CheckTx` mainly as a spam protection mechanism. The transaction enters the mempool only if the gas prices of the transaction are greater than one of the minimum gas prices in `minGasPrices`. If `minGasPrices == 1uatom,1photon`, the gas price of the transaction must be greater than `1uatom OR 1photon`.
+-   **`appVersion`:** version of the application set in the application's constructor function.
