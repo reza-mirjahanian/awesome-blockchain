@@ -1,0 +1,3 @@
+### `ParamStore`
+
+During `InitChain`, the `RequestInitChain` provides `ConsensusParams`, which contains parameters related to block execution such as maximum gas and size in addition to evidence parameters. If these parameters are non-nil, they are set in the `BaseApp`'s `ParamStore`. The `ParamStore` is managed behind the scenes by an `x/params` module subspace. This allows the parameters to be tweaked via on-chain governance.
