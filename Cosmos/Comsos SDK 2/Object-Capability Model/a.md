@@ -10,3 +10,7 @@
 > 2.  An object A can obtain a reference to C only if object A receives a message containing a reference to C. As a consequence of these two rules, an object can obtain a reference to another object only through a preexisting chain of references. In short, "Only connectivity begets connectivity."
 
 For an introduction to object-capabilities, see this [Wikipedia article](https://en.wikipedia.org/wiki/Object-capability_model).
+
+
+
+![alt text](image.png)
