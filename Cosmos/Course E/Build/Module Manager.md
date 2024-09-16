@@ -50,3 +50,27 @@ type AppModule interface {
 	AppModuleBasic
 }
 ```
+
+
+### Implementing the Application Module Interfaces
+
+Typically, the various application module interfaces are implemented in a file called `module.go`, located in the module's folder (e.g. `./x/module/module.go`).
+
+Almost every module needs to implement the `AppModuleBasic` and `AppModule` interfaces. If the module is only used for genesis, it will implement `AppModuleGenesis` instead of `AppModule`. The concrete type that implements the interface can add parameters that are required for the implementation of the various methods of the interface. For example, the `Route()` function often calls a `NewMsgServerImpl(k keeper)` function defined in `keeper/msg_server.go` and therefore needs to pass the module's [`keeper`](https://docs.cosmos.network/v0.50/build/building-modules/keeper) as a parameter.
+
+```
+// example
+type AppModule struct{
+    AppModuleBasic
+    keeper       Keeper
+}
+
+```
+
+In the example above, you can see that the `AppModule` concrete type references an `AppModuleBasic`, and not an `AppModuleGenesis`. That is because `AppModuleGenesis` only needs to be implemented in modules that focus on genesis-related functionalities. In most modules, the concrete `AppModule` type will have a reference to an `AppModuleBasic` and implement the two added methods of `AppModuleGenesis` directly in the `AppModule` type.
+
+If no parameter is required (which is often the case for `AppModuleBasic`), just declare an empty concrete type like so:
+
+```
+type AppModuleBasic struct{}
+```
