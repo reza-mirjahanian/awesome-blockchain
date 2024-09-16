@@ -26,3 +26,14 @@ The above interfaces are mostly embedding smaller interfaces (extension interfac
 -   [`module.HasABCIEndBlock`](https://docs.cosmos.network/v0.50/build/building-modules/module-manager#hasabciendblock): The extension interface that contains information about the `AppModule`, `EndBlock` and returns an updated validator set.
 -   (legacy) [`module.HasInvariants`](https://docs.cosmos.network/v0.50/build/building-modules/module-manager#hasinvariants): The extension interface for registering invariants.
 -   (legacy) [`module.HasConsensusVersion`](https://docs.cosmos.network/v0.50/build/building-modules/module-manager#hasconsensusversion): The extension interface for declaring a module consensus version.
+  
+  
+  ------
+
+The `AppModuleBasic` interface exists to define independent methods of the module, i.e. those that do not depend on other modules in the application. This allows for the construction of the basic application structure early in the application definition, generally in the `init()` function of the [main application file](https://docs.cosmos.network/v0.50/learn/beginner/app-anatomy#core-application-file). 
+
+
+The `AppModule` interface exists to define inter-dependent module methods. Many modules need to interact with other modules, typically through [`keeper`s](https://docs.cosmos.network/v0.50/build/building-modules/keeper), which means there is a need for an interface where modules list their `keeper`s and other methods that require a reference to another module's object. `AppModule` interface extension, such as `HasBeginBlocker` and `HasEndBlocker`, also enables the module manager to set the order of execution between module's methods like `BeginBlock` and `EndBlock`, which is important in cases where the order of execution between modules matters in the context of the application.
+
+
+Use `module.CoreAppModuleBasicAdaptor` instead for creating an `AppModuleBasic` from an `appmodule.AppModule`
