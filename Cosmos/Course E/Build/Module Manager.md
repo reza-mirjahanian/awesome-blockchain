@@ -1,3 +1,17 @@
+Module Managers
+--------------------------------------------------------------------------------------------------------------------------------------------
+
+Module managers are used to manage collections of `AppModuleBasic` and `AppModule`.
+
+### `BasicManager`[​](https://docs.cosmos.network/v0.50/build/building-modules/module-manager#basicmanager "Direct link to basicmanager")
+
+The `BasicManager` is a structure that lists all the `AppModuleBasic` of an application:
+
+types/module/module.go
+```
+type BasicManager map[string]AppModuleBasic
+```
+-----------
 Cosmos SDK modules need to implement the [`AppModule` interfaces](https://docs.cosmos.network/v0.50/build/building-modules/module-manager#application-module-interfaces), in order to be managed by the application's [module manager](https://docs.cosmos.network/v0.50/build/building-modules/module-manager#module-manager).
 
 
