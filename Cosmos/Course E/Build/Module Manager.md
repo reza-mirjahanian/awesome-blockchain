@@ -37,3 +37,16 @@ The `AppModule` interface exists to define inter-dependent module methods. Man
 
 
 Use `module.CoreAppModuleBasicAdaptor` instead for creating an `AppModuleBasic` from an `appmodule.AppModule`
+
+--------
+All the AppModuleBasic of an application are managed by the BasicManager
+
+
+```
+types/module/module.go
+// AppModule is the form for an application module. Most of
+// its functionality has been moved to extension interfaces.
+type AppModule interface {
+	AppModuleBasic
+}
+```
