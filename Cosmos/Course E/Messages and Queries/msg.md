@@ -14,3 +14,4 @@ Before the introduction of Protobuf and gRPC in the Cosmos SDK, there was usuall
 ```
 queryCategory/queryRoute/queryType/arg1/arg2/...
 ```
+
