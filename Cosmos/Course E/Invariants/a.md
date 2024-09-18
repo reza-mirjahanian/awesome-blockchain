@@ -65,3 +65,19 @@ DelegatorSharesInvariant(k))
 [See full example on GitHub](https://github.com/cosmos/cosmos-sdk/blob/v0.50.0-alpha.0/x/staking/keeper/invariants.go#L12-L22)
 
 For more, see an example of [`Invariant`s implementation from the `staking` module](https://github.com/cosmos/cosmos-sdk/blob/v0.50.0-alpha.0/x/staking/keeper/invariants.go).
+
+
+Invariant Registry
+-------------------------------------------------------------------------------------------------------------------------------------------------
+
+The `InvariantRegistry` is a registry where the `Invariant`s of all the modules of an application are registered. There is only one `InvariantRegistry` per **application**, meaning module developers need not implement their own `InvariantRegistry` when building a module. **All module developers need to do is to register their modules' invariants in the `InvariantRegistry`, as explained in the section above**. The rest of this section gives more information on the `InvariantRegistry` itself, and does not contain anything directly relevant to module developers.
+
+At its core, the `InvariantRegistry` is defined in the Cosmos SDK as an interface:
+
+types/invariant.go
+```
+// expected interface for registering invariants
+type InvariantRegistry interface{
+RegisterRoute(moduleName, route string, invar Invariant)
+}
+```
