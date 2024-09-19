@@ -31,10 +31,15 @@ repeatedgoogle.protobuf.Any accounts =2;
 
 ### `InitGenesis`[​](https://docs.cosmos.network/v0.50/build/building-modules/genesis#initgenesis "Direct link to initgenesis")
 
-The `InitGenesis` method is executed during [`InitChain`](https://docs.cosmos.network/v0.50/learn/advanced/baseapp#initchain) when the application is first started. Given a `GenesisState`, it initializes the subset of the state managed by the module by using the module's [`keeper`](https://docs.cosmos.network/v0.50/build/building-modules/keeper) setter function on each parameter within the `GenesisState`.
+The `InitGenesis` method is executed during when the application is first started. Given a `GenesisState`, it initializes the subset of the state managed by the module by using the module's [`keeper`](https://docs.cosmos.network/v0.50/build/building-modules/keeper) setter function on each parameter within the `GenesisState`.
 
 The [module manager](https://docs.cosmos.network/v0.50/build/building-modules/module-manager#manager) of the application is responsible for calling the `InitGenesis` method of each of the application's modules in order. This order is set by the application developer via the manager's `SetOrderGenesisMethod`, which is called in the [application's constructor function](https://docs.cosmos.network/v0.50/learn/beginner/app-anatomy#constructor-function).
 
 See an example of `InitGenesis` from the `auth` module:
 
 x/auth/keeper/genesis.go
+
+
+### `ExportGenesis`
+
+The `ExportGenesis` method is executed whenever an export of the state is made. It takes the latest known version of the subset of the state managed by the module and creates a new `GenesisState` out of it. This is mainly used when the chain needs to be upgraded via a hard fork.
