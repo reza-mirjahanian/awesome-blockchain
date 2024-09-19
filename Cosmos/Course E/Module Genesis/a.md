@@ -43,3 +43,16 @@ x/auth/keeper/genesis.go
 ### `ExportGenesis`
 
 The `ExportGenesis` method is executed whenever an export of the state is made. It takes the latest known version of the subset of the state managed by the module and creates a new `GenesisState` out of it. This is mainly used when the chain needs to be upgraded via a hard fork.
+
+
+### GenesisTxHandler
+
+`GenesisTxHandler` is a way for modules to submit state transitions prior to the first block. This is used by `x/genutil` to submit the genesis transactions for the validators to be added to staking.
+
+core/genesis/txhandler.go
+```
+// TxHandler is an interface that modules can implement to provide genesis state transitions
+type TxHandler interface{
+ExecuteGenesisTx([]byte)error
+}
+```
