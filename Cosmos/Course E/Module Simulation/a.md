@@ -1,0 +1,7 @@
+-   [Simulation package](https://docs.cosmos.network/v0.50/build/building-modules/simulator#simulation-package)
+    -   [Store decoders](https://docs.cosmos.network/v0.50/build/building-modules/simulator#store-decoders)
+    -   [Randomized genesis](https://docs.cosmos.network/v0.50/build/building-modules/simulator#randomized-genesis)
+    -   [Random weighted operations](https://docs.cosmos.network/v0.50/build/building-modules/simulator#random-weighted-operations)
+    -   [Random proposal contents](https://docs.cosmos.network/v0.50/build/building-modules/simulator#random-proposal-contents)
+-   [Registering simulation functions](https://docs.cosmos.network/v0.50/build/building-modules/simulator#registering-simulation-functions)
+-   [App Simulator manager](https://docs.cosmos.network/v0.50/build/building-modules/simulator#app-simulator-manager)
