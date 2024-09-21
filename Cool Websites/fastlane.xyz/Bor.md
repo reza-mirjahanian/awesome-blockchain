@@ -1,0 +1,1 @@
+Bor is the Official Golang implementation of the Matic protocol. It is a fork of Go Ethereum - <https://github.com/ethereum/go-ethereum> and EVM compatible.
