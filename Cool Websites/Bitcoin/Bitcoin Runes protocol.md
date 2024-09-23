@@ -1,0 +1,1 @@
+The [Bitcoin] Runes protocol is a fungible token standard on Bitcoin.
