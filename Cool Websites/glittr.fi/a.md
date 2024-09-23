@@ -1,3 +1,5 @@
+![alt text](image.png)
+
 **Bitcoin DeFi Through a Developer-Friendly Metaprotocol for an Intergalactic App Store**
 =========================================================================================
 
