@@ -29,3 +29,15 @@ Glittr is a system that uses templates to create tokens called Glyphs. These Gly
 -   Glittr transactions are mined before validation, ensuring Bitcoin-level finality.
 -   The system is reactive, with users issuing transactions that must be consistent with a Glyph's constraints.
 -   Validators confirm transaction consistency, and valid transactions become state.
+-   
+----
+
+**Glyphs**
+
+Glyphs are created using templates that define specific validation rules for transactions. There are three initial templates:
+
+1.  **Pool Equity Glyphs**: Represent fractional equity in a liquidity pool.
+2.  **Wrapped Runes**: A wrapped version of Runes.
+3.  **Collateralized Glyphs**: Tokens minted against collateral, such as stablecoins.
+
+Glyphs without a template have the same properties as Runes.
