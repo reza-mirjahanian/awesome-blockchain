@@ -8,6 +8,8 @@
     -   **Skype**
     -   **Hamachi (LogMeIn)**
 
+![alt text]({13231AD3-1EC6-484E-8F5E-B3DEB1AE2D15}.png)
+
 These systems allow **thousands** or even **millions of peers (computers)** to communicate without relying on a **central server**.
 
 * * * *
