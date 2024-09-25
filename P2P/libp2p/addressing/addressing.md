@@ -16,3 +16,17 @@ multiaddr in libp2p
 multiaddrs are used throughout libp2p for encoding network addresses. When addresses need to be shared or exchanged between processes, they are encoded in the binary representation of multiaddr.
 
 When exchanging addresses, peers send a multiaddr containing both their network address and peer id, as described in [the section on the `p2p` multiaddr](https://github.com/libp2p/specs/blob/master/addressing/README.md#the-p2p-multiaddr).
+
+
+
+### multiaddr basics
+
+A multiaddr is a sequence of instructions that can be traversed to some destination.
+
+For example, the `/ip4/198.51.100/tcp/1234` multiaddr starts with `ip4`, which is the lowest-level protocol that requires an address. The `tcp` protocol runs on top of `ip4`, so it comes next.
+
+The multiaddr above consists of two components, the `/ip4/198.51.100` component, and the `/tcp/1234` component. It's not possible to split either one further; `/ip4` alone is an invalid multiaddr, because the `ip4` protocol was defined to require a 32 bit address. Similarly, `tcp` requires a 16 bit port number.
+
+Although we referred to `/ip4/198.51.100` and `/tcp/1234` as "components" of a larger TCP/IP address, each is actually a valid multiaddr according to the multiaddr spec. However, not every **syntactically valid multiaddr is a functional description of a process in the network**. As we've seen, even a simple TCP/IP connection requires composing two multiaddrs into one. See the section on [composing multiaddrs](https://github.com/libp2p/specs/blob/master/addressing/README.md#composing-multiaddrs) for information on how multiaddrs can be combined, and the [Transport multiaddrs section](https://github.com/libp2p/specs/blob/master/addressing/README.md#transport-multiaddrs) for the combinations that describe valid transport addresses.
+
+The [multiaddr protocol table](https://github.com/multiformats/multiaddr/blob/master/protocols.csv) contains all currently defined protocols and the length of their address components.
