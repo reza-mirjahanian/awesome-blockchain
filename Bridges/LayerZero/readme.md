@@ -5,8 +5,11 @@
 1.  **Ultra Light Nodes (ULNs):** These reside on each chain and are responsible for receiving block headers from an Oracle. They don't store the entire block data, making them lightweight and efficient.
 
 2.  **Relayer:** An off-chain service that transmits transaction proofs between chains. When a transaction occurs on the source chain, the Relayer generates a proof and sends it to the destination chain's ULN.
+Relayers are responsible for relaying transaction proofs from the source chain to the destination chain. They work in conjunction with oracles but are independent, providing an additional layer of security.
+The relayer submits the proof of the transaction, while the oracle provides the block header. The destination chain then verifies the transaction using both pieces of information.
 
 3.  **Oracle:** A third-party service (currently Chainlink) that provides block headers to the ULNs. This ensures that the Relayer cannot submit fraudulent proofs.
+
 
 **Key Concepts:**
 
@@ -76,3 +79,4 @@ async function crossChainTransfer(amount, destinationChainId) {
 This is a simplified example. Actual implementation requires in-depth knowledge of LayerZero's API and smart contract development. Remember to consult official documentation and examples for the most up-to-date information.
 
 ----------------
+
