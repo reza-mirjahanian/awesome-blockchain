@@ -20,8 +20,7 @@
     -   **Interoperability**: The ability of different blockchains to communicate and share data.
     -   **Synthetic Derivatives**: Tokens representing assets from another blockchain.
     -   **Layer 2 Networks**: Faster blockchains built on top of existing ones (e.g., Arbitrum, Polygon).
-    -   **ERC-20 Token**: Standard for fungible tokens on Ethereum.
-    -   **Exploit**: Security vulnerability leading to unauthorized access or manipulation.
+ 
     -   **Bridge Token**: The converted asset on the target blockchain.
 3.  **Popular Online Services**:
     
