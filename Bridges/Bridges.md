@@ -1,10 +1,4 @@
 
-# What Are Blockchain Bridge 
-
-
-In the world of Web3, we’ve seen a boom in both L1 blockchains and L2 scaling solutions and ways to make them faster and more efficient. But with all these options, there’s also a growing need to move stuff, like money or data, between these blockchains.
-
-
 # What Are Blockchain Bridges? 🤔
 
 Blockchain bridges are basically software tools that allow separate blockchain networks to share information and assets. 
@@ -12,7 +6,6 @@ Blockchain bridges are basically software tools that allow separate blockchain n
 
 # Different Types Of blockchain Bridges
 
-Just like bridges in the real world come in different shapes and sizes, catering to different needs and environments, blockchain bridges also vary in their types and functions. Let’s take a closer look at the main types of blockchain bridges:
 
 1️⃣  **Trusted Bridges (Centralized or Custodial)**: These bridges are like crossing a bridge controlled by a central authority. They focus on being easy to use and fast, making them great for beginners or quick transfers. But remember, you’re trusting this authority to hold your assets, similar to trusting a bank.  _Examples include_ [**_Binance Bridge_**](https://www.bnbchain.org/en/bnb-chain-bridges) _and_ **_Multichain._**
 
