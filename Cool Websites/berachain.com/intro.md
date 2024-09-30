@@ -1,3 +1,6 @@
+https://www.youtube.com/@berachainfoundation/videos
+
+
 -   **Berachain**:
 
     -   A Layer-1 blockchain built using **Cosmos SDK**.
