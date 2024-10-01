@@ -1,3 +1,86 @@
+
+
+**
+
+Story( Proof of Liquidity)
+--------------------------
+
+Problem with Proof of stake:
+
+-   Staked tokens reduce liquidity as they are locked up.
+
+-   Applications built on PoS chains have limited influence on chain security.
+
+-   Validators receive minimal rewards from the applications they support, leading to a misalignment of incentives.
+
+It leads to: In PoS, validators have little incentive to engage with protocols or users, leading to a fragmented ecosystem.
+
+In PoL, validators, protocols, and users must work together to maximize liquidity and benefits.
+
+An EVM-compatible L1 built on the Cosmos SDK Added a new runtime layer to separate the EVM from the Cosmos runtime, allowing for a fully native EVM environment.
+
+Solution
+
+-   Dual Token System: Bar Chain introduces a dual token system consisting of:
+
+-   BAR: Used for gas fees and network security.
+
+-   BGT: Used for governance and on-chain incentivization.
+
+How the System Works
+
+1.  Staking Process: Users stake BAR with validators. Validators also stake BAR, activating their stake.
+
+2.  BGT Emission: The staking of BAR leads to the emission of BGT, which is utilized to provide liquidity across various protocols within the Bar Chain ecosystem, such as AMM and lending pools.
+
+3.  Liquidity Providers: Users providing liquidity earn BGT, which they can delegate to activated validators.
+
+4.  Increased Emissions: The more BGT a validator receives, the higher the BGT emissions, creating a cycle of benefits.
+
+Benefits of the Mechanism
+
+-   Enhanced Liquidity: This system ensures liquidity within the ecosystem.
+
+-   Mutually Beneficial Relationships: Validators benefit from increased BGT emissions tied to their support from liquidity providers, while protocols enjoy improved liquidity and security.
+
+-   Overall Ecosystem Health: This symbiotic relationship contributes to the strength and efficiency of the Bar Chain ecosystem.
+
+Three core primitives:
+
+1.  BeEx (decentralized exchange)
+
+2.  Perps (perpetual swaps)
+
+3.  Bend (lending market)
+
+4.
+
+* * * *
+
+How Polaris Works
+
+-   Block Construction:
+
+-   Polaris builds EVM blocks from data provided by Comet (Cosmos SDK).
+
+-   EVM state transitions are applied, and the block is stored on the Cosmos chain using an IVL tree.
+
+-   Three Main Processes:
+
+-   Block Building: Assemble a list of transactions and order them.
+
+-   Block Processing: Apply EVM state transitions and store data.
+
+-   Block Commitment: Commit the block to the canonical chain.
+
+-   ABCI (Application Blockchain Interface):
+
+Uses Prepare Proposal, Process Proposal, and Finalize Block steps.**
+
+------------
+Longer
+------------
+------------
 **Limitations of PoS**:
 
 *   Staked tokens reduce liquidity as they are locked up.
