@@ -131,3 +131,7 @@ A method for proving that a state transition is invalid.
 
 ## Synchrony assumption
 An assumption that the network is synchronous such that when a message is sent it will be received within a certain amount of time.
+
+
+## Trust minimized bridge
+A bridge between two blockchains that doesn’t require an intermediary, a committee, or an honest majority assumption to ensure that funds can’t be stolen.
