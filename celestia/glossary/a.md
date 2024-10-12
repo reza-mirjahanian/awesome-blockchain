@@ -48,3 +48,17 @@ A function of modular blockchains where transactions are executed and the new st
 
 ## Execution environment
 The virtual environment within a blockchain where transactions are processed, and accounts and smart contracts live.
+
+
+## Execution layer
+A type of modular blockchain whose primary job is hosting smart contracts and executing transactions.
+
+
+## Fork choice rule
+An algorithm that nodes use to correctly identify and follow the canonical chain.
+
+## ISR stands for Intermediate State Root.
+
+
+## Light client
+A type of node that only downloads and verifies block headers, relying on an honest majority assumption that the state of the chain indicated by the block header is valid.
