@@ -141,3 +141,11 @@ A bridge between two blockchains that requires either a trusted intermediary, co
 
 ## Validity proof
 A type of cryptographic proof that can be used to attest to the validity of a state transition.
+
+
+## Validium
+A type of zero-knowledge rollup that posts its data off-chain rather than to its parent chain.
+
+
+## Volition
+A zero-knowledge rollup with options for both on-chain and off-chain data availability.
