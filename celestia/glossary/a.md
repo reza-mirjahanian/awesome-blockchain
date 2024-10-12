@@ -41,3 +41,10 @@ A type of attack that occurs when a block producer proposes a new block but does
 
 ## Dispute resolution
 The handling and resolution of disputes, commonly used as a term in relation to optimistic rollups and their fraud proof mechanism.
+
+
+## Execution
+A function of modular blockchains where transactions are executed and the new state of the chain is determined.
+
+## Execution environment
+The virtual environment within a blockchain where transactions are processed, and accounts and smart contracts live.
