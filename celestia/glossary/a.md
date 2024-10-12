@@ -12,3 +12,10 @@
 - Consensus algorithm
 
 	A consensus algorithm is a set of rules that blockchains use to determine how nodes produce new blocks and agree to finalize them.
+
+
+DA stands for Data Availability.
+
+DAC stands for Data Availability Committee.
+
+DAS stands for Data Availability Sampling.
