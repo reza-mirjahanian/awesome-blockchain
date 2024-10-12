@@ -62,3 +62,26 @@ An algorithm that nodes use to correctly identify and follow the canonical chain
 
 ## Light client
 A type of node that only downloads and verifies block headers, relying on an honest majority assumption that the state of the chain indicated by the block header is valid.
+
+
+## Light node
+In Celestia, a light node is a type of node that verifies block headers and does data availability sampling.
+
+## Liveness
+Liveness is a property of blockchains where validators produce new blocks and successfully finalize transactions.
+
+
+## Modular blockchain
+A type of blockchain that specializes in one or two tasks, rather than all of them.
+
+
+## Namespaced Merkle Tree
+A Namespaced Merkle Tree (NMT) is a type of binary Merkle tree where each node in the tree is tagged by the minimum and maximum namespace of their children.
+
+
+## Off-chain data availability
+Off-chain data availability occurs when an L2 publishes its transaction data somewhere separate from the L1 it settles on.
+
+
+## On-chain data availability
+On-chain data availability occurs when an L2 publishes its transaction data to its designated L1.
