@@ -149,3 +149,7 @@ A type of zero-knowledge rollup that posts its data off-chain rather than to its
 
 ## Volition
 A zero-knowledge rollup with options for both on-chain and off-chain data availability.
+
+
+## zk-Rollup
+A type of rollup that posts its blocks to a separate chain with a validity proof that attests to the correctness of the block.
