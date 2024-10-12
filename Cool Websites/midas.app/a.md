@@ -8,3 +8,11 @@ mBASIS
 ======
 
 Midas Basis Trading Token (mBASIS) is a permissionless yield-bearing token tracking a delta-neutral basis trading strategy.
+
+
+Introduction to mTBILL
+======================
+
+Midas US Treasury Bill Token (mTBILL) is a permissionless yield-bearing token tracking the performance of short-dated US Treasury Bills.
+
+mTBILL is Midas' flagship product, offering onchain exposure to short-duration U.S. Treasury Bills (T-Bills), one of the safest and most liquid assets available. With mTBILL, investors gain access to stable, dollar-denominated yields, combining the reliability of traditional finance with the flexibility and composability of DeFi.
