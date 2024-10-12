@@ -135,3 +135,9 @@ An assumption that the network is synchronous such that when a message is sent i
 
 ## Trust minimized bridge
 A bridge between two blockchains that doesn’t require an intermediary, a committee, or an honest majority assumption to ensure that funds can’t be stolen.
+
+## Trusted bridge
+A bridge between two blockchains that requires either a trusted intermediary, committee, or an honest majority assumption to ensure that funds can’t be stolen.
+
+## Validity proof
+A type of cryptographic proof that can be used to attest to the validity of a state transition.
