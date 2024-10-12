@@ -34,3 +34,10 @@ A data availability committee (DAC) is a permissioned group of nodes responsible
 
 ## Data availability layer
 A blockchain that provides data availability for other types of chains, like rollups.
+
+## Data withholding attack
+A type of attack that occurs when a block producer proposes a new block but does not share the underlying transaction data that was used to create the block.
+
+
+## Dispute resolution
+The handling and resolution of disputes, commonly used as a term in relation to optimistic rollups and their fraud proof mechanism.
