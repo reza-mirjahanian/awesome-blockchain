@@ -124,3 +124,10 @@ The process by which individuals come to an agreement on a change that will be m
 
 ## Sovereign rollup
 A type of rollup that does not use a settlement layer to determine its canonical chain and validity rules.
+
+## State transition fraud proof
+A method for proving that a state transition is invalid.
+
+
+## Synchrony assumption
+An assumption that the network is synchronous such that when a message is sent it will be received within a certain amount of time.
