@@ -85,3 +85,42 @@ Off-chain data availability occurs when an L2 publishes its transaction data som
 
 ## On-chain data availability
 On-chain data availability occurs when an L2 publishes its transaction data to its designated L1.
+
+
+## Optimistic rollup
+A type of rollup that posts its blocks to a separate chain without any cryptographic proofs that attest to their validity.
+
+
+## Safety
+Safety is a property of blockchains that a chain will not fork.
+
+## Scalability
+Scalability is the ability of a blockchain to increase its capacity without an equal increase in the cost to run a node that verifies the chain.
+
+
+## Settlement
+A function of modular blockchains where transaction proofs from rollups are verified and disputes are resolved.
+
+## Settlement layer
+A modular blockchain whose primary role is to provide proof verification and dispute resolution for rollups.
+
+
+## Sequencer
+A sequencer is a type of rollup node that is responsible for collecting transactions and producing new blocks.
+
+
+## Sharding
+The process of separating a blockchain from a single chain into multiple chains (shards).
+
+
+## Shared security
+Security that a blockchain inherits from an external source.
+
+
+## Sovereign blockchain
+A blockchain that has independent control over itself and its applications via social consensus.Social consensus
+The process by which individuals come to an agreement on a change that will be made to a blockchain.
+
+
+## Sovereign rollup
+A type of rollup that does not use a settlement layer to determine its canonical chain and validity rules.
