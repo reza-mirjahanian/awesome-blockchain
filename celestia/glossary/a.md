@@ -30,3 +30,7 @@ The condition of whether or not transaction data was made available for nodes to
 
 ## Data availability committee
 A data availability committee (DAC) is a permissioned group of nodes responsible for providing data availability to a blockchain.
+
+
+## Data availability layer
+A blockchain that provides data availability for other types of chains, like rollups.
