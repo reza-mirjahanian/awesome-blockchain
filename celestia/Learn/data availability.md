@@ -8,7 +8,7 @@ Really, data availability is like streaming a sports game. DA lets anyone downlo
 
 The one thing that data availability doesn't cover is the long-term storage of transaction data. DA is just about publishing data and temporary storage.
 
-![alt text](image-2.png)
+![alt text](image-2a.png)
 
 The difference might not seem important, but DA and long-term data storage actually have varying security properties.
 
