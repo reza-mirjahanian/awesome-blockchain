@@ -30,3 +30,9 @@ The settlement task in modular blockchains is similar to solving arguments durin
 The consensus task in modular blockchains works in a similar way. Transactions get ordered first. If people see different orders of the transactions, they won’t be able to agree on the right order - just like you and your friend couldn’t agree on which team won.
 
 When people see the same order of transactions they can agree the order is correct - just like your friend agreeing on which team won after you both realized what games you were watching.
+
+
+### Data availability
+![alt text](image-5.png)
+The data availability task in modular blockchains is similar to recording and streaming a football game. Data availability lets anyone check the contents of a transaction to see what happened, just like a recording lets people at home watch the game to find out the score, even if they can’t afford to go to the stadium.
+
