@@ -1,0 +1,7 @@
+So, what does Celestia's DA layer actually do? Well, Celestia provides abundant DA to address the scaling bottleneck. And it does this with data availability sampling (DAS).
+
+DAS is a new technology that enables Celestia to securely increase its blockspace with more users (light nodes). And the way rollups use Celestia is simple. All they really need to do is use Celestia's DA layer to publish and temporarily access their transaction data.
+
+Now, with ~95% percent lower DA costs, developers can focus on improving their app without the burden of high fees or unnecessary gas cost optimizations. Ultimately, low-cost DA unlocks new capabilities for developers to build fully onchain apps, like onchain games or generative art. See the [cost savings for your chain](https://www.datalenses.zone/chain/celestia/calculator) with Celestia underneath.
+
+The other important aspect of DAS is that it enables users to secure and directly verify Celestia. Without DAS, DA layers have to give up verifiability and security for higher throughput. So users have to trust validators or committees to ensure the chain is running correctly. With DAS, users can secure and directly verify Celestia's DA layer with proofs instead of a trusted committee.
