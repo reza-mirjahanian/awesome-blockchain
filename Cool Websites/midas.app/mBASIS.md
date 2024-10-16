@@ -1,0 +1,1 @@
+Permissionless yield-bearing token tracking a crypto market neutral strategy

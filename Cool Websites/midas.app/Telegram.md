@@ -9,3 +9,5 @@ We built the ultimate Yield App on Telegram!
 Launch the App and collect GM points now. 🚀
 
 ![alt text](image-1.png)
+
+![alt text](image-2.png)
