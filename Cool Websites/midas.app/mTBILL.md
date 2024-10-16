@@ -1,0 +1,1 @@
+Permissionless yield-bearing token tracking short-term US Treasuries
