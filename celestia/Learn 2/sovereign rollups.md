@@ -1,3 +1,5 @@
+https://celestia.org/learn/sovereign-rollups/misconceptions//
+
 #### Summary
 
 -   Sovereign rollups publish transactions to another blockchain for ordering and data availability, leaving its nodes to determine the correct chain.
@@ -50,3 +52,16 @@ The native bridges of smart contract rollups have [trust-minimized security](ht
 As for sovereign rollups, they can optionally have a trust-minimized bridge to the DA layer, but it does not determine the correct chain for the sovereign rollup. If the DA layer lacks execution, like Celestia, then a bridge to the DA layer would require [stronger trust assumptions](https://celestia.org/glossary/honest-majority-assumption/) for security.
 
 For DA layers that don't have smart contracts, bridges with sovereign rollups would mainly facilitate the movement of the DA layer token. This would let the DA layer token get used in applications (e.g. DeFi & NFTs) and moved throughout the rest of the blockchain ecosystem.
+
+
+----------------
+
+#### Summary
+
+-   Sovereign rollups inherit multiple aspects of security from the DA layer, such as [liveness](https://celestia.org/glossary/liveness/), [safety](https://celestia.org/glossary/safety/), re-org resistance, and censorship resistance.
+-   Sovereign rollups can have a bridge to the DA layer. The design space for bridging between sovereign rollups is wide.
+-   Sovereign rollups don't need a settlement layer because they [do their own settlement](https://celestia.org/learn/sovereign-rollups/an-introduction/#what-is-a-sovereign-rollup).
+-   
+
+
+
