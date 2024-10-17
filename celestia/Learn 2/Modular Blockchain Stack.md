@@ -17,3 +17,11 @@ Essentially, the layer 1 is a monolithic chain that receives additional scale fr
 
 
 #### Execution, settlement, and data availability
+
+![](https://celestia.org/static/8c2422a2a3f33850e68fa83d24bd801d/64756/3-layer-stack.png)
+
+The settlement layer is unique to that of regular layer 1s that provide settlement because it decouples the settlement functionality from the rest of the functions. The result is an execution chain that can be used specifically for settlement, enabling a [trust-minimized bridge](https://celestia.org/glossary/trust-minimized-bridge) between the execution and settlement layer and providing a way by which execution layers can bridge between each other.
+
+The execution layer may choose to publish its full blocks to the settlement layer, after which the settlement layer will build its own blocks that include transactions from the execution layer and publish the transaction data to the consensus and data availability layer. This is only one of multiple ways that the settlement layer could function within the modular stack.
+
+At the bottom of this construction is the consensus and data availability layer. As the name suggests, it only provides consensus over the order of transactions and verifies that their data is available. Because there is no execution functionality, only transaction data is published by the settlement layer rather than the contents of the entire block.
