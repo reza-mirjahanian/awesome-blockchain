@@ -19,3 +19,6 @@ Operators can configure indexing via the  `[tx_index]`  section. The  `indexer` 
 #   3) "psql" - the indexer services backed by PostgreSQL.
 # indexer = "kv"
 ```
+
+KV
+The kv indexer type is an embedded key-value store supported by the main underlying CometBFT database. Using the kv indexer type allows you to query for block and transaction events directly against CometBFT’s RPC. However, the query syntax is limited and so this indexer type might be deprecated or removed entirely in the future.
