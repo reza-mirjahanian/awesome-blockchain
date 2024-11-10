@@ -22,6 +22,9 @@
     * Data storage cost covered by rent.
     * Permissionless crediting and reading.
     * Owner-controlled debiting and modification.
+![alt text](image.png)
+![alt text](image-1.png)
+
 * **Programs (Smart Contracts):**
     * Special accounts with executable flag set to true.
     * Contain eBPF bytecode.
@@ -29,7 +32,7 @@
     * Stateless, reading and writing data to other accounts.
     * Execute instructions.
     * Cross-program invocation (CPI) for inter-program communication.
-
+![alt text](image-2.png)
 ## Solana Instructions and Transactions
 
 * **Instructions:**
@@ -39,7 +42,7 @@
     * Bundles of instructions.
     * Include recent block hash, fee payer address, and signatures.
     * Atomic execution (all or nothing).
-
+![alt text](image-3.png)
 ## Transaction Lifecycle
 
 1. Client builds instructions and transaction.
