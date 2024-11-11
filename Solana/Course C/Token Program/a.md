@@ -1,0 +1,3 @@
+The [Token Program](https://github.com/solana-labs/solana-program-library/tree/b1c44c171bc95e6ee74af12365cb9cbab68be76c/token/program) contains all the instruction logic for interacting with tokens on the network (both fungible and non-fungible). All tokens on Solana are effectively [data accounts](https://solana.com/docs/core/accounts#data-account) owned by the Token Program.
+
+You can find the full list of Token Program instructions [here](https://github.com/solana-labs/solana-program-library/blob/b1c44c171bc95e6ee74af12365cb9cbab68be76c/token/program/src/instruction.rs).
