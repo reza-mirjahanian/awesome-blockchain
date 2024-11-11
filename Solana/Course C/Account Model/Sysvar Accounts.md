@@ -1,0 +1,1 @@
+Sysvar accounts are special accounts located at predefined addresses that provide access to cluster state data. These accounts are dynamically updated with data about the network cluster. You can find the full list of Sysvar Accounts [here](https://docs.solanalabs.com/runtime/sysvars).
