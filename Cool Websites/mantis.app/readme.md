@@ -9,3 +9,9 @@ Mantis synergizes with the [Inter-Blockchain Communication (IBC) Protocol](http
 -   
 
 
+-   **CoWs:** Coincidence of Wants (CoWs) is an occurrence when one party's desired transaction is coincidentally the opposite of another party's desired transaction. Thus, these two transactions can be used to settle one another as opposed to leveraging a third party intermediary like an exchange. Settlement via CoWs is generally optimal to settlement on exchanges as it means there are no fees or delays caused by participation of a third party.
+-   
+-   **Native yield:** Mantis Accounts are network-level accounts on the Mantis Rollup that can be used for participating in on-chain actions. Mantis Account users will earn native yield for any assets deposited to the Mantis L2. Therefore, assets held in Mantis Accounts earn yield even when not actively being used.
+-   
+
+-   **Single and cross-chain OFAs:** Order flow auctions (OFAs) are mechanisms for transaction settlement optimization. In these auctions, a bidding system with a third party ensures users capture as much value as possible from their transactions. In the case of Mantis, solvers participate as bidders in the OFA, presenting optimized solutions. Then, the auctioneer selects the winning bidder (i.e. the solver presenting the best solution to the user intent).
