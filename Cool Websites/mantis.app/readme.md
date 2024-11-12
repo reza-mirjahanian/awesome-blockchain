@@ -29,3 +29,7 @@ Through this architecture, key benefits to users are:
 1.  Capital efficiency via native yield
 2.  Optimal execution of intents via OFA
 3.  A simplified, abstracted cross-chain DeFi experience
+4.  
+
+
+ IBC is leveraged on Mantis via the Picasso Network.
