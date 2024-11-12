@@ -1,4 +1,10 @@
-[Mantis](https://www.mantis.app/) is a vertically integrated intent pipeline complete with expression, execution, and settlement. This is accomplished via the Mantis protocol and Mantis rollup.
+https://blog.essential.builders/introducing-essential/
+
+https://anoma.net/research/intents-arent-real
+
+
+[Mantis](https://www.mantis.app/) is a vertically integrated intent pipeline complete with 
+expression, execution, and settlement. This is accomplished via the Mantis protocol and Mantis rollup.
 
 
 Mantis synergizes with the [Inter-Blockchain Communication (IBC) Protocol](https://www.ibcprotocol.dev/) via the [Picasso Network](https://www.picasso.network/) to deliver secure interoperability. Ultimately, Mantis strives to establish a decentralized market for cross-domain intent expression.
@@ -15,3 +21,11 @@ Mantis synergizes with the [Inter-Blockchain Communication (IBC) Protocol](http
 -   
 
 -   **Single and cross-chain OFAs:** Order flow auctions (OFAs) are mechanisms for transaction settlement optimization. In these auctions, a bidding system with a third party ensures users capture as much value as possible from their transactions. In the case of Mantis, solvers participate as bidders in the OFA, presenting optimized solutions. Then, the auctioneer selects the winning bidder (i.e. the solver presenting the best solution to the user intent).
+-   
+**This is the future for how users will interact and curate on-chain experiences.**
+
+Through this architecture, key benefits to users are:
+
+1.  Capital efficiency via native yield
+2.  Optimal execution of intents via OFA
+3.  A simplified, abstracted cross-chain DeFi experience
