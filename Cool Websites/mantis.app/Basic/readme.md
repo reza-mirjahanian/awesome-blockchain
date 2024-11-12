@@ -3,6 +3,10 @@ https://blog.essential.builders/introducing-essential/
 https://anoma.net/research/intents-arent-real
 
 
+**Multichain-Agnostic Normalized Trust-Minimized Intent Settlement (Mantis):** A vertically integrated, optimized intents settlement framework. Mantis is complete with with expression, execution, and settlement.
+
+
+
 [Mantis](https://www.mantis.app/) is a vertically integrated intent pipeline complete with 
 expression, execution, and settlement. This is accomplished via the Mantis protocol and Mantis rollup.
 
