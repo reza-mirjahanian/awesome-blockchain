@@ -1,0 +1,6 @@
+- Intents are important in DeFi since they can improve the user experience
+
+
+They can carry out all types of cross-domain transactions while abstracting away the complexity involved in this process. **With intents, users do not have to spend time identifying the best opportunities to satisfy their goals only to find that these opportunities are no longer available by the time that they have explored all options.** Mantis and its intent settlement framework do all of this for the user in short order.
+
+However, many existing intents solutions are not cross-chain interoperable or vertically integrated with execution and settlement. This means that users can not leverage them for cross-chain transactions. These protocols are also unable to accrue value from pay-for-order-flow (PFOF). In PFOF, a market maker pays a broker for routing their clients' trades to a market maker. Thus, market makers benefit from increased order flow and thus increased earnings. Brokers also earn money by effectively selling the order flow of their users to market makers. Moreover, clients can benefit from reduced trading costs as PFOF can be leveraged to at least partially cover user fees.
