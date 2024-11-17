@@ -1,0 +1,1 @@
+You can see the help menu with `cometbft --help`, and the version number with `cometbft version`.
