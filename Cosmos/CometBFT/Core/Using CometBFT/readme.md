@@ -50,3 +50,24 @@ The `genesis.json` file in `$CMTHOME/config/` defines the initial CometBFT s
     -   `name`: Name of the validator (optional).
 -   `app_hash`: The expected application hash (as returned by the `ResponseInfo` ABCI message) upon genesis. If the app's hash does not match, CometBFT will panic.
 -   `app_state`: The application state (e.g. initial distribution of tokens)
+-   
+
+
+Run
+---
+
+To run a CometBFT node, use:
+
+```
+cometbft node
+
+```
+
+By default, CometBFT will try to connect to an ABCI application on `tcp://127.0.0.1:26658`. If you have the `kvstore` ABCI app installed, run it in another window. If you don't, kill CometBFT and run an in-process version of the `kvstore` app:
+
+```
+cometbft node --proxy_app=kvstore
+
+```
+
+After a few seconds, you should see blocks start streaming in. Note that blocks are produced regularly, even if there are no transactions. See [No Empty Blocks](https://docs.cometbft.com/v0.38/core/using-cometbft#no-empty-blocks), below, to modify this setting.
