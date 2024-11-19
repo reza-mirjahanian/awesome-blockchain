@@ -103,3 +103,63 @@ Visit `http://localhost:26657` in your browser to see the list of other endpoi
 > TIP: Find the RPC Documentation [here](https://docs.cometbft.com/v0.38/rpc/)
 
 ---
+
+Reset
+-----
+
+>  **UNSAFE** Only do this in development and only if you can afford to lose all blockchain data!
+
+To reset a blockchain, stop the node and run:
+
+```
+cometbft unsafe_reset_all
+
+```
+
+This command will remove the data directory and reset private validator and address book files.
+
+-------
+
+Configuration
+-------------
+
+CometBFT uses a `config.toml` for configuration. For details, see [the config specification](https://docs.cometbft.com/v0.38/core/configuration).
+
+No Empty Blocks
+---------------
+
+While the default behavior of `cometbft` is still to create blocks approximately once per second, it is possible to disable empty blocks or set a block creation interval. In the former case, blocks will be created when there are new transactions or when the AppHash changes.
+
+To configure CometBFT to not produce empty blocks unless there are transactions or the app hash changes, run CometBFT with this additional flag:
+
+```
+cometbft node --consensus.create_empty_blocks=false
+
+```
+
+or set the configuration via the `config.toml` file:
+
+```
+[consensus]
+create_empty_blocks = false
+
+```
+
+Remember: because the default is to *create empty blocks*, avoiding empty blocks requires the config option to be set to `false`.
+
+The block interval setting allows for a delay (in time.Duration format [ParseDuration](https://golang.org/pkg/time/#ParseDuration)) between the creation of each new empty block. It can be set with this additional flag:
+
+```
+--consensus.create_empty_blocks_interval="5s"
+
+```
+
+or set the configuration via the `config.toml` file:
+
+```
+[consensus]
+create_empty_blocks_interval = "5s"
+
+```
+
+With this setting, empty blocks will be produced every 5s if no block has been produced otherwise, regardless of the value of `create_empty_blocks`.
