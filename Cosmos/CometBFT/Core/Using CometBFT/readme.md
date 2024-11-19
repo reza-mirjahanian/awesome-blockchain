@@ -71,3 +71,35 @@ cometbft node --proxy_app=kvstore
 ```
 
 After a few seconds, you should see blocks start streaming in. Note that blocks are produced regularly, even if there are no transactions. See [No Empty Blocks](https://docs.cometbft.com/v0.38/core/using-cometbft#no-empty-blocks), below, to modify this setting.
+
+
+---
+Transactions
+------------
+
+To send a transaction, use `curl` to make requests to the CometBFT RPC server, for example:
+
+```
+curl http://localhost:26657/broadcast_tx_commit?tx=\"abcd\"
+
+```
+
+We can see the chain's status at the `/status` end-point:
+
+```
+curl http://localhost:26657/status | json_pp
+
+```
+
+and the `latest_app_hash` in particular:
+
+```
+curl http://localhost:26657/status | json_pp | grep latest_app_hash
+
+```
+
+Visit `http://localhost:26657` in your browser to see the list of other endpoints. Some take no arguments (like `/status`), while others specify the argument name and use `_` as a placeholder.
+
+> TIP: Find the RPC Documentation [here](https://docs.cometbft.com/v0.38/rpc/)
+
+---
