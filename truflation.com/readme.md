@@ -5,7 +5,7 @@ https://www.youtube.com/@truflation/videos
 Tokenizing off-chain assets requires precise data feeds
 Precise and up-to-date information ensures that digital representations of real-world assets are accurate, trustworthy, and capable of fostering confidence among investors.
 
-index.fun
+
 
 -------------
 
