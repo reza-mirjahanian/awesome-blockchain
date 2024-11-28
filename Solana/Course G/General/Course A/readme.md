@@ -108,8 +108,8 @@
 2. **RPC Client:** Forwards the transaction to validators.
 3. **Validators:** Execute instructions using the Solana runtime.
 4. **Programs:** Execute code based on received instructions, updating relevant accounts.
-
-
+![alt text](image-4.png)
+![alt text](image-5.png)
 ### VI. Tokens on Solana
 
 **1. Token Types:**
