@@ -119,8 +119,8 @@ https://github.com/solana-developers/pirate-bootcamp/blob/main/quest-1/scripts/1
 
 * **SPL Tokens:** Solana Program Library tokens.
 * **NFTs (Non-Fungible Tokens):**  SPL tokens with unique properties (0 decimals, supply of 1, customizable metadata).
+![alt text](image-7.png)
 ![alt text](image-6.png)
-
 
 **2. Programs Involved:**
 
@@ -129,7 +129,7 @@ https://github.com/solana-developers/pirate-bootcamp/blob/main/quest-1/scripts/1
 * **Metadata Program (Metaplex):** Manages token metadata (name, symbol, image, etc.).
 
 **3.  SPL Token Creation Process:**
-
+![alt text](image-8.png)
 1. Create a mint account.
 2. Initialize the mint account.
 3. Create an associated token account (ATA).
