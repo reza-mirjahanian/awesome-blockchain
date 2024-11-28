@@ -108,6 +108,9 @@
 2. **RPC Client:** Forwards the transaction to validators.
 3. **Validators:** Execute instructions using the Solana runtime.
 4. **Programs:** Execute code based on received instructions, updating relevant accounts.
+
+https://github.com/solana-developers/pirate-bootcamp/blob/main/quest-1/scripts/1.simpleTransaction.ts
+
 ![alt text](image-4.png)
 ![alt text](image-5.png)
 ### VI. Tokens on Solana
