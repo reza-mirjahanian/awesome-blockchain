@@ -87,7 +87,7 @@
     * `data`: Raw bytes sent to the program.
 
 **2. Transactions:**
-
+![alt text](image-2.png)
 * **Structure:**
     * `instructions`: Array of instructions.
     * `recentBlockhash`: Prevents duplication.
@@ -103,7 +103,7 @@
 
 
 ### V. Transaction Lifecycle
-
+![alt text](image-3.png)
 1. **Client (DApp):** Builds instructions and bundles them into a transaction.
 2. **RPC Client:** Forwards the transaction to validators.
 3. **Validators:** Execute instructions using the Solana runtime.
