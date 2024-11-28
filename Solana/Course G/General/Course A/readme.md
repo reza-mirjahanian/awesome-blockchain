@@ -1,6 +1,6 @@
 ## Solana Workshop 
 
-
+![alt text](image.png)
 
 **Agenda:**
 
@@ -35,7 +35,7 @@
 
 
 ### III. Solana Programming Model
-
+![alt text]({4BD8B8CD-B995-4470-8582-1C30A8E08CF1}.png)
 **1. Accounts:**
 
 * Fundamental building blocks (like files in an OS).
