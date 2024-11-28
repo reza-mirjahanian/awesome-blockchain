@@ -119,6 +119,8 @@ https://github.com/solana-developers/pirate-bootcamp/blob/main/quest-1/scripts/1
 
 * **SPL Tokens:** Solana Program Library tokens.
 * **NFTs (Non-Fungible Tokens):**  SPL tokens with unique properties (0 decimals, supply of 1, customizable metadata).
+![alt text](image-6.png)
+
 
 **2. Programs Involved:**
 
