@@ -114,3 +114,17 @@ type AccountKeeperI interface {
     NextAccountNumber(sdk.Context) uint64
 }
 ```
+
+
+The `accounts` command allow users to query all the available accounts.
+
+```
+simd query auth accounts [flags]
+```
+
+```bat
+sign
+The sign command allows users to sign transactions that was generated offline.
+
+simd tx sign tx.json --from $ALICE > tx.signed.json
+```
