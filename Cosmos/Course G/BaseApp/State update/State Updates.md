@@ -32,3 +32,16 @@ During `PrepareProposal`, the `prepareProposalState` is set by branching the 
 During `ProcessProposal`, the `processProposalState` is set based off of the last committed state from the root store and is used to process a signed proposal received from a validator. In this state, `runTx` is called and the `AnteHandler` is executed and the context used in this state is built with information from the header and the main state, including the minimum gas prices, which are also set. Again we want to highlight that the described behavior is that of the default handler and applications have the flexibility to define their own [custom mempool handlers](https://docs.cosmos.network/main/build/building-apps/app-mempool).
 
 ![alt text](image-4.png)
+
+
+### FinalizeBlock State Updates[​](https://docs.cosmos.network/v0.52/learn/advanced/baseapp#finalizeblock-state-updates "Direct link to FinalizeBlock State Updates")
+
+During `FinalizeBlock`, the `finalizeBlockState` is set for use during transaction execution and endblock. The `finalizeBlockState` is based off of the last committed state from the root store and is branched. Note, the `finalizeBlockState` is set to `nil` on [`Commit`](https://docs.cosmos.network/v0.52/learn/advanced/baseapp#commit).
+
+The state flow for transaction execution is nearly identical to `CheckTx` except state transitions occur on the `finalizeBlockState` and messages in a transaction are executed. Similarly to `CheckTx`, state transitions occur on a doubly branched state -- `finalizeBlockState`. Successful message execution results in writes being committed to `finalizeBlockState`. Note, if message execution fails, state transitions from the AnteHandler are persisted.
+
+### Commit State Updates[​](https://docs.cosmos.network/v0.52/learn/advanced/baseapp#commit-state-updates "Direct link to Commit State Updates")
+
+During `Commit` all the state transitions that occurred in the `finalizeBlockState` are finally written to the root `CommitMultiStore` which in turn is committed to disk and results in a new application root hash. These state transitions are now considered final. Finally, the `checkState` is set to the newly committed state and `finalizeBlockState` is set to `nil` to be reset on `FinalizeBlock`.
+
+![alt text](image-5.png)
