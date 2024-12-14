@@ -36,3 +36,8 @@ return err
 
 -   `Events ([]cmn.KVPair)`: Key-Value tags for filtering and indexing transactions (eg. by account). See [`events`](https://docs.cosmos.network/v0.52/learn/advanced/events) for more.
 -   `Codespace (string)`: Namespace for the Code.
+
+
+#### RecheckTx[​](https://docs.cosmos.network/v0.52/learn/advanced/baseapp#rechecktx "Direct link to RecheckTx")
+
+After `Commit`, `CheckTx` is run again on all transactions that remain in the node's local mempool excluding the transactions that are included in the block. To prevent the mempool from rechecking all transactions every time a block is committed, the configuration option `mempool.recheck=false` can be set. As of Tendermint v0.32.1, an additional `Type` parameter is made available to the `CheckTx` function that indicates whether an incoming transaction is new (`CheckTxType_New`), or a recheck (`CheckTxType_Recheck`). This allows certain checks like signature verification can be skipped during `CheckTxType_Recheck`.
