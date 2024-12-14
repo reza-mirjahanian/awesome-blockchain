@@ -35,3 +35,9 @@ Finally, a few more important parameters:
 -   `voteInfos`: This parameter carries the list of validators whose precommit is missing, either because they did not vote or because the proposer did not include their vote. This information is carried by the [Context](https://docs.cosmos.network/v0.52/learn/advanced/context) and can be used by the application for various things like punishing absent validators.
 -   `minGasPrices`: This parameter defines the minimum gas prices accepted by the node. This is a **local** parameter, meaning each full-node can set a different `minGasPrices`. It is used in the `AnteHandler` during [`CheckTx`](https://docs.cosmos.network/v0.52/learn/advanced/baseapp#checktx), mainly as a spam protection mechanism. The transaction enters the [mempool](https://docs.cometbft.com/v1.0/explanation/core/mempool) only if the gas prices of the transaction are greater than one of the minimum gas price in `minGasPrices` (e.g. if `minGasPrices == 1uatom,1photon`, the `gas-price` of the transaction must be greater than `1uatom` OR `1photon`).
 -   `appVersion`: Version of the application. It is set in the [application's constructor function](https://docs.cosmos.network/v0.52/learn/beginner/app-anatomy#constructor-function).
+
+
+ParamStore[​](https://docs.cosmos.network/v0.52/learn/advanced/baseapp#paramstore "Direct link to ParamStore")
+--------------------------------------------------------------------------------------------------------------
+
+During `InitChain`, the `RequestInitChain` provides `ConsensusParams` which contains parameters related to block execution such as maximum gas and size in addition to evidence parameters. If these parameters are non-nil, they are set in the BaseApp's `ParamStore`. Behind the scenes, the `ParamStore` is managed by an `x/consensus` module. This allows the parameters to be tweaked via on-chain governance.
