@@ -135,6 +135,9 @@ https://github.com/solana-developers/pirate-bootcamp/blob/main/quest-1/scripts/1
 3. Create an associated token account (ATA).
 4. Mint tokens from the mint to the ATA.
 
+
+![alt text](image-9.png)
+
 **4. NFTs:**
 
 * Decimals: 0
