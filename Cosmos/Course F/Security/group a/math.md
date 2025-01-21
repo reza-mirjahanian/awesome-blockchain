@@ -1,6 +1,6 @@
 # Rounding errors
 
-Application developers must take care of correct rounding of numbers, especially if the rounding impacts tokens amounts.
+1Application developers must take care of correct rounding of numbers, especially if the rounding impacts tokens amounts.
 
 Cosmos-sdk offers two custom types for dealing with numbers:
 
