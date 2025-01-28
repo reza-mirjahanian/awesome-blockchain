@@ -1,5 +1,6 @@
 **Slots and Epochs**
 --------------------
+https://ethos.dev/beacon-chain
 
 The Beacon Chain provides the heartbeat to Ethereum's consensus. Each slot is 12 seconds and an epoch is 32 slots: 6.4 minutes.
 
@@ -18,3 +19,6 @@ While proof-of-work is associated with miners, Ethereum's validators are proof-o
 A block **proposer** is a validator that has been pseudorandomly selected to build a block.
 
 Most of the time, validators are **attesters** that vote on blocks.  These votes are recorded in the Beacon Chain and determine the head of the Beacon Chain.
+
+![alt text](image-1.png)
+At every epoch, a validator is pseudorandomly assigned to a slot.
