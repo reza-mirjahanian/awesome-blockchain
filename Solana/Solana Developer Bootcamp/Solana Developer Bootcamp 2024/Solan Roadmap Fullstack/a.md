@@ -1,4 +1,4 @@
-**Full-Stack Solana Development Guide Breakdown**  
+
 
 ---
 
