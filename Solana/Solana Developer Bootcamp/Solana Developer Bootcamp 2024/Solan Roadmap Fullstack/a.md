@@ -140,3 +140,92 @@
   - Never use devnet wallets for mainnet funds.  
 - **Testing**:  
   - Leverage TypeScript tests to validate program logic.
+
+
+  ------------------------
+
+  # Full Stack Solana Development Guide Breakdown
+
+## Project Overview
+* Building complete Solana blockchain application
+* Components:
+  - Anchor program (Rust code)
+  - Local testing environment
+  - Devnet deployment
+  - React frontend application
+
+## Environment Setup Requirements
+* Operating system-specific installations needed
+* For Windows users:
+  - WSL installation required first
+  - Tools to be installed within WSL
+* Browser wallet requirements:
+  - Any wallet supporting devnet
+  - Phantom wallet recommended
+
+## Initial Setup Steps
+
+### Terminal Setup
+1. Launch appropriate terminal:
+   - Windows: WSL terminal in VS Code
+   - Mac/Linux: Regular terminal or VS Code default
+
+### Wallet Configuration
+1. Create file system wallet:
+   ```
+   solana-keygen new
+   ```
+2. Configure Solana CLI for localhost:
+   ```
+   solana config set --url localhost
+   ```
+
+### Local Validator Setup
+1. Navigate to home folder (Windows requirement)
+2. Launch local test validator:
+   ```
+   solana-test-validator
+   ```
+3. Check balance and airdrop funds:
+   ```
+   solana balance
+   solana airdrop 1
+   ```
+
+## Anchor Project Setup
+
+### Project Initialization
+1. Create new anchor project:
+   ```
+   anchor init counter
+   ```
+
+### Development Workflow
+1. Write Rust code
+2. Build using `anchor build`
+3. Write tests (Mocha/Chai)
+4. Run tests with `anchor test`
+5. Repeat until ready for deployment
+
+### Project Structure
+* Programs folder: Contains Rust code
+* Target folder: Build outputs
+  - Deploy folder: Blockchain deployment files
+  - Counter keypair: Program control keys
+  - TypeScript types
+
+### Testing
+* Command: `anchor test --skip-local-validator`
+* Process:
+  - Builds Rust program
+  - Deploys to validator
+  - Runs tests
+  - Verifies functionality
+
+## Code Structure
+
+### Rust Program Components
+* Import statements
+* Macro declarations
+* Program ID declaration
+* Type declarations
