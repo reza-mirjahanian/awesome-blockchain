@@ -47,3 +47,19 @@ In this step, we will set up a beacon node. Use the following command to start a
 `
 ```
 
+### [Non-staking](https://lighthouse-book.sigmaprime.io/run_a_node.html#non-staking)
+
+```
+
+`lighthouse bn\
+  --network mainnet\
+  --execution-endpoint http://localhost:8551\
+  --execution-jwt /secrets/jwt.hex\
+  --checkpoint-sync-url https://mainnet.checkpoint.sigp.io\
+  --disable-deposit-contract-sync
+`
+```
+
+Since we are not staking, we can use the `--disable-deposit-contract-sync` flag to disable syncing of deposit logs from the execution node.
+
+Once Lighthouse runs, we can monitor the logs to see if it is syncing correctly.
