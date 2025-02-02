@@ -23,10 +23,10 @@ pub mod counter {
     }
 }
 
-#[derive(Accounts)]
-pub struct Initialize<'info> {
+#[derive(Accounts)] // used to validate accounts passed to your Solana program. It defines which accounts are required for a specific instruction and enforces constraints 
+pub struct Initialize<'info> {  // This struct specifies the accounts needed for the initialize instruction.
     #[account(mut)]
-    pub user: Signer<'info>,
+    pub user: Signer<'info>, // 'Info ties the lifetime of account data (provided by Solana during transaction processing) to the Rust types.
 
     // Create and initialize `Counter` account using a PDA as the address
     #[account(
@@ -51,8 +51,8 @@ pub struct Increment<'info> {
     pub counter: Account<'info, Counter>,
 }
 
-#[account]
-#[derive(InitSpace)]
+#[account]  //When you create an account (using the #[account] attribute), Anchor knows how to store and retrieve its state from Solana's blockchain.
+#[derive(InitSpace)]  // space = 8 + 8 + 1 // discriminator + u64 + u8
 pub struct Counter {
     pub count: u64, // 8 bytes
     pub bump: u8,   // 1 byte
