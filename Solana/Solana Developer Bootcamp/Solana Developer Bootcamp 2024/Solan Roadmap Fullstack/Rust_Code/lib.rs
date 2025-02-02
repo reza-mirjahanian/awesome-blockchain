@@ -32,7 +32,7 @@ pub struct Initialize<'info> {  // This struct specifies the accounts needed for
     #[account(
         init,
         seeds = [b"counter"], // optional seeds for pda
-        bump,                 // bump seed for pda
+        bump,                 // bump seed for pda , Anchor will automatically calculate and include the bump value in the context (ctx.bumps).
         payer = user,
         space = 8 + Counter::INIT_SPACE
     )]
@@ -46,7 +46,7 @@ pub struct Increment<'info> {
     #[account(
         mut,
         seeds = [b"counter"], // optional seeds for pda
-        bump = counter.bump,  // bump seed for pda stored in `Counter` account
+        bump = counter.bump,  // bump seed for pda stored in `Counter` account, Used when the account is already created, ensuring that the PDA’s bump matches the one stored in the account for security and consistency
     )]
     pub counter: Account<'info, Counter>,
 }
