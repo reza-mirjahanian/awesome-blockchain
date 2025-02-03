@@ -1,0 +1,3 @@
+-   **Solana Pay** is a specification for encoding Solana transaction requests within URLs, enabling standardized transaction requests across different Solana apps and wallets.
+-   **Partial signing** of transactions allows the creation of transactions that require multiple signatures before they are submitted to the network.
+-   **Transaction gating** involves implementing rules that determine whether certain transactions are allowed to be processed, based on specific conditions or the presence of particular data in the transaction.
