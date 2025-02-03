@@ -5,6 +5,17 @@
 -   If the transaction fails for any reason other than the `advanceNonce` instruction, the nonce will still be advanced, even though all other instructions will be reverted.
 
 
+----------------
+
+From the [Durable Nonce guide](https://solana.com/developers/guides/advanced/introduction-to-durable-nonces#durable-nonce-applications):
+
+> 1.  **Scheduled Transactions**: One of the most apparent applications of Durable Nonces is the ability to schedule transactions. Users can pre-sign a transaction and then submit it at a later date, allowing for planned transfers, contract interactions, or even executing pre-determined investment strategies.
+> 2.  **Multisig Wallets**: Durable Nonces are very useful for multi-signature wallets where one party signs a transaction, and others may confirm it at a later time. This feature enables the proposal, review, and later execution of a transaction within a trustless system.
+> 3.  **Programs Requiring Future Interaction**: If a program on Solana requires interaction at a future point (such as a vesting contract or a timed release of funds), a transaction can be pre-signed using a Durable Nonce. This ensures the contract interaction happens at the correct time without necessitating the presence of the transaction creator.
+> 4.  **Cross-chain Interactions**: When you need to interact with another blockchain and it requires waiting for confirmations, you can sign the transaction with a Durable Nonce and execute it once the required confirmations are received.
+> 5.  **Decentralized Derivatives Platforms**: In a decentralized derivatives platform, complex transactions might need to be executed based on specific triggers. With Durable Nonces, these transactions can be pre-signed and executed when the trigger condition is met.
+
+
 -------------------------
 Durable Nonces are a way to bypass the expiration date of regular transactions. To understand this, we'll start by looking at the concepts behind regular transactions.
 
