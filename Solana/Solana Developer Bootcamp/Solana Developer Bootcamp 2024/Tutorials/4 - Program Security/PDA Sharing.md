@@ -70,3 +70,62 @@ pub struct TokenPool {
     pub bump: u8,
 }
 ```
+
+
+## Secure account specific PDA
+
+One approach to create an account specific PDA is to use the `withdraw_destination` as a seed to derive the PDA used as the authority of the `vault` token account. This ensures the PDA signing for the CPI in the `withdraw_tokens` instruction handler is derived using the intended `withdraw_destination` token account. In other words, tokens from a `vault` token account can only be withdrawn to the `withdraw_destination` that was originally initialized with the `pool` account.
+
+```Rust
+use anchor_lang::prelude::*;
+use anchor_spl::token::{self, Token, TokenAccount};
+ 
+declare_id!("Fg6PaFpoGXkYsidMpWTK6W2BeZ7FEfcYkg476zPFsLnS");
+ 
+#[program]
+pub mod pda_sharing_secure {
+    use super::*;
+ 
+    pub fn withdraw_tokens(ctx: Context<WithdrawTokens>) -> Result<()> {
+        let amount = ctx.accounts.vault.amount;
+        let seeds = &[
+            ctx.accounts.pool.withdraw_destination.as_ref(),
+            &[ctx.accounts.pool.bump],
+        ];
+        token::transfer(get_transfer_ctx(&ctx.accounts).with_signer(&[seeds]), amount)
+    }
+}
+ 
+#[derive(Accounts)]
+pub struct WithdrawTokens<'info> {
+    #[account(has_one = vault, has_one = withdraw_destination)]
+    pool: Account<'info, TokenPool>,
+    vault: Account<'info, TokenAccount>,
+    withdraw_destination: Account<'info, TokenAccount>,
+    /// CHECK: This is the PDA that signs for the transfer
+    authority: UncheckedAccount<'info>,
+    token_program: Program<'info, Token>,
+}
+ 
+pub fn get_transfer_ctx<'accounts, 'remaining, 'cpi_code, 'info>(
+    accounts: &'accounts WithdrawTokens<'info>,
+) -> CpiContext<'accounts, 'remaining, 'cpi_code, 'info, token::Transfer<'info>> {
+    CpiContext::new(
+        accounts.token_program.to_account_info(),
+        token::Transfer {
+            from: accounts.vault.to_account_info(),
+            to: accounts.withdraw_destination.to_account_info(),
+            authority: accounts.authority.to_account_info(),
+        },
+    )
+}
+ 
+#[account]
+#[derive(InitSpace)]
+pub struct TokenPool {
+    pub vault: Pubkey,
+    pub mint: Pubkey,
+    pub withdraw_destination: Pubkey,
+    pub bump: u8,
+}
+```
