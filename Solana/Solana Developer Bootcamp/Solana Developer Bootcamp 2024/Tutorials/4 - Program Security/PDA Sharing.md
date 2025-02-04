@@ -89,7 +89,7 @@ pub mod pda_sharing_secure {
     pub fn withdraw_tokens(ctx: Context<WithdrawTokens>) -> Result<()> {
         let amount = ctx.accounts.vault.amount;
         let seeds = &[
-            ctx.accounts.pool.withdraw_destination.as_ref(),
+            ctx.accounts.pool.withdraw_destination.as_ref(), //Diff is here!
             &[ctx.accounts.pool.bump],
         ];
         token::transfer(get_transfer_ctx(&ctx.accounts).with_signer(&[seeds]), amount)
@@ -116,6 +116,74 @@ pub fn get_transfer_ctx<'accounts, 'remaining, 'cpi_code, 'info>(
             from: accounts.vault.to_account_info(),
             to: accounts.withdraw_destination.to_account_info(),
             authority: accounts.authority.to_account_info(),
+        },
+    )
+}
+ 
+#[account]
+#[derive(InitSpace)]
+pub struct TokenPool {
+    pub vault: Pubkey,
+    pub mint: Pubkey,
+    pub withdraw_destination: Pubkey,
+    pub bump: u8,
+}
+```
+-----------------
+
+### [Anchor's seeds and bump Constraints]
+
+PDAs can be used as both the address of an account and allow programs to sign for the PDAs they own.
+
+The example below uses a PDA derived using the `withdraw_destination` as both the address of the `pool` account and the owner of the `vault` token account. This means that only the `pool` account associated with the correct `vault` and `withdraw_destination` can be used in the `withdraw_tokens` instruction handler.
+
+You can use Anchor's `seeds` and `bump` constraints with the [`#[account(...)]`](https://www.anchor-lang.com/docs/account-constraints) attribute to validate the `pool` account PDA. Anchor derives a PDA using the `seeds` and `bump` specified and compares it against the account passed into the instruction handler as the `pool` account. The `has_one` constraint is used to further ensure that only the correct accounts stored on the `pool` account are passed into the instruction handler.
+
+```Rust
+use anchor_lang::prelude::*;
+use anchor_spl::token::{self, Token, TokenAccount};
+ 
+declare_id!("ABQaKhtpYQUUgZ9m2sAY7ZHxWv6KyNdhUJW8Dh8NQbkf");
+ 
+#[program]
+pub mod pda_sharing_recommended {
+    use super::*;
+ 
+    pub fn withdraw_tokens(ctx: Context<WithdrawTokens>) -> Result<()> {
+        let amount = ctx.accounts.vault.amount;
+        let seeds = &[
+            ctx.accounts.pool.withdraw_destination.as_ref(),
+            &[ctx.accounts.pool.bump],
+        ];
+        token::transfer(get_transfer_ctx(&ctx.accounts).with_signer(&[seeds]), amount)
+    }
+}
+ 
+#[derive(Accounts)]
+pub struct WithdrawTokens<'info> {
+    #[account(
+        seeds = [withdraw_destination.key().as_ref()],
+        bump = pool.bump,
+        has_one = vault,
+        has_one = withdraw_destination,
+    )]
+    pool: Account<'info, TokenPool>,
+    #[account(mut)]
+    vault: Account<'info, TokenAccount>,
+    #[account(mut)]
+    withdraw_destination: Account<'info, TokenAccount>,
+    token_program: Program<'info, Token>,
+}
+ 
+pub fn get_transfer_ctx<'accounts, 'remaining, 'cpi_code, 'info>(
+    accounts: &'accounts WithdrawTokens<'info>,
+) -> CpiContext<'accounts, 'remaining, 'cpi_code, 'info, token::Transfer<'info>> {
+    CpiContext::new(
+        accounts.token_program.to_account_info(),
+        token::Transfer {
+            from: accounts.vault.to_account_info(),
+            to: accounts.withdraw_destination.to_account_info(),
+            authority: accounts.pool.to_account_info(),
         },
     )
 }
