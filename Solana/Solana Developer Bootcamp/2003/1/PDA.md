@@ -2,6 +2,8 @@
 
 ---
 
+![alt text](image.png)
+
 ## **Core Concepts**  
 - **No Private Key**: PDAs are derived from **seeds** and a **program ID**, not cryptographic keypairs.  
 - **Signing Authority**: PDAs allow programs to **sign transactions** via `invoke_signed`.  
