@@ -7,9 +7,9 @@ import (
     "encoding/hex"    sdk "github.com/cosmos/cosmos-sdk/types"
     sdkerrors "github.com/cosmos/cosmos-sdk/types/errors"
     "net/url")
-func (msg \*MsgSwapByDenom) ValidateBasicReza() error {
+func (msg *MsgSwapByDenom) ValidateBasicReza() error {
     // Validate the creator address
-    \_, err := sdk.AccAddressFromBech32(msg.Creator) //  Or msg.Sender
+    _, err := sdk.AccAddressFromBech32(msg.Creator) //  Or msg.Sender
     if err != nil {
        return errorsmod.Wrapf(sdkerrors.ErrInvalidAddress, "invalid creator address: %v", err)
     }
@@ -29,7 +29,7 @@ func (msg \*MsgSwapByDenom) ValidateBasicReza() error {
     }
     if msg.URI != "" {
        // Basic URI validation (you might want to use a more robust URI parsing library for production)
-       \_, err := url.ParseRequestURI(msg.URI)
+       _, err := url.ParseRequestURI(msg.URI)
        if err != nil {
           return sdkerrors.Wrap(sdkerrors.ErrInvalidRequest, "uri must be a valid URI format (e.g., http://, https://, ipfs://)")
        }
@@ -37,7 +37,7 @@ func (msg \*MsgSwapByDenom) ValidateBasicReza() error {
           return sdkerrors.Wrap(sdkerrors.ErrInvalidRequest, "uri hash is required when uri is provided")
        }
        // Basic URI Hash validation (assuming it's expected to be a hex-encoded hash)
-       if \_, err := hex.DecodeString(msg.URIHash); err != nil {
+       if _, err := hex.DecodeString(msg.URIHash); err != nil {
           return sdkerrors.Wrapf(sdkerrors.ErrInvalidRequest, "invalid uri hash format: %s. Expected hex-encoded string.", err)
        }
        // Example Hash length check (SHA256 - 32 bytes = 64 hex chars, SHA512 - 64 bytes = 128 hex chars)
@@ -166,3 +166,7 @@ func (suite *ZigchKeeperTestSuite) TestUpdateParams() {
 ```
 
 --------------------------
+## 4️⃣ What is wrong with these requirements
+
+
+-----------------
