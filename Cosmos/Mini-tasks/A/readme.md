@@ -65,4 +65,104 @@ func (msg \*MsgSwapByDenom) ValidateBasicReza() error {
 --------------------------
 ## 3️⃣ Write tests for this function
 
+```go
+package keeper
+
+import (
+	"context"
+
+	errorsmod "cosmossdk.io/errors"
+	sdk "github.com/cosmos/cosmos-sdk/types"
+	govtypes "github.com/cosmos/cosmos-sdk/x/gov/types"
+	"github.com/reza/x/zigch/types"
+)
+
+func (k msgServer) UpdateParams(goCtx context.Context, req *types.MsgUpdateParams) (*types.MsgUpdateParamsResponse, error) {
+
+	if k.authority != req.Authority {
+		return nil, errorsmod.Wrapf(govtypes.ErrInvalidSigner, "invalid authority; expected %s, got %s", k.authority, req.Authority)
+	}
+	ctx := sdk.UnwrapSDKContext(goCtx)
+
+	if err := k.SetParams(ctx, req.Params); err != nil {
+		return nil, err
+	}
+
+	return &types.MsgUpdateParamsResponse{}, nil
+}
+
+```
+
+```go
+package keeper_test
+
+import (
+	"fmt"
+
+	"cosmossdk.io/math"
+	authtypes "github.com/cosmos/cosmos-sdk/x/auth/types"
+	govtypes "github.com/cosmos/cosmos-sdk/x/gov/types"
+	"github.com/reza/x/zigch/keeper"
+	"github.com/reza/x/zigch/types"
+)
+
+func (suite *ZigchKeeperTestSuite) TestUpdateParams() {
+	sender := authtypes.NewModuleAddress(govtypes.ModuleName)
+	tests := []struct {
+		name      string
+		authority string
+		params    types.Params
+		expected  error
+	}{
+		{
+			name:      "invalid authority",
+			authority: "invalid_authority",
+			params:    types.Params{},
+			expected:  fmt.Errorf("invalid authority"),
+		},
+		{
+			name:      "valid authority",
+			authority: sender.String(),
+			params: types.Params{
+				LeverageEnabled: true,
+				Reza:            100,
+			},
+			expected: nil,
+		},
+		{
+			name: "empty authority",
+			params: types.Params{
+				LeverageEnabled: true,
+				Reza:            100,
+			},
+			authority: "",
+			expected:  fmt.Errorf("invalid authority"),
+		},
+	}
+
+	for _, tt := range tests {
+		suite.Run(tt.name, func() {
+			suite.SetupTest()
+
+			msgServer := keeper.NewMsgServerImpl(suite.app.ZigchKeeperTestSuite)
+
+			msg := &types.MsgUpdateParams{
+				Authority: tt.authority,
+				Params:    &tt.params,
+			}
+
+			_, err := msgServer.UpdateParams(suite.ctx, msg)
+			if tt.expected != nil {
+				suite.Require().ErrorContains(err, tt.expected.Error())
+			} else {
+				suite.Require().NoError(err)
+				storedParams := suite.app.ZigchKeeperTestSuite.GetParams(suite.ctx)
+				suite.Require().Equal(tt.params, storedParams)
+			}
+		})
+	}
+}
+
+```
+
 --------------------------
