@@ -1,3 +1,11 @@
+# Table of Contents
+
+1. [Write the basic structure Validate Basic](#1-write-the-basic-structure-validate-basic)
+2. [Find error in this code](#2-find-error-in-this-code)
+3. [Write tests for this function](#3-write-tests-for-this-function)
+4. [What is wrong with these requirements](#4-what-is-wrong-with-these-requirements)
+5. [Command to upload and init a CosmWasm](#5-command-to-upload-and-init-a-cosmwasm)
+
 ## 1️⃣ Write the basic structure Validate Basic
 
 ```go
@@ -170,3 +178,5 @@ func (suite *ZigchKeeperTestSuite) TestUpdateParams() {
 
 
 -----------------
+
+## 5️⃣ Command to upload and init a CosmWasm
