@@ -257,12 +257,14 @@ id=YOUR_CODE_ID
 nibid query wasm code-info $id
 
 ```
-
+![alt text](image-8.png)
+![alt text](image-9.png)
+![alt text](image-10.png)
 ##### C - Interact  
 ```bash
 #Setup Variable $init (Change name, symbol. Instead of YOUR_WALLET_ADDRESS write your wallet address)
 
-init='{"name":"Ovodoff","symbol":"OFFC","decimals":2,"initial_balances":[{"address":"YOUR_WALLET_ADDRESS","amount":"100000"}],"mint":{"minter":"YOUR_WALLET_ADDRESS"},"marketing":{}}'
+init='{"name":"Reza_Mirjah","symbol":"OFFC","decimals":2,"initial_balances":[{"address":"YOUR_WALLET_ADDRESS","amount":"100000"}],"mint":{"minter":"YOUR_WALLET_ADDRESS"},"marketing":{}}'
 
 #sending tx ( Change  label and wallet name if needed)
 
