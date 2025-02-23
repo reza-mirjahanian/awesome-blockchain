@@ -232,3 +232,5 @@ junod query wasm contract-state smart $CONTRACT "$GET_COUNT" $NODE --output json
 ![alt text](image-5.png)
 
 ![alt text](image-6.png)
+
+![alt text](image-7.png)
