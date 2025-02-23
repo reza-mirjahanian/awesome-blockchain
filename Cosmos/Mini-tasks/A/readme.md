@@ -201,6 +201,8 @@ sudo docker run --rm -v "$(pwd)":/code \
     cosmwasm/rust-optimizer:0.11.4
 ```
 
+![alt text](image-2.png)
+
 ##### B - Upload 
 
 ```bash
@@ -208,6 +210,8 @@ sudo docker run --rm -v "$(pwd)":/code \
 # Upload our increment smart contract to the testnet
 RES=$(junod tx wasm store artifacts/increment.wasm --from JunoWallet $TXFLAG -y --output json -b block) CODE_ID=$(echo $RES | jq -r '.logs[0].events[-1].attributes[0].value')
 ```
+![alt text](image-3.png)
+![alt text](image-4.png)
 
 ##### C - Interact  
 ```bash
@@ -224,3 +228,5 @@ junod tx wasm execute $CONTRACT "$INC" --amount 100ujunox --from JunoWallet $TXF
 GET_COUNT='{"get_count": {}}'
 junod query wasm contract-state smart $CONTRACT "$GET_COUNT" $NODE --output json
 ```
+
+![alt text](image-5.png)
