@@ -180,3 +180,47 @@ func (suite *ZigchKeeperTestSuite) TestUpdateParams() {
 -----------------
 
 ## 5️⃣ Command to upload and init a CosmWasm
+
+### Example 1 (JUNO)
+
+##### A - Compile
+
+```bash
+# compile the wasm contract with stable toolchain
+rustup default stable
+# this will produce a wasm build in ./target/wasm32-unknown-unknown/release/YOUR_NAME_HERE.wasm
+cargo wasm
+# this runs unit tests with helpful backtraces
+RUST_BACKTRACE=1 cargo unit-test
+# auto-generate json schema
+cargo schema
+# create an optimized version
+sudo docker run --rm -v "$(pwd)":/code \
+    --mount type=volume,source="$(basename "$(pwd)")_cache",target=/code/target \
+    --mount type=volume,source=registry_cache,target=/usr/local/cargo/registry \
+    cosmwasm/rust-optimizer:0.11.4
+```
+
+##### B - Upload 
+
+```bash
+# Make sure to get Testnet tokens which can be requested from the faucet 
+# Upload our increment smart contract to the testnet
+RES=$(junod tx wasm store artifacts/increment.wasm --from JunoWallet $TXFLAG -y --output json -b block) CODE_ID=$(echo $RES | jq -r '.logs[0].events[-1].attributes[0].value')
+```
+
+##### C - Interact  
+```bash
+# Instantiate the smart contract
+INIT='{"count":100}'
+junod tx wasm instantiate $CODE_ID "$INIT" --from JunoWallet --label "increment project label" $TXFLAG -y
+# Save contract details for future use
+CONTRACT=$(junod query wasm list-contract-by-code $CODE_ID $NODE --output json | jq -r '.contracts[-1]')
+echo $CONTRACT
+# Increment the counter
+INC='{"increment" :{}}'
+junod tx wasm execute $CONTRACT "$INC" --amount 100ujunox --from JunoWallet $TXFLAG -y
+# Query the current count
+GET_COUNT='{"get_count": {}}'
+junod query wasm contract-state smart $CONTRACT "$GET_COUNT" $NODE --output json
+```
