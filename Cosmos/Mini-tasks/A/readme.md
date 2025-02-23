@@ -176,6 +176,21 @@ func (suite *ZigchKeeperTestSuite) TestUpdateParams() {
 --------------------------
 ## 4️⃣ What is wrong with these requirements
 
+My brainstorming questions:
+
+1.  Does maxPerAddress refer to the total amount across all requests or just the limit within a specific time window?
+
+2.  For addresses that make many requests, should we consider adding page breaks or filters?
+
+3.  How long must users wait between requests?
+
+4.  How can we stop users from using multiple wallets to bypass limits?
+
+5.  How should we handle situations where one or more users send many valid requests very quickly?
+
+6.  Go programming language doesn't have a basic "uint" type - it only has uint64 and uint32.
+
+7.  How long should we keep the log history? Should we delete older logs after a certain time to save storage space?
 
 -----------------
 
