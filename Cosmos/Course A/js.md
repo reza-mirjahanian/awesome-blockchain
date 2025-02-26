@@ -146,7 +146,7 @@
 - **Solve People Problems**:
   - Focus on what users and developers truly need.
 - **Rediscover the Joy of Programming**:
-  - Move from "software construction" to "software engineering."
+  - Move from "software construction" to "software engineering"
   - Simplify development to enable creativity and artistic coding.
 
 ---
