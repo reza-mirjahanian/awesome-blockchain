@@ -27,27 +27,42 @@ anchor build
 solana config set --url localhost
 ```
 
+### Run the test validator node
+Run the following command in a new shell, not in the Anchor project. But do not close the shell where you ran anchor build. This is running a local (test) Solana node instance on your machine:
+```bash
+# shell 2
+
+solana-test-validator
+```
+
+### Ensure the program\_id is synced with the Anchor key
+```bash
+# shell 1
+
+anchor keys sync
+```
+
+You may also need to airdrop yourself some local Sol by running `solana airdrop 100 {YOUR_WALLET_ADDRESS}` in the terminal. You can get your wallet address by running `solana address` in the command line.
 
 ```bash
+
+```
+
+
+```bash
+
 ```
 
 ```bash
+
 ```
 
 ```bash
-```
 
-
-```bash
-```
-
-```bash
-```
-
-```bash
 ```
 
 
 ```bash
+
 ```
 
