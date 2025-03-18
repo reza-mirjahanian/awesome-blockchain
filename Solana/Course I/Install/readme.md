@@ -69,15 +69,16 @@ pub mod day_1 {
 pub struct Initialize {}
 ```
 
-
+###  kill the local validator process and restart it with:
 ```bash
-
+solana-test-validator --reset
+```
+### Run the test 
+```bash
+anchor test --skip-local-validator
 ```
 
-```bash
-
-```
-
+### Find the log file by running
 ```bash
 
 ```
