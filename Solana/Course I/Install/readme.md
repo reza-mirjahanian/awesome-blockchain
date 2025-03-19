@@ -115,3 +115,13 @@ If you get this error, your keys are not synced. Run `anchor keys sync`.
 ### Error: Your configured rpc port: 8899 is already in use
 
 You ran `anchor test` without `--skip-local-validator` while the validator is running in the background. Either turn off the validator and run `anchor test` or run `anchor test --skip-local-validator` with the validator running. Skip local validator means skip the temporary one it creates for the project, not the one running in the background.
+
+
+
+### Account has insufficient funds for spend
+
+Run the command below to airdrop 100 SOL to your development address:
+
+```
+solana airdrop 100 J7t...zjK
+```
