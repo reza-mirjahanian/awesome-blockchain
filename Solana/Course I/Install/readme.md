@@ -110,3 +110,8 @@ Error: Deploying program failed: Error processing Instruction 1: custom program 
 There was a problem deploying: Output { status: ExitStatus(unix_wait_status(256)), stdout: "", stderr: "" }.
 ```
 If you get this error, your keys are not synced. Run `anchor keys sync`.
+
+
+### Error: Your configured rpc port: 8899 is already in use
+
+You ran `anchor test` without `--skip-local-validator` while the validator is running in the background. Either turn off the validator and run `anchor test` or run `anchor test --skip-local-validator` with the validator running. Skip local validator means skip the temporary one it creates for the project, not the one running in the background.
