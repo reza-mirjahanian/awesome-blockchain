@@ -96,3 +96,9 @@ solana logs
 
 When the tests run against a node, we will be able to query the node for state changes. If you are not able to get the node to run, it is okay to run `anchor test` without the `--skip-local-validator` flag. However, you will have a harder time developing and testing, so we recommend getting the local validator to work.
 
+### change the Anchor version
+
+```
+avm install 0.29.0
+avm use 0.29.0
+```
