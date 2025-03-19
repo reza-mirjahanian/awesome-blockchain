@@ -102,3 +102,11 @@ When the tests run against a node, we will be able to query the node for state c
 avm install 0.29.0
 avm use 0.29.0
 ```
+
+### Error: Deploying program failed: Error processing Instruction 1: custom program error: 0x1
+
+```
+Error: Deploying program failed: Error processing Instruction 1: custom program error: 0x1
+There was a problem deploying: Output { status: ExitStatus(unix_wait_status(256)), stdout: "", stderr: "" }.
+```
+If you get this error, your keys are not synced. Run `anchor keys sync`.
