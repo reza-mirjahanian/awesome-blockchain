@@ -125,3 +125,27 @@ Run the command below to airdrop 100 SOL to your development address:
 ```
 solana airdrop 100 J7t...zjK
 ```
+
+
+### RPC request error: cluster version query failed
+
+```bash
+Error: RPC request error: cluster version query failed: error sending request for url (http://localhost:8899/): error trying to connect: tcp connect error: Connection refused (os error 61)
+There was a problem deploying: Output { status: ExitStatus(unix_wait_status(256)), stdout: "", stderr: "" }.
+```
+
+This means the `solana-test-validator` is not running in the background. Run `solana-test-validator` in another shell.
+
+### thread 'main' panicked at 'called `Option::unwrap()` on a `None` value'
+
+```
+thread 'main' panicked at 'called `Option::unwrap()` on a `None` value', /Users/username/.cargo/git/checkouts/anchor-50c4b9c8b5e0501f/347c225/lang/syn/src/idl/file.rs:214:73
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+```
+
+It's likely you didn't run `anchor build` yet.
+
+
+### Error: target/idl/day\_1.json doesn't exist. Did you run `anchor build`?
+
+Create a new project and name it day\_1 instead of day1. Anchor seems to silently insert underscores on some machines.
