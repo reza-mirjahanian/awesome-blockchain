@@ -149,3 +149,4 @@ It's likely you didn't run `anchor build` yet.
 ### Error: target/idl/day\_1.json doesn't exist. Did you run `anchor build`?
 
 Create a new project and name it day\_1 instead of day1. Anchor seems to silently insert underscores on some machines.
+
