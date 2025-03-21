@@ -18,3 +18,6 @@ contract Day2 {
 
 
 ```
+---------
+
+### Passing a string
