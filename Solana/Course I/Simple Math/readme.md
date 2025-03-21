@@ -73,3 +73,5 @@ Transaction executed in slot 368489:
 ```
 
 ### overflow-checks = true in Cargo.toml
+
+If the key `overflow-checks` is set to `true` in the Cargo.toml file, then Rust will add overflow checks at the compiler level. See the screenshot of Cargo.toml next:
