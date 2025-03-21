@@ -21,3 +21,27 @@ contract Day2 {
 ---------
 
 ### Passing a string
+Rust
+
+```rust
+pub fn initialize(ctx: Context<Initialize>,
+                  a: u64,
+                  b: u64,
+                  message: String) -> Result<()> {
+    msg!("You said {:?}", message);
+    msg!("You sent {} and {}", a, b);
+    Ok(())
+}
+
+```
+TS
+```ts
+it("Is initialized!", async () => {
+  // Add your test here.
+  const tx = await program.methods
+    .initialize(
+       new anchor.BN(777), new anchor.BN(888), "hello").rpc();
+    console.log("Your transaction signature", tx);
+});
+
+```
