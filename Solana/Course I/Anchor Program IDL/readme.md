@@ -120,3 +120,6 @@ Now run anchor build – let’s see what we get back in the new IDL.
 
 
 ```
+Note that "`accounts`" is no longer empty and is populated with the fields from the struct: "`signer`" and "`anotherSigner`" (note that `another_signer` got transformed from snake case into camel case). The IDL has been updated to match the struct we just changed, specifically with the number of accounts we added.
+
+you can think of it as analogous to `tx.origin` in Ethereum.
