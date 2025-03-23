@@ -123,3 +123,37 @@ Now run anchor build – let’s see what we get back in the new IDL.
 Note that "`accounts`" is no longer empty and is populated with the fields from the struct: "`signer`" and "`anotherSigner`" (note that `another_signer` got transformed from snake case into camel case). The IDL has been updated to match the struct we just changed, specifically with the number of accounts we added.
 
 you can think of it as analogous to `tx.origin` in Ethereum.
+
+### example 2
+
+```rust
+use anchor_lang::prelude::*;
+
+declare_id!("8PSAL9t1RMb7BcewhsSFrRQDq61Y7YXC5kHUxMk5b39Z");
+
+#[program]
+pub mod anchor_function_tutorial {
+    use super::*;
+
+    pub fn function_a(ctx: Context<NonEmptyAccountExample>) -> Result<()> {
+        Ok(())
+    }
+
+    pub fn function_b(ctx: Context<Empty>, firstArg: u64) -> Result<()> {
+        Ok(())
+    }
+}
+
+#[derive(Accounts)]
+pub struct NonEmptyAccountExample<'info> {
+    signer: Signer<'info>,
+    another_signer: Signer<'info>,
+}
+
+#[derive(Accounts)]
+pub struct Empty {}
+
+```
+Now build it with `anchor build`
+
+![alt text](image-1.png)
