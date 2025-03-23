@@ -157,3 +157,22 @@ pub struct Empty {}
 Now build it with `anchor build`
 
 ![alt text](image-1.png)
+
+The function `function_a` has no arguments and this shows in the IDL as an empty array under the `args` key.
+
+Its `Context` takes the `NonEmptyAccountExample` struct. This struct `NonEmptyAccountExample` has two signer fields: `signer` and `another_signer`. Note that these are repeated as elements in the account key in the IDL for `function_a`. You can see that Anchor translated Rust's snake case to camel case in the IDL.
+
+**Update for Anchor 0.30** Anchor no longer automatically performs this translation ([release notes](https://github.com/coral-xyz/anchor/blob/v0.30.0/CHANGELOG.md#fixes-2)).
+
+The function `function_b` takes an u64 argument. Its context struct is empty, so the `accounts` key in IDL for `function_b` is an empty array.
+
+In general, we expect the array of items in the IDL's `accounts` key to match the keys of the account struct that the function takes in its `ctx` argument.
+
+Summary
+-------
+
+In this chapter:
+
+-   We learned Solana uses an IDL (iInterface Definition Language) to show how to interact with a Solana program and what fields appear in the IDL.
+-   We introduced the struct modified by `#[derive(Accounts)]` and how it relates to function arguments.
+-   Anchor interprets snake\_case functions in Rust as camelCase functions in the Typescript tests.
