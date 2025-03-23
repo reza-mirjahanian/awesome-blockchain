@@ -88,3 +88,35 @@ pub struct NonEmptyAccountExample<'info> {
 
 
 ```
+
+Now run anchor build – let’s see what we get back in the new IDL.
+
+```json
+{
+  "version": "0.1.0",
+  "name": "anchor_function_tutorial",
+  "instructions": [
+    {
+      "name": "nonEmptyAccountExample",
+      "accounts": [
+        {
+          "name": "signer",
+          "isMut": false,
+          "isSigner": true
+        },
+        {
+          "name": "anotherSigner",
+          "isMut": false,
+          "isSigner": true
+        }
+      ],
+      "args": []
+    }
+  ],
+  "metadata": {
+    "address": "8PSAL9t1RMb7BcewhsSFrRQDq61Y7YXC5kHUxMk5b39Z"
+  }
+}
+
+
+```
