@@ -1,4 +1,6 @@
 
+**The significant difference between how Ethereum and Solana stops transactions with invalid parameters is that Ethereum triggers a revert and Solana returns an error.**
+
 ```rust
 use anchor_lang::prelude::*;
 
