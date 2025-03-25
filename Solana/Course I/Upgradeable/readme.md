@@ -11,3 +11,6 @@ Run `anchor deploy` again:
 The program was deployed to the same address, but this time it was upgraded, not deployed.
 
 The program id has not changed, the program got overwritten.
+
+Solana programs are mutable by default
+--------------------------------------
