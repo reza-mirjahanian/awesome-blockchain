@@ -68,3 +68,6 @@ anchor test --skip-local-validator --skip-deploy
 ```
 
 Now look at the logs terminal:
+![alt text](image-2.png)
+
+We see that the initialize instruction was executed, but the program was neither deployed nor upgraded, since we used the `--skip-deploy` argument with anchor test.
