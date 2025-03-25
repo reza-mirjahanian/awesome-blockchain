@@ -1,3 +1,10 @@
+Summary
+-------
+
+-   Solana does not have a constructor, programs are "just deployed"
+-   Solana does not have immutable variables
+-   Solana does not have delegatecall, programs can be "just updated"
+
 Solana programs do not have constructors
 ----------------------------------------
 ```
