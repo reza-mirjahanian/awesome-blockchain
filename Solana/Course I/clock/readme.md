@@ -136,3 +136,22 @@ block.gaslimit
 Solana has a per-block compute unit [limit of 48 million](https://github.com/solana-labs/solana/issues/29492). Each transaction is by default limited to 200,000 compute units, though it can be raised to 1.4 million compute units ( [see an example here](https://solanacookbook.com/references/basic-transactions.html#how-to-change-compute-budget-fee-priority-for-a-transaction)).
 
 It is **not possible** to access this limit from a Rust program
+
+--
+
+block.basefee
+-------------
+
+In Ethereum, the basefee is dynamic per EIP-1559; it is a function of previous block utilization. In Solana, the base price of a transaction is static, so there is no need for a variable like this.
+
+block.difficulty
+----------------
+
+Block difficulty is a concept associated with Proof of Work (PoW) blockchains. Solana, on the other hand, operates on a Proof of History (PoH) combined with Proof of Stake (PoS) consensus mechanism, which doesn't involve the concept of block difficulty.
+
+block.chainid
+-------------
+
+Solana does not have a chain id because it is not an EVM compatible blockchain. The block.chainid is how Solidity smart contracts know if they are on a testnet, L2, mainnet or some other EVM compatible chain.
+
+Solana runs separate clusters for [Devnet, Testnet, and Mainnet](https://docs.solana.com/clusters), but programs do not have a mechanism to know which one they are on. However, you can programatically adjust your code at deploy time using the Rust cfg feature to have different features depending on which cluster it is deployed to. Here is an example of [changing the program id depending on the cluster](https://solana.stackexchange.com/questions/848/how-to-have-a-different-program-id-depending-on-the-cluster).
