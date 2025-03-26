@@ -113,3 +113,17 @@ Transaction executed in slot 36:
 ```
 
 Notice the "`Week day is: Wed`" log.
+
+-------
+
+block.number in Solana
+----------------------
+
+Solana has a notion of a "slot number" which is very related to the "block number" but is not the same thing.
+
+block.coinbase
+--------------
+
+In Ethereum, the "Block Coinbase" represents the address of the miner who has successfully mined a block in Proof of Work (PoW). On the other hand, Solana uses a leader-based consensus mechanism which is a combination of both Proof of History (PoH) and Proof of Stake (PoS), removing the concept of mining. Instead, a [block or slot leader](https://docs.solana.com/cluster/leader-rotation) is appointed to validate transactions and propose blocks during certain intervals, under a system known as the [leader schedule](https://docs.solana.com/cluster/leader-rotation#leader-schedule-rotation). This schedule determines who will be the block producer at a certain time.
+
+However, presently, there's no specific way to access the address of the block leader in Solana programs.
