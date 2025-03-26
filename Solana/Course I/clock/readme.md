@@ -127,3 +127,12 @@ block.coinbase
 In Ethereum, the "Block Coinbase" represents the address of the miner who has successfully mined a block in Proof of Work (PoW). On the other hand, Solana uses a leader-based consensus mechanism which is a combination of both Proof of History (PoH) and Proof of Stake (PoS), removing the concept of mining. Instead, a [block or slot leader](https://docs.solana.com/cluster/leader-rotation) is appointed to validate transactions and propose blocks during certain intervals, under a system known as the [leader schedule](https://docs.solana.com/cluster/leader-rotation#leader-schedule-rotation). This schedule determines who will be the block producer at a certain time.
 
 However, presently, there's no specific way to access the address of the block leader in Solana programs.
+
+----
+
+block.gaslimit
+--------------
+
+Solana has a per-block compute unit [limit of 48 million](https://github.com/solana-labs/solana/issues/29492). Each transaction is by default limited to 200,000 compute units, though it can be raised to 1.4 million compute units ( [see an example here](https://solanacookbook.com/references/basic-transactions.html#how-to-change-compute-budget-fee-priority-for-a-transaction)).
+
+It is **not possible** to access this limit from a Rust program
