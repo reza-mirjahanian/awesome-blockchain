@@ -43,3 +43,28 @@ Solana Sysvars in Anchor, using the get method
 As mentioned earlier, not all sysvars can be accessed using Anchor's `get` method. Sysvars such as Clock, EpochSchedule, and Rent can be accessed using this method.
 
 While the Solana documentation includes Fees and EpochRewards as sysvars that can be accessed with the `get` method, these are deprecated in the latest version of Anchor. Therefore, they cannot be called using the `get` method in Anchor.
+
+
+### Clock sysvar
+
+To utilize the Clock sysvar, we can invoke the `Clock::get()` (we did something similar in a previous tutorial) method as demonstrated below.
+
+Add the following code in the initialize function of our project:
+
+```rust
+pub fn initialize(ctx: Context<Initialize>) -> Result<()> {
+    // Get the Clock sysvar
+    let clock = Clock::get()?;
+
+    msg!(
+        "clock: {:?}",
+        // Retrieve all the details of the Clock sysvar
+        clock
+    );
+
+    Ok(())
+}
+```
+
+Now, run the test on a local Solana node and check the log:
+![alt text](image-3.png)
