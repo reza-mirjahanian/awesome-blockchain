@@ -68,3 +68,99 @@ pub fn initialize(ctx: Context<Initialize>) -> Result<()> {
 
 Now, run the test on a local Solana node and check the log:
 ![alt text](image-3.png)
+
+
+-------
+
+Sysvars in Anchor Using Sysvar Public Address
+----------------------------------------------
+
+For sysvars that don't support the `get` method, we can access them using their public addresses. Any exceptions to this will be specified.
+
+### StakeHistory sysvar
+
+Recall that we previously mentioned that this sysvar keeps a record of stake activations and deactivations for the entire network on a per-epoch basis. However, since we are running a local validator node, this sysvar will return empty data.
+
+We will access this sysvar using its public address 
+**SysvarStakeHistory1111111111111111111111111**.
+
+First, we modify the `Initialize` account struct in our project as follows:
+
+```
+#[derive(Accounts)]
+pub struct Initialize<'info> {
+    /// CHECK:
+    pub stake_history: AccountInfo<'info>, // We create an account for the StakeHistory sysvar
+}
+```
+
+We ask the reader to treat the new syntax as boilerplate for now. The `/// CHECK:` and `AccountInfo` will be explained in a later tutorial. For the curious, the `<'info>` token is a [Rust lifetime](https://web.mit.edu/rust-lang_v1.25/arch/amd64_ubuntu1404/share/doc/rust/html/book/first-edition/lifetimes.html).
+
+Next, we add the following code to the `initialize` function.
+
+(The reference to the sysvar account will be passed in as part of the transaction in our test. The previous examples had them built into the Anchor framework).
+
+```
+pub fn initialize(ctx: Context<Initialize>) -> Result<()> {
+    // Previous code...
+
+    // Accessing the StakeHistory sysvar
+    // Create an array to store the StakeHistory account
+    let arr = [ctx.accounts.stake_history.clone()];
+
+    // Create an iterator for the array
+    let accounts_iter = &mut arr.iter();
+
+    // Get the next account info from the iterator (still StakeHistory)
+    let sh_sysvar_info = next_account_info(accounts_iter)?;
+
+    // Create a StakeHistory instance from the account info
+    let stake_history = StakeHistory::from_account_info(sh_sysvar_info)?;
+
+    msg!("stake_history: {:?}", stake_history);
+
+    Ok(())
+}
+```
+
+We are not importing the StakeHistory sysvar because we can access it through the use of the `super::*; import`. If this is not the case, we will import the specific sysvar.
+
+And update the test:
+
+```rust
+import * as anchor from "@coral-xyz/anchor";
+import { Program } from "@coral-xyz/anchor";
+import { Sysvars } from "../target/types/sysvars";
+
+describe("sysvars", () => {
+  // Configure the client to use the local cluster.
+  anchor.setProvider(anchor.AnchorProvider.env());
+
+  const program = anchor.workspace.Sysvars as Program<Sysvars>;
+
+  // Create a StakeHistory PublicKey object
+  const StakeHistory_PublicKey = new anchor.web3.PublicKey(
+    "SysvarStakeHistory1111111111111111111111111"
+  );
+
+  it("Is initialized!", async () => {
+    // Add your test here.
+    const tx = await program.methods
+      .initialize()
+      .accounts({
+        stakeHistory: StakeHistory_PublicKey,
+      })
+      .rpc();
+    console.log("Your transaction signature", tx);
+  });
+});
+```
+
+Now, we re-run our test:
+![alt text](image-7.png)
+
+
+Just as mentioned earlier, it returns empty data for our local validator.
+
+We can also obtain the public key of the StakeHistory sysvar from the Anchor Typescript client by replacing our `StakeHistory_PublicKey` variable with `anchor.web3.SYSVAR_STAKE_HISTORY_PUBKEY`.
+
