@@ -15,3 +15,23 @@ Not all sysvars support the `get` method, and some are deprecated (information
 -   **StakeHistory:** maintains a record of stake activations and deactivations for the entire network on a per-epoch basis, which is updated at the beginning of each epoch.
 -   **Instructions:** To get access to the serialized instructions that are part of the current transaction.
 -   **LastRestartSlot:** Contains the slot number of the last restart (the last time Solana restarted ) or zero if none ever happened. If the Solana blockchain were to crash and restart, an application can use this information to determine if it should wait until things stabilize.
+
+Differentiating between Solana slots and blocks.
+------------------------------------------------
+
+A slot is a window of time (about 400ms) where a designated leader can produce a block. A slot contains a block (the same kind of block on Ethereum, i.e a list of transactions). However, a slot might not contain a block if the block leader failed to produce a block during that slot. Their relationship is illustrated below:
+
+![alt text](image.png)
+
+Although every block maps to exactly one slot, the block hash is not the same as the slot hash. This distinction is evident when clicking on a slot number in an explorer, it opens up the details of a block with a different hash.
+
+Let's take an example from the image below from the Solana block explorer:
+
+![alt text](image-1.png)
+![alt text](image-2.png)
+
+The highlighted green number in the image is the slot number **237240962**, and the highlighted yellow text is the slot hash **DYFtWxEdLbos9E6SjZQCMq8z242Yv2bVoj6dzwskd5vZ**. The block hash highlighted in red below is **FzHwFHDAXJBc55rpjShznGCBnC7DsTCjxf3KKAk6hk9T**.
+
+We can distinguish between a block and a slot by their unique hashes, even though they have the same numbers.
+
+As a test, click on any slot number in the explorer [here](https://explorer.solana.com/address/SysvarS1otHashes111111111111111111111111111/slot-hashes?cluster=testnet) and you will notice that a block page will open. This block will have a different hash from the slot hash.
