@@ -35,3 +35,11 @@ The highlighted green number in the image is the slot number **237240962**, a
 We can distinguish between a block and a slot by their unique hashes, even though they have the same numbers.
 
 As a test, click on any slot number in the explorer [here](https://explorer.solana.com/address/SysvarS1otHashes111111111111111111111111111/slot-hashes?cluster=testnet) and you will notice that a block page will open. This block will have a different hash from the slot hash.
+
+
+Solana Sysvars in Anchor, using the get method
+-----------------------------------------------
+
+As mentioned earlier, not all sysvars can be accessed using Anchor's `get` method. Sysvars such as Clock, EpochSchedule, and Rent can be accessed using this method.
+
+While the Solana documentation includes Fees and EpochRewards as sysvars that can be accessed with the `get` method, these are deprecated in the latest version of Anchor. Therefore, they cannot be called using the `get` method in Anchor.
