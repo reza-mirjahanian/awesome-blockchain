@@ -164,3 +164,99 @@ Just as mentioned earlier, it returns empty data for our local validator.
 
 We can also obtain the public key of the StakeHistory sysvar from the Anchor Typescript client by replacing our `StakeHistory_PublicKey` variable with `anchor.web3.SYSVAR_STAKE_HISTORY_PUBKEY`.
 
+### Instruction sysvar
+
+This sysvar can be used to access the serialized instructions of the current transaction, along with some metadata that are part of that transaction. We will demonstrate this below.
+
+First, we update our imports:
+
+```
+#[program]
+pub mod sysvars {
+    use super::*;
+    use anchor_lang::solana_program::sysvar::{instructions, fees::Fees, recent_blockhashes::RecentBlockhashes};
+    // rest of the code
+}
+```
+
+Next, we add the Instruction sysvar account to the `Initialize` account struct:
+
+```
+#[derive(Accounts)]
+pub struct Initialize<'info> {
+    /// CHECK:
+    pub stake_history: AccountInfo<'info>, // We create an account for the StakeHistory sysvar
+    /// CHECK:
+    pub recent_blockhashes: AccountInfo<'info>,
+    /// CHECK:
+    pub instruction_sysvar: AccountInfo<'info>,
+}
+```
+
+Now, modify the initialize function to accept a `number: u32` parameter and add the following code to the initialize function.
+
+```
+pub fn initialize(ctx: Context<Initialize>, number: u32) -> Result<()> {
+    // Previous code...
+
+    // Get Instruction sysvar
+    let arr = [ctx.accounts.instruction_sysvar.clone()];
+
+    let account_info_iter = &mut arr.iter();
+
+    let instructions_sysvar_account = next_account_info(account_info_iter)?;
+
+    // Load the instruction details from the instruction sysvar account
+    let instruction_details =
+        instructions::load_instruction_at_checked(0, instructions_sysvar_account)?;
+
+    msg!(
+        "Instruction details of this transaction: {:?}",
+        instruction_details
+    );
+    msg!("Number is: {}", number);
+
+    Ok(())
+}
+```
+
+In contrast to the previous sysvar, where we used `<sysvar_name>::from_account_info()` to retrieve the sysvar, in this case, we utilize the `load_instruction_at_checked()` method from the Instruction sysvar. This method requires the instruction data index (0 in this case) and the Instruction sysvar account as parameters.
+
+Update the test:
+
+```
+import * as anchor from "@coral-xyz/anchor";
+import { Program } from "@coral-xyz/anchor";
+import { Sysvars } from "../target/types/sysvars";
+
+describe("sysvars", () => {
+  // Configure the client to use the local cluster.
+  anchor.setProvider(anchor.AnchorProvider.env());
+
+  const program = anchor.workspace.Sysvars as Program<Sysvars>;
+
+  // Create a StakeHistory PublicKey object
+  const StakeHistory_PublicKey = new anchor.web3.PublicKey(
+    "SysvarStakeHistory1111111111111111111111111"
+  );
+
+  it("Is initialized!", async () => {
+    // Add your test here.
+    const tx = await program.methods
+      .initialize(3) // Call the initialze function with the number `3`
+      .accounts({
+        stakeHistory: StakeHistory_PublicKey, // pass the public key of StakeHistory sysvar to the list of accounts needed for the instruction
+        recentBlockhashes: anchor.web3.SYSVAR_RECENT_BLOCKHASHES_PUBKEY, // pass the public key of RecentBlockhashes sysvar to the list of accounts needed for the instruction
+        instructionSysvar: anchor.web3.SYSVAR_INSTRUCTIONS_PUBKEY, // Pass the public key of the Instruction sysvar to the list of accounts needed for the instruction
+      })
+      .rpc();
+    console.log("Your transaction signature", tx);
+  });
+});
+```
+
+And run the test:
+
+If we closely examine the log, we can see the program Id, the public key of the sysvar instruction, the serialized data, and other metadata.
+![alt text](image-8.png)
+We can also see the number `3` highlighted with the yellow arrow in both the serialized instruction data and our own program log. The serialized data highlighted in red is a discriminator injected by Anchor (we can ignore that).
