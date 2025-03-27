@@ -32,3 +32,8 @@ From the log, we can observe that the EpochSchedule sysvar contains the followin
 -   **leader\_schedule\_slot\_offset** highlighted in red determines the timing for the next epoch's leader schedule (we had previously talked about this in day 11). It's also set to 432,000.
 -   **warmup** highlighted in purple is a boolean that indicates whether Solana is in the warm-up phase. During this phase, epochs start smaller and gradually increase in size. This helps the network start smoothly after a reset or during its early days.
 -   **first\_normal\_epoch** highlighted in orange identifies the first epoch that can have its slot count, and first\_normal\_slot highlighted in blue is the slot that starts this epoch. In this case both are 0 (zero).
+
+
+The reason we see the `first_normal_epoch` and `first_normal_slot` being 0 is because the test validator hasn't been running for two days. If we were to run this command on the mainnet (at time of writing), we would expect to see the `first_normal_epoch` being 576 and the `first_normal_slot` being 248,832,000.
+
+![alt text](image-5.png)
