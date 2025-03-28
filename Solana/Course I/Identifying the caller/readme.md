@@ -268,3 +268,11 @@ describe("day14", () => {
 Here we generated a random keypair and used it to sign the transaction. Let's run test again:
 ![alt text](image-1.png)
 As expected, we got an error, since the signer’s pubkey is not equal to the owner’s pubkey.
+
+### Modify the owner
+
+To change the owner in a program, the pubkey assigned to the owner needs to be stored on-chain. However, discussions about "storage" in Solana will be covered in a future tutorial.
+
+The owner can just redeploy the bytecode.
+
+**Exercise**: Upgrade a program like the one above to have a new owner.
