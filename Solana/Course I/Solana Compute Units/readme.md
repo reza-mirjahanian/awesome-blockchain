@@ -225,3 +225,38 @@ Notice the reduction in compute unit cost as the integer type reduced. This is e
 Generating a program derived account (PDA) on-chain using `find_program_address` may use more compute units because this method iterates over calls to `create_program_address` until it finds a PDA that's not on the ed25519 curve. To reduce the compute cost, use `find_program_address()` off-chain and pass the resulting bump seed to the program when possible. More on this is discussed in a later section as its out of scope for this section.
 
 This is not an exhaustive list but a few points to give an idea of what makes a program more computationally intensive than another.
+
+
+What is eBPF?
+-------------
+
+Solana's bytecode is heavily derived from BPF. "eBPF" simply means "extended BPF." This section explains BPF in the context of Linux.
+
+Solana VM as you'd expect does not understand Rust or C. Programs written in these languages are compiled down to eBPF (extended Berkeley Packet Filter).
+
+In a nutshell, eBPF allows execution of arbitrary eBPF bytecode within the kernel (in a sandbox environment) when the kernel emits an event the eBPF bytecode subscribes to, example:
+
+-   network: open/close a socket
+-   disk: write/read
+-   creation of a process
+-   creation of a thread
+-   CPU instruction invocation
+-   supports up to 64 bits (that's why Solana has a max uint type of u64)
+
+You can think of it as JavaScript but for the kernel. JavaScript performs actions on the browser when an event is emitted, eBPF does something very similar for when events are emitted within the kernel, e.g. when a syscall is executed.
+
+This allows us to build programs for various use cases e.g. (based on events listed above):
+
+-   network: To analyze routes and more
+-   security: filtering traffic based on certain rules and reporting any bad/blocked traffic
+-   tracing and profiling: collecting detailed execution flow from the userspace program to the kernel instructions
+-   observability: report and analyze kernel activities
+
+The program is only executed when we need it (i.e. when an event is emitted in the kernel). For example, say you want to get the name of a file and data written to it when it is written to, we listen/register/subscribe to the `vfs_write()` syscall event. Now, whenever that file is written to, we have that data at our disposal.
+
+Solana Bytecode Format (SBF)
+----------------------------
+
+Solana Bytecode Format is a variant of eBPF with certain changes and the one that stands out the most is the removal of the bytecode verifier. The bytecode verifier is present in eBPF to ensure that all possible execution paths are finite and safe to execute.
+
+Solana handles this using compute unit limit . Having a compute meter that limits computational resources spent with a cap moves safety checks to the runtime and allows arbitrary memory access, indirect jumps, loops, and other interesting behaviours.
