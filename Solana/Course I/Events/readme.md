@@ -35,7 +35,7 @@ pub struct MySecondEvent {
 
 ```
 
-Events become part of the [Solana program's IDL](https://www.rareskills.io/post/anchor-idl), similar to how events are part of a Solidity smart contract's ABI. Below we screenshot the IDL of the program above while highlighting the relevant
+Events become part of the Solana program's IDL, similar to how events are part of a Solidity smart contract's ABI. Below we screenshot the IDL of the program above while highlighting the relevant
 
 ![alt text](image.png)
 
@@ -110,3 +110,12 @@ In Ethereum, logs are used for auditing purposes, but in Solana, logs cannot be 
 Events are preserved in the block explorer however. See the bottom of this transaction as an example:
 <https://explorer.solana.com/tx/JgyHQPxL3cPLFtV4cx5i842ZgBx57R2fkNn2TZn1wsQZqVXKfijd43CEHo88C3ridK27Kw8KkMzfvDdqaS398SX>
 
+
+Unlike Ethereum, Solana transactions can be queried by address
+--------------------------------------------------------------
+
+In Ethereum, there is no direct way to query the transactions either sent to a smart contract or from a particular wallet.
+
+We can *count* the number of transactions sent from an address using [eth\_getTransactionCount](https://ethereum.org/developers/docs/apis/json-rpc#eth_gettransactioncount). We can get a specific transaction using the transaction hash with [eth\_getTransactionByHash](https://ethereum.org/developers/docs/apis/json-rpc#eth_gettransactionbyhash). We can get the transactions in a specific block using [eth\_getBlockByNumber](https://ethereum.org/developers/docs/apis/json-rpc#eth_getblockbynumber) or [eth\_getBlockByHash](https://ethereum.org/developers/docs/apis/json-rpc#eth_getblockbyhash).
+
+However, it is not possible to get all transactions by address. This has to be done indirectly by parsing every block since the wallet became active or the smart contract was deployed.
