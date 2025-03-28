@@ -64,3 +64,73 @@ describe("Day14", () => {
 In the test, we passed our wallet account as signer to the `signer1` account, then called the initialize function. Following that, we logged the wallet account on the console to verify its consistency with the one in our program.
 
 **Exercise:** What did you notice from the outputs in **shell\_1** (commands terminal) and **shell\_3** (logs terminal) after running the test?
+
+
+Multiple signers
+----------------
+
+In Solana, we can also have more than one signer sign a transaction, you can think of this as batching up a bunch of signatures and sending it in one transaction. One use-case is doing a multisig transaction in one transaction.
+
+To do that, we just add more Signer structs to the account struct in our program, then ensure the necessary accounts are passed when calling the function:
+
+```
+use anchor_lang::prelude::*;
+
+declare_id!("Hf96fZsgq9R6Y1AHfyGbhi9EAmaQw2oks8NqakS6XVt1");
+
+#[program]
+pub mod day14 {
+    use super::*;
+
+    pub fn initialize(ctx: Context<Initialize>) -> Result<()> {
+        let the_signer1: &mut Signer = &mut ctx.accounts.signer1;
+        let the_signer2: &mut Signer = &mut ctx.accounts.signer2;
+
+        msg!("The signer1: {:?}", *the_signer1.key);
+        msg!("The signer2: {:?}", *the_signer2.key);
+
+        Ok(())
+    }
+}
+
+#[derive(Accounts)]
+pub struct Initialize<'info> {
+    pub signer1: Signer<'info>,
+    pub signer2: Signer<'info>,
+}
+
+```
+
+The above example is somewhat the same as the single signer example, with one notable difference. In this case, we added another Signer account (`signer2`) to the `Initialize` struct and also logged both signers pubkey in the **initialize** function.
+
+Calling the **initialize** function with multiple signers is different, compared to a single signer. The test below shows how to invoke a function with multiple signers:
+
+```
+describe("Day14", () => {
+  // Configure the client to use the local cluster.
+  anchor.setProvider(anchor.AnchorProvider.env());
+
+  const program = anchor.workspace.Day14 as Program<Day14>;
+
+  // generate a signer to call our function
+  let myKeypair = anchor.web3.Keypair.generate();
+
+  it("Is signed by multiple signers", async () => {
+    // Add your test here.
+    const tx = await program.methods
+      .initialize()
+      .accounts({
+        signer1: program.provider.publicKey,
+        signer2: myKeypair.publicKey,
+      })
+      .signers([myKeypair])
+      .rpc();
+
+    console.log("The signer1: ", program.provider.publicKey.toBase58());
+    console.log("The signer2: ", myKeypair.publicKey.toBase58());
+  });
+});
+
+```
+
+So what is different about the above test? First is the `signers()` method, which takes in an array of signers which signs a transaction as an argument. But we only have one signer in the array, instead of two. Anchor automatically passes the wallet account in the provider as a signer, so we don't need to add it to the signers array again.
