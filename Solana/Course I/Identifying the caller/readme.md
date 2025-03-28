@@ -199,3 +199,70 @@ pub enum OnlyOwnerError {
 In the context of the code above, the `OWNER` variable stores the pubkey (address) associated with my local Solana wallet. Be sure to replace the OWNER variable with your wallet's pubkey before testing. You can easily retrieve your pubkey by running the `solana address` command.
 
 The `#[access_control]` attribute executes the given access control method before running the main instruction. When the initialize function is called, the access control method (`check`) is executed prior to the initialize function. The `check` method accepts a referenced context as argument, then it checks if the signer of the transaction equals the value of the `OWNER` variable. The `require_keys_eq!` macro ensures two pubkeys values are equal, if true, it executes the initialize function, else, it reverts with the `NotOwner` custom error.
+
+
+### Testing the onlyOwner functionality --- happy case
+
+In the test below, we are calling the initialize function and signing the transaction using the owner's keypair:
+
+```rust
+import * as anchor from "@coral-xyz/anchor";
+import { Program } from "@coral-xyz/anchor";
+import { Day14 } from "../target/types/day14";
+
+describe("day14", () => {
+  // Configure the client to use the local cluster.
+  anchor.setProvider(anchor.AnchorProvider.env());
+
+  const program = anchor.workspace.Day14 as Program<Day14>;
+
+  it("Is called by the owner", async () => {
+    // Add your test here.
+    const tx = await program.methods
+      .initialize()
+      .accounts({
+        signerAccount: program.provider.publicKey,
+      })
+      .rpc();
+
+    console.log("Transaction hash:", tx);
+  });
+});
+
+```
+
+We called the initialize function and passed the wallet account (*local Solana wallet account*) in the provider to the `signerAccount` which has the `Signer<'info>` struct, to validate that the wallet account actually signed the transaction. Also remember that Anchor secretly signs any transaction using the wallet account in the provider.
+
+Run test `anchor test --skip-local-validator` , if everything was done correctly, the test should pass:
+![alt text](image.png)
+
+### Testing if the signer is not the owner --- attack case
+
+Using a different keypair that is not the owner to call the initialize function and sign the transaction will throw an error since the function call is restricted to only the owner:
+
+```
+describe("day14", () => {
+  // Configure the client to use the local cluster.
+  anchor.setProvider(anchor.AnchorProvider.env());
+
+  const program = anchor.workspace.Day14 as Program<Day14>;
+
+  let Keypair = anchor.web3.Keypair.generate();
+
+  it("Is NOT called by the owner", async () => {
+    // Add your test here.
+    const tx = await program.methods
+      .initialize()
+      .accounts({
+        signerAccount: Keypair.publicKey,
+      })
+      .signers([Keypair])
+      .rpc();
+
+    console.log("Transaction hash:", tx);
+  });
+});
+
+```
+
+Here we generated a random keypair and used it to sign the transaction. Let's run test again:
