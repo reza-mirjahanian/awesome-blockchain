@@ -119,3 +119,36 @@ In Ethereum, there is no direct way to query the transactions either sent to a s
 We can *count* the number of transactions sent from an address using [eth\_getTransactionCount](https://ethereum.org/developers/docs/apis/json-rpc#eth_gettransactioncount). We can get a specific transaction using the transaction hash with [eth\_getTransactionByHash](https://ethereum.org/developers/docs/apis/json-rpc#eth_gettransactionbyhash). We can get the transactions in a specific block using [eth\_getBlockByNumber](https://ethereum.org/developers/docs/apis/json-rpc#eth_getblockbynumber) or [eth\_getBlockByHash](https://ethereum.org/developers/docs/apis/json-rpc#eth_getblockbyhash).
 
 However, it is not possible to get all transactions by address. This has to be done indirectly by parsing every block since the wallet became active or the smart contract was deployed.
+
+
+Getting the transaction history in Solana
+-----------------------------------------
+
+On the other hand, Solana has an RPC function [getSignaturesForAddress](https://solana.com/docs/rpc/http/getsignaturesforaddress) which lists all the transactions an address has done. The address can be a program or a wallet.
+
+The following is a script to list the transactions from an address:
+
+```rust
+let web3 = require('@solana/web3.js');
+
+const solanaConnection = new web3.Connection(web3.clusterApiUrl("mainnet-beta"));
+
+const getTransactions = async(address,limit) => {
+  const pubKey = new web3.PublicKey(address);
+  let transactionList = await solanaConnection.getSignaturesForAddress(pubKey, {limit: limit});
+  let signatureList = transactionList.map(transaction => transaction.signature);
+
+  console.log(signatureList);
+
+  for await (const sig of signatureList) {
+    console.log(await solanaConnection.getParsedTransaction(sig, {maxSupportedTransactionVersion: 0}));
+  }
+}
+
+let myAddress = "enter and address here";
+
+getTransactions(myAddress, 3);
+
+```
+
+Note that the actual content of the transaction is retrieved using the `getParsedTransaction` RPC method.
