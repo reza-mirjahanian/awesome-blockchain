@@ -266,3 +266,5 @@ describe("day14", () => {
 ```
 
 Here we generated a random keypair and used it to sign the transaction. Let's run test again:
+![alt text](image-1.png)
+As expected, we got an error, since the signer’s pubkey is not equal to the owner’s pubkey.
