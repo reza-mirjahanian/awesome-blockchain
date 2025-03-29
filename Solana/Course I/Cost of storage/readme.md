@@ -89,3 +89,115 @@ pub struct Initialize {}`
 
 Again, note that the output of this program matches the output on the command line.
 
+Comparing Storage costs to ETH
+------------------------------
+
+At the current time of writing, ETH has a value of about $2,425. Initializing a new account costs 22,100 gas, so we can calculate the gas cost of 32 bytes to be $0.80 assuming gas costs are 15 gwei.
+
+Currently, Solana has a price of $90 / SOL, so paying 1,113,600 lamports to initialize a 32 byte storage will cost $0.10.
+
+However, ETH has a market capitalization 7.5x as much as SOL, so if SOL had the same market capitalization as ETH, the current price of SOL would be $675, and the 32 byte storage would cost $0.75.
+
+Solana has a permanent inflation model that will eventually converge to 1.5% per year, so this should help reflect the fact that storage gets cheaper over time per Moore's Law, which states that transistor density for the same cost doubles every 18 months.
+
+Remember, the translation from bytes to crypto are constants set in the protocol that a hard fork could change at any time.
+
+Accounts with balances below the 2 year rent except threshold are reduced until the account is deleted
+------------------------------------------------------------------------------------------------------
+
+A rather humorous Reddit thread of a user with a wallet account slowly getting "drained" can be read here: [https://www.reddit.com/r/solana/comments/qwin1h/my\_sol\_balance\_in\_the\_wallet\_is\_decreasing/](https://www.reddit.com/r/solana/comments/qwin1h/my_sol_balance_in_the_wallet_is_decreasing/)
+
+The reason for this is the wallet was below the rent exception threshold, and the Solana runtime is slowly reducing the account balance to pay for the rent.
+
+If a wallet ends up getting deleted due to having the balance below the rent exempt threshold, it can be "resurrected" by sending more SOL to it, but if data is stored in the account, that data will be lost.
+
+Size limitations
+----------------
+
+When we initialize an account, we cannot initialize more than 10,240 bytes in size.
+
+**Exercise**: create a basic storage initialization program and set `space=10241`. This is 1 byte higher than the limit. You should see an error like the following:
+![alt text](image-2.png)
+
+Changing the size of an account
+-------------------------------
+
+If you need to increase the size of the account, we can use the `realloc` macro. This may be handy if the account is storing a vector and needs more space. An example is in the `increase_account_size` function and `IncreaseAccountSize` context struct which increases the size by 1,000 bytes (see the ALL CAPS comment in the code below):
+
+```
+`use anchor_lang::prelude::*;
+use std::mem::size_of;
+
+declare_id!("GLKUcCtHx6nkuDLTz5TNFrR4tt4wDNuk24Aid2GrDLC6");
+
+#[program]
+pub mod basic_storage {
+    use super::*;
+
+    pub fn initialize(ctx: Context<Initialize>) -> Result<()> {
+        Ok(())
+    }
+
+    pub fn increase_account_size(ctx: Context<IncreaseAccountSize>) -> Result<()> {
+        Ok(())
+    }
+}
+
+#[derive(Accounts)]
+pub struct IncreaseAccountSize<'info> {
+
+    #[account(mut,
+              // ***** 1,000 BYTE INCREMENT IS OVER HERE *****
+              realloc = size_of::<MyStorage>() + 8 + 1000,
+              realloc::payer = signer,
+              realloc::zero = false,
+              seeds = [],
+              bump)]
+    pub my_storage: Account<'info, MyStorage>,
+
+    #[account(mut)]
+    pub signer: Signer<'info>,
+
+    pub system_program: Program<'info, System>,
+}
+
+#[derive(Accounts)]
+pub struct Initialize<'info> {
+
+    #[account(init,
+              payer = signer,
+              space=size_of::<MyStorage>() + 8,
+              seeds = [],
+              bump)]
+    pub my_storage: Account<'info, MyStorage>,
+
+    #[account(mut)]
+    pub signer: Signer<'info>,
+
+    pub system_program: Program<'info, System>,
+}
+
+#[account]
+pub struct MyStorage {
+    x: u64,
+}`
+```
+
+When increasing the size of the account, be sure to set `realloc::zero = false` (in the code above) if you do not want the account data erased. If you want the account data to be set to all zeros, use `realloc::zero = true`. You do not need to change the test. The macro will handle this behind the scenes for you.
+
+**Exercise**: Initialize an account in the test, then call the `increase_account_size` function. View the account size with `solana account <addr>`. In the command line. You will need to do this with the local validator so the account persists.
+
+Maximum Solana account size
+---------------------------
+
+The maximum account size increase per realloc is 10240. The maximum size an account can be in Solana is 10 MB.
+
+Anticipating the cost of deploying a program
+--------------------------------------------
+
+The bulk of the cost of deploying a Solana program comes from paying rent for storing the bytecode. The bytecode is stored in a separate account from the address returned from `anchor deploy`.
+
+The screenshot below shows how to obtain this information:
+![alt text](image-3.png)
+
+A simple hello world program currently costs a little over 2.47 SOL to deploy. The cost can be significantly reduced by writing raw Rust code instead of using the Anchor framework, but we don’t recommend doing that until you fully understand all the security risks Anchor eliminates by default.
