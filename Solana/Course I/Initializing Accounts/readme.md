@@ -201,3 +201,45 @@ The Solana runtime does not force us to use structs to store data. From Solana's
 You are not required to use structs to use Solana accounts. It is possible to write sequence of bytes directly, but this is not a convenient way to store data.
 
 The `#[account]` macro implements all the magic transparently.
+
+
+
+### Unit test initialization
+
+The following Typescript code will run the Rust code above.
+
+```
+`import * as anchor from "@coral-xyz/anchor";
+import { Program } from "@coral-xyz/anchor";
+import { BasicStorage } from "../target/types/basic_storage";
+
+describe("basic_storage", () => {
+  anchor.setProvider(anchor.AnchorProvider.env());
+
+  const program = anchor.workspace.BasicStorage as Program<BasicStorage>;
+
+  it("Is initialized!", async () => {
+    const seeds = []
+    const [myStorage, _bump] = anchor.web3.PublicKey.findProgramAddressSync(seeds, program.programId);
+
+    console.log("the storage account address is", myStorage.toBase58());
+
+    await program.methods.initialize().accounts({ myStorage: myStorage }).rpc();
+  });
+});
+`
+```
+
+Here is the output of the unit test:
+
+We will learn more about this in a following tutorial, but Solana requires us to specify in advance the accounts a transaction will interact with. Since we are interacting with the account that stores `MyStruct`, we need to compute its "address" in advance and pass it to the `initialize()` function. This is done with the following Typescript code:
+![alt text](image-6.png)
+
+```
+seeds = []
+const [myStorage, _bump] =
+    anchor.web3.PublicKey.findProgramAddressSync(seeds, program.programId);
+
+```
+
+Note that `seeds` is an empty array, just like it is in the Anchor program.
