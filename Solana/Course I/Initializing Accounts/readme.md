@@ -243,3 +243,74 @@ const [myStorage, _bump] =
 ```
 
 Note that `seeds` is an empty array, just like it is in the Anchor program.
+
+### Predicting the account address in Solana is like create2 in Ethereum
+
+In Ethereum, the address of a contract created using create2 is dependent on:
+
+-   the address of the deploying contract
+-   a salt
+-   and the bytecode of the created contract
+
+Predicting the address of initialized accounts in Solana is very similar except that it ignores the "bytecode". Specifically, it depends on:
+
+-   the program that owns the storage account, `basic_storage` (which is akin to the address of the deploying contract)
+-   and the `seeds` (which is akin to create2's "salt")
+
+In all the examples in this tutorial, `seeds` is an empty array, but we will explore non-empty arrays in a later tutorial.
+
+
+### Don't forget to convert my\_storage to myStorage
+
+Anchor silently convert's Rust snake case to Typescript's camel case. When we supply `.accounts({myStorage: myStorage})` in Typescript to the initialize function, it is "filling out" the `my_storage` key in the `Initialize` struct in Rust (green circle below). The `system_program` and `Signer` are quietly filled in by Anchor:
+![alt text](image-7.png)
+Accounts cannot be initialized twice
+------------------------------------
+
+If we could reinitialize an account, that would be highly problematic since a user could wipe data from the system! Thankfully, Anchor defends against this in the background.
+
+If you run the test a second time (without resetting the local validator), you will get the error screenshotted below.
+
+Alternatively, you can run the following test if you aren't using the local validator:
+
+```js
+import * as anchor from "@coral-xyz/anchor";
+import { Program } from "@coral-xyz/anchor";
+import { BasicStorage } from "../target/types/basic_storage";
+
+describe("basic_storage", () => {
+  anchor.setProvider(anchor.AnchorProvider.env());
+
+  const program = anchor.workspace.BasicStorage as Program<BasicStorage>;
+
+  it("Is initialized!", async () => {
+    const seeds = []
+    const [myStorage, _bump] = anchor.web3.PublicKey.findProgramAddressSync(seeds, program.programId);
+
+    // ********************************************
+    // **** NOTE THAT WE CALL INITIALIZE TWICE ****
+    // ********************************************
+    await program.methods.initialize().accounts({myStorage: myStorage}).rpc();
+    await program.methods.initialize().accounts({myStorage: myStorage}).rpc();
+  });
+});
+`
+```
+
+When we run the test, the test fails because the second call to `initialize` throws an error. The expected output is as follows:
+![alt text](image-8.png)
+
+
+Don't forget to reset the validator if running the test multiple times
+----------------------------------------------------------------------
+
+Because the `solana-test-validator` will still remember the account from the first unit test, you'll want to reset the validator between tests using `solana-test-validator --reset`. Otherwise, you'll get the error above.
+
+Summary of initializing accounts
+--------------------------------
+
+The need to initialize an account will likely feel unnatural to most EVM developers.
+
+Don't worry, you'll see this code sequence over and over again, and it will become second nature after a while.
+
+We've only looked at initializing storage in this tutorial, in the upcoming ones we will study reading, writing, and deleting storage. There will be plenty of opportunities to get an intuitive grasp for what all the code we looked at today does.
