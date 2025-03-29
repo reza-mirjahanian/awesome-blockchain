@@ -170,3 +170,8 @@ When we `init` an account, we must supply additional information:
 -   `seeds` and `bump` (red box): A program can own multiple accounts, it "discriminates" among the accounts with the "seed" which is used in calculating a "discriminator". The "discriminator" takes up 8 bytes, which is why we need to allocate the additional 8 bytes in addition to the space our struct takes up. The bump can be treated as boilerplate for now.
 
 This might seem like a lot to take in, don't worry. **Initializing an account can largely be treated as boilerplate for now.**
+
+
+### What is the system program?
+
+The `system program` is a program built into the Solana runtime (a bit like an [Ethereum precompile](https://www.rareskills.io/post/solidity-precompiles)) that transfers SOL from one account to another. We will revisit this in a later tutorial about transferring SOL. For now, we need to transfer SOL away from the signer, who is paying for the `MyStruct` storage, so the `system program` is always a part of initialization transactions.
