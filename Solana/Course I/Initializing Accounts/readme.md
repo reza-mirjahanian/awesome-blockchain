@@ -175,3 +175,29 @@ This might seem like a lot to take in, don't worry. **Initializing an account c
 ### What is the system program?
 
 The `system program` is a program built into the Solana runtime (a bit like an [Ethereum precompile](https://www.rareskills.io/post/solidity-precompiles)) that transfers SOL from one account to another. We will revisit this in a later tutorial about transferring SOL. For now, we need to transfer SOL away from the signer, who is paying for the `MyStruct` storage, so the `system program` is always a part of initialization transactions.
+
+![alt text](image-5.png)
+
+### MyStorage struct
+
+Recall the data field inside the Solana account:
+
+Under the hood, this is a byte sequence. The struct in the example above:
+
+```
+#[account]
+pub struct MyStorage {
+    x: u64,
+}
+
+```
+
+gets serialized into a byte sequence and stored in the `data` field when written to. During write, the `data` field is deserialized according to that struct.
+
+In our example, we are only using one variable in the struct, though we could add more, or variables of another type, if we wanted to.
+
+The Solana runtime does not force us to use structs to store data. From Solana's perspective, the account just holds a data blob. However, Rust has a lot of convenient libraries for turning structs into data blobs and vice versa, so structs are the convention. Anchor is leveraging these libraries behind the scenes.
+
+You are not required to use structs to use Solana accounts. It is possible to write sequence of bytes directly, but this is not a convenient way to store data.
+
+The `#[account]` macro implements all the magic transparently.
