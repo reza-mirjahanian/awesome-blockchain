@@ -158,3 +158,15 @@ The `'info` keyword is a [Rust lifetime](https://doc.rust-lang.org/rust-by-ex
 ### The `my_storage` field in the Initialize struct
 
 The attribute macro above the `my_storage` field (purple arrow) is how Anchor knows this transaction is intended to initialize this account (remember, an [attribute-like macro](https://www.rareskills.io/post/rust-attribute-derive-macro) starts with `#` and augments the struct with additional functionality):
+
+![alt text](image-4.png)
+
+The important keyword here is `init`.
+
+When we `init` an account, we must supply additional information:
+
+-   `payer` (blue box): who is paying the SOL for allocating storage. The signer is specified to be `mut` because their account balance will change, i.e. some SOL will be deducted from their account. Therefore, we annotate their account as "mutable."
+-   `space` (orange box): this indicates how much space the account will take. Rather than figuring this out ourselves, we can use the `std::mem::size_of` utility and use the struct we are trying to store: `MyStorage` (green box), as an argument. The `+ 8` (pink box) we discuss in the following point.
+-   `seeds` and `bump` (red box): A program can own multiple accounts, it "discriminates" among the accounts with the "seed" which is used in calculating a "discriminator". The "discriminator" takes up 8 bytes, which is why we need to allocate the additional 8 bytes in addition to the space our struct takes up. The bump can be treated as boilerplate for now.
+
+This might seem like a lot to take in, don't worry. **Initializing an account can largely be treated as boilerplate for now.**
