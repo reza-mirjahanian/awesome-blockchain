@@ -141,3 +141,20 @@ Note that there is no code in the `initialize()` function --- in fact all it d
 ```
 
 It is not mandatory that functions for initializing accounts be empty, we could have custom logic. But for our example, it is empty. It is also not mandatory that functions which `initialize` accounts be called initialize, but it is a helpful name.
+
+### The Initialize struct
+
+The `Initialize` Struct contains references to the resources needed to initialize an account:
+
+-   `my_storage`: a struct of type `MyStorage` we are initializing.
+-   `signer`: the wallet that is paying for the "gas" for storage of the struct. (Gas costs for storage are discussed later).
+-   `system_program`: we will discuss it later in this tutorial.
+
+![alt text](image-3.png)
+
+The `'info` keyword is a [Rust lifetime](https://doc.rust-lang.org/rust-by-example/scope/lifetime.html).
+
+
+### The `my_storage` field in the Initialize struct
+
+The attribute macro above the `my_storage` field (purple arrow) is how Anchor knows this transaction is intended to initialize this account (remember, an [attribute-like macro](https://www.rareskills.io/post/rust-attribute-derive-macro) starts with `#` and augments the struct with additional functionality):
