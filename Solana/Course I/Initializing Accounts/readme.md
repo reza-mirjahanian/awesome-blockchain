@@ -157,7 +157,7 @@ The `'info` keyword is a [Rust lifetime](https://doc.rust-lang.org/rust-by-ex
 
 ### The `my_storage` field in the Initialize struct
 
-The attribute macro above the `my_storage` field (purple arrow) is how Anchor knows this transaction is intended to initialize this account (remember, an [attribute-like macro](https://www.rareskills.io/post/rust-attribute-derive-macro) starts with `#` and augments the struct with additional functionality):
+The attribute macro above the `my_storage` field (purple arrow) is how Anchor knows this transaction is intended to initialize this account (remember, an [attribute-like macro] starts with `#` and augments the struct with additional functionality):
 
 ![alt text](image-4.png)
 
@@ -174,7 +174,7 @@ This might seem like a lot to take in, don't worry. **Initializing an account c
 
 ### What is the system program?
 
-The `system program` is a program built into the Solana runtime (a bit like an [Ethereum precompile](https://www.rareskills.io/post/solidity-precompiles)) that transfers SOL from one account to another. We will revisit this in a later tutorial about transferring SOL. For now, we need to transfer SOL away from the signer, who is paying for the `MyStruct` storage, so the `system program` is always a part of initialization transactions.
+The `system program` is a program built into the Solana runtime (a bit like an [Ethereum precompile]) that transfers SOL from one account to another. We will revisit this in a later tutorial about transferring SOL. For now, we need to transfer SOL away from the signer, who is paying for the `MyStruct` storage, so the `system program` is always a part of initialization transactions.
 
 ![alt text](image-5.png)
 

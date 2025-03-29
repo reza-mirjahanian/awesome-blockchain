@@ -24,7 +24,7 @@ As we already know, Solana uses the compute units to prevent the halting problem
 
 However, unlike EVM chains, the computational resources used in a transaction does not affect the fees paid for that transaction. You will be charged as if you used your entire limit or if you used very little of it. For example, a 400 compute unit transaction costs the same as a 200,000 compute unit transaction.
 
-In addition to compute units, the number of [signers for the Solana transaction](https://www.rareskills.io/post/msg-sender-solana) affects the compute unit cost. From the Solana [docs](https://docs.solana.com/developing/intro/transaction_fees#transaction-fee-calculation):
+In addition to compute units, the number of [signers for the Solana transaction] affects the compute unit cost. From the Solana [docs](https://docs.solana.com/developing/intro/transaction_fees#transaction-fee-calculation):
 
 *"So right now, transaction fees are solely determined by the number of signatures that need to be verified in a transaction. The only limit on the number of signatures in a transaction is the max size of transaction itself. Each signature (64 bytes) in a transaction (max 1232 bytes) must reference a unique public key (32 bytes) so a single transaction could contain as many as 12 signatures (not sure why you would do that)."*
 
