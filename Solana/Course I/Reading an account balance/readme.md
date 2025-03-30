@@ -103,6 +103,6 @@ In our case however, we are not reading the data from the account --- we are onl
 Not all the SOL in an account is spendable
 ------------------------------------------
 
-Recall from our discussion of [Solana account rent](https://www.rareskills.io/post/solana-account-rent) that the account must maintain a certain balance of SOL to be "rent exempt" or the runtime will delete the account. Just because the account has "1 SOL" in it does not necessarily mean the account can spend the entire 1 SOL.
+Recall from our discussion of [Solana account rent] that the account must maintain a certain balance of SOL to be "rent exempt" or the runtime will delete the account. Just because the account has "1 SOL" in it does not necessarily mean the account can spend the entire 1 SOL.
 
 For example, if you are building a staking or bank application where a user's deposited SOL is kept in separate accounts, it is not accurate to simply measure the SOL balance of those accounts as the rent will be included in the balance.
