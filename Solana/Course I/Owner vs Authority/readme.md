@@ -106,3 +106,25 @@ When we look at the logs, we see the address of the program we just deployed:
 ![alt text](image-4.png)
 
 Remember, everything is an account on Solana, including programs. Now let's inspect this account using the `solana account 6Ye7CgrwJxH3b4EeWKh54NM8e6ZekPcqREgkrn7Yy3Tg`. We get the following result:
+![alt text](image-5.png)
+
+
+**Note the authority field is absent, because "authority" is not a field that Solana accounts hold**. If you scroll up to the top of this article, you will see the keys in the console match the fields we listed at the top of the article.
+
+Here, the "owner" is `BPFLoaderUpgradeable111...111`, which is the owner of all Solana programs.
+
+Now let's run `solana program show 6Ye7CgrwJxH3b4EeWKh54NM8e6ZekPcqREgkrn7Yy3Tg`, where `6Ye7...y3TG` is the address of our program:
+![alt text](image-6.png)
+
+
+In the green box above, we see our wallet address --- the one used to deploy the program and what we printed out earlier with `solana address`:
+![alt text](image-7.png)
+But this leads us to an important question...
+
+Where does Solana store the "authority" for the program, which is currently our wallet?
+---------------------------------------------------------------------------------------
+
+It isn't a field in an account, so it must be in the `data` field of some Solana account. The "authority" is stored in the `ProgramData Address` where the bytecode of the program is stored:
+
+![alt text](image-8.png)
+
