@@ -25,7 +25,9 @@
 - **Criteria**:
   - Validator with the largest voting power (most Sol staked) is chosen.
   - In case of a tie, the validator with the highest public key address is selected.
-
+![alt text](image-1.png)
+![alt text](image-2.png)
+![alt text](image-3.png)
 #### *Leader Schedule*
 - A predefined schedule determines which node serves as the leader during specific time intervals (epochs).
 - Nodes are sorted based on staked Solana, and a random seed is used to assign leadership within epochs.
@@ -38,7 +40,7 @@
 - **Type**:
   - Not a consensus mechanism like proof of work (PoW) or proof of stake (PoS).
   - Enhances PoS consensus by adding time order.
-
+![alt text](image-4.png)
 #### *Comparison with Proof of Work*
 - Bitcoin PoW requires miners to guess a hash to create a block.
 - PoW imposes a time delay to ensure blocks are validated and ordered properly.
