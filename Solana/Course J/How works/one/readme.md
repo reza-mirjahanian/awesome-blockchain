@@ -61,6 +61,7 @@
 ---
 
 #### *Validation by Verifier Nodes*
+![alt text](image-5.png)
 - **Parallel Processing**:
   - Verifiers re-compute the hash chain to validate the leader's work.
   - GPU cores enable parallel processing of thousands of hashes, making validation efficient.
