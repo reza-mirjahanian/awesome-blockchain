@@ -66,7 +66,7 @@
   - Verifiers re-compute the hash chain to validate the leader's work.
   - GPU cores enable parallel processing of thousands of hashes, making validation efficient.
 - **Key Principle**: Hash generation is sequential, but validation can be parallelized.
-
+![alt text](image-6.png)
 ---
 
 ### **Consensus Mechanism**
@@ -90,7 +90,7 @@
 
 #### *Solana’s Approach*
 - Claims to prioritize consistency and partition tolerance (CP).
-- Josh questions this claim, suggesting Solana may lean more toward availability and partition tolerance (AP).
+-  questions this claim, suggesting Solana may lean more toward availability and partition tolerance (AP).
 
 ---
 
@@ -123,27 +123,3 @@
 
 ---
 
-### **Key Takeaways**
-#### *Josh’s Reflection*
-- Initially skeptical about cryptocurrency, viewing it as a glorified public database.
-- The deep dive into Solana’s architecture and proof of history changed his perspective.
-- Recognizes the importance of decentralized systems in solving complex problems like Byzantine fault tolerance.
-
-#### *Bullish Outlook*
-- Proof of history is a game-changing innovation that enhances transaction speed and reduces gas fees.
-- Horizontal scaling provides a theoretical solution for future growth.
-
-#### *Final Thoughts*
-- Solana’s architecture is sound, but Josh acknowledges there’s much more to learn.
-- Encourages viewers to continue exploring the technology and engage with the community.
-
----
-
-### **Conclusion**
-#### *Call to Action*
-- Josh invites viewers to like and subscribe for more content.
-- Promises future videos exploring Solana and other related topics.
-
---- 
-
-This breakdown organizes the content into digestible sections, highlighting key points and providing clarity on technical concepts.
