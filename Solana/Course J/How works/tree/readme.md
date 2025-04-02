@@ -8,3 +8,5 @@ Sealevel:
 ---------------------------------------------------------------------------
 
 **Sealevel** Multi-threaded runtime maximizes performance by efficiently utilizing hardware through parallel processing across validator cores. This enables better scalability as hardware advances. Unlike EVM chains with global fees, Sealevel facilitates localized fee markets, allowing fees to be tailored per smart contract, preventing unrelated transactions (like NFT minting) from impacting swap or DeFi fees.
+![alt text](image.png)
+
