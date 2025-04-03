@@ -43,3 +43,5 @@ Let's explore how Program Derived Addresses (PDAs) are generated on Solana:
 -   `programId.` Every PDA is linked to the ID of the program that controls it.
 -   **Bump Seed.** A special 'bump seed' is used to prevent collisions. Solana searches for a bump seed that, when combined with the other seeds and `programId`creates a valid PDA lying off the `ed25519` curve (meaning it doesn't have a corresponding private key).
 -   `findProgramAddress.`will return both the address and the bump used to kick the address off of the elliptic curve.
+
+![alt text](image-3.png)
