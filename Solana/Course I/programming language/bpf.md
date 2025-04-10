@@ -1,6 +1,10 @@
 The Adoption of Berkeley Packet Filter in Solana's Architecture
 ===============================================================
 
+https://github.com/codilime/BPF-Introduction
+
+
+
 Solana has emerged as a prominent blockchain platform, distinguished by its emphasis on high performance and scalability within the rapidly evolving landscape of decentralized technologies . Through innovations such as Proof of History (PoH), which provides a unique method for time synchronization across a distributed network, and a parallel processing architecture, Solana aims to overcome the limitations of earlier blockchain designs . A fundamental aspect of Solana's architecture is its choice of the Berkeley Packet Filter (BPF) as the foundation for its smart contract execution environment. This report provides a comprehensive analysis of the rationale behind this decision, exploring the technical underpinnings, performance implications, security features, and historical context that led Solana to adopt BPF for its virtual machine.
 
 Demystifying Berkeley Packet Filter (BPF)
