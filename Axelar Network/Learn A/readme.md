@@ -25,3 +25,23 @@ Axelar has three components:
 -   A decentralized network. This is built primarily on open-source Cosmos technologies.
 -   A set of gateway smart contracts that provide the connectivity between the Axelar network and its interconnected external chains.
 -   A software development kit (SDK) of developer tools and APIs, including [Axelarscan](https://axelarscan.io/), a block explorer used to track cross-chain transactions.
+
+
+### Network Architecture
+
+The [Axelar network](https://axelar.network/blog/an-introduction-to-the-axelar-network) is built using the [Cosmos SDK](https://v1.cosmos.network/sdk), CometBFT, and CosmWasm VM. The [Cosmos SDK](https://docs.cosmos.network/main) is an open-source software development kit (SDK) for building sovereign, multi-asset, public, PoS blockchains. It's used to build a custom application layer, or state machine, while CometBFT is used to securely replicate that state machine on all nodes in the network. CometBFT, an application-agnostic engine, handles the networking and consensus layers through two main components:
+
+-   A consensus algorithm, i.e., Tendermint.
+-   A socket protocol, i.e., the [Application Blockchain Interface](https://cosmos-network.gitbooks.io/cosmos-academy/content/cosmos-for-developers/tendermint/abci-protocol.html) (ABCI).
+
+Tendermint is used to validate requests on the source chain and confirm changes on the destination chain. Tendermint consensus provides instant finality and Byzantine fault tolerance. While this specific consensus approach only verifies cross-chain communication, Axelar can connect diverse forms of consensus. For example, Axelar is one of a few cross-chain protocols able to connect EVM and Cosmos chains.
+
+
+
+#### Consensus & Security Approaches
+
+Axelar's network uses a **Delegated Proof-of-Stake (DPoS)** consensus mechanism. Validators produce new blocks, participate in multiparty signing, and vote on external chain states. Tokenholders stake AXL by delegating tokens to a validator's staking pool. Only the top 75 validators are in the active set, a parameter that can be adjusted through onchain governance. Both delegating to validators and running a validator are permissionless.
+
+Every PoS consensus mechanism runs the risk of concentrating voting power among a few dominant stakers. Axelar mitigates this risk with [quadratic voting](https://www.mdpi.com/2078-2489/13/6/305/htm) for its consensus mechanism. With quadratic voting, voting power does not increase linearly with stake. For Axelar validators to increase their voting power, they must increase their delegated stake exponentially.
+
+In addition, Axelar applies network functions that enable the suspension of traffic from malicious interconnected chains and contract limits that cap how much can be transferred over a time period. The efficacy of these functions is improved by Axelar's hub-and-spoke network topology. During the [Multichain collapse](https://axelar.network/blog/hub-and-spoke-architecture), cross-chain swap services built using Axelar were able to stay safe and liquid by isolating compromised connections.
