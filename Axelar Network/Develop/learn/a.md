@@ -71,10 +71,12 @@
     *   **Answer:** It receives the `sourceChain`, `sourceAddress`, `payload`, `tokenSymbol`, and `amount`.
 
 20. **Question:** Where can developers embed custom logic that should run immediately upon receiving a message or message+token on the destination chain?
+
     *   **Answer:** Developers can embed custom logic directly inside the `_execute` or `_executeWithToken` function on their destination chain contract.
 
-### **IV. Axelar Scan - Purpose & Access**21. **Question:** What is Axelar Scan?
-    *   **Answer:** Axelar Scan is described as a portal that allows users to visualize how messages and assets are being sent from one protocol/chain to another within the Axelar ecosystem. It provides visibility into transactions, network statistics, and more.
+### **IV. Axelar Scan - Purpose & Access**21. 
+**Question:** What is Axelar Scan?
+    **Answer:** Axelar Scan is described as a portal that allows users to visualize how messages and assets are being sent from one protocol/chain to another within the Axelar ecosystem. It provides visibility into transactions, network statistics, and more.
 
 22. **Question:** What is the URL to access Axelar Scan for the mainnet?
     *   **Answer:** `axelarscan.io`
@@ -102,7 +104,7 @@
 
 28. **Question:** How can a user verify the on-chain details for each step of a GMP transaction shown on Axelar Scan?
     *   **Answer:** For each step (like `Sent`, `Gas Paid`, `Executed`), there are links on Axelar Scan that you can click to view the corresponding transaction details directly on the relevant source or destination chain's block explorer (e.g., Snowtrace for Avalanche).
-
+![alt text](image.png)
 29. **Question:** What feature does Axelar Scan provide to help users resolve transactions stuck due to insufficient gas fees?
     *   **Answer:** It provides a "Recovery" button, specifically an "Add Gas" button, for transactions marked with "insufficient fee". Clicking this allows the user to pay the required additional gas via a wallet pop-up.
 
@@ -136,6 +138,7 @@
     *   **Answer:** The status on Axelar Scan automatically updated from "insufficient fee" to showing progress through the subsequent steps (`Gas Paid`, `Confirmed`, etc.).
 
 ### **VII. Axelar Query API**
+![alt text](image-1.png)
 
 38. **Question:** Beyond recovery, what other API category does AxelarJS provide for developers?
     *   **Answer:** The Axelar Query API.
@@ -205,8 +208,7 @@
 ### **1. What is the Axelar Network?**
 - **Answer:** Axelar is a decentralized interoperability network that enables cross-chain communication and asset transfers. It provides tools like **General Message Passing (GMP)** and **Axelar Scan** to simplify cross-chain development and troubleshooting.
 
-### **2. What is the role of a Developer Advocate at Axelar?**
-- **Answer:** A Developer Advocate (e.g., Idris Oli) educates developers on Axelar’s tools (like GMP and Axelar Scan), creates tutorials/demos, and helps troubleshoot cross-chain transactions.
+
 
 ---
 
@@ -376,4 +378,3 @@
 
 ---
 
-**Total Questions:** 25 (Expand further by diving deeper into SDK methods, security practices, and validator roles.)
