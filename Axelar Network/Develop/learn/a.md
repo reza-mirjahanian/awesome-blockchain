@@ -1,17 +1,15 @@
 
-
 ## Interview Questions & Answers based on Axelar Workshop Text
 
 ### **I. Introduction & Context**
 
-1.  **Question:** Who is the speaker and what is their role?
-    *   **Answer:** The speaker is Idris Olubisi, a Developer Advocate at Interop Labs, working on the Axelar Network.
+
 
 2.  **Question:** What is the main topic of this workshop session?
     *   **Answer:** The main topic is tracking and troubleshooting cross-chain transactions using AxelarJS (the SDK) and Axelar Scan.
 
 3.  **Question:** What is the stated goal for attendees by the end of the workshop?
-    *   **Answer:** By the end of the workshop, attendees should have the tools to send messages across different chains effortlessly, track every step of their transactions, and solve any potential issues (hiccups) encountered along the way.
+    *   **Answer:** By the end of the workshop, attendees should have the tools to send messages across different chains effortlessly, track every step of their transactions, and solve any potential issues encountered along the way.
 
 4.  **Question:** The speaker mentions a personal pain point that motivates the workshop. What was it?
     *   **Answer:** The speaker describes an experience where they tried to send an asset (like USDC) from Ethereum to a friend on another network, but the transaction got stuck. They felt helpless because they didn't know why it was stuck or how to fix it, especially since their friend urgently needed the asset.
