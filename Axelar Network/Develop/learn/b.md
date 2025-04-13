@@ -309,7 +309,7 @@ event FeeDeducted(address indexed user, uint256 amount, uint256 fee);
 
 --- 
 
-**Formatting Note**: Use headers to categorize questions, **bold** for key terms, *italics* for explanations, and bullet points for lists. Code snippets are in code blocks for clarity.
+
 
 --------------
 
