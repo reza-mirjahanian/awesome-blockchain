@@ -27,3 +27,15 @@ If the installation succeeds, you should be able to execute the utility from you
 `$ cosmwasm-check --version
 Contract checking 1.2.3`
 ```
+
+[Verifying the installation]
+------------------------------------------------------------------------------------------------------
+
+To guarantee you are ready to build your smart contracts, you need to make sure you can build examples. Checkout the [cw-plus](https://github.com/CosmWasm/cw-plus) repository and run the testing command in its folder:
+
+```
+
+`$ git clone git@github.com:CosmWasm/cw-plus.git
+$ cd ./cw-plus
+cw-plus $ cargo test`
+```
