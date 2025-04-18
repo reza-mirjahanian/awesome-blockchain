@@ -20,3 +20,11 @@ Byzantine is a trustless and efficient restaking layer with permissionless strat
 The Byzantine protocol is trustless and designed to be more efficient, modular, and flexible than any other decentralized restaking platform.
 
 All vaults are entirely independent of each other: Funds are fully segregated between them and risk is completely isolated. Vaults are not affected by governance.
+
+
+Separating risk management & infrastructure
+--------------------------------------------
+
+Byzantine achieves this flexibility by separating the [risk management ("strategy layer")](https://docs.byzantine.fi/the-basics/strategy-layer-and-infrastructure-layer-explain-like-im-5#the-strategy-layer) from the [infrastructure ("infrastructure layer")](https://docs.byzantine.fi/the-basics/strategy-layer-and-infrastructure-layer-explain-like-im-5#meet-the-infra-layer):
+
+![alt text](image-1.png)
