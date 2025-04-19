@@ -68,3 +68,6 @@ The vault parameters are set when it is created. They are either immutable or ca
 It is left up to the vault creator to set immutability at launch and up to the staker to invest in vaults representing their preferred investment philosophy.
 
 Vault risk as well as fund flows (including rewards) are fully segregated at all times.
+
+
+
