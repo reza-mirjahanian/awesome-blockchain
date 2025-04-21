@@ -1,0 +1,1 @@
+Unlike the Ethereum Mainnet, the Beacon Chain does **not handle** transactions or [smart contracts](https://docs.alchemy.com/alchemy/tutorials/hello-world-smart-contract). Instead, it coordinates the entire Ethereum network by managing its stakers (who validate the proof of stake blocks) and shard chains (split-up chains of the main network).
