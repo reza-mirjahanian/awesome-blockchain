@@ -6,6 +6,12 @@ In comparison, PoS solves this by **semi-randomly  selecting** only a few "valid
 ![alt text](image.png)
 
 
+**Slots and Epochs**
+--------------------
+
+The Beacon Chain provides the heartbeat to Ethereum's consensus. Each slot is 12 seconds and an epoch is 32 slots: 6.4 minutes.
+
+
 ### **How do you become a validator?**
 
 To [become a validator], a node needs to deposit a certain amount of ETH into the Ethereum network. This is called "staking," similar to a collateral or security deposit. For the upgrade, one has to stake a minimum of 32 ETH on the main Ethereum chain to run a validator node.
