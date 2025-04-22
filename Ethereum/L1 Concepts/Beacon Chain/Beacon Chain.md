@@ -57,6 +57,14 @@ At every epoch, a pseudorandom process RANDAO selects proposers for each slot, a
 
 Proposers are selected by RANDAO with a weighting on the validator's balance.  It's possible a validator is a proposer and committee member for the same slot, but it's not the norm. The probability of this happening is 1/32 so we'll see it about once per epoch. The sketch depicts a scenario with less than 8,192 validators, otherwise there would be at least two committees per slot.
 
+![alt text](image-4.png)
+
+The diagram is a combined depiction of what happened in three slots. In Slot 1, a block is proposed and then attested to by two validators; one validator in Committee A was offline. The attestations and block at Slot 1 propagate the network and reach many validators. In Slot 2, a block is proposed and a validator in Committee B does not see it, thus it attests that the Beacon Chain head is the block at Slot 1.  Note this validator is different from the offline validator from Slot 1. **Attesting to the Beacon Chain head is called an LMD GHOST vote.** In Slot 3, all validators in Committee C run the LMD GHOST fork choice rule, and independently attest to the same head.
+
+A validator can only be in one committee per epoch. Typically, there are more than 8,192 validators: meaning more than one committee per slot. All committees are the same size, and have at least 128 validators. The security probabilities decrease when there are less than 4,096 validators because committees would have less than 128 validators.
+
+> **At every epoch, validators are evenly divided across slots and then subdivided into committees of appropriate size. All of the validators from that slot attest to the Beacon Chain head. A shuffling algorithm scales up or down the number of committees per slot to get at least 128 validators per committee.**
+
 ### **How do you become a validator?**
 
 To [become a validator], a node needs to deposit a certain amount of ETH into the Ethereum network. This is called "staking," similar to a collateral or security deposit. For the upgrade, one has to stake a minimum of 32 ETH on the main Ethereum chain to run a validator node.
