@@ -45,6 +45,18 @@ It is clearer to associate stakers with a stake, and validators with a **balanc
 
 Validators are executed by ***validator clients*** that make use of a beacon (chain) node.  A **beacon node** has the functionality of following and reading the Beacon Chain. A validator client can implement beacon node functionality or make calls into beacon nodes. One validator client can execute many validators.
 
+
+**Committees**
+--------------
+
+A committee is a group of validators.  For security, each slot has committees of at least 128 validators.  An attacker has less than a [one in a trillion](https://medium.com/@chihchengliang/minimum-committee-size-explained-67047111fa20) probability of controlling ⅔ of a committee.
+
+The concept of a randomness beacon that emits random numbers for the public, lends its name to the Ethereum Beacon Chain. The Beacon Chain enforces consensus on a pseudorandom process called RANDAO.
+![alt text](image-3.png)
+At every epoch, a pseudorandom process RANDAO selects proposers for each slot, and shuffles validators to committees.
+
+Proposers are selected by RANDAO with a weighting on the validator's balance.  It's possible a validator is a proposer and committee member for the same slot, but it's not the norm. The probability of this happening is 1/32 so we'll see it about once per epoch. The sketch depicts a scenario with less than 8,192 validators, otherwise there would be at least two committees per slot.
+
 ### **How do you become a validator?**
 
 To [become a validator], a node needs to deposit a certain amount of ETH into the Ethereum network. This is called "staking," similar to a collateral or security deposit. For the upgrade, one has to stake a minimum of 32 ETH on the main Ethereum chain to run a validator node.
