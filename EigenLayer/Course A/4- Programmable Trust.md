@@ -1,6 +1,6 @@
 
 ---
-
+![alt text](image.png)
 ## **General Overview and Vision**
 
 ### 1. **What is the main vision behind the project introduced in the talk?**
