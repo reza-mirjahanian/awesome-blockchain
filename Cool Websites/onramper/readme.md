@@ -1,3 +1,6 @@
+https://www.youtube.com/@onrampmoney/videos
+
+https://docs.onramper.com/docs/supported-payment-methods
 
 ![alt text](image.png)
 
