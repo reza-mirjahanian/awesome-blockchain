@@ -1,4 +1,6 @@
 
+![alt text](image.png)
+
 Onramper is an innovative fiat-to-crypto on-ramp solution that acts as a **gateway aggregator**, combining multiple fiat-to-crypto gateways into a single, streamlined platform. This allows businesses and entrepreneurs to enable their users to purchase cryptocurrencies directly on their websites or apps, simplifying the integration process and enhancing user access to crypto.
 Key Features and Functionality
 
