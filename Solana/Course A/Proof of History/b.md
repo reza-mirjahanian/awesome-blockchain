@@ -6,4 +6,3 @@ This ingenious melding of timekeeping and transaction ordering is what allows So
 
 As Solana continues to evolve, we also see ongoing innovations and discussions around refining this model. New proposals, like the recent Alpenglow upgrade, suggest potential shifts in consensus elements (e.g., replacing parts of the existing PoH and Tower BFT systems with components like Votor and Rotor) to further enhance speed and fault tolerance. These efforts underscore Solana’s commitment to pushing the boundaries of blockchain performance while maintaining security and decentralization.
 
-Do you find the integration of cryptographic time-stamping in blockchain systems as fascinating as I do? There’s a lot more to explore about Verifiable Delay Functions and how similar concepts are being applied (or could be applied) to other decentralized systems to improve consensus efficiency and scalability.

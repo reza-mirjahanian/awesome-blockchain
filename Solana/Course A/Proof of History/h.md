@@ -76,4 +76,3 @@ Citations:
 [17] https://solana.com/news/how-solana-s-proof-of-history-is-a-huge-advancement-for-block-time
 
 ---
-Answer from Perplexity: pplx.ai/share
