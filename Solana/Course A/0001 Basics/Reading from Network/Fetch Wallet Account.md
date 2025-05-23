@@ -1,18 +1,7 @@
 ### All "wallet" accounts are simply System Program owned accounts that hold SOL and can sign transactions.
 
 
-The Token Program is an executable program account on Solana. Like wallet accounts, programs have the same underlying [Account](https://github.com/anza-xyz/agave/blob/v2.1.11/sdk/account/src/lib.rs#L48-L60) data structure, but with key differences in its fields:
 
-| Field | Description |
-| --- |  --- |
-| `executable` | Set to `true`, indicating that this account contains executable program code. |
-| --- |  --- |
-| `data` | For program accounts, this field stores the program's executable code. In contrast, wallet accounts have an empty data field. |
-| `owner` | The account is owned by a Loader program, which is a category of built-in programs that own executable program accounts on Solana. (`BPFLoader2111111111111111111111111111111111`) |
-
-The program account stores the compiled bytecode for the Token Program's [source code](https://github.com/solana-program/token/tree/main/program). You can view this program account on the [Solana Explorer](https://explorer.solana.com/address/TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA).
-
-![alt text](image-1.png)
 
 All Solana accounts share the same [Account type](https://github.com/anza-xyz/agave/blob/v2.1.11/sdk/account/src/lib.rs#L48-L60).
 
