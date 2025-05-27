@@ -1,0 +1,609 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Solana's Proof of History: An Infographic</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <!-- Infographic Plan:
+    1. Hero: What is PoH? Key metrics (TPS, Finality).
+    2. How PoH Works: VDF, SHA-256 (HTML/CSS Flowchart), Core Principles (Table).
+    3. PoH in Solana's Consensus: Synergy with PoS, Tower BFT (HTML/CSS Diagram).
+    4. Performance Unlocked: TPS Comparison (Bar Chart), Latency, Energy Efficiency.
+    5. PoH vs. Alternatives: Comparative Table (PoH, PoW, PoS, Lamport).
+    6. Challenges & Considerations: Hardware Demands, Network Stability (HTML/CSS Timeline), Security.
+    7. Impact & Future: dApp Ecosystem (Donut Chart), Future Outlook.
+    -->
+    <!-- Visualization Choices:
+        - TPS/Finality (Hero): Big Numbers (HTML/CSS). Goal: Inform. Justification: Quick impact. NO SVG.
+        - How PoH Works (VDF/SHA-256): Flowchart (HTML/CSS + Tailwind). Goal: Organize. Justification: Illustrate process. NO SVG/Mermaid.
+        - Core PoH Principles: Table (HTML + Tailwind). Goal: Organize. Justification: Structured summary. NO SVG.
+        - PoH + PoS + Tower BFT: Diagram (HTML/CSS + Tailwind). Goal: Organize. Justification: Show system interaction. NO SVG/Mermaid.
+        - TPS Comparison (Solana vs. BTC vs. ETH): Bar Chart (Chart.js, Canvas). Goal: Compare. Justification: Effective for magnitude comparison. NO SVG.
+        - Latency: Big Number (HTML/CSS). Goal: Inform.
+        - Energy Efficiency: Icon (Unicode) + Text. Goal: Inform.
+        - Comparative Analysis Table: Table (HTML + Tailwind). Goal: Organize. Justification: Detailed comparison. NO SVG.
+        - Hardware Demands: Icon (Unicode) + Text. Goal: Inform.
+        - Network Stability Incidents: Timeline (HTML/CSS + Tailwind). Goal: Change. Justification: Chronological events. NO SVG/Mermaid.
+        - dApp Ecosystem on Solana: Donut Chart (Chart.js, Canvas). Goal: Compare (composition). Justification: Show proportions. NO SVG.
+    -->
+    <!-- Color Palette Chosen: Brilliant Blues (Conceptual)
+        Primary: #0D6EFD (Bootstrap Blue as a proxy)
+        Accent1: #0DCAF0 (Bootstrap Cyan)
+        Accent2: #60A5FA (Tailwind blue-400)
+        Background: #F8F9FA (Light Gray)
+        Card Background: #FFFFFF (White)
+        Text Primary: #212529 (Dark Gray)
+        Text Secondary: #6C757D (Medium Gray)
+        Chart Colors: Variations of blues and complementary accents.
+    -->
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #F8F9FA; /* Light Gray Background */
+            color: #212529; /* Dark Gray Text */
+        }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 600px; /* Max width for larger charts */
+            margin-left: auto;
+            margin-right: auto;
+            height: 300px; /* Base height */
+            max-height: 400px; /* Max height */
+        }
+        @media (min-width: 768px) {
+            .chart-container {
+                height: 350px;
+            }
+        }
+        .card {
+            background-color: #FFFFFF; /* White Card Background */
+            border-radius: 0.5rem; /* 8px */
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            padding: 1.5rem; /* 24px */
+            margin-bottom: 1.5rem; /* 24px */
+        }
+        .stat-value {
+            font-size: 2.25rem; /* 36px */
+            font-weight: 700;
+            color: #0D6EFD; /* Primary Blue */
+        }
+        .stat-label {
+            font-size: 0.875rem; /* 14px */
+            color: #6C757D; /* Medium Gray Text */
+            text-transform: uppercase;
+        }
+        .section-title {
+            font-size: 1.875rem; /* 30px */
+            font-weight: 700;
+            color: #0D6EFD; /* Primary Blue */
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+        .section-intro {
+            font-size: 1.125rem; /* 18px */
+            color: #495057; /* Darker Medium Gray */
+            text-align: center;
+            margin-bottom: 2rem;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .flowchart-step {
+            background-color: #E0F2FE; /* Light Blue Background */
+            border: 2px solid #0DCAF0; /* Cyan Border */
+            color: #0369A1; /* Darker Cyan Text */
+            padding: 0.75rem 1rem;
+            border-radius: 0.375rem;
+            text-align: center;
+            font-weight: 600;
+            min-height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .flowchart-arrow {
+            font-size: 1.5rem;
+            color: #0DCAF0; /* Cyan */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 60px; /* Match step height */
+        }
+        .timeline-item {
+            position: relative;
+            padding-left: 2rem; /* Space for the dot and line */
+            margin-bottom: 1.5rem;
+        }
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: 0.45rem;
+            top: 0.25rem;
+            width: 0.75rem; /* Dot size */
+            height: 0.75rem;
+            border-radius: 50%;
+            background-color: #0D6EFD; /* Primary Blue */
+            z-index: 1;
+        }
+        .timeline-item::after {
+            content: '';
+            position: absolute;
+            left: 0.78rem; 
+            top: 0.25rem;
+            bottom: -1.5rem; /* Extends to next item's approx top */
+            width: 2px;
+            background-color: #BDDFFF; /* Lighter Blue */
+        }
+        .timeline-item:last-child::after {
+            display: none; /* No line after the last item */
+        }
+        .timeline-date {
+            font-weight: 600;
+            color: #0D6EFD; /* Primary Blue */
+            margin-bottom: 0.25rem;
+        }
+    </style>
+</head>
+<body class="antialiased">
+    <header class="bg-[#0D6EFD] text-white py-8 shadow-lg">
+        <div class="container mx-auto px-4 text-center">
+            <h1 class="text-4xl font-bold mb-2">Solana's Proof of History (PoH)</h1>
+            <p class="text-xl opacity-90">A Deep Dive into Cryptographic Timekeeping and its Impact</p>
+        </div>
+    </header>
+
+    <main class="container mx-auto px-4 py-8">
+        <section id="intro-poh" class="mb-12">
+            <h2 class="section-title">What is Proof of History?</h2>
+            <p class="section-intro">
+                Proof of History (PoH) is a cornerstone of Solana's architecture, acting as a cryptographic clock. It's not a consensus mechanism itself, but a system that creates a verifiable, ordered sequence of events *before* consensus, dramatically boosting efficiency and speed.
+            </p>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 text-center">
+                <div class="card">
+                    <div class="stat-value">~400ms</div>
+                    <div class="stat-label">Block Times</div>
+                    <p class="text-sm text-gray-600 mt-2">PoH enables extremely rapid block production.</p>
+                </div>
+                <div class="card">
+                    <div class="stat-value">50k-65k</div>
+                    <div class="stat-label">Transactions Per Second (TPS)</div>
+                    <p class="text-sm text-gray-600 mt-2">Achieved through efficient ordering via PoH.</p>
+                </div>
+                <div class="card">
+                    <div class="stat-value">&lt; 1 Sec</div>
+                    <div class="stat-label">Transaction Finality</div>
+                    <p class="text-sm text-gray-600 mt-2">Near-instant confirmation of transactions.</p>
+                </div>
+            </div>
+            <div class="card mt-8">
+                <h3 class="text-xl font-semibold mb-3 text-[#0D6EFD]">More Than Just Consensus</h3>
+                <p class="text-gray-700 mb-2">PoH decouples transaction ordering from validation. It generates a trustless, verifiable sequence of events, solving the "clock problem" in distributed systems. This pre-ordered stream allows Solana's Proof of Stake (PoS) consensus to operate with significantly reduced complexity and communication overhead.</p>
+                <p class="text-gray-700">Think of it as a decentralized clock that doesn't tell wall-clock time, but establishes an incontrovertible sequence and proof of computational effort between events, creating its own "ledger time."</p>
+            </div>
+        </section>
+
+        <section id="how-poh-works" class="mb-12">
+            <h2 class="section-title">The Mechanics of PoH</h2>
+            <p class="section-intro">
+                PoH's effectiveness stems from Verifiable Delay Functions (VDFs) and sequential SHA-256 hashing, creating a tamper-resistant, ordered ledger.
+            </p>
+            <div class="card">
+                <h3 class="text-xl font-semibold mb-4 text-center text-[#0D6EFD]">VDFs & Sequential SHA-256 Hashing</h3>
+                <p class="text-gray-700 mb-6 text-center">PoH uses a high-frequency VDF, implemented as a sequential SHA-256 hash function running over itself. The output of one hash becomes the input for the next, creating a chain. This process is non-parallelizable for the generator but easily verifiable in parallel by others.</p>
+                
+                <div class="grid grid-cols-1 md:grid-cols-5 items-center gap-2 md:gap-0 my-4">
+                    <div class="flowchart-step">Previous Hash (State)</div>
+                    <div class="flowchart-arrow text-2xl font-bold mx-auto">➔</div>
+                    <div class="flowchart-step">Input Data (e.g., Transactions) Hashed & Appended</div>
+                    <div class="flowchart-arrow text-2xl font-bold mx-auto">➔</div>
+                    <div class="flowchart-step">SHA-256 Iteration (VDF Core)</div>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-5 items-center gap-2 md:gap-0 my-4">
+                    <div class="flowchart-step">New Hash (State) + Count Recorded</div>
+                    <div class="flowchart-arrow text-2xl font-bold mx-auto">➔</div>
+                    <div class="flowchart-step">Forms Verifiable Entry in PoH Ledger</div>
+                    <div class="flowchart-arrow text-2xl font-bold mx-auto">➔</div>
+                    <div class="flowchart-step">Process Repeats Continuously</div>
+                </div>
+                 <p class="text-sm text-gray-600 mt-4 text-center">This creates an append-only data structure with trustless passage of time encoded into it. Altering any past event invalidates all subsequent hashes.</p>
+            </div>
+
+            <div class="card mt-8">
+                <h3 class="text-xl font-semibold mb-3 text-center text-[#0D6EFD]">Core Technical Principles</h3>
+                <div class="overflow-x-auto">
+                    <table class="min-w-full divide-y divide-gray-200">
+                        <thead class="bg-gray-50">
+                            <tr>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Principle</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Description</th>
+                            </tr>
+                        </thead>
+                        <tbody class="bg-white divide-y divide-gray-200">
+                            <tr>
+                                <td class="px-6 py-4 whitespace-nowrap font-medium">Verifiability</td>
+                                <td class="px-6 py-4">Creates a transparent historical record verifiable by any observer (VDFs, SHA-256).</td>
+                            </tr>
+                            <tr>
+                                <td class="px-6 py-4 whitespace-nowrap font-medium">Sequentiality (Order)</td>
+                                <td class="px-6 py-4">Each PoH state is generated from the previous in a non-parallelizable manner by the generator.</td>
+                            </tr>
+                            <tr>
+                                <td class="px-6 py-4 whitespace-nowrap font-medium">Proof of Elapsed Time</td>
+                                <td class="px-6 py-4">VDF requires provable computational effort (time) for each new state.</td>
+                            </tr>
+                            <tr>
+                                <td class="px-6 py-4 whitespace-nowrap font-medium">Tamper-Resistance</td>
+                                <td class="px-6 py-4">Altering a past event invalidates all subsequent hashes, making changes detectable.</td>
+                            </tr>
+                            <tr>
+                                <td class="px-6 py-4 whitespace-nowrap font-medium">Asymmetric Gen./Verification</td>
+                                <td class="px-6 py-4">PoH generation is sequential; verification can be highly parallelized.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <section id="poh-consensus" class="mb-12">
+            <h2 class="section-title">PoH within Solana's Consensus</h2>
+            <p class="section-intro">
+                PoH is not a standalone consensus. It integrates deeply with Proof of Stake (PoS) and Tower BFT to achieve network agreement and security with remarkable speed.
+            </p>
+            <div class="card">
+                 <h3 class="text-xl font-semibold mb-4 text-center text-[#0D6EFD]">Synergy: PoH + PoS + Tower BFT</h3>
+                <p class="text-gray-700 mb-6 text-center">PoH provides the ordered timeline, while PoS (via staking SOL) provides economic security and validator incentives. Tower BFT, Solana's PoS implementation, uses PoH as a global clock *before* consensus, allowing rapid decisions on the correct blockchain fork.</p>
+                
+                <div class="p-4 rounded-lg bg-sky-50 border border-sky-200">
+                    <div class="text-center mb-4">
+                        <span class="font-semibold text-sky-700">Leader Node (PoH Generator for a Slot)</span>
+                        <div class="text-2xl my-2 text-sky-500">⬇️</div>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-center">
+                        <div class="p-3 bg-white rounded shadow border border-sky-100">
+                            <p class="font-medium text-sky-600">1. Receives Transactions</p>
+                        </div>
+                        <div class="p-3 bg-white rounded shadow border border-sky-100">
+                            <p class="font-medium text-sky-600">2. Orders & Embeds into PoH Stream (VDF)</p>
+                        </div>
+                        <div class="p-3 bg-white rounded shadow border border-sky-100">
+                            <p class="font-medium text-sky-600">3. Broadcasts Block with PoH Data</p>
+                        </div>
+                    </div>
+                    <div class="text-center my-4">
+                        <span class="text-2xl text-sky-500">⬇️</span>
+                        <p class="font-semibold text-sky-700 mt-1">Verifier Nodes</p>
+                    </div>
+                     <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-center">
+                        <div class="p-3 bg-white rounded shadow border border-sky-100">
+                            <p class="font-medium text-sky-600">A. Verify PoH Sequence</p>
+                        </div>
+                        <div class="p-3 bg-white rounded shadow border border-sky-100">
+                            <p class="font-medium text-sky-600">B. Validate Transactions</p>
+                        </div>
+                        <div class="p-3 bg-white rounded shadow border border-sky-100">
+                            <p class="font-medium text-sky-600">C. Participate in Tower BFT (Vote)</p>
+                        </div>
+                    </div>
+                     <div class="text-center mt-4">
+                        <span class="text-2xl text-sky-500">⬇️</span>
+                        <p class="font-bold text-xl text-green-600 mt-1">Consensus & Finality</p>
+                    </div>
+                </div>
+                <p class="text-sm text-gray-600 mt-4 text-center">Leader rotation ensures fairness. Verifiers trust the PoH sequence, focusing on validation and voting, significantly reducing communication overhead.</p>
+            </div>
+        </section>
+
+        <section id="performance" class="mb-12">
+            <h2 class="section-title">Performance Unlocked by PoH</h2>
+            <p class="section-intro">
+                The integration of PoH translates into tangible performance advantages, setting Solana apart in speed, capacity, and efficiency.
+            </p>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="card">
+                    <h3 class="text-xl font-semibold mb-3 text-[#0D6EFD]">Revolutionizing Transaction Speed (TPS)</h3>
+                    <p class="text-gray-700 mb-4">PoH is foundational to Solana's ability to process tens of thousands of transactions per second, far exceeding older blockchains.</p>
+                    <div class="chart-container h-64 md:h-80">
+                        <canvas id="tpsChart"></canvas>
+                    </div>
+                    <p class="text-xs text-gray-500 mt-2 text-center">Illustrative comparison. Actual TPS can vary.</p>
+                </div>
+                <div class="card">
+                    <h3 class="text-xl font-semibold mb-3 text-[#0D6EFD]">Key Performance Metrics</h3>
+                    <div class="space-y-4">
+                        <div>
+                            <span class="stat-label">Latency</span>
+                            <div class="stat-value">~400ms</div>
+                            <p class="text-sm text-gray-600">Block times, leading to near-instant user experience.</p>
+                        </div>
+                        <div>
+                            <span class="stat-label">Scalability</span>
+                            <p class="text-gray-700">PoH enables efficient verification and supports parallel transaction execution (Sealevel), enhancing network growth capacity.</p>
+                        </div>
+                        <div>
+                            <span class="stat-label">Energy Efficiency <span class="text-green-500">⚡️</span></span>
+                            <p class="text-gray-700">Combined with PoS, PoH contributes to a significantly more energy-efficient model than PoW, as VDF computation is single-core and not a competitive race.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="comparison" class="mb-12">
+            <h2 class="section-title">PoH in the Landscape of Timekeeping</h2>
+            <p class="section-intro">
+                PoH offers a distinct approach compared to traditional blockchain mechanisms and distributed system concepts for managing time and event order.
+            </p>
+            <div class="card">
+                <div class="overflow-x-auto">
+                    <table class="min-w-full divide-y divide-gray-200">
+                        <thead class="bg-gray-50">
+                            <tr>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Feature</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">PoH (Solana)</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">PoW (e.g., Bitcoin)</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">PoS (e.g., ETH Post-Merge)</th>
+                            </tr>
+                        </thead>
+                        <tbody class="bg-white divide-y divide-gray-200">
+                            <tr>
+                                <td class="px-6 py-4 font-medium">Primary Function</td>
+                                <td class="px-6 py-4">Cryptographic timekeeping, pre-consensus ordering</td>
+                                <td class="px-6 py-4">Consensus, block creation, Sybil resistance</td>
+                                <td class="px-6 py-4">Consensus, block creation, Sybil resistance</td>
+                            </tr>
+                            <tr>
+                                <td class="px-6 py-4 font-medium">Time/Order Source</td>
+                                <td class="px-6 py-4">VDF (sequential hashes)</td>
+                                <td class="px-6 py-4">Miners solving hash puzzle</td>
+                                <td class="px-6 py-4">Validators attesting; fork-choice</td>
+                            </tr>
+                            <tr>
+                                <td class="px-6 py-4 font-medium">Nature of "Time"</td>
+                                <td class="px-6 py-4">Verifiable proxy for real-time via computation</td>
+                                <td class="px-6 py-4">Probabilistic, by block discovery</td>
+                                <td class="px-6 py-4">Negotiated via consensus</td>
+                            </tr>
+                            <tr>
+                                <td class="px-6 py-4 font-medium">Energy Consumption</td>
+                                <td class="px-6 py-4">Moderate</td>
+                                <td class="px-6 py-4">Very High</td>
+                                <td class="px-6 py-4">Low-Moderate</td>
+                            </tr>
+                            <tr>
+                                <td class="px-6 py-4 font-medium">Typical L1 TPS</td>
+                                <td class="px-6 py-4">50,000+</td>
+                                <td class="px-6 py-4">~3-7</td>
+                                <td class="px-6 py-4">~12-30 (pre-sharding/rollups)</td>
+                            </tr>
+                             <tr>
+                                <td class="px-6 py-4 font-medium">vs. Lamport Timestamps</td>
+                                <td class="px-6 py-4" colspan="3">PoH advances beyond Lamport timestamps by providing a *cryptographically verifiable proof of elapsed real time (via VDF)*, not just logical ordering. This offers greater resilience against manipulation in Byzantine environments.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <section id="challenges" class="mb-12">
+            <h2 class="section-title">Challenges and Considerations</h2>
+            <p class="section-intro">
+                Despite its innovations, PoH and the Solana architecture face ongoing challenges related to decentralization, network stability, and the security dynamics of high-throughput systems.
+            </p>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="card">
+                    <h3 class="text-xl font-semibold mb-3 text-[#0D6EFD]">Hardware Demands & Decentralization <span class="text-orange-500">⚙️</span></h3>
+                    <p class="text-gray-700 mb-2">Running a Solana validator requires substantial hardware (e.g., 12+ core CPUs, 128GB+ RAM, fast SSDs, high bandwidth). This poses a barrier to entry, raising concerns about potential network centralization, even with a respectable Nakamoto coefficient (around 30-40).</p>
+                    <p class="text-sm text-gray-600">This is a direct trade-off for the high performance PoH enables.</p>
+                </div>
+                <div class="card">
+                    <h3 class="text-xl font-semibold mb-3 text-[#0D6EFD]">Security in High-Throughput Systems <span class="text-red-500">🛡️</span></h3>
+                    <p class="text-gray-700 mb-2">The extreme speed means less observable mempool time. Solana addresses front-running and spam at the protocol level (e.g., stake-weighted QoS, QUIC, localized fee markets) rather than relying on mempool filtering.</p>
+                    <p class="text-sm text-gray-600">Smart contract developers must be mindful of strict resource limits (Compute Units) and standard vulnerabilities in this fast-paced environment.</p>
+                </div>
+            </div>
+            <div class="card mt-8">
+                <h3 class="text-xl font-semibold mb-4 text-center text-[#0D6EFD]">Network Stability: Learning from Incidents 📉</h3>
+                <p class="text-gray-700 mb-6 text-center">Solana has experienced outages. These incidents, often related to bugs, spam, or interactions between PoH-timed slots and protocols like Turbine (block propagation), highlight the complexities of a high-performance system. Each has led to improvements.</p>
+                <div class="max-w-2xl mx-auto">
+                    <div class="timeline-item">
+                        <div class="timeline-date">Dec 2020</div>
+                        <p class="text-gray-700">Turbine bug related to PoH slot ID vs. block hash, leading to halt. Resolved by tracking blocks by hash.</p>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-date">Sept 2021</div>
+                        <p class="text-gray-700">Resource exhaustion from bot activity during an IDO. Led to software upgrades and fee-based prioritization plans.</p>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-date">May 2022</div>
+                        <p class="text-gray-700">Consensus halt due to bots exploiting NFT mints. Led to QUIC implementation and stake-weighted transaction processing.</p>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-date">Feb 2023</div>
+                        <p class="text-gray-700">Large block (validator custom service bug) overwhelmed Turbine. Resolved by restart and improved deduplication logic.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="impact-future" class="mb-12">
+            <h2 class="section-title">Impact and Future Trajectory</h2>
+            <p class="section-intro">
+                PoH has enabled a new class of high-performance dApps on Solana and its core principles continue to influence blockchain evolution.
+            </p>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="card">
+                    <h3 class="text-xl font-semibold mb-3 text-[#0D6EFD]">Enabling Novel Use Cases 🚀</h3>
+                    <p class="text-gray-700 mb-4">Solana's speed and low costs, powered by PoH, attract DeFi, NFT, and gaming projects requiring high performance (e.g., on-chain order books).</p>
+                    <div class="chart-container h-64 md:h-80">
+                        <canvas id="dappEcosystemChart"></canvas>
+                    </div>
+                    <p class="text-xs text-gray-500 mt-2 text-center">Illustrative dApp categories on Solana.</p>
+                </div>
+                <div class="card">
+                    <h3 class="text-xl font-semibold mb-3 text-[#0D6EFD]">Future Outlook & Research 🔭</h3>
+                    <p class="text-gray-700 mb-2">Ongoing work aims to enhance scalability, reduce latency, and improve robustness. Research into VDFs and Byzantine fault-tolerant timekeeping continues.</p>
+                    <ul class="list-disc list-inside text-gray-700 space-y-1">
+                        <li>Further decentralizing PoH generation.</li>
+                        <li>Evolution of VDF constructions for better performance/security.</li>
+                        <li>Improving integration with consensus and propagation layers.</li>
+                    </ul>
+                    <p class="text-gray-700 mt-3">The principle of decoupling verifiable timekeeping from consensus is a key contribution that may inspire future distributed systems.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="conclusion" class="py-8 bg-gray-100">
+            <div class="card max-w-3xl mx-auto text-center">
+                <h2 class="section-title mb-4">PoH: A Paradigm Shift</h2>
+                <p class="text-lg text-gray-700 mb-4">
+                    Proof of History is a pivotal innovation, enabling Solana's high throughput and low latency by solving the "clock problem" in a novel way. It underscores deliberate trade-offs, prioritizing performance while navigating challenges in decentralization and stability.
+                </p>
+                <p class="text-md text-gray-600">
+                    Its successes and challenges offer valuable lessons for the blockchain industry, and its core idea of a verifiable timeline as a foundational service holds promise for future distributed systems.
+                </p>
+            </div>
+        </section>
+    </main>
+
+    <footer class="text-center py-6 bg-gray-800 text-gray-400 text-sm">
+        <p>Infographic based on "Proof of History in Solana: A Comprehensive Technical Analysis".</p>
+        <p>For informational purposes only. Data points are illustrative and based on the provided report.</p>
+    </footer>
+
+    <script>
+        // Helper function for Chart.js label wrapping
+        function wrapLabels(label, maxWidth) {
+            const words = label.split(' ');
+            let lines = [];
+            let currentLine = words[0];
+
+            for (let i = 1; i < words.length; i++) {
+                if (currentLine.length + words[i].length + 1 <= maxWidth) {
+                    currentLine += ' ' + words[i];
+                } else {
+                    lines.push(currentLine);
+                    currentLine = words[i];
+                }
+            }
+            lines.push(currentLine);
+            return lines;
+        }
+        
+        const tooltipTitleCallback = function(tooltipItems) {
+            const item = tooltipItems[0];
+            let label = item.chart.data.labels[item.dataIndex];
+            if (Array.isArray(label)) {
+              return label.join(' ');
+            } else {
+              return label;
+            }
+        };
+
+        // Chart 1: TPS Comparison
+        const tpsCtx = document.getElementById('tpsChart').getContext('2d');
+        new Chart(tpsCtx, {
+            type: 'bar',
+            data: {
+                labels: ['Bitcoin', 'Ethereum (L1 Pre-Rollups)', 'Solana (Operational)'],
+                datasets: [{
+                    label: 'Transactions Per Second (TPS)',
+                    data: [5, 20, 50000], // Approximate values
+                    backgroundColor: ['#FFC107', '#6C757D', '#0D6EFD'],
+                    borderColor: ['#FFB300', '#5A6268', '#0A58CA'],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        type: 'logarithmic', // Use logarithmic for large differences
+                        title: {
+                            display: true,
+                            text: 'TPS (Log Scale)'
+                        }
+                    },
+                    x: {
+                        ticks: {
+                            callback: function(value) {
+                                const label = this.getLabelForValue(value);
+                                return wrapLabels(label, 10); // Wrap x-axis labels
+                            }
+                        }
+                    }
+                },
+                plugins: {
+                    tooltip: {
+                        callbacks: {
+                           title: tooltipTitleCallback
+                        }
+                    },
+                    legend: {
+                        display: false
+                    }
+                }
+            }
+        });
+
+        // Chart 2: dApp Ecosystem on Solana (Illustrative)
+        const dappCtx = document.getElementById('dappEcosystemChart').getContext('2d');
+        new Chart(dappCtx, {
+            type: 'doughnut',
+            data: {
+                labels: ['DeFi', 'NFT Marketplaces', 'Gaming', 'Infrastructure', 'Other dApps'],
+                datasets: [{
+                    label: 'Solana dApp Ecosystem',
+                    data: [35, 30, 20, 10, 5], // Illustrative percentages
+                    backgroundColor: ['#0D6EFD', '#0DCAF0', '#60A5FA', '#198754', '#FFC107'],
+                    hoverOffset: 4
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    tooltip: {
+                        callbacks: {
+                           title: tooltipTitleCallback
+                        }
+                    },
+                    legend: {
+                        position: 'bottom',
+                         labels: {
+                            font: { size: 10 },
+                            padding: 10,
+                            generateLabels: function(chart) {
+                                const data = chart.data;
+                                if (data.labels.length && data.datasets.length) {
+                                    return data.labels.map(function(label, i) {
+                                        const meta = chart.getDatasetMeta(0);
+                                        const style = meta.controller.getStyle(i);
+                                        const shortLabel = label.length > 16 ? label.substring(0, 14) + '...' : label;
+                                        return {
+                                            text: shortLabel,
+                                            fillStyle: style.backgroundColor,
+                                            strokeStyle: style.borderColor,
+                                            lineWidth: style.borderWidth,
+                                            hidden: isNaN(data.datasets[0].data[i]) || meta.data[i].hidden,
+                                            index: i
+                                        };
+                                    });
+                                }
+                                return [];
+                            }
+                        }
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html>
