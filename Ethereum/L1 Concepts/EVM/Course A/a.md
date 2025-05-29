@@ -1,3 +1,5 @@
+https://www.evm.codes/
+
 # EVM Internals & Smart Contract Design Patterns
 ![alt text](image.png)
 
@@ -130,6 +132,24 @@
       * Decodes it as a call to `withdraw(32833)` (interpreting the remaining bytes as the argument).
 
 ## Bytecode and Assembly
+![alt text](image-3.png)
+
+
+
+-   On top is the program bytecode, the raw representation that the EVM works off of.
+
+-   It's essentially another bytearray, with each byte in the bytearray corresponding to either an OPCODE or information to PUSH to the stack.
+
+-   The lower image is the assembly representation of the bytecode above
+
+-   On the left we have the program counter (PC), which is the index in the bytecode for that operation.
+
+-   Then we have the actual OPCODE name itself, such as PUSH1, MSTORE, LT, etc.
+
+-   PUSH operations have data associated with them, and this information is added onto the top of the stack
+
+-   You can produce this assembly representation using a tool like heimdall's disassemble module
+
 
   * **Bytecode:** The low-level machine code that the EVM executes. It's a sequence of bytes.
       * Example (start of Wrapped Ether bytecode): `60806040...`
@@ -549,3 +569,46 @@
     ```
       * When `depositsPaused` is true, attempts to call `deposit` will revert. ETH sent would be returned to the caller.
   * Sending ETH to a contract without a `payable fallback` or `receive` function that handles it will generally revert, unless it's to the `SELFDESTRUCT` beneficiary (which is a niche case). If it has a generic `payable fallback`, it might accept ETH without depositing into the vault logic.
+
+
+
+### INTERNAL CONTRACT DESIGN (TYPES)
+
+
+-   How does solidity represent different types?
+
+-   Bitwise masking allows for the EVM to only include a subset of bits from the whole word on the stack.
+
+-   How can we tell the difference between types?
+
+-   If a bitwise operation (other than a mask) is performed on a word, it's likely a bytes type.
+
+-   If an arithmetic operation is performed on a word, it's likely a uint or other number type.
+
+-   Strings, dynamic types (bytes, arrays, etc) are stored in memory, typically in RLP format.
+
+-   How are mappings represented?
+
+-   Concatenate a key and the mapping slot in a 64-byte memory array (key 1 slot 0):
+
+-   00000000000000000000000000000000000000000000000000000000000000010000000000000000000000000000000000000000000000000000000000000000
+
+-   SSTORE(SHA3(memory\[..\]), value)
+
+-   Why?
+
+### RLP
+
+**
+
+-   Recursive Length Prefix (RLP) is a data encoding scheme used in Ethereum, primarily used for serializing and deserializing data structures and dynamic types
+
+-   RLP is fairly complex, for a full understanding check out: [ethereum.org's docs](https://ethereum.org/en/developers/docs/data-structures-and-encoding/rlp/).
+
+-   Simply put:
+
+-   RLP is used to encode lists, strings, arrays, and other data types in a way that the EVM can understand
+
+-   RLP encoding involves prefixing data with the length of the data and recursively encoding nested structures
+
+**
