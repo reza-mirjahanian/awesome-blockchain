@@ -68,6 +68,15 @@
 
 ## Storage
 
+![alt text](image-1.png)
+
+-   This information does persist across transactions
+
+-   Can be thought of as a mapping from SLOT to VALUE (or KEY=>VALUE)
+
+-   Can be used to store immutables, balances, ownership information, etc.
+
+
   * **Purpose:** To *persist information forever* on the blockchain within a contract.
   * **Structure:** A key-value store, mapping 256-bit keys (slots) to 256-bit values.
       * Analogy: A *mapping*, *hash map*, or a simple *JSON-like structure*.
@@ -81,7 +90,13 @@
       * Mappings.
 
 ## Call Data
+**
 
+-   When you send a contract-interaction on Ethereum, you're actually sending calldata (and optionally some ether) to the contract
+
+-   This calldata contains all the instructions the program needs to execute and carry out your operation
+
+**
   * **Definition:** *The data payload sent with a transaction when interacting with a contract.*
       * It's a read-only byte array.
   * **Content:** Contains all the instructions and arguments the program needs to execute.
@@ -93,7 +108,7 @@
     This is an example of call data for Blur's token contract.
 
 ## Reading Call Data: Signatures and Selectors
-
+![alt text](image-2.png)
   * **Function Selector:** The **first 4 bytes** of the call data.
       * Example from above: `0x2e1a7d4d`
   * **Derivation:**
