@@ -1,4 +1,5 @@
 # EVM Internals & Smart Contract Design Patterns
+![alt text](image.png)
 
 ## EVM Overview: The Anatomy
 
