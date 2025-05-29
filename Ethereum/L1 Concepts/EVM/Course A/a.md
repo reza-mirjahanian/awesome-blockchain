@@ -39,6 +39,18 @@
 
 ## Memory
 
+
+
+-   Sometimes you need to store information longer than 256 bits
+
+-   Despite its name, does NOT persist and is lost at the end of a transaction
+
+-   Is simply a long bytearray, but you can also think of it as a Vec<u8> or hex string
+
+-   Used for revert data, return data, strings, RLP, etc
+
+
+
   * **Purpose:** Used for storing data that might be:
       * Longer than 256 bits (32 bytes).
       * Needed temporarily during a transaction.
