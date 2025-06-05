@@ -6,3 +6,6 @@ The **Volatility Token** functions like a junior tranche, absorbing the full vol
 
 
 ![alt text](image.png)
+
+
+![alt text](image-1.png)
