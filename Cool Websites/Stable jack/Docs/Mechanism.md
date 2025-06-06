@@ -1,0 +1,3 @@
+The value of Yield Tokens and Volatile Tokens are dynamically linked to the price of the collateral asset, ensuring that the total value of all Yield Tokens and Volatile Tokens equals the overall reserve value of the collateral asset. This connection is expressed through the equation:
+
+**The value of Collateral Asset in USD = (Total Supply of Yield Token × NAV of Yield Token) + (Total Supply of Volatile Token × NAV of Volatile Token)**, where the net asset value (NAV) is the current mint/redemption value of Yield Token or Volatile Token determined by the protocol.
