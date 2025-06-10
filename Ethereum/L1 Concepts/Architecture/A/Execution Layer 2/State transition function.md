@@ -1,3 +1,6 @@
+https://epf.wiki/#/wiki/EL/el-specs
+
+
 -   Is it possible to append the block to the end of the blockchain?
 -   How does the state change as a result?
 
@@ -54,3 +57,13 @@ This is a **fundamental concept** in blockchain systems like Ethereum, where the
 
 
 ![alt text](image-1.png)
+
+
+1.  **Block Execution**: Execute the transactions within the block, which yields the following outputs:
+    -   **Gas Used**: The total gas consumed by executing all transactions in the block.
+    -   **Trie Roots**: The roots of the tries for all transactions and receipts contained in the block.
+    -   **Logs Bloom**: A bloom filter of logs from all transactions within the block.
+    -   **State**: The state, as specified in the python execution specs, after executing all transactions.
+
+
+1.  **Pruning Old Blocks**: Remove blocks that are older than the most recent 255 blocks from the blockchain.
