@@ -51,3 +51,6 @@ In simpler terms:
 > **New State = TransitionFunction(Old State, New Block)**
 
 This is a **fundamental concept** in blockchain systems like Ethereum, where the state changes deterministically as each block is applied.
+
+
+![alt text](image-1.png)
