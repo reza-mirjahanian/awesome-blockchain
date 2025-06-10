@@ -29,3 +29,7 @@ Before regular operation begins, the CL and EL perform a capability exchange via
 ##### [Payload validation](https://epf.wiki/#/wiki/EL/el-architecture?id=payload-validation)
 
 Payload is validated with respect to the block header and execution environment rule sets:
+
+![alt text](image-1.png)
+
+With the merge, the function of the execution layer has been altered within the Ethereum network. Previously, it was tasked with the responsibility of managing the consensus of the blockchain, ensuring the correct order of blocks, as well as handling reorganizations. However, after the merge, these tasks have been delegated to the consensus layer, resulting in a significant simplification of the execution layer. Now, we can conceptualize the execution layer as primarily carrying out the state transition function.
