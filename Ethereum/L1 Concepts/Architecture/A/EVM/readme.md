@@ -106,3 +106,8 @@ Notice how the table above doesn't include offset 01. This is because the operan
 Essentially, the **program counter** ensures the EVM knows the position of each next instruction to execute and when to stop executing as illustrated in the example below.
 
 ![alt text](image-5.png)
+
+Memory
+--------------------------------------------------
+
+EVM memory is a byte array of 22562256 (or [practically infinite](https://www.talkcrypto.org/blog/2019/04/08/all-you-need-to-know-about-2256/)) bytes. All locations in memory are well-defined initially as zero.
