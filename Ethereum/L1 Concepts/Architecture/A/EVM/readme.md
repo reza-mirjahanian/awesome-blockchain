@@ -111,3 +111,26 @@ Memory
 --------------------------------------------------
 
 EVM memory is a byte array of 22562256 (or [practically infinite](https://www.talkcrypto.org/blog/2019/04/08/all-you-need-to-know-about-2256/)) bytes. All locations in memory are well-defined initially as zero.
+
+![alt text](image-6.png)
+
+
+Calldata
+------------------------------------------------------
+
+The **calldata** is read-only input data passed to the EVM via message call instructions or from a transaction and is stored as a sequence of bytes that are accessible via specific opcodes.
+
+### [Reading from calldata](https://epf.wiki/#/wiki/EL/evm?id=reading-from-calldata)
+
+
+Storage
+----------------------------------------------------
+
+Storage is designed as a **word-addressed word array**. Unlike memory, storage is associated with an Ethereum account and is **persisted** across transactions as part of the world state. It can be thought of as a key-value **database** associated with the smart contract, which is why it contains the contract's "state" variables. Storage size is fixed at 2^256 slots, 32 bytes each.
+The calldata for the current environment can be accessed using either:
+
+-   `CALLDATALOAD` opcode which reads 32 bytes from a desired offset onto the stack, [learn more](https://veridelisi.medium.com/learn-evm-opcodes-v-a59dc7cbf9c9).
+-   or, using `CALLDATACOPY` to copy a portion of calldata to memory.
+
+
+![alt text](image-7.png)
