@@ -64,3 +64,45 @@ Select Opcodes used in this discussion:
 | 90--9F | `SWAP1--SWAP16` | Swap top with N+1th stack item |
 
 Refer [Appendix H of Yellow Paper](https://ethereum.github.io/yellowpaper/paper.pdf) for a comprehensive list.
+
+
+EVM Data Locations
+==========================================================================
+
+The EVM has four main places to store data during execution:
+
+-   **Stack**
+-   **Memory**
+-   **Storage**
+-   **Calldata**
+
+Let's explore each of these data stores more in depth.
+
+[Stack](https://epf.wiki/#/wiki/EL/evm?id=stack)
+------------------------------------------------
+
+Stack is a simple data structure with two operations: **PUSH** and **POP**. Push adds an item to top of the stack, while pop removes the top-most item. Stack operates on Last-In-First-Out (LIFO) principle - the last element added is the first removed. If you try to pop from an empty stack, a **stack underflow error** occurs.
+
+Since the stack is where most opcodes operate, it is responsible for holding the values used to read from and write to **memory** and **storage**, which we'll detail later.
+
+The primary utility of the stack by the EVM is to store intermediate values in computations and to supply arguments to opcodes.
+
+
+### Program counter
+
+Recall that the bytecode is a flat array of bytes with each opcode being a 1 byte. The EVM needs a way to track what is the next byte (opcode) to execute in the bytecode array. This is where the EVM **program counter** comes in. It will keep track of the next opcode's offset, which is the location in the byte array of the next instruction to execute on the stack.
+
+In the example above, the values on the left of the assembly code represent the byte offset (starting at 0) of each opcode within the bytecode:
+
+| Bytecode | Assembly | Length of Instruction in bytes | Offset in hex |
+| --- |  --- |  --- |  --- |
+| 60 06 | PUSH1 06 | 2 | 00 |
+| --- |  --- |  --- |  --- |
+| 60 07 | PUSH1 07 | 2 | 02 |
+| 01 | ADD | 1 | 04 |
+
+Notice how the table above doesn't include offset 01. This is because the operand 06 takes position of offset 01, and the same concept applies for operand 07 taking position of offset 03.
+
+Essentially, the **program counter** ensures the EVM knows the position of each next instruction to execute and when to stop executing as illustrated in the example below.
+
+![alt text](image-5.png)
