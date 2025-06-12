@@ -13,7 +13,7 @@ Every single node has a hash value. The node's hash is calculated as the SHA-3 h
 
 The following diagram illustrates how traversal and hashing work together in the MPT. As an example of data retrieval from a leaf node, let's obtain the value `hi` using the key `11110AA`.
 
-
+![alt text](image-2.png)
 
 ### 1. Start at the Root (Extension Node in this Scenario)
 
