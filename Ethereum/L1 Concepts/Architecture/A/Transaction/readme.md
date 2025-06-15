@@ -235,6 +235,7 @@ $ cast publish f86401847735940083013880945fbdb2315678afecb367f032d93f642f64180aa
 }
 ```
 
+
 Read storage **slot 0** using cast:
 
 ```
