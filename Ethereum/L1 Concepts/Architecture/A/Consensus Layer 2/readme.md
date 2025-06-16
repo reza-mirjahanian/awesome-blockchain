@@ -4,3 +4,7 @@ In Ethereum's consensus layer, the goal is to ensure that tens of thousands of i
 
 
 These nodes often use [consumer grade hardware](https://stakefromhome.com/) and communicate over internet connections that may be slow, lose data, or disconnect unexpectedly. Node operators might misconfigure their software or fail to update it. Additionally, there could be many bad actors running rogue nodes or tampering with communications for personal gain. This is what we mean by "unreliable infrastructure."
+
+### [Byzantine Fault Tolerance (BFT) and Byzantine Generals' Problem](https://epf.wiki/#/wiki/CL/overview?id=byzantine-fault-tolerance-bft-and-byzantine-generals39-problem)
+
+Byzantine Fault Tolerance (BFT) is a property of distributed systems that allows them to function correctly even when some components fail or act maliciously. BFT is crucial in decentralized networks, where trust among nodes cannot be assumed. In other words, a system exhibiting BFT can tolerate Byzantine faults, which are arbitrary failures that include malicious behavior. For a system to be Byzantine fault-tolerant, it must reach consensus despite these faults. For more on the problem and practical solutions read [this](https://hackmd.io/@kira50/SknuPZMIC).
