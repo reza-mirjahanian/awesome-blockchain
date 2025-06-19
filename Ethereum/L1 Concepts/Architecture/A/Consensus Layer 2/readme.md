@@ -103,7 +103,7 @@ Each slot is 12 seconds and an epoch is 32 slots: 384 seconds or 6.4 minutes. Ea
 
 A **slot is a chance for a block to be added to the Beacon Chain**. Every 12 seconds, one block is added. Validators need to be roughly [synchronized with time](https://ethresear.ch/t/network-adjusted-timestamps/4187). A slot is like the block time, but slots can be empty. The Beacon Chain genesis block is at Slot 0.
 
-![Diagram for slots and epoch](https://epf.wiki/images/cl/slots-and-epochs.png)
+![alt text](image-1.png)
 
 *The first 32 slots are in Epoch 0. Genesis block is at Slot 0.*
 
@@ -113,23 +113,23 @@ A block proposer is a validator that has been pseudo-randomly selected to build 
 
 Attestations are votes on the validity of the blocks, which are aggregated into the Beacon Chain to ensure consensus.
 
-![Diagram for Validator selection](https://epf.wiki/images/cl/validators.png)
 
+![alt text](image-2.png)
 *A slot can be missed as you can see in this diagram on 28th slot*
 
-An **attestation** is a validator's vote, weighted by the validator's stake. Attestations are broadcasted by validators in addition to blocks. Validators also police each other and are rewarded for reporting other validators that make conflicting votes, or propose multiple blocks.
+An **attestation** is a validator's vote, weighted by the validator's stake. Attestations are broadcasted by validators in addition to blocks. Validators also **police each** other and are rewarded for reporting other validators that make conflicting votes, or propose multiple blocks.
 
-The contents of the Beacon Chain is primarily a registry of validator addresses, the state of each validator, and attestations. Validators are activated by the Beacon Chain and can transition to states
+The contents of the **Beacon Chain** is primarily a **registry of validator** addresses, the state of each validator, and attestations. Validators are activated by the Beacon Chain and can transition to states
 
-**IMPORTANT NOTE on Staking Validators Semantics:** *In Ethereum's PoS, users activate validators by staking ETH, similar to buying hardware in PoW. Stakers are associated with the amount staked, while validators have a maximum balance of 32 ETH each. For every 32 ETH staked, one validator is activated. Validators are run by validator clients, which use a beacon node to follow and read the Beacon Chain. A single validator client can manage multiple validators.*
+**IMPORTANT NOTE on Staking Validators Semantics:** *In Ethereum's PoS, users activate validators by staking ETH, similar to buying hardware in PoW. Stakers are associated with the amount staked, while validators have a maximum balance of 32 ETH each. For every 32 ETH staked, one validator is activated. Validators are run by validator clients, which use a beacon node to follow and read the Beacon Chain. **A single validator client** can manage multiple validators.*
 
 ### [Committees](https://epf.wiki/#/wiki/CL/overview?id=committees)
 
-Committees are groups of at least 128 validators assigned to each slot for added security. An attacker has less than a 1 in a trillion chance of controlling ⅔ of a committee.
+Committees are groups of **at least 128 validators assigned** to each slot for added security. An attacker has less than a **1 in a trillion chance of controlling ⅔ of a committee**.
 
 The concept of a randomness beacon that emits random numbers for the public, is how Beacon Chain got it's name. The Beacon Chain enforces consensus on a pseudorandom process called RANDAO.
 
-![Diagram for Validator selection](https://epf.wiki/images/cl/RANDAO.png)
+![alt text](image-3.png)
 
 *At every epoch, a pseudorandom process RANDAO selects proposers for each slot, and shuffles validators to committees.*
 
@@ -140,7 +140,7 @@ The concept of a randomness beacon that emits random numbers for the public, is 
 
 The sketch depicts a scenario with less than 8,192 validators, otherwise there would be at least two committees per slot.
 
-![Diagram for Committees](https://epf.wiki/images/cl/committees.png)
+![alt text](image-4.png)
 
 The diagram is a combined depiction of what happened in 3 slots:
 
