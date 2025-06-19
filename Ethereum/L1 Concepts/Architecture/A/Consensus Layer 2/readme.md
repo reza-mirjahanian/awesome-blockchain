@@ -13,7 +13,7 @@ Byzantine Fault Tolerance (BFT) is a **property** of distributed systems that al
 
 Consensus is a way to build reliable distributed systems with unreliable components. **Blockchain-based distributed systems** aim to agree on a single history of transactions.
 
-Proof-of-work and Proof-of-stake are **not consensus protocols**, but enable consensus protocols. In Ethereum, Nodes and validators are the actors of the consensus system. Slots and epochs regulate consensus time. Blocks and attestations are the currency of consensus.
+Proof-of-work and Proof-of-stake are **not consensus protocols**, but enable consensus protocols. In Ethereum, Nodes and validators are the actors of the consensus system. Slots and epochs regulate consensus time. **Blocks and attestations** are the currency of consensus.
 
 ------
 
