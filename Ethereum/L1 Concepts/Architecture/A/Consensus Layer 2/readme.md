@@ -17,7 +17,7 @@ Proof-of-work and Proof-of-stake are **not consensus protocols**, but enable con
 
 ------
 
-The Consensus Layer (CL) is a fundamental component that ensures the network's security, reliability, and efficiency. Originally, Ethereum utilized Proof-of-work (PoW) as its consensus mechanism, similar to Bitcoin. PoW, while effective in maintaining decentralization and security, has significant drawbacks, including high energy consumption and limited scalability. To address these issues, Ethereum has transitioned to Proof-of-Stake (PoS), a more sustainable and scalable consensus mechanism.
+The Consensus Layer (CL) is a fundamental component that ensures the network's **security, reliability, and efficiency**. Originally, Ethereum utilized Proof-of-work (PoW) as its consensus mechanism, similar to Bitcoin. PoW, while effective in maintaining decentralization and security, has significant drawbacks, including high energy consumption and limited scalability. To address these issues, Ethereum has transitioned to Proof-of-Stake (PoS), a more sustainable and scalable consensus mechanism.
 
 The Ethereum network consists of many individual nodes. Each node operates independently and communicates over the Internet, which is often unreliable and asynchronous.
 
@@ -31,23 +31,23 @@ Ethereum's consensus protocol actually *bolts together* two different consensu
 [Proof-of-work and Proof-of-stake](https://epf.wiki/#/wiki/CL/overview?id=proof-of-work-and-proof-of-stake)
 -----------------------------------------------------------------------------------------------------------
 
-This is a good point to clarify that neither Proof-of-work (PoW) nor Proof-of-Stake (PoS) are consensus protocols by themselves. They are often incorrectly referred to as such, but they are actually mechanisms that enable consensus protocols. Both PoW and PoS primarily serve as Sybil resistance mechanisms, placing a cost on participating in the protocol. This prevents attackers from overwhelming the system cheaply.
+This is a **good point to clarify** that neither Proof-of-work (PoW) nor Proof-of-Stake (PoS) are consensus protocols by themselves. They are often incorrectly referred to as such, but they are actually mechanisms that enable consensus protocols. **Both PoW and PoS primarily serve as Sybil resistance mechanisms, placing a cost on participating in the protocol. This prevents attackers from overwhelming the system cheaply**.
 
 However, both PoW and PoS are closely linked to the consensus mechanisms they support through [fork choice](https://epf.wiki/#/wiki/CL/cl-architecture?id=fork-choice-rules) rules. They help assign a weight or score to a chain of blocks: in PoW, it's the total computational work done; in PoS, it's the total value staked that supports a particular chain. Beyond these basics, PoW and PoS can support various consensus protocols, each with its own dynamics and trade-offs.
 
 
 ### [Blockchains](https://epf.wiki/#/wiki/CL/overview?id=blockchains)
 
-The basic element of a blockchain is the block. A block contains a set of transactions assembled by a leader (block proposer). The contents of a block can vary based on the protocol.
+The basic element of a blockchain is the block. A block contains a set of transactions **assembled by a leader (block proposer)**. The contents of a block can vary based on the protocol.
 
 -   The payload of a block on Ethereum's execution chain is a list of user transactions.
--   In the pre-Merge PoS Beacon Chain, a block's payload was mostly a set of attestations by validators.
--   Post-Merge Beacon Chain blocks also include the execution payload (user transactions).
--   After [EIP-4844](https://eips.ethereum.org/EIPS/eip-4844)(Deneb upgrade), blocks now also contain commitments to opaque data blobs alongside user transactions.
+-   In the **pre-Merge** PoS Beacon Chain, a block's payload was mostly a set of attestations by validators.
+-   **Post-Merge** Beacon Chain blocks also include the execution payload (user transactions).
+-   After [EIP-4844](https://eips.ethereum.org/EIPS/eip-4844)(Deneb upgrade), blocks now also contain **commitments** to opaque data blobs alongside user transactions.
 
 Except for the Genesis block, each block builds on and points to a parent block, forming a chain of blocks: a blockchain. The goal is for all nodes on the network to agree on the same canonical blockchain history.
 
-![Blockchain](https://epf.wiki/images/cl/blockchain.svg)
+![alt text](image.png)
 
 *Time moves from left to right and, except for the Genesis block, each block points to the parent block it builds on.*
 
