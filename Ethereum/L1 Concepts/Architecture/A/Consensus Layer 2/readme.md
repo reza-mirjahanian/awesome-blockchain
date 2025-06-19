@@ -136,7 +136,7 @@ The concept of a randomness beacon that emits random numbers for the public, is 
 **Validator Selection:**
 
 -   As mentioned earlier, Proposers are chosen by RANDAO, weighted by validator balance.
--   A validator can be both a proposer and a committee member for the same slot, but this is rare (1/32 probability).
+-   A validator **can be both** a proposer and a committee member for the same slot, but this is rare (1/32 probability).
 
 The sketch depicts a scenario with less than 8,192 validators, otherwise there would be at least two committees per slot.
 
@@ -148,25 +148,25 @@ The diagram is a combined depiction of what happened in 3 slots:
 -   Slot 2: A block is proposed, but one validator misses it and attests to the previous block.
 -   Slot 3: All validators in Committee C attest to the same head, following the LMD GHOST rule.
 
-Validators attest to their view of the Beacon Chain head using the LMD GHOST rule. Attestations help finalize blocks by reaching consensus on the blockchain's state.
+**Validators attest to their view of the Beacon** Chain head using the LMD GHOST rule. Attestations help finalize blocks by reaching consensus on the blockchain's state.
 
 **Committee Size and Security:**
 
--   With more than 8,192 validators, multiple committees per slot are formed.
+-   With more than **8,192 validators**, multiple committees per slot are formed.
 -   Committees must be at least 128 validators for optimal security.
--   Security decreases with fewer than 4,096 validators, as committee sizes drop below 128.
+-   Security decreases with fewer **than 4,096 validators**, as committee sizes drop below 128.
 
 > At every epoch, validators are evenly divided across slots and then subdivided into committees of appropriate size. All of the validators from that slot attest to the Beacon Chain head. A shuffling algorithm scales up or down the number of committees per slot to get at least 128 validators per committee. More details on shuffling can be found in [proto's repo.](https://github.com/protolambda/eth2-docs#shuffling)
 
 ### [Blobs](https://epf.wiki/#/wiki/CL/overview?id=blobs)
 
-[EIP-4844](https://eips.ethereum.org/EIPS/eip-4844), also known as proto-danksharding, is part of the Deneb/Cancun hardfork. It introduces a data availability layer to Ethereum, allowing for the temporary storage of arbitrary data on the blockchain. This arbitrary data stored this way are called `blobs`, and each block can have 3 ~ 6 blob sidecars (wrappers for blobs). EIP-4844 marks Ethereum's first step towards sharding and scalability, enabling Layer 2 solutions (L2s) to use this data availability layer to lower gas fees and process more transactions.
+[EIP-4844](https://eips.ethereum.org/EIPS/eip-4844), also known as proto-danksharding, is part of the Deneb/Cancun hardfork. It introduces a data availability layer to Ethereum, allowing for the temporary storage of arbitrary data on the blockchain. This arbitrary data stored this way are called `blobs`, and each block can have **3 ~ 6 blob** sidecars (wrappers for blobs). EIP-4844 marks Ethereum's first step towards sharding and scalability, enabling Layer 2 solutions (L2s) to use this data availability layer to lower gas fees and process more transactions.
 
 ### [Design and Implementation](https://epf.wiki/#/wiki/CL/overview?id=design-and-implementation)
 
-A key design decision in EIP-4844 is the use of [KZG commitments](https://epf.wiki/#/wiki/Cryptography/kzg) to verify blobs and support future proposer-builder separation. To use KZG commitments, a Trusted Setup is needed. For the Deneb hardfork, a [KZG Ceremony](https://github.com/ethereum/kzg-ceremony) was conducted to create this Trusted Setup.
+A key design decision in EIP-4844 is the use of [KZG commitments](https://epf.wiki/#/wiki/Cryptography/kzg) to verify blobs and support future proposer-builder separation. To use KZG commitments, a **Trusted Setup** is needed. For the Deneb hardfork, a [KZG Ceremony](https://github.com/ethereum/kzg-ceremony) was conducted to create this Trusted Setup.
 
-![Diagram for Blobs](https://epf.wiki/images/cl/blobs.png)
+![alt text](image-5.png)
 
 ### [Storage Requirements](https://epf.wiki/#/wiki/CL/overview?id=storage-requirements)
 
@@ -183,11 +183,11 @@ By default, these blobs will be retained for 4096 epochs, and clients would prun
 
 ### [Checkpoints and Finality](https://epf.wiki/#/wiki/CL/overview?id=checkpoints-and-finality)
 
-At the end of each epoch, checkpoints are created. A checkpoint is a block in the first slot of an epoch. If there is no such block, then the checkpoint is the preceding most recent block. There is always one checkpoint block per epoch. A block can be the checkpoint for multiple epochs.
+At the end of **each epoch**, checkpoints are created. A checkpoint is a block in the first slot of an epoch. If there is no such block, then the checkpoint is the preceding most recent block. There is always one checkpoint block per epoch. A block can be the checkpoint for multiple epochs.
 
-A block becomes a checkpoint if it receives attestations from a majority of validators. Checkpoints are used to finalize the blockchain's state. A block is considered final when it is included in two-thirds of the most recent checkpoint attestations, ensuring it cannot be reverted.
+A block becomes a checkpoint if it receives attestations from a majority of validators. Checkpoints are used to **finalize the blockchain's state**. A block is considered final when it is included in two-thirds of the most recent checkpoint attestations, ensuring it cannot be reverted.
 
-![Diagram for checkpoints](https://epf.wiki/images/cl/checkpoints.jpg)
+![alt text](image-6.png)
 
 *Checkpoints for a scenario where an epoch contain 64 slots*
 
@@ -201,7 +201,7 @@ A supermajority, defined as ⅔ of the total validator balance, is required for 
 
 When a user transaction is included in a block, on average it would be somewhere in the middle of an epoch. It takes half an epoch (about 3.2 minutes) to reach the next checkpoint, suggesting transaction finality of 2.5 epochs: 16 minutes. Optimally, more than ⅔ of attestations will have been included by the 22nd (2/3rd of 32) slot of an epoch. Thus, transaction finality is an average of 14 minutes (16+32+22 slots). Block confirmations emerge from a block's attestations, then move to its justification, to its finality. Use cases can decide whether they need finality or an earlier safety threshold is sufficient.
 
-![Diagram for Finality](https://epf.wiki/images/cl/finalization.png)
+![alt text](image-7.png)
 
 *Example of one checkpoint getting justified (Slot 64) and finalizing a prior checkpoint (Slot 32).*
 
@@ -266,16 +266,16 @@ Upon exit, there is a delay of four epochs before withdrawal, during which valid
 
 Honest validators can withdraw their balance in about 27 hours, whereas slashed validators face a delay of approximately 36 days (8,192 epochs).
 
-![Diagram for Validator Lifecycle](https://epf.wiki/images/cl/validator-lifecycle.png)
+![alt text](image-8.png)
 
 To prevent rapid changes in the validator set, mechanisms limit how many validators can be activated or exited per epoch. The Beacon Chain also employs effective balances for technical optimization, which change less frequently than actual validator balances.
 
 #### [Overall Effects](https://epf.wiki/#/wiki/CL/overview?id=overall-effects)
 
-At every epoch, validators are evenly divided across slots and then subdivided into committees of appropriate size. Validators can only be in one slot, and in one committee. Collectively:
+At every epoch, validators are evenly divided across slots and then subdivided into committees of appropriate size. Validators can only be in **one slot, and in one committee**. Collectively:
 
 -   All validators in an epoch attempt to finalize the same checkpoint: FFG vote
--   All validators assigned to a slot attempt to vote on the same Beacon Chain head: LMD GHOST vote Optimal behavior rewards validators the most.
+-   All validators assigned to a slot attempt to vote on the same Beacon Chain head: LMD GHOST vote **Optimal** behavior rewards validators the most.
 
 The Beacon Chain's introduction on December 1, 2020, began with 21,063 validators. The number of validators can decrease with slashings or voluntary exits, or more stakers can join and be activated. Fast forward to today(15th May, 2024) there are more than 1,000,000 validators that are active on Ethereum Network. The world has never seen a scalable platform for decentralized systems and applications like Ethereum.
 
