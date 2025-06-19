@@ -86,13 +86,13 @@ The Paris hard fork was a pivotal event in Ethereum's history, setting the stage
 [Beacon Chain and its Preliminaries](https://epf.wiki/#/wiki/CL/overview?id=beacon-chain-and-its-preliminaries)
 ---------------------------------------------------------------------------------------------------------------
 
-The Beacon Chain is the backbone of Ethereum's consensus. It coordinates validators, manages the PoS protocol, and ensures consensus across the network. This section will cover the anatomy of Beacon chain.
+The Beacon Chain is the backbone of Ethereum's consensus. It **coordinates** validators, manages the PoS protocol, and ensures consensus across the network. This section will cover the anatomy of Beacon chain.
 
 ### [Validators](https://epf.wiki/#/wiki/CL/overview?id=validators)
 
 Validators are essentially the participants in the PoS Protocol. They propose and validate new blocks, ensuring the integrity and security of the blockchain. Validators must stake ETH as collateral, aligning their interests with the network's health. Validators are chosen to propose blocks based on several factors:
 
--   **Staked Ether**: Each validator can stake a maximum of 32 ETH. Stakers with more ETH can increase their influence by running multiple validator nodes, each staking 32 ETH. This system ensures decentralization and aligns the interests of validators with the network's security and integrity.
+-   **Staked Ether**: Each validator can stake a maximum of 32 ETH. **Stakers with more ETH** can increase their influence by running multiple validator nodes, each staking 32 ETH. This system ensures decentralization and aligns the interests of validators with the network's security and integrity.
 -   **Randomness**: The selection process incorporates cryptographic randomness to prevent predictability and manipulation. This is achieved through the [RANDAO](https://inevitableeth.com/home/ethereum/network/consensus/randao) and [VDF (Verifiable Delay Function)](https://inevitableeth.com/home/ethereum/upgrades/consensus-updates/vdf) mechanisms.
 -   **Committees**: Validators are grouped into committees for block proposal and attestation. Each committee is responsible for validating and attesting to blocks, ensuring a decentralized and secure validation process.
 -   **Staking Requirements**: To become a validator, an individual must deposit a minimum of 32 ETH into the official deposit contract. This ETH acts as collateral to incentivize honest behavior. The validator's ETH is at risk if they fail to perform their duties or engage in malicious activities.
@@ -101,7 +101,7 @@ Validators are essentially the participants in the PoS Protocol. They propose an
 
 Each slot is 12 seconds and an epoch is 32 slots: 384 seconds or 6.4 minutes. Each slot has a validator assigned to propose a block, while committees of validators attest to the block's validity.
 
-A slot is a chance for a block to be added to the Beacon Chain. Every 12 seconds, one block is added. Validators need to be roughly [synchronized with time](https://ethresear.ch/t/network-adjusted-timestamps/4187). A slot is like the block time, but slots can be empty. The Beacon Chain genesis block is at Slot 0.
+A **slot is a chance for a block to be added to the Beacon Chain**. Every 12 seconds, one block is added. Validators need to be roughly [synchronized with time](https://ethresear.ch/t/network-adjusted-timestamps/4187). A slot is like the block time, but slots can be empty. The Beacon Chain genesis block is at Slot 0.
 
 ![Diagram for slots and epoch](https://epf.wiki/images/cl/slots-and-epochs.png)
 
