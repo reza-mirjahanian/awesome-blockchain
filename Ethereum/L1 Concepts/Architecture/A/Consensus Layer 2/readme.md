@@ -51,22 +51,22 @@ Except for the Genesis block, each block builds on and points to a parent block,
 
 *Time moves from left to right and, except for the Genesis block, each block points to the parent block it builds on.*
 
-The chain grows as nodes add new blocks to its tip. This is done by temporarily selecting a "leader", the node that extends the chain. In PoW, the leader is the miner who first solves the PoW puzzle for its block. In Ethereum's PoS, the proposer(leader) is pseudo-randomly selected from active validator set.
+The chain grows as nodes add new blocks to its tip. This is done by temporarily selecting a "leader", the node that extends the chain. In PoW, the leader is the miner who first solves the PoW puzzle for its block. In Ethereum's PoS, the **proposer(leader)** is pseudo-randomly selected from active validator set.
 
-The leader (block proposer) adds a block to the chain, choosing and ordering its contents. The block must be valid according to protocol rules, or the network will ignore it. Using blocks is an optimization. Adding individual transactions one by one would create a huge consensus overhead. So blocks are batches of transactions, In Ethereum's execution chain, block size is limited by the block gas limit (the amount of work needed to process the transactions). [Beacon block](https://epf.wiki/#/wiki/CL/beacon-api?id=beaconblockbody) sizes are limited by hard-coded constants.
+The leader (block proposer) adds a block to the chain, choosing and ordering its contents. The block must be valid according to protocol rules, or the network will ignore it. Using blocks is an optimization. Adding individual transactions one by one would create a huge consensus overhead. So blocks are batches of transactions, In Ethereum's execution chain, **block size** is limited by the block gas limit (the amount of work needed to process the transactions). [Beacon block](https://epf.wiki/#/wiki/CL/beacon-api?id=beaconblockbody) sizes are limited by hard-coded constants.
 
 [Transition to Proof-of-Stake](https://epf.wiki/#/wiki/CL/overview?id=transition-to-proof-of-stake)
 ---------------------------------------------------------------------------------------------------
 
 > The engine was changed mid-flight! September 15, 2022 --- the day Ethereum switched to Proof-of-Stake. That new engine is the Consensus Layer, formerly known as Ethereum 2.0's Beacon Chain.
 
-The Paris hard fork (The merge) in Ethereum was activated based on "terminal total difficulty" (TTD) instead of block height to avoid risks like malicious forks. This ensures the transition to Proof-of-Stake (PoS) occurs only when the cumulative difficulty reaches a critical threshold. The terminal block is the last Proof-of-work (PoW) block where its total difficulty surpasses a predefined threshold, ensuring security. The total difficulty is calculated recursively, reflecting the computational effort in the blockchain.
+The Paris hard fork (The merge) in Ethereum was activated based on "terminal total difficulty" (TTD) instead of block height to avoid risks like malicious forks. This ensures the transition to Proof-of-Stake (PoS) occurs only when the cumulative difficulty reaches a critical threshold. The **terminal block** is the last Proof-of-work (PoW) block where its total difficulty surpasses a predefined threshold, ensuring security. The total difficulty is calculated recursively, reflecting the computational effort in the blockchain.
 
 This is relevant because testnets, devnets and any Ethereum network running the latest software needs to activate the Merge - not by block height but by Total Terminal Difficulty (TTD). More details on the [transition criteria](https://hackmd.io/@kira50/rJ2y7jImR) and [Total Terminal Difficulty](https://bordel.wtf/).
 
 The merge introduces the following:
 
--   **Beacon Chain Takes Over**: The Beacon Chain, already running in parallel with the Ethereum mainnet, assumes the responsibility for processing new blocks. Under PoS, blocks are validated by validators who stake their ETH to participate in the consensus mechanism, rather than by miners solving cryptographic puzzles.
+-   **Beacon Chain Takes Over**: The Beacon Chain, already running **in parallel with the Ethereum mainnet**, assumes the responsibility for processing new blocks. Under PoS, blocks are validated by validators who stake their ETH to participate in the consensus mechanism, rather than by miners solving cryptographic puzzles.
 
 -   **Security and Efficiency**: This transition not only aims to enhance the security of the Ethereum network by making it more decentralized but also significantly reduces its energy consumption, addressing one of the major criticisms of traditional PoW systems.
 
