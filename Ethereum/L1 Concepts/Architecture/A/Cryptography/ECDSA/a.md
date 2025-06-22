@@ -4,7 +4,7 @@
 
 #### 1. **Overview of ECDSA**
 
-ECDSA is a widely used **public-key cryptography** algorithm that enables secure and efficient digital signatures. It belongs to the family of elliptic curve cryptography (ECC) algorithms, which rely on the algebraic structure of elliptic curves over finite fields. ECDSA provides the same functionality as traditional algorithms like RSA but with significantly smaller key sizes and faster computation, making it highly suitable for environments with limited resources.
+ECDSA is a widely used **public-key cryptography** algorithm that enables secure and efficient digital signatures. It belongs to the family of elliptic curve cryptography (ECC) algorithms, which rely on the algebraic structure of elliptic curves over finite fields. ECDSA provides the same functionality as traditional algorithms like **RSA but with significantly smaller key sizes and faster computation**, making it highly suitable for environments with limited resources.
 
 In ECDSA, the signer uses a private key to sign a message, and anyone can verify the signature using the signer's public key.
 
