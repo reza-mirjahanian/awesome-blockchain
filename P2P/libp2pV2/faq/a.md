@@ -2,7 +2,7 @@
 
 ### Interview Questions for a Senior Developer on **libp2p**
 
-As a 10x founding engineer, when interviewing a senior developer for expertise in libp2p, the goal is to assess their deep understanding of networking protocols, distributed systems, and peer-to-peer (P2P) systems. The questions span the fundamentals to complex, real-world scenarios.
+
 
 ---
 
