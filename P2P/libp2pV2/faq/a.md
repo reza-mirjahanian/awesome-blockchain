@@ -2,7 +2,7 @@
 
 ### Interview Questions for a Senior Developer on **libp2p**
 
-As a 10x founding engineer, when interviewing a senior developer for expertise in libp2p, the goal is to assess their deep understanding of networking protocols, distributed systems, and peer-to-peer (P2P) systems. The questions span the fundamentals to complex, real-world scenarios.
+
 
 ---
 
@@ -11,7 +11,7 @@ As a 10x founding engineer, when interviewing a senior developer for expertise i
 ### 1.1 What is **libp2p**, and why is it important in decentralized applications?
 
 **Answer:**
-libp2p is a modular network stack designed for building decentralized, peer-to-peer (P2P) applications. It allows developers to create applications that can communicate directly with peers without relying on centralized servers. libp2p provides a flexible architecture that abstracts different networking protocols, enabling communication across different types of networks (e.g., WebRTC, TCP, Bluetooth).
+libp2p is a **modular network stack** designed for building decentralized, peer-to-peer (P2P) applications. It allows developers to create applications that can communicate directly with peers without relying on centralized servers. libp2p provides a flexible architecture that abstracts different networking protocols, enabling communication across different types of networks (e.g., WebRTC, TCP, Bluetooth).
 
 - **Key Benefits:**
   - **Modular**: You can select only the components you need, such as transport protocols, peer discovery mechanisms, and encryption layers.
