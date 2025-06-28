@@ -1,6 +1,6 @@
 # 🧠 **Mastering libp2p: From Foundational to Expert Level**
 
-We will explore **libp2p** in **progressive levels**, from its **core architecture** to **advanced applications and security**, with **code in Rust and Go** (the two most mature implementations), and **comparisons to other networking models**.
+
 
 ---
 

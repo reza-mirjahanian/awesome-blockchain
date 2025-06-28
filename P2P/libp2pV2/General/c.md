@@ -4,7 +4,7 @@ Welcome to your comprehensive masterclass on **libp2p**, the modular network sta
 
 ### 1\. The Foundations: Understanding the Core Principles
 
-At its heart, libp2p is not a monolithic library but a collection of protocols, specifications, and libraries that provide the fundamental building blocks for P2P networking. This modularity is its greatest strength, allowing you to compose a network stack tailored to your application's specific needs.
+At its heart, libp2p is not a **monolithic library** but a collection of protocols, specifications, and libraries that provide the fundamental building blocks for P2P networking. This modularity is its greatest strength, allowing you to compose a network stack tailored to your application's specific needs.
 
 #### 1.1. Peer Identity: The `PeerId`
 
