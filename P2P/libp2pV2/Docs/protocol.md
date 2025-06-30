@@ -80,3 +80,11 @@ The second kind of protocol registration takes three arguments: the protocol id,
 When a stream request comes in whose protocol id doesn't have any exact matches, the protocol id will be passed through all of the registered match functions. If any returns `true`, the associated handler function will be invoked.
 
 This gives you a lot of flexibility to do your own "fuzzy matching" and define whatever rules for protocol matching make sense for your application.
+
+
+
+### Dialing a specific protocol [#](https://docs.libp2p.io/concepts/fundamentals/protocols/#dialing-a-specific-protocol)
+
+When dialing a remote peer to open a new stream, the initiating peer sends the protocol id that they'd like to use. The remote peer will use the matching logic described above to accept or reject the protocol. If the protocol is rejected, the dialing peer can try again.
+
+When dialing, you can optionally provide a list of protocol ids instead of a single id. When you provide multiple protocol ids, they will each be tried in succession, and the first successful match will be used if at least one of the protocols is supported by the remote peer. This can be useful if you support a range of protocol versions, since you can propose the most recent version and fallback to older versions if the remote hasn't adopted the latest version yet.
