@@ -1,1 +1,6 @@
 P2P networks can take many forms, including file-sharing systems like [BitTorrent](https://www.bittorrent.com/), blockchain networks like [Bitcoin](https://bitcoin.org/en/) and [Ethereum](https://ethereum.org/en/), and decentralized communication standards like [Matrix](https://matrix.org/). These systems all have different challenges and tradeoffs, but they share the goal of improving upon the traditional client-server networking model.
+
+
+### Background of libp2p 
+
+libp2p was initially developed as part of the [InterPlanetary File System (IPFS)](https://ipfs.tech/)
