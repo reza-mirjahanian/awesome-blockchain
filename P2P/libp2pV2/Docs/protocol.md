@@ -63,3 +63,20 @@ If the listening peer does not support the requested protocol, it will end the s
 If the protocol is supported, the listening peer will echo back the protocol id as a signal that future data sent over the stream will use the agreed protocol semantics.
 
 This process of reaching agreement about what protocol to use for a given stream or connection is called **protocol negotiation**.
+
+-----------------
+
+### Matching protocol ids and versions 
+
+When you register a protocol handler, there are two methods you can use.
+
+The first takes two arguments: a protocol id, and a handler function. If an incoming stream request sends an exact match for the protocol id, the handler function will be invoked with the new stream as an argument.
+
+
+#### Using a match function 
+
+The second kind of protocol registration takes three arguments: the protocol id, a protocol match function, and the handler function.
+
+When a stream request comes in whose protocol id doesn't have any exact matches, the protocol id will be passed through all of the registered match functions. If any returns `true`, the associated handler function will be invoked.
+
+This gives you a lot of flexibility to do your own "fuzzy matching" and define whatever rules for protocol matching make sense for your application.
