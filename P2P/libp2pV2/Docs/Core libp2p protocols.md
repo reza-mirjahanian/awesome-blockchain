@@ -38,5 +38,26 @@ See the ping [technical specification](https://github.com/libp2p/specs/blob/mas
 
 ## Identify 
 
+| **Protocol id** | spec |  |  | implementations |
+| --- |  --- |  --- |  --- |  --- |
+| `/ipfs/id/1.0.0` | [identify spec](https://github.com/libp2p/specs/pull/97/files) | [go](https://github.com/libp2p/go-libp2p/tree/master/p2p/protocol/identify) | [js](https://github.com/libp2p/js-libp2p-identify) | [rust](https://github.com/libp2p/rust-libp2p/tree/master/protocols/identify/src) |
 
 
+The `identify` protocol allows peers to exchange information about each other, most notably their public keys and known network addresses.
+
+The basic identify protocol works by establishing a new stream to a peer using the identify protocol id shown in the table above.
+
+When the remote peer opens the new stream, they will fill out an [`Identify` protobuf message](https://github.com/libp2p/go-libp2p/blob/master/p2p/protocol/identify/pb/identify.proto) containing information about themselves, such as their public key, which is used to derive their [`PeerId`](https://docs.libp2p.io/concepts/fundamentals/peers/).
+
+Importantly, the `Identify` message includes an `observedAddr` field that contains the [multiaddr](https://docs.libp2p.io/concepts/appendix/glossary#multiaddr) that the peer observed the request coming in on. This helps peers determine their NAT status, since it allows them to see what other peers observe as their public address and compare it to their own view of the network.
+
+#### identify/push 
+
+| **Protocol id** | spec & implementations |
+| --- |  --- |
+| `/ipfs/id/push/1.0.0` | same as [identify above](https://docs.libp2p.io/concepts/fundamentals/protocols/#identify) |
+
+
+A slight variation on `identify`, the `identify/push` protocol sends the same `Identify` message, but it does so proactively instead of in response to a request.
+
+**This is useful** if a peer starts listening on a new address, establishes a new [relay circuit](https://docs.libp2p.io/concepts/nat/circuit-relay/), or learns of its public address from other peers using the standard `identify` protocol. Upon creating or learning of a new address, the peer can push the new address to all peers it's currently aware of. This keeps everyone's routing tables up to date and makes it more likely that other peers will discover the new address.
