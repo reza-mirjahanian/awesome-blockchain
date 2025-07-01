@@ -61,3 +61,20 @@ Importantly, the `Identify` message includes an `observedAddr` field that co
 A slight variation on `identify`, the `identify/push` protocol sends the same `Identify` message, but it does so proactively instead of in response to a request.
 
 **This is useful** if a peer starts listening on a new address, establishes a new [relay circuit](https://docs.libp2p.io/concepts/nat/circuit-relay/), or learns of its public address from other peers using the standard `identify` protocol. Upon creating or learning of a new address, the peer can push the new address to all peers it's currently aware of. This keeps everyone's routing tables up to date and makes it more likely that other peers will discover the new address.
+
+
+### kad-dht 
+
+`kad-dht` is a [Distributed Hash Table](https://en.wikipedia.org/wiki/Distributed_hash_table) based on the [Kademlia](https://en.wikipedia.org/wiki/Kademlia) routing algorithm, with some modifications.
+
+libp2p uses the DHT as the foundation of its [routing](https://docs.libp2p.io/concepts/discovery-routing/overview/) functionality. To learn more about DHT and the Kademlia algorithm, check out the [Distributed Hash Tables guide](https://docs.ipfs.tech/concepts/dht/) on the IPFS documentation site. In addition, check out the [libp2p implementations page](https://libp2p.io/implementations/) for updates on all the kad-libp2p implementations.
+
+
+### Circuit Relay [#](https://docs.libp2p.io/concepts/fundamentals/protocols/#circuit-relay)
+
+| **Protocol id** | spec |  | implementations |
+| --- |  --- |  --- |  --- |
+| `/libp2p/circuit/relay/0.1.0` | [circuit relay spec](https://github.com/libp2p/specs/tree/master/relay) | [go](https://github.com/libp2p/go-libp2p-circuit) | [js](https://github.com/libp2p/js-libp2p-circuit) |
+| --- |  --- |  --- |  --- |
+
+As described in the [Circuit Relay article](https://docs.libp2p.io/concepts/nat/circuit-relay/), libp2p provides a protocol for tunneling traffic through relay peers when two peers are unable to connect to each other directly. See the article for more information on working with relays
