@@ -75,18 +75,113 @@ Multiaddresses can be composed to describe multiple "layers" of addresses.
 For more detail, see [Addressing](https://docs.libp2p.io/concepts/fundamentals/addressing/), or the [multiaddr spec](https://github.com/multiformats/multiaddr), which has links to many implementations.
 
 -----------------------------
+Here's a **shorter, clearer, and more concise** version of the explanation using **bold** and *italic* formatting:
+
+---
+
+### **Multihash – A Future-Proof Hashing Format**
+
+**Multihash** is a *compact, self-describing* format for cryptographic hashes. It includes:
+
+* **Hash function type**
+* **Hash output length**
+* **Raw hash value**
+
+This info is stored as a **2-byte prefix** added to the hash, enabling systems to *identify and validate* the hash algorithm used — now and in the future.
+
+---
+
+### **Why It Matters**
+
+Most systems store only the raw hash (e.g., Git), making it *hard to change* the hash function later. **Multihash solves this** by making the function *explicitly part of the output*.
+
+---
+
+### **Where It’s Used**
+
+* **libp2p:** In `PeerId`, which is a hash of the public key.
+* **IPFS:** Uses multihashes in:
+
+  * **Content identifiers (CID)**
+  * **Peer identity**
+  * *CID v0* = raw multihash
+  * *Modern CID* = multihash + metadata (via [IPLD](https://ipld.io/))
+
+---
+
+### **Example**
+
+A **base58 multihash** like
+`QmYyQSo1c1Ym7orWxLYvCrM2EmxFTANf8wXmmE7DWjhx5N`
+starts with `Qm`, indicating:
+
+* **SHA-256**
+* **256-bit output**
+
+This is common for all SHA-256 base58 multihashes.
 
 
+
+https://github.com/multiformats/multihash
 
 -----------------------------
 
+# **Multiplexing**
 
+**Multiplexing** (*"muxing"*) combines multiple communication streams over a single logical medium.
+
+## **How It Works**
+- Multiple independent data streams → single TCP connection
+- TCP connection → single physical connection (ethernet, wifi)
+
+## **Benefits**
+- **Reduces network overhead**
+- **Improves NAT traversal** efficiency
+
+## **libp2p Implementation**
+**Supported protocols:**
+- **mplex** - simple protocol with multi-language support
+- **yamux** 
+- **spdy**
+
+*Multiple protocols can run over one connection, enabling peers to communicate more efficiently.*
 
 -----------------------------
+# **multistream**
 
+**multistream** is a lightweight convention for ***"tagging"*** binary data streams with short headers that identify the stream's content.
+
+## **libp2p Usage**
+- **Identifies protocols** used for peer communication
+- **multistream-select** handles protocol negotiation
+
+*The header tag tells peers what type of data they're receiving in each stream.*
+
+https://github.com/multiformats/multistream-select/
+
+https://github.com/multiformats/multicodec/
 
 -----------------------------
+# **NAT (Network Address Translation)**
 
+**NAT** maps addresses from one address space to another, typically at the boundary between private networks and the global internet.
+
+## **Why NAT Exists**
+- **IPv4 address space is limited**
+- Private networks use many internal addresses while consuming only **one public IP**
+
+## **The Problem**
+- ***Outgoing connections*** (private → public) are **easy**
+- ***Incoming connections*** (public → private) are **difficult**
+- Machines must explicitly tell the router to **forward traffic** for specific ports
+
+## **Impact on Network Models**
+**Client/Server:** Works well - outgoing connections provide routing information for responses
+
+**Peer-to-Peer:** Problematic - peers need to **accept incoming connections**, requiring public reachability
+
+## **libp2p Solution**
+Implements multiple **NAT Traversal** approaches to enable P2P connectivity.
 
 
 -----------------------------
