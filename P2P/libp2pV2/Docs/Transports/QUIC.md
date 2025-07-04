@@ -36,3 +36,27 @@ A web browser connection typically entails the following **(TCP+TLS+HTTP/2)**:
     -   Application data starts to flow.
 
 In contrast, HTTP/3 runs over [QUIC](https://docs.libp2p.io/concepts/transports/quic/#what-is-quic), where QUIC is similar to TCP+TLS+HTTP/2 and runs over UDP. Building on UDP allows HTTP/3 to bypass the challenges found in TCP and use all the advantages of HTTP/2 and HTTP over QUIC.
+
+
+### How does QUIC work? 
+
+QUIC combines the functionality of these layers. Instead of TCP, it builds on UDP. When a UDP datagram is lost, it is not automatically retransmitted by the kernel. QUIC therefore takes responsibility for loss detection and repair itself. By using encryption, QUIC avoids ossified middleboxes. The TLS 1.3 handshake is performed in the first flight, removing the cost of verifying the client's address and saving an RTT. QUIC also exposes multiple streams (and not just a single byte stream), so no stream multiplexer is needed at the application layer. Part of the application layer is also built directly into QUIC.
+
+In addition, a client can make use of QUIC's 0 RTT feature for subsequent connections when it has already communicated with a certain server. The client can then send (encrypted) application data even before the QUIC handshake has finished.
+
+### QUIC native multiplexing 
+
+A single QUIC packet can carry frames containing stream data from one or more streams. Since QUIC packets can be decrypted even when they're received out of order, this solves the problem of [HoL blocking](https://docs.libp2p.io/concepts/transports/quic/#key-challenges-with-tcp) that multiplexers applied on top of a TCP connection suffer from: If a packet that contains stream data for one stream is lost, this only blocks progress on this one stream. All other streams can still make progress.
+
+
+QUIC in libp2p 
+-----------------------------------------------------------------------------------
+
+libp2p **only supports bidirectiona**l streams and uses TLS 1.3 by default. Since QUIC already provides an encrypted, stream-multiplexed connection, libp2p directly uses QUIC streams, without any additional framing.
+
+To authenticate each others' peer IDs, peers encode their peer ID into a self-signed certificate, which they sign using their host's private key. This is the same way peer IDs are authenticated in the [libp2p TLS handshake](https://github.com/libp2p/specs/blob/master/tls/tls.md).
+
+💡
+To be clear, there is no additional security handshake and stream muxer needed as QUIC provides all of this by default. This also means that establishing a libp2p connection between two nodes using QUIC only takes a single RTT.
+
+Following the multiaddress format, a standard QUIC connection will look like: `/ip4/192.0.2.0/udp/65432/quic-v1/`.
