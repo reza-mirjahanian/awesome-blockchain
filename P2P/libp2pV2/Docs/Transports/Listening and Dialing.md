@@ -38,3 +38,13 @@ An example multiaddress that includes a `PeerId`:
 
 The `/p2p/QmcEPrat8ShnCph8WjkREzt5CPXF2RwhYxYBALDcLC1iV6` component uniquely identifies the remote peer using the hash of its public key. For more, see the [peer identity content](https://docs.libp2p.io/concepts/fundamentals/peers/#peer-id).
 
+Supporting multiple transports [#](https://docs.libp2p.io/concepts/transports/listen-and-dial/#supporting-multiple-transports)
+------------------------------------------------------------------------------------------------------------------------------
+
+libp2p applications often need to support multiple transports at once. For example, you might want your services to be usable from long-running daemon processes via TCP, while also accepting websocket connections from peers running in a web browser.
+
+The libp2p component responsible for managing the transports is called the [switch](https://docs.libp2p.io/concepts/appendix/glossary/#switch), which also coordinates [protocol negotiation](https://docs.libp2p.io/concepts/fundamentals/protocols/#protocol-negotiation), [stream multiplexing](https://docs.libp2p.io/concepts/multiplex/overview/), [establishing secure communication](https://docs.libp2p.io/concepts/secure-comm/overview/) and other forms of "connection upgrading".
+
+The switch provides a single "entry point" for dialing and listening, and frees up your application code from having to worry about the specific transports and other pieces of the "connection stack" that are used under the hood.
+
+The term "**swarm**" was previously used to refer to what is now called the "switch", and some places in the codebase still use the "swarm" terminology.
