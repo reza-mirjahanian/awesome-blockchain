@@ -64,7 +64,15 @@ It is particularly useful in **local area networks (LANs)**, such as **home**�
 
 -----------------------------
 
+### multiaddr 
 
+A `multiaddress` (often abbreviated `multiaddr`), is a convention for encoding multiple layers of addressing information into a single "future-proof" path structure.
+
+For example: `/ip4/192.0.2.0/udp/1234` encodes two protocols along with their essential addressing information. The `/ip4/192.0.2.0` informs us that we want the `192.0.2.0` loopback address of the IPv4 protocol, and `/udp/1234` tells us we want to send UDP packets to port `1234`.
+
+Multiaddresses can be composed to describe multiple "layers" of addresses.
+
+For more detail, see [Addressing](https://docs.libp2p.io/concepts/fundamentals/addressing/), or the [multiaddr spec](https://github.com/multiformats/multiaddr), which has links to many implementations.
 
 -----------------------------
 
