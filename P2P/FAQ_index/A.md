@@ -183,11 +183,23 @@ https://github.com/multiformats/multicodec/
 ## **libp2p Solution**
 Implements multiple **NAT Traversal** approaches to enable P2P connectivity.
 
+https://en.wikipedia.org/wiki/Network_address_translation
 
 -----------------------------
+### NAT Traversal
 
+**NAT Traversal** – *The process of establishing connections across NAT boundaries.*
 
+- Private networks use internal IP ranges (e.g., *10.0.1.x*).  
+- Routers block **incoming traffic** unless explicitly told where to route it.  
+- **Port forwarding** via router admin or **UPnP** (supported by *libp2p*) can enable access.
 
+**When NAT fails**:  
+- Multiple NAT layers can block traversal.  
+- **Circuit Relay** is used: a *public peer* acts as a relay, forwarding traffic to the private peer.  
+- Private peers advertise the relay’s *multiaddr* to receive incoming connections.
+
+https://en.wikipedia.org/wiki/Universal_Plug_and_Play
 -----------------------------
 
 
