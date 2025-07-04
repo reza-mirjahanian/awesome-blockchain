@@ -43,10 +43,24 @@ The process of opening a libp2p connection to another peer is known as "dialing"
 
 -----------------------------
 
+### Listen 
 
+The process of accepting incoming libp2p connections is known as "listening", and it allows other peers to ["dial"](https://docs.libp2p.io/concepts/appendix/glossary/#dial) up and open network connections to your peer.
 
 -----------------------------
+### mDNS 
 
+[Multicast DNS](https://en.wikipedia.org/wiki/Multicast_DNS) is a protocol for service discovery on a local network. One of libp2p's [peer routing](https://docs.libp2p.io/concepts/appendix/glossary/#peer-routing) implementations leverages mDNS to discover local peers quickly and efficiently.
+
+https://blog.matrixpost.net/what-is-multicast-dns-mdns-and-how-it-works/
+
+
+
+**Multicast DNS (mDNS)** is a protocol used in network environments **to resolve hostnames** to **IP addresses** within **small networks** without the need for **a dedicated DNS server**.
+
+It is particularly useful in **local area networks (LANs)**, such as **home** or **office networks**, where devices need to discover and communicate with each other dynamically.
+
+**mDNS** operates **by using multicast packets over UDP (User Datagram Protocol)** to send **DNS queries** to **all devices on the local network**, allowing them to respond with the **appropriate IP addresses**.
 
 -----------------------------
 
