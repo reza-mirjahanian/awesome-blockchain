@@ -281,10 +281,19 @@ A data structure that stores [PeerIds](https://docs.libp2p.io/concepts/appendix
 - **Libp2p's main method** uses a *DHT* with the **Kademlia algorithm** for efficient peer lookup.
 
 -----------------------------
+**Peer-to-Peer (P2P) Network**  
 
+A *peer-to-peer (P2P)* network allows participants (*peers* or *nodes*) to communicate **directly** on a relatively equal basis.  
+
+- Peers may have different roles, but no central *servers* are required.  
+- Unlike the *client/server* model, there’s no strict division between providers (*servers*) and requesters (*clients*).
 
 -----------------------------
+### Pubsub 
 
+In general, refers to "publish / subscribe", a communication pattern in which participants "subscribe" for updates "published" by other participants, often on a named "topic".
+
+libp2p defines a [pubsub spec](https://github.com/libp2p/specs/blob/master/pubsub/README.md), with links to several implementations in supported languages. Pubsub is an area of ongoing research and development, with multiple implementations optimized for different use cases and environments.
 
 
 -----------------------------
