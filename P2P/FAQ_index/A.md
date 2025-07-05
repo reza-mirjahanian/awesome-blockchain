@@ -156,6 +156,8 @@ https://github.com/multiformats/multihash
 
 *The header tag tells peers what type of data they're receiving in each stream.*
 
+Most core libp2p functionality is defined in terms of protocols, and libp2p protocols are identified using [multistream](https://docs.libp2p.io/concepts/appendix/glossary/#multistream) headers.
+
 https://github.com/multiformats/multistream-select/
 
 https://github.com/multiformats/multicodec/
@@ -298,21 +300,55 @@ libp2p defines a [pubsub spec](https://github.com/libp2p/specs/blob/master/pubs
 
 -----------------------------
 
+### **Protocol Negotiation** 🤝
+
+This is the process where two participants (*peers*) agree on which communication rules (*protocol*) to use.
+
+In the **libp2p** framework, this negotiation involves a few key parts:
+
+-   ***Protocol Identification***
+    -   Protocols are labeled using a method called **multistream**.
+    -   This method adds a small header to the beginning of the data stream, which includes a unique protocol name and version number.
+-   ***The Handshake***
+    -   When peers first connect, they perform a **handshake** to agree on which protocols to use for their communication.
+    -   The specific `libp2p` implementation of this handshake process is called **multistream-select**.
+
+-----------------------------
+A **Signaling Server** 📢 is a central service that helps two peers connect, especially when they are behind **NATs** (*Network Address Translators*). It doesn't handle the main communication itself, but rather helps set it up.
+
+Its primary jobs are:
+-   ***Discovery***: It finds the public IP address and port for each peer.
+-   ***Relaying***: It passes initial messages between the peers to help them find each other.
+
+The ultimate goal of a signaling server is to assist with **NAT traversal**, which is the process of establishing a direct communication link between the two peers.
 
 
 -----------------------------
+### Swarm 
 
+Can refer to a collection of interconnected peers.
 
-
------------------------------
-
-
------------------------------
-
-
+In the libp2p codebase, "swarm" may refer to a module that allows a peer to interact with its peers, although this component was later renamed ["switch"](https://docs.libp2p.io/concepts/appendix/glossary/#switch).
 
 -----------------------------
 
+### **Switch** 🔄  
+*A core **libp2p** component that:*  
+
+- **Unifies multiple transports** into a single interface 🛠️  
+  - Apps can dial peers **without needing to specify the transport**.  
+- **Manages "connection upgrades"** ⬆️  
+  - Transforms a basic ("raw") connection into one with:  
+    - 🔒 **Secure communications**  
+    - 🗣️ **Protocol negotiation**  
+    - 🌀 **Stream multiplexing**  
+
+*Note:* Historically called **"swarm"**.
+
+-----------------------------
+### Topology 
+
+In a peer-to-peer context, usually refers to the shape or structure of the [overlay network](https://docs.libp2p.io/concepts/appendix/glossary/#overlay) formed by peers as they communicate with each other
 
 
 -----------------------------
