@@ -275,7 +275,10 @@ A data structure that stores [PeerIds](https://docs.libp2p.io/concepts/appendix
 
 -----------------------------
 
+**Peer Routing** – *The process of finding a peer’s network address using its peer ID.*
 
+- Can include **local discovery** via methods like *mDNS* (multicast DNS).  
+- **Libp2p's main method** uses a *DHT* with the **Kademlia algorithm** for efficient peer lookup.
 
 -----------------------------
 
