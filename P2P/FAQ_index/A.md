@@ -353,6 +353,30 @@ In a peer-to-peer context, usually refers to the shape or structure of the [ove
 
 -----------------------------
 
+**🔌 Transport in libp2p**
+
+* **Definition**:
+  *A transport is any tech that moves data between machines.*
+  Examples:
+
+  * 🖧 **TCP** (OS-level)
+  * 🌐 **WebSocket** (browser)
+  * 🧩 Anything implementing the transport interface
+
+* **Environment Limitations**:
+
+  * Browsers (e.g. JavaScript) may only support WebSockets
+  * ❌ Not all transports are available everywhere
+
+* **🪄 Circuit Relay** (Transport Adapter):
+  *Helps peers communicate when direct transport isn't possible*
+
+  Example:
+
+  1. 🧍‍♂️ Browser peer (WebSocket-only)
+  2. 🔁 Relay peer (supports TCP & WebSocket)
+  3. 📡 TCP-only peer
+     → Relay bridges communication between them ✅
 
 
 -----------------------------
