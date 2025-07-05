@@ -89,15 +89,14 @@ Here's a **shorter, clearer, and more concise** version of the explanation using
 
 This info is stored as a **2-byte prefix** added to the hash, enabling systems to *identify and validate* the hash algorithm used — now and in the future.
 
----
 
-### **Why It Matters**
+
+**Why It Matters**
 
 Most systems store only the raw hash (e.g., Git), making it *hard to change* the hash function later. **Multihash solves this** by making the function *explicitly part of the output*.
 
----
 
-### **Where It’s Used**
+**Where It’s Used**
 
 * **libp2p:** In `PeerId`, which is a hash of the public key.
 * **IPFS:** Uses multihashes in:
@@ -107,9 +106,9 @@ Most systems store only the raw hash (e.g., Git), making it *hard to change* the
   * *CID v0* = raw multihash
   * *Modern CID* = multihash + metadata (via [IPLD](https://ipld.io/))
 
----
 
-### **Example**
+
+ **Example**
 
 A **base58 multihash** like
 `QmYyQSo1c1Ym7orWxLYvCrM2EmxFTANf8wXmmE7DWjhx5N`
@@ -200,20 +199,79 @@ https://en.wikipedia.org/wiki/Network_address_translation
 - Private peers advertise the relay’s *multiaddr* to receive incoming connections.
 
 https://en.wikipedia.org/wiki/Universal_Plug_and_Play
+
+-----------------------------
+### Node
+
+ **Node** has multiple meanings in peer-to-peer networking:
+
+## **Software Instance**
+A *node* is a running instance of P2P software. For example: "I'm running an orbit-db node on AWS version 3.2.0"
+- Also called a **peer** (terms used interchangeably)
+- Refers to the entire program participating in the network
+
+## **Node.js Runtime**
+The JavaScript runtime environment that supports js-libp2p (context usually makes this clear)
+
+## **Graph Theory Applications**
+
+### *Network Topology*
+Nodes represent connected peers in the network graph
+- Efficient graph construction and traversal enables effective **peer routing**
+
+### *Data Structures*
+Nodes are key elements in structures like:
+- **Linked lists**: nodes contain values + links to next node
+- **DAGs** (Directed Acyclic Graphs): IPFS naturally stores these
+- **IPLD** (Interplanetary Linked Data): grew from IPFS needs but useful beyond it
+
+
+-----------------------------
+### Overlay [#](https://docs.libp2p.io/concepts/appendix/glossary/#overlay)
+
+An "overlay network" or just "overlay" refers to the logical structure of a peer-to-peer network, which is "overlaid" on top of the underlying [transport mechanisms](https://docs.libp2p.io/concepts/appendix/glossary/#transport) used for lower-level network communication.
+
+
+
+An **overlay network** is a *logical P2P structure* built on top of lower-level transport protocols.
+
+It defines:
+
+* *Peer discovery and identification*
+* *Message propagation*
+* *Network behavior*
+
+**libp2p** uses overlays in:
+
+* **DHT** (Kademlia-based)
+* **PubSub** networks
+
+
+An overlay network is a virtual network built on top of an existing network (the underlay). It allows for the creation of new functionalities or services that the underlying network alone cannot provide.
+
+https://en.wikipedia.org/wiki/Overlay_network
+
 -----------------------------
 
 
+### **PeerId – Unique Cryptographic Identity**
+
+**PeerId** is a *globally unique, verifiable identifier* for a peer in **libp2p**, making impersonation easily detectable.
+
+* Typically a **multihash** of the peer’s **public key**
+* Used to retrieve the full public key (e.g., from a **DHT**) for *encryption* or *signature verification*
+* Experimental: small public keys can be *inlined* into the PeerId (not recommended for production yet)
+
+**PeerIds** are:
+
+* *Transport-independent*, enabling identity verification across networks
+* *Persistent*, unlike IP addresses, surviving location or address changes
 
 -----------------------------
 
+### Peer store 
 
------------------------------
-
-
-
------------------------------
-
-
+A data structure that stores [PeerIds](https://docs.libp2p.io/concepts/appendix/glossary/#peerid) for known peers, along with known [multiaddresses](https://docs.libp2p.io/concepts/appendix/glossary/#multiaddr) that can be used to communicate with them.
 
 -----------------------------
 
