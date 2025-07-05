@@ -1,6 +1,6 @@
 https://docs.libp2p.io/concepts/pubsub/overview/
 
-
+![alt text](image.png)
 ---
 
 
@@ -69,7 +69,7 @@ https://docs.libp2p.io/concepts/pubsub/overview/
 
 * **Grafting**: upgrading a metadata-only connection to full-message when below mesh size.
 * **Pruning**: downgrading full-message connections when above mesh size.
-  Peers run a **heartbeat** every second, performing graft/prune steps ([docs.libp2p.io][1]).
+  Peers run a **heartbeat** every second, performing graft/prune steps
 
 ---
 
@@ -93,7 +93,7 @@ https://docs.libp2p.io/concepts/pubsub/overview/
 
 * **Publish**: sender sends to all full-message peers
 * **Forward**: receivers send to their full-message peers
-* Nodes store recently seen messages to avoid duplicates and optionally validate content (e.g., chat length <100 chars); invalid messages are dropped ([docs.libp2p.io][1]).
+* Nodes store recently seen messages to avoid duplicates and optionally validate content (e.g., chat length <100 chars); invalid messages are dropped .
 
 ### Q: *What's the router concept in gossipsub?*
 
@@ -151,7 +151,7 @@ https://docs.libp2p.io/concepts/pubsub/overview/
 
 ### Q: *How is “pubsub” defined in libp2p glossary?*
 
-**A:** As “publish/subscribe”, a pattern where participants subscribe to topics and publishers publish to topics; libp2p defines a spec with multiple language implementations ([docs.libp2p.io][2], [docs.libp2p.io][1], [arxiv.org][3]).
+**A:** As “publish/subscribe”, a pattern where participants subscribe to topics and publishers publish to topics; libp2p defines a spec with multiple language implementations
 
 ---
 
@@ -160,4 +160,7 @@ https://docs.libp2p.io/concepts/pubsub/overview/
 ### Q: *How does rendezvous protocols complement pub/sub?*
 
 **A:** Rendezvous helps bootstrap pub/sub by discovering peers subscribed to topics. PubSub can even build rendezvous services via federated gossip .
+
+----------
+
 
