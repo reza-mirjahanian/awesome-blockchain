@@ -37,6 +37,8 @@ pub mod favorites {
     // We can also add a get_favorites instruction handler to return the user's favorite number and color
 }
 
+
+// Favorites::INIT_SPACE becomes a compile-time constant giving the exact number of bytes required to serialize this struct on-chain. space = ANCHOR_DISCRIMINATOR_SIZE + Favorites::INIT_SPACE
 // What we will put inside the Favorites PDA
 #[account]
 #[derive(InitSpace)]
