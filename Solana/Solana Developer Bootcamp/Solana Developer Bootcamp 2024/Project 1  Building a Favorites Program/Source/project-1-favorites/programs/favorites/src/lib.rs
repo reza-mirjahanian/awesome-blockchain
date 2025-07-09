@@ -24,6 +24,8 @@ pub mod favorites {
             hobbies
         ); 
 
+
+        // set_inner is a method provided by Anchor's Account<T> type that allows you to overwrite the inner data (T) of an Account<T> safely. It keeps the account’s discriminator (the 8-byte prefix Anchor uses for type safety).
         context.accounts.favorites.set_inner(Favorites {
             number,
             color,
