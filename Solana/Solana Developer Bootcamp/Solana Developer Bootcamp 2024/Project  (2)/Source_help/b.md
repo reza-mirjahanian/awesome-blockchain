@@ -1,263 +1,90 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Solana Voting Contract Mind Map</title>
-    <style>
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            margin: 0;
-            padding: 20px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            min-height: 100vh;
-        }
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            background: white;
-            border-radius: 20px;
-            padding: 30px;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
-        }
-        h1 {
-            text-align: center;
-            color: #2c3e50;
-            margin-bottom: 30px;
-            font-size: 2.5em;
-        }
-        .mindmap {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 30px;
-        }
-        .central-node {
-            background: linear-gradient(45deg, #FF6B6B, #4ECDC4);
-            color: white;
-            padding: 20px 40px;
-            border-radius: 50px;
-            font-size: 1.5em;
-            font-weight: bold;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-            text-align: center;
-        }
-        .branches {
-            display: flex;
-            justify-content: space-around;
-            width: 100%;
-            flex-wrap: wrap;
-            gap: 20px;
-        }
-        .branch {
-            flex: 1;
-            min-width: 300px;
-            background: #f8f9fa;
-            border-radius: 15px;
-            padding: 20px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-            transition: transform 0.3s ease;
-        }
-        .branch:hover {
-            transform: translateY(-5px);
-        }
-        .branch-title {
-            font-size: 1.3em;
-            font-weight: bold;
-            color: #2c3e50;
-            margin-bottom: 15px;
-            text-align: center;
-            padding: 10px;
-            border-radius: 10px;
-        }
-        .functions { background: linear-gradient(45deg, #667eea, #764ba2); color: white; }
-        .accounts { background: linear-gradient(45deg, #f093fb, #f5576c); color: white; }
-        .data { background: linear-gradient(45deg, #4facfe, #00f2fe); color: white; }
-        .errors { background: linear-gradient(45deg, #fa709a, #fee140); color: white; }
-        .config { background: linear-gradient(45deg, #a8edea, #fed6e3); color: #2c3e50; }
-        
-        .sub-items {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-        }
-        .sub-items li {
-            background: white;
-            margin: 10px 0;
-            padding: 15px;
-            border-radius: 10px;
-            border-left: 4px solid #3498db;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-            transition: all 0.3s ease;
-        }
-        .sub-items li:hover {
-            background: #ecf0f1;
-            border-left-color: #e74c3c;
-        }
-        .code-snippet {
-            background: #2c3e50;
-            color: #ecf0f1;
-            padding: 5px 10px;
-            border-radius: 5px;
-            font-family: 'Courier New', monospace;
-            font-size: 0.9em;
-            margin: 5px 0;
-        }
-        .connection-line {
-            width: 2px;
-            height: 30px;
-            background: linear-gradient(to bottom, #3498db, #9b59b6);
-            margin: 0 auto;
-        }
-        .key-concepts {
-            background: #fff3cd;
-            border: 2px solid #ffeaa7;
-            border-radius: 15px;
-            padding: 20px;
-            margin: 20px 0;
-        }
-        .key-concepts h3 {
-            color: #d63031;
-            margin-top: 0;
-        }
-        .comparison {
-            background: #d4edda;
-            border: 2px solid #95db95;
-            border-radius: 15px;
-            padding: 20px;
-            margin: 20px 0;
-        }
-        .comparison h3 {
-            color: #155724;
-            margin-top: 0;
-        }
-    </style>
-</head>
-<body>
-    <div class="container">
-        <h1>🗳️ Solana Voting Contract Architecture</h1>
-        
-        <div class="key-concepts">
-            <h3>🔑 Key Concepts for Solidity Developers</h3>
-            <p><strong>Account Model:</strong> Unlike Solidity's storage variables, Solana uses separate accounts to store data</p>
-            <p><strong>Seeds & Bumps:</strong> Deterministic account addresses (like CREATE2 in Solidity)</p>
-            <p><strong>Context:</strong> Contains all accounts and metadata needed for the instruction</p>
-            <p><strong>Anchor Framework:</strong> Similar to Hardhat/Foundry - provides structure and safety</p>
-        </div>
+Of course. Here's an overview and a mind map to help you understand this Solana smart contract built with the Anchor framework.
 
-        <div class="mindmap">
-            <div class="central-node">
-                Solana Voting Contract<br>
-                <div class="code-snippet">declare_id!("5s3PtT8kLYCv1WEp6dSh3T7EuF35Z6jSu5Cvx4hWG79H")</div>
-            </div>
+This smart contract creates a simple on-chain voting system. Unlike Solidity, where data and logic often reside in the same contract, Solana separates them. The logic lives in a single **program**, and data is stored in separate **accounts**. This contract uses Program Derived Addresses (PDAs) to create unique accounts for each poll and candidate, ensuring that data is organized and securely owned by the program.
 
-            <div class="connection-line"></div>
+### Code Overview
 
-            <div class="branches">
-                <div class="branch">
-                    <div class="branch-title functions">📋 Program Functions</div>
-                    <ul class="sub-items">
-                        <li>
-                            <strong>initialize_poll</strong>
-                            <div class="code-snippet">ctx: Context&lt;InitializePoll&gt;</div>
-                            Creates a new poll with name, description, and voting window
-                        </li>
-                        <li>
-                            <strong>initialize_candidate</strong>
-                            <div class="code-snippet">ctx: Context&lt;InitializeCandidate&gt;</div>
-                            Adds a candidate to an existing poll
-                        </li>
-                        <li>
-                            <strong>vote</strong>
-                            <div class="code-snippet">ctx: Context&lt;Vote&gt;</div>
-                            Records a vote for a candidate (with time validation)
-                        </li>
-                    </ul>
-                </div>
+  * **`#[program]` Module (`voting`):** This is the core logic of your smart contract, similar to a `contract` block in Solidity. It contains the functions that users can call.
 
-                <div class="branch">
-                    <div class="branch-title accounts">🏦 Account Structures</div>
-                    <ul class="sub-items">
-                        <li>
-                            <strong>InitializePoll</strong>
-                            <div class="code-snippet">seeds = [b"poll", poll_id]</div>
-                            Signer + PollAccount + SystemProgram
-                        </li>
-                        <li>
-                            <strong>InitializeCandidate</strong>
-                            <div class="code-snippet">seeds = [poll_id, candidate]</div>
-                            Signer + PollAccount + CandidateAccount
-                        </li>
-                        <li>
-                            <strong>Vote</strong>
-                            <div class="code-snippet">mut poll_account, mut candidate_account</div>
-                            Signer + PollAccount + CandidateAccount
-                        </li>
-                    </ul>
-                </div>
+      * `initialize_poll`: Creates a new poll account with a name, description, and voting period.
+      * `initialize_candidate`: Adds a new candidate to an existing poll.
+      * `vote`: Allows a user to cast a vote for a specific candidate, but only within the poll's designated time frame.
 
-                <div class="branch">
-                    <div class="branch-title data">💾 Data Structures</div>
-                    <ul class="sub-items">
-                        <li>
-                            <strong>PollAccount</strong>
-                            <div class="code-snippet">#[derive(InitSpace)]</div>
-                            poll_name, poll_description, start/end times, option_index
-                        </li>
-                        <li>
-                            <strong>CandidateAccount</strong>
-                            <div class="code-snippet">#[max_len(32)]</div>
-                            candidate_name, candidate_votes counter
-                        </li>
-                    </ul>
-                </div>
+  * **`#[derive(Accounts)]` Structs:** These structs define the accounts required by each function in the `#[program]` module. They act as a security and validation layer, ensuring that the correct accounts are passed in before any logic is executed.
 
-                <div class="branch">
-                    <div class="branch-title errors">⚠️ Error Handling</div>
-                    <ul class="sub-items">
-                        <li>
-                            <strong>VotingNotStarted</strong>
-                            <div class="code-snippet">current_time &lt;= start_time</div>
-                            Prevents voting before poll opens
-                        </li>
-                        <li>
-                            <strong>VotingEnded</strong>
-                            <div class="code-snippet">current_time &gt; end_time</div>
-                            Prevents voting after poll closes
-                        </li>
-                    </ul>
-                </div>
+      * `InitializePoll`: Specifies the accounts needed to create a poll. It initializes a new `PollAccount`.
+      * `InitializeCandidate`: Defines the accounts for adding a candidate. It requires the parent `PollAccount` and initializes a new `CandidateAccount`.
+      * `Vote`: Lists the accounts needed for voting. It requires mutable access to both the `PollAccount` and the `CandidateAccount` to check times and increment votes.
 
-                <div class="branch">
-                    <div class="branch-title config">⚙️ Configuration</div>
-                    <ul class="sub-items">
-                        <li>
-                            <strong>Account Constraints</strong>
-                            <div class="code-snippet">init_if_needed, payer = signer</div>
-                            Automatic account creation and rent payment
-                        </li>
-                        <li>
-                            <strong>Space Allocation</strong>
-                            <div class="code-snippet">space = 8 + INIT_SPACE</div>
-                            Deterministic storage size calculation
-                        </li>
-                        <li>
-                            <strong>Seeds & Bumps</strong>
-                            <div class="code-snippet">seeds = [...], bump</div>
-                            Deterministic account address generation
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </div>
+  * **`#[account]` Structs:** These define the data structures for storing state on the blockchain, much like `structs` used for storage variables in Solidity.
 
-        <div class="comparison">
-            <h3>🔄 Solidity vs Solana Comparison</h3>
-            <p><strong>Solidity:</strong> Single contract with storage variables → <strong>Solana:</strong> Multiple accounts with individual data</p>
-            <p><strong>Solidity:</strong> msg.sender → <strong>Solana:</strong> ctx.accounts.signer</p>
-            <p><strong>Solidity:</strong> require() statements → <strong>Solana:</strong> Custom error enums</p>
-            <p><strong>Solidity:</strong> Constructor → <strong>Solana:</strong> Initialize functions with account creation</p>
-        </div>
-    </div>
-</body>
-</html>
+      * `PollAccount`: Holds all the information about a specific poll.
+      * `CandidateAccount`: Stores a candidate's name and their vote count.
+
+  * **`#[error_code]` Enum:** This defines custom error messages, making it easier to debug failed transactions.
+
+-----
+
+### Mind Map of the Voting Smart Contract
+
+This mind map illustrates how the different parts of the code connect. The program's functions are the entry points, which use "Context" structs to access and manipulate the on-chain data stored in "Accounts."
+
+```
+🌳 Voting Smart Contract (Program ID: 5s3Pt...H79H)
+│
+├── 📜 Program Logic (The `#[program]` module)
+│   │
+│   ├── ✨ fn initialize_poll(...)
+│   │   │   - Action: Creates a new poll.
+│   │   │   - Connects to ➔ Context: `InitializePoll`
+│   │   │   - Modifies ➔ Data Account: `PollAccount` (writes initial data)
+│   │
+│   ├── ✨ fn initialize_candidate(...)
+│   │   │   - Action: Adds a candidate to a poll.
+│   │   │   - Connects to ➔ Context: `InitializeCandidate`
+│   │   │   - Modifies ➔ Data Accounts: `CandidateAccount` (creates it) & `PollAccount` (increments option index)
+│   │
+│   └── ✨ fn vote(...)
+│       │   - Action: Casts a vote for a candidate.
+│       │   - Connects to ➔ Context: `Vote`
+│       │   - Modifies ➔ Data Account: `CandidateAccount` (increments vote count)
+│       │   - Checks ➔ `PollAccount` for voting start/end times.
+│       │   - Throws ➔ Custom Errors: `VotingNotStarted` or `VotingEnded`.
+│
+├── 🔗 Account Contexts (The `#[derive(Accounts)]` structs)
+│   │
+│   ├── 🏗️ struct InitializePoll
+│   │   │   - Purpose: Validates and provides accounts for `initialize_poll`.
+│   │   │   - Contains:
+│   │   │     - `signer`: The user creating the poll (pays for account creation).
+│   │   │     - `poll_account`: A new Program-Derived Address (PDA) for the poll data. The `init_if_needed` flag creates the account.
+│   │   │     - `system_program`: Required by Solana to create new accounts.
+│   │
+│   ├── 👨‍💼 struct InitializeCandidate
+│   │   │   - Purpose: Validates accounts for `initialize_candidate`.
+│   │   │   - Contains:
+│   │   │     - `signer`: The user adding the candidate.
+│   │   │     - `poll_account`: The existing poll this candidate belongs to.
+│   │   │     - `candidate_account`: A new PDA for the candidate, linked to the poll via seeds.
+│   │
+│   └── 🗳️ struct Vote
+│       │   - Purpose: Provides the necessary accounts for the `vote` function.
+│       │   - Contains:
+│       │     - `signer`: The user who is voting.
+│       │     - `poll_account`: The poll being voted in (mutable).
+│       │     - `candidate_account`: The candidate being voted for (mutable, to update votes).
+│
+├── 🗃️ Data Storage (The `#[account]` structs)
+│   │
+│   ├── 📊 struct PollAccount
+│   │   │   - Stores: poll_name, poll_description, poll_voting_start, poll_voting_end, poll_option_index.
+│   │
+│   └── 👤 struct CandidateAccount
+│       │   - Stores: candidate_name, candidate_votes.
+│
+└── ⚠️ Error Handling (The `#[error_code]` enum)
+    │
+    ├── 🚫 enum ErrorCode
+    │   │   - `VotingNotStarted`: Returned if a vote is cast before the start time.
+    │   │   - `VotingEnded`: Returned if a vote is cast after the end time.
+```
