@@ -1,5 +1,7 @@
 ## 🗳️ **Solana Voting dApp: Full Local Setup and Smart Contract Walkthrough**
 
+![alt text](image-1.png)
+
 ---
 
 ### 📌 **Project Overview**
