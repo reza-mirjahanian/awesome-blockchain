@@ -1,3 +1,5 @@
+The `#[derive(Accounts)]` macro is used to annotate a struct that specifies the accounts required for a particular instruction, where each field represents a separate **account**.
+
 ```rust
 use anchor_lang::prelude::*;
  
