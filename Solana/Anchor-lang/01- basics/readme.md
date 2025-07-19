@@ -1,0 +1,1 @@
+https://docs.rs/anchor-lang/latest/anchor_lang/index.html
