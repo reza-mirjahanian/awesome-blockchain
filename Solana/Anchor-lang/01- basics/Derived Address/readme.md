@@ -28,7 +28,7 @@ The `seeds` constraint specifies the optional values used to derive the PDA.
 
 * Use an empty array `[]` to define a PDA without optional seeds.
 
-```
+```rust
 #[derive(Accounts)]
 pub struct InstructionAccounts<'info> {
     #[account(
@@ -85,7 +85,7 @@ This example below shows the relationship between the program, IDL, and client.
 
 The program below defines a `pda_account` using a static seed (`b"hello_world"`) and the signer's public key as a dynamic seed.
 
-```
+```rust
 use anchor_lang::prelude::*;
  
 declare_id!("BZLiJ62bzRryYp9mRobz47uA66WDgtfTXhhgM25tJyx5");
@@ -108,4 +108,6 @@ pub struct InstructionAccounts<'info> {
         seeds = [b"hello_world", signer.key().as_ref()],
         bump,
     )]
+        pub pda_account: SystemAccount<'info>,
+}
 ```
