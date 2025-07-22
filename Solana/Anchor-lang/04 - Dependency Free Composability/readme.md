@@ -15,3 +15,15 @@ how to use the `declare_program!()` macro in two scenarios:
 
 1.  Making Cross Program Invocations (CPIs) from one program to another program
 2.  Building client-side transactions to invoke a program's instructions
+
+-----------
+
+![alt text](image.png)
+
+![alt text](image-1.png)
+
+The `declare_program!()` macro takes a single argument - the name of the program's IDL file (e.g. `example.json`):
+
+```
+declare_program!(example);  // Looks for /idls/example.json
+```
