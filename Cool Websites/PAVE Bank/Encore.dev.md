@@ -94,7 +94,7 @@ Check out this \~10-min crash course to see how quickly you can get started!
 
 ---
 
-## ✅ In Summary
+## ✅ In Summary:
 
 Encore.dev is an end-to-end development platform built for modern distributed systems. It combines a high-performance, type-safe backend framework with fully integrated infrastructure, powerful local tooling, and optional cloud automation—all designed to reduce complexity and increase developer productivity.
 
