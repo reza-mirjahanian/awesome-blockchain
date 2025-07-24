@@ -34,7 +34,7 @@ Here’s a comprehensive look at **Encore.dev**, a modern backend framework desi
 
 ### 6. **AI-Enabled Workflow**
 
-* Encore’s declarative model integrates with AI tools to generate complete systems (services, infra, docs) and validate code automatically ([Encore][1]).
+* Encore’s declarative model integrates with AI tools to generate complete systems (services, infra, docs) and validate code automatically 
 
 ---
 
