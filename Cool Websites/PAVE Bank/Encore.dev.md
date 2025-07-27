@@ -36,6 +36,7 @@ Here’s a comprehensive look at **Encore.dev**, a modern backend framework desi
 
 * Encore’s declarative model integrates with AI tools to generate complete systems (services, infra, docs) and validate code automatically 
 
+
 ---
 
 ## 👨‍💻 Example: A Simple API (TypeScript)
