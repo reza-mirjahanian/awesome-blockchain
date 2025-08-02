@@ -1,6 +1,6 @@
 
 # 📘 Glossary of Terms
-
+https://www.investopedia.com/terms/z/zero-couponbond.asp
 ---
 
 ### **High Capital**
