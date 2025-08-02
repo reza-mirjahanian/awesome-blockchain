@@ -1,6 +1,6 @@
 # 📈 **Fixed Yield on Pendle: Mastering Principal Tokens (PT)**
 
----
+![alt text](image.png)
 
 ## 🧠 **Understanding Yield Dynamics in DeFi**
 
