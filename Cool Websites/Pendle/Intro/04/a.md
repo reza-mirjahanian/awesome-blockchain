@@ -31,7 +31,7 @@ Pendle pools are composed of two specific types of assets:
   * **Standard Yield Token (SY)**: A wrapped version of the underlying yield-bearing asset, making it compatible with the Pendle protocol. For simplicity, we can think of this as the **underlying asset** itself.
 
 -----
-
+![alt text](image.png)
 # Anatomy of a Pendle Pool: PT & SY
 
 ## Principal Token (PT)
