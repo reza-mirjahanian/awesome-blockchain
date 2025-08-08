@@ -17,3 +17,9 @@ https://stake.sonic.game/
 [The Sonic Testnet is now live. Explore it through Sonic Odyssey](https://odyssey.sonic.game/)
 
 ---
+
+RUSH Onchain Game Development
+-------------------------------
+
+Rush is a Rust-based ECS framework that streamlines blockchain integration, allowing any game to
+become a Fully-Onchain Game or Autonomous World.
