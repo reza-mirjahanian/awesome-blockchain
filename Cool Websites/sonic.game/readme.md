@@ -7,6 +7,13 @@ Sonic SVM is the **first chain extension on Solana** - for games, applications,
 # Vision
 Sonic’s vision is to expand the existing Solana Gaming Ecosystem to process millions of requests per second per game and settle them back onto Solana L1.
 
+HyperGrid: Solana's State-of-the-Art Layer 2
+--------------------------------------------
+
+HyperGrid is a parallel processing framework designed to introduce customizability and scale, while being natively composable to Solana.
+[HyperGrid Overview](https://www.sonic.game/hypergrid)
+
+
 TRADE SONIC
 -----------
 https://foundation.sonic.game/swap
