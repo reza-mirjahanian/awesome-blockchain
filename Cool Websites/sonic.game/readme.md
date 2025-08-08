@@ -3,6 +3,10 @@ ExperienceSuperSonicAdoption
 
 Sonic SVM is the **first chain extension on Solana** - for games, applications, and industry's first TikTok App Layer. Built with **Sonic HyperGrid Framework**, onboarding the next billion users onto Web3.
 
+
+# Vision
+Sonic’s vision is to expand the existing Solana Gaming Ecosystem to process millions of requests per second per game and settle them back onto Solana L1.
+
 TRADE SONIC
 -----------
 https://foundation.sonic.game/swap
