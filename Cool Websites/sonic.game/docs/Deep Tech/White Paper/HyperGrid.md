@@ -53,3 +53,65 @@
   *Creating a dedicated grid ensures performance isolation and operational stability for high-throughput dAPPs.*
 
 ![alt text](image-1.png)
+
+---
+
+## 🎮 Integration Scenarios
+
+- **SDK Grid Construction**  
+  *Use the HyperGrid SDK to build a grid and stake a fee to register on the Shared Sequencer Network.*
+
+- **Independent Sequencer Network**  
+  *Deploy a standalone Sequencer Network alongside your grid that runs autonomously without continuous service connections.*
+
+## 🚀 Developer Deployment Options
+
+- **Public Grid Deployment**  
+  *Ideal for early-stage dAPPs or those with low-frequency interactions to leverage the HyperGrid public Grid.*
+
+- **EVM/SVM Contract Deployment**  
+  *dAPPs simply upload and deploy contract or program code compatible with EVM or SVM, regardless of grid form.*
+
+## 🔄 Cross-Compatibility
+
+- **Sonic SVM Compatibility**  
+  *Supports contracts and code from EVM or SVM environments at native performance for seamless deployment and migration.*
+
+---
+## 🔗 Bridging SOL to HyperGrid
+
+### 🧭 **Initial Transfer Process**
+- **SOL Sent to Program Address**  
+  *Users initiate the bridge by sending SOL to a specific address managed by HyperGrid validators on Solana Mainnet.*
+
+### 🔐 **Validator Verification**
+- **Multi-Signature Aggregation**  
+  *Validators use BLS (Boneh-Lynn-Shacham) signatures to securely combine multiple signatures into one compact proof.*
+- **Transaction Attestation**  
+  *The aggregated signature confirms the transaction’s authenticity for Grid recognition.*
+
+### 🪙 **SOL Minting on Grid**
+- **Grid Verification**  
+  *Once verified, the Grid mints an equivalent amount of SOL.*
+- **State Binding**  
+  *Minted SOL on the Grid is bound to the state of the original SOL on the Mainnet, ensuring consistency and trust.*
+----------
+
+## 🔄 Exiting SOL from Grids to Mainnet — Key Points
+
+### 1️⃣ **Standard Withdrawal Transaction**
+
+* 📝 **User initiates withdrawal** *within the Grid*.
+* 🛡 **Grid validators generate BLS signature** *reflecting the quorum's approval*.
+* 📤 **Signature sent to Mainnet** *triggers unlocking and release of corresponding SOL*.
+
+### 2️⃣ **Emergency Exit Protocol**
+
+* 🚨 **Triggered when Grid is inoperative** *user issues emergency exit directly on Mainnet*.
+* 🔍 **Mainnet detects lapse** *in Grid’s state commitments — indicates operational failure*.
+* 🛠 **Automatic claim mechanism** *secures user funds based on last known Grid state*.
+* 📌 **State root updated** *on Mainnet to reflect user’s adjusted holdings after exit*.
+
+### 🛡 **Continuous Access Assurance**
+
+* 🔄 **Two-tiered system** *ensures users can always retrieve assets, even during Grid anomalies*.
