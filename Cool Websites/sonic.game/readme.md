@@ -103,12 +103,4 @@ Sonic natively integrates tools for:
 
 ---
 
-## Newsletter Subscription
-Stay updated with Sonic’s latest developments through their **email subscription**:
-> *"Be the first to know about the last updates and launches."*
 
-[Subscribe to Sonic’s newsletter](#) (form not shown in current content).
-
---- 
-
-*Last Updated: Based on content as of the provided webpage.*
