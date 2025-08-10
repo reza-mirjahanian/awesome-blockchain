@@ -1,5 +1,5 @@
 ### 🏛️ Architectural Overview
-
+![alt text](image.png)
 *   **Multi-Grid Approach**: HyperGrid uses a network of **semi-autonomous grids**.
 *   **Anchoring**: Each grid is anchored to the **Solana mainnet** for *consensus and finality*. ⚓
 
