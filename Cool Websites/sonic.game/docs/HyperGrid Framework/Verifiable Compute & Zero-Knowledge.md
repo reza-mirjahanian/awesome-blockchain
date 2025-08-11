@@ -1,5 +1,5 @@
 # ⚡ Verifiable Compute & Zero-Knowledge Proofing on HyperGrid
-
+https://docs.lightprotocol.com/
 ---
 
 ## 🖥 About the **Sonic zk-Coprocessor**
@@ -37,7 +37,7 @@
 ---
 
 ### **Phase 2 — Full Zero-Knowledge Rollup Integration**
-
+![alt text](image-8.png)
 * **Goal**: *Instant finality & combined proof system*.
 * **Enhancement**: Merge **validity proof** + **consistency proof** → single zk-proof.
 * **Tech Stack**: zk-circuits for SVM via **Light Protocol** or native Solana zk primitives.
