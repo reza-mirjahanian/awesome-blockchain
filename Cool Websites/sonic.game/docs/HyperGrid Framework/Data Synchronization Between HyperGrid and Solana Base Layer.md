@@ -1,5 +1,5 @@
 # **HyperGrid & Solana Data Synchronization: Key Points**  
-
+![alt text](image-2.png)
 ## **📖 Reading Data from Solana to HyperGrid**  
 1. **Initial Loading**:  
    - *Pre-existing Solana program loaded from Storage into HyperGrid's Cache.*  
@@ -16,7 +16,7 @@
    - *Read response sent back to **Sonic RPC** → forwarded to User.*  
 
 ---  
-
+![alt text](image-3.png)
 ## **🔄 Synchronizing Updates from HyperGrid to Solana**  
 1. **Initial Loading**:  
    - *Pre-existing Program loaded into HyperGrid's Cache.*  
