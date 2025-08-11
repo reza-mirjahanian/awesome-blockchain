@@ -1,36 +1,54 @@
-### 🔍 Blockchain Data Challenges
-- **Blockchain Networks** aggregate data via *blocks, transactions, and metadata*.
-- Querying APIs are *openly available and well-documented* for direct data fetching 📡.
-- Baseline APIs suffice for *small DApps with minimal historical needs* but fail for larger requirements due to:
-  - **Performance** limitations 🚀.
-  - **Scalability** constraints 📈.
+🧠 **Sorada Architecture Overview**  
 
-### ⚡ Performance Issues
-- Companies lack control over *response times and data optimizations* in network APIs.
-- Impacts *website speed, SEO, and conversion rates* 💨.
-- Critical for *business requirements* affecting user experience and efficiency.
+![alt text](image.png)
 
-### 📊 Scalability Issues
-- Inability to *adapt elastically* to user demands via network APIs.
-- Affects *financial feasibility* of operations beyond just performance 🏦.
-- Limits provisioning for growing data needs.
+🔹 *A high-performance, distributed system designed to optimize Solana read operations through modular services and resilient data storage.*
 
-### 🛠️ Blockchain Indexing Solution
-- **Blockchain Indexing** involves *querying historical data from the network and storing it in-house* 🗄️.
-- Simplified pipeline:
-  1. Fetch *blocks and transactions* using network APIs.
-  2. Store data in *internal infrastructure*.
-  3. Query via *internally provisioned endpoints* for products.
-- Provides *internal control* over **performance** and **scalability** 🔄.
+---
 
-### 📈 Sonic SVM Case Study
-- Sonic's infrastructure showed *85% archival read requests* vs *15% write requests* 📊.
-- Reads include *getTransaction, getBlock, getSignaturesForAddress* 🔍.
-- Bottlenecks in *bandwidth and storage costs* from direct requests to Hypergrid 💥.
-- Solved by *decoupling archival reads* into Sorada, reducing infrastructure strain.
+⚙️ **Core Services**
 
-### 🌟 What is Sorada?
-- **Sorada** is Sonic's *data solution* for decoupling **archival read requests** from **network write requests** 🔀.
-- Shifts reads to *separate data-optimized infrastructure*, mitigating *bandwidth and storage bottlenecks* 🛡️.
-- Enables SVM validators to *allocate more compute to transaction processing* ⚙️.
-- Optimizes *read performance* by *30–40x* 🚀.
+1. **Lite RPC**  
+   - *Lightweight RPC service optimized for Solana read requests*  
+   - 🚀 Stripped-down version of a Solana full node  
+   - 📥 Supports only data retrieval endpoints (e.g., `getBlock`, `getTransaction`)  
+   - ⚡ Enhances speed and efficiency by removing unnecessary components  
+
+2. **Ingestor**  
+   - 🔄 Pulls real-time data from the **Sonic Hypergrid**  
+   - 💾 Persists ingested data into **Big Table** storage  
+   - 🕒 Ensures up-to-date data availability for querying  
+
+3. **Replicator**  
+   - 🔁 Copies indexed data from **Big Table** to a **Distributed Filesystem**  
+   - 🛡️ Improves data durability and fault tolerance  
+   - 🌐 Enables resilient, long-term data preservation across multiple nodes  
+
+---
+
+🗄️ **Data Repositories**
+
+1. **Cache**  
+   - ⏱️ Enables fast retrieval of frequently accessed data  
+   - 📦 Reduces load on primary storage by serving repetitive requests efficiently  
+   - 🔄 *Temporary storage layer for performance optimization*
+
+2. **Big Table**  
+   - 🏗️ Primary data store for structured, indexed data  
+   - 📊 Scales horizontally to handle large volumes of blockchain data  
+   - 🔍 Optimized for high-throughput read operations  
+
+3. **Distributed Filesystem**  
+   - 🧩 Self-replicating storage across multiple nodes  
+   - 🔒 Ensures data safety and resilience against node failures  
+   - 📁 Used for long-term, secure data persistence via replication from Big Table  
+
+---
+
+🎯 **Key Insights**
+
+- 🧩 **Modular design** enables scalability and focused optimization  
+- 🔁 **Data flows** from real-time ingestion → primary storage → replicated backup  
+- 💡 **Separation of concerns**: Each service handles a specific role in the data lifecycle  
+- 🌐 **Resilience by design**: Replication + distributed storage = high availability  
+- ⚖️ **Performance + Reliability**: Cache for speed, Big Table for scale, DFS for safety 🛡️
