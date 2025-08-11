@@ -1,4 +1,5 @@
 ## 🏗 Sorada Architecture — Core Concepts
+![alt text](image.png)
 
 ### ⚙ **Services**
 

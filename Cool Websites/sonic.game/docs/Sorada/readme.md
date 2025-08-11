@@ -1,6 +1,5 @@
 🧠 **Sorada Architecture Overview**  
 
-![alt text](image.png)
 
 🔹 *A high-performance, distributed system designed to optimize Solana read operations through modular services and resilient data storage.*
 
