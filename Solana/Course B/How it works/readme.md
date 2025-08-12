@@ -103,3 +103,17 @@ prioritization fee = compute unit price (micro-lamports) x compute unit limit
 ```rust
  Substantial changes to the core Solana protocol go through a formal, transparent process of submitting a Solana Improvement Document (SIMD) which community members and core engineering will publicly critique. SIMDs are then  voted on by the network.
 ``` 
+
+
+**Solana Transaction Flow**
+
+1. **Wallet Connection** – User connects their wallet, allowing the app to read the public key. The key remains encrypted and sandboxed.
+2. **Transaction Message Creation** – Built based on user actions (e.g., token swap with specified amounts and slippage).
+3. **Signing** – The wallet signs the message with the private key after prompting the user for confirmation, often showing a transaction simulation.
+4. **Submission** – The signed transaction is sent to an RPC provider, which forwards it to validators. RPCs also enable transaction simulation and on-chain data retrieval via JSON-RPC or WebSocket endpoints.
+
+**Failed Transactions**
+
+* On Solana, “failed transactions” still consume fees and execute successfully at the runtime level but end with a logical failure.
+* Over 80% of these are due to **error code 0x1771** (exceeded slippage).
+* 95% of such transactions are sent by just 0.1% of active addresses, mostly automated arbitrage bots.
