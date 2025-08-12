@@ -91,3 +91,15 @@ A transaction (or **transaction message**) has four parts:
 total fee = prioritization fee + base fee
 prioritization fee = compute unit price (micro-lamports) x compute unit limit
 ``` 
+
+
+**Solana Transaction Fees**
+
+* **Base Fee:** Fixed at 5,000 lamports per signature (usually 1 signature per transaction), regardless of complexity.
+* **Prioritization Fee:** Optional under normal load, but often required during congestion. Priced in micro-lamports (1 millionth of a lamport) per compute unit to incentivize validators to include the transaction.
+* **Fee Distribution:** Currently, 50% of all fees are burned and 50% go to the block producer. Under SIMD-96, 100% of prioritization fees will go to the block producer; base fee split remains the same.
+
+
+```rust
+ Substantial changes to the core Solana protocol go through a formal, transparent process of submitting a Solana Improvement Document (SIMD) which community members and core engineering will publicly critique. SIMDs are then  voted on by the network.
+``` 
