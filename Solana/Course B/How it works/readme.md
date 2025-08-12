@@ -70,9 +70,6 @@ FDKJvWcJNae6wecbgDYDFPCfgs14aJnVsUfWQRYWLn4Tn
 
 ![alt text](image-2.png)
 
-Here’s a cleaned and compact version while keeping it technically precise:
-
----
 
 **Solana Transaction Structure**
 A transaction (or **transaction message**) has four parts:
@@ -90,4 +87,7 @@ A transaction (or **transaction message**) has four parts:
 
 ---
 
-If you’d like, I can also make a **developer cheat sheet diagram** showing how these four parts fit together visually. That would make it very easy to reference.
+```rust
+total fee = prioritization fee + base fee
+prioritization fee = compute unit price (micro-lamports) x compute unit limit
+``` 
