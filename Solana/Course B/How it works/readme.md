@@ -116,4 +116,4 @@ prioritization fee = compute unit price (micro-lamports) x compute unit limit
 
 * On Solana, “failed transactions” still consume fees and execute successfully at the runtime level but end with a logical failure.
 * Over 80% of these are due to **error code 0x1771** (exceeded slippage).
-* 95% of such transactions are sent by just 0.1% of active addresses, mostly automated arbitrage bots.
+* 95% of such transactions are sent by just 0.1% of active addresses, mostly automated **arbitrage bots**.
