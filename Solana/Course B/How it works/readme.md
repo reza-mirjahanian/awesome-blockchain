@@ -1,7 +1,7 @@
-![alt text](image.png)
 
- Transaction Lifecycle:
---------
+
+##  Transaction Lifecycle:
+![alt text](image.png)
 
 * Users send transactions to the current leader, who compiles, executes, and records them in a block.
 
@@ -10,7 +10,7 @@
 
 --
 
-### Wallets
+## Wallets
 
 * **Public keys** are 32-byte values, represented as Base58-encoded strings.
 * **Private keys** (secret keys) are also 32 bytes and function as the password granting full access to an account.
@@ -42,5 +42,30 @@ FDKJvWcJNae6wecbgDYDFPCfgs14aJnVsUfWQRYWLn4Tn
 167,61,6,246,107,39,51,110,185,81,13,81,16,182,30,71]
 ```
 
+![alt text](image-3.png)
+
+
+**Key Derivation**
+
+* Private keys can be generated from mnemonic seed phrases (12 or 24 words), commonly used for backup and recovery.
+* Multiple keys can be deterministically derived from a single seed phrase.
+
+**Cryptography**
+
+* Solana uses **Ed25519** elliptic curve cryptography for public/private keys.
+* Ed25519 offers small key/signature sizes, fast computation, and resistance to common attacks.
+* Each Solana wallet address corresponds to a point on the Ed25519 curve.
+
+**Transactions & Signing**
+
+* Transactions are signed with the private key; signatures are verified using the public key.
+* The signature ensures authenticity, prevents tampering, and uniquely identifies the transaction.
+* Transactions are the only way to change state on Solana and are **atomic**—they either execute fully or fail entirely.
+
+
+
 ---
 
+## A Solana Transaction
+
+![alt text](image-2.png)
