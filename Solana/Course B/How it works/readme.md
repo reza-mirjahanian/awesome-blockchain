@@ -69,3 +69,25 @@ FDKJvWcJNae6wecbgDYDFPCfgs14aJnVsUfWQRYWLn4Tn
 ## A Solana Transaction
 
 ![alt text](image-2.png)
+
+Here’s a cleaned and compact version while keeping it technically precise:
+
+---
+
+**Solana Transaction Structure**
+A transaction (or **transaction message**) has four parts:
+
+1. **Header** – References the account address list and marks which accounts must sign the transaction.
+2. **Account Addresses** – Lists all accounts read or written during execution. This explicit list is unique to Solana, enabling performance optimizations but requiring developers to determine all involved accounts beforehand.
+3. **Recent Blockhash** – Prevents duplicate or stale transactions. Expires after 151 blocks (\~1 minute). RPCs retry every \~2 seconds until the transaction is finalized or the blockhash expires.
+4. **Instructions** – Each specifies the program to run, accounts involved, and necessary data (e.g., transfer, mint, burn, create account, close account).
+
+**Constraints**
+
+* **Size limit:** 1,232 bytes.
+* **Account limit:** Restricted number of referenced accounts.
+* **Compute limit:** Measured in **compute units (CUs)**, representing processing cost.
+
+---
+
+If you’d like, I can also make a **developer cheat sheet diagram** showing how these four parts fit together visually. That would make it very easy to reference.
