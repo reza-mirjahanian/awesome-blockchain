@@ -845,3 +845,87 @@ that are not ancestors of the finalized bank are pruned
    - Enables **full state replay from scratch** for node bootstrap or forensic analysis.  
 2. **Google Bigtable Instance**  
    - Stores processed **block data** for fast historical queries and indexing.  
+
+
+   ----
+
+   ## **Solana Inflation & Staking Rewards**  
+
+---
+
+### **Inflation Mechanism**  
+- New **SOL tokens** are generated **each epoch** to fund staking rewards.  
+- Causes a **wealth transfer**:  
+  - Non-stakers lose relative network share.  
+  - Stakers gain proportional rewards.  
+- **Inflation schedule:**  
+  - Started (early 2021) at **8%** annual rate.  
+  - Decreases by **15% per year** until stabilizing at **1.5% long-term**.  
+
+---
+
+### **Staking Participation**  
+- Any SOL holder can stake to:  
+  - **Earn rewards**.  
+  - **Help secure** the network.  
+- Staking involves assigning tokens to **one or more validators**.  
+
+---
+
+### **Delegation**  
+- **Delegating:** Assigning stake to a validator as a sign of trust.  
+- Tokens remain under the owner’s control — validator **cannot spend or take ownership**.  
+- All staking, unstaking, and redelegation actions take effect **at the start of the next epoch**.  
+
+
+
+**Solana Validator Voting, Credits, and Inflation Rewards**
+
+---
+
+### **Voting Process & Costs**
+- **Voting Mechanics:**
+  - Validators submit vote transactions for each slot; only accurate, successful votes earn *credits*.
+  - Each vote transaction costs **0.000005 SOL**, with *no priority fee* required.
+- **Cost Structure:**
+  - Voting expenses typically total about **1 SOL per day per validator**—the main ongoing cost of validation.
+
+---
+
+### **Earning Credits**
+- *During an epoch*, validators accumulate credits for successful votes.
+- Credits measure *participation* and *contribute to reward calculation* at epoch end.
+- Example:  
+  - *Top validators:* Successfully vote on ~90% of slots.
+  - *Average validator:* ~80% slot voting success (~345,600 credits per 432,000-slot epoch).
+  - *Skipped slots* (no block produced): 2–10% of slots; cannot be voted on and yield no credits.
+
+---
+
+### **Inflation Reward Distribution**
+- **Reward Pooling:**
+  - Total epoch inflation is divided by credits earned across all validators.
+  - A validator’s share = `(validator_credits / total_credits)`, further weighted by **stake amount**.
+- **Reward Formula:**
+  - *If a validator has 1% of total stake and average credits, they earn ≈1% of inflation pot.*
+  - *Above-average credits → higher rewards; below-average credits → lower rewards.*
+
+---
+
+### **Factors Affecting Validator & Staker Returns**
+- **Voting Performance:** Higher voting/credit rate directly increases SOL rewards.
+- **Commission Rate:** Validators set a commission, reducing delegator returns.
+- **Delinquency:** Being offline or out-of-sync (delinquent) reduces both credits and rewards.
+- **Block Production:** Validators acting as slot leaders receive additional **block rewards**.
+
+---
+
+### **Key Points**
+- *Validator returns (APY) vary based on voting performance, commission rate, and uptime.*
+- *Main validator cost is from voting transactions, not hardware or entry fees.*
+- *Delegators should consider performance and commission when selecting validators.*
+
+
+```rust
+ Price of LST = (total staked SOL in pool * price of SOL) / total LST minted
+``` 
