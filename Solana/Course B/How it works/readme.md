@@ -120,3 +120,105 @@ prioritization fee = compute unit price (micro-lamports) x compute unit limit
 
 
 ![alt text](image-4.png)
+
+
+----------
+
+**RPC Nodes in Solana**
+RPCs (Remote Procedure Calls) refer to RPC nodes, which act as gateways for interacting with and reading data from the Solana network. These nodes run the same software as full validators but with different settings, enabling them to simulate transactions accurately and maintain an up-to-date view of the network state.
+
+As of now, Solana has over 4,000 RPC nodes. Unlike full validator nodes, RPC nodes:
+
+* Hold no stake in the network.
+* Cannot vote or produce blocks.
+* Operate mainly as a paid service for developers, since they do not earn staking rewards.
+
+This is different from most blockchains, where validator and RPC nodes are often the same entity.
+
+---
+
+**Transaction Flow and Leader Schedule**
+Solana was designed to operate **without a mempool**. Instead of broadcasting transactions randomly across the network (as in traditional gossip-based blockchains), all transactions are sent directly to a predetermined *leader* for each slot.
+
+#### Process:
+
+1. An RPC node receives a transaction message.
+2. The RPC forwards it to the slot’s leader.
+3. A leader schedule is generated before each epoch (\~every 2 days).
+4. The epoch is divided into slots (400 ms each).
+5. Validators with more stake have a higher probability of being chosen as leaders.
+6. When it’s a validator’s turn, it switches to *leader mode*, processes transactions, and broadcasts the resulting block to the network.
+
+---
+
+**Stake-Weighted Quality of Service (SWQoS)**
+In early 2024, Solana introduced **Stake-Weighted Quality of Service** to reduce spam and improve Sybil resistance. This system:
+
+* Prioritizes transactions relayed through staked validators.
+* Allocates higher transaction forwarding capacity to validators with more stake.
+* Limits spam from non-staked nodes by giving them less priority.
+
+---
+
+**Solana Clusters**
+Solana operates four clusters:
+
+* **Localnet** – Local testing environment.
+* **Testnet** – Network testing by validators and developers.
+* **Devnet** – Public testing with test tokens.
+* **Mainnet-Beta** – The production network where tokens have real value.
+
+When people refer to “the Solana network,” they almost always mean **Mainnet-Beta**.
+
+
+
+![alt text](image-5.png)
+
+---------
+
+## **Stake-Leasing Model & SWQoS Allocation**  
+
+Under this model, **validators** can enter agreements to **lease their stake-weighted capacity** to **RPC nodes**.  
+
+- **RPC Node Benefit:** Gains **increased bandwidth**, enabling higher **transaction inclusion rates** in blocks.  
+- **Capacity Allocation:**  
+  - **80%** of a leader’s capacity (**~2,000 connections**) reserved for **Stake-Weighted Quality of Service (SWQoS)**.  
+  - **20%** (**~500 connections**) reserved for **transaction messages from non-staked nodes**.  
+
+This allocation mirrors **priority lanes on highways** — drivers pay a toll to **bypass congestion**.  
+
+### **Impact on the Solana Ecosystem**  
+- **Increased requirements** for forwarding transactions to leaders.  
+- **Reduced effectiveness** of spam attacks.  
+- **Incentive for high-traffic apps** to **vertically integrate**, by:  
+  - Running their **own validator nodes**, or  
+  - Securing access to **staked connections**.  
+- Result: **Privileged, low-latency access** to leader nodes → **enhanced transaction throughput**.  
+
+---
+
+## **A QUIC Note**  
+
+In **late 2022**, Solana adopted the **QUIC networking protocol** for transaction message transmission to leaders.  
+
+- **Reason for Adoption:** Network disruptions caused by **bot-driven NFT mint spamming**.  
+- **Protocol Benefits:**  
+  - Enables **rapid, asynchronous communication** like UDP.  
+  - Offers **secure sessions** and **flow control strategies** like TCP.  
+  - Limits **traffic per source**, protecting against spam and focusing on **genuine transactions**.  
+  - Uses **separate streams**, so dropped transactions **don’t block others**.  
+
+**In Short:** QUIC combines the **speed of UDP** with the **reliability of TCP**, optimizing Solana’s transaction pipeline under high-load conditions.
+
+---
+
+## **Stake-Weighting in Solana**  
+
+**Stake-weighting** is a **foundational principle** across Solana’s architecture, influencing:  
+- **Voting rewards**  
+- **Turbine tree structure**  
+- **Leader scheduling**  
+- **Gulf Stream transaction forwarding**  
+- **Gossip network message propagation**  
+
+Validators with **greater stake** receive **higher trust** and **priority roles** in the network.  
