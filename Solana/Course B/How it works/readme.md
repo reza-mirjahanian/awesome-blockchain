@@ -1,5 +1,118 @@
 
 
+### **1. Core Concepts & Transaction Lifecycle**
+* **1.1. Transaction Lifecycle**
+* **1.2. Wallets & Cryptography**
+    * Public & Private Keys
+    * Keypairs
+    * Key Derivation & Seed Phrases
+    * Ed25519 Elliptic Curve Cryptography
+* **1.3. Transaction Structure & Fees**
+    * Transaction Components (Header, Addresses, Blockhash, Instructions)
+    * Constraints (Size, Account, Compute Limits)
+    * Transaction Fees (Base and Prioritization)
+    * Fee Distribution & SIMD-96
+* **1.4. Transaction Flow**
+    * From Wallet to Validator
+    * Failed Transactions & Slippage
+
+***
+
+### **2. Network Architecture & Participants**
+* **2.1. RPC Nodes**
+    * Role as Gateways
+    * Distinction from Validators
+* **2.2. Leader-Based Transaction Forwarding**
+    * Absence of a Mempool
+    * Leader Schedule & Epochs
+    * Stake-Weighted Leader Selection
+* **2.3. Stake-Weighted Quality of Service (SWQoS)**
+    * Spam Reduction & Prioritization
+    * Stake-Leasing Model
+    * Capacity Allocation
+* **2.4. QUIC Networking Protocol**
+    * Adoption and Benefits
+* **2.5. Validator Clients**
+    * Importance of Client Diversity
+    * Agave (formerly Solana Labs client)
+    * Firedancer
+    * Jito-Solana
+    * Frankendancer (Hybrid Client)
+    * Other Clients (Sig, Mithril)
+* **2.6. Solana Clusters**
+    * Localnet, Testnet, Devnet, Mainnet-Beta
+
+***
+
+### **3. Core Technologies & Mechanisms**
+* **3.1. Proof of History (PoH)**
+    * Function as a Cryptographic Clock
+    * Role in Transaction Ordering
+    * Relationship to Proof of Stake (PoS)
+    * Implementation with SHA-256
+    * Verifiable Delay Function (VDF) Properties
+    * Ticks and Timing
+* **3.2. Transaction Processing Unit (TPU)**
+    * Continuous Block Building
+    * Processing Pipeline (Fetch, SigVerify, Banking Stages)
+* **3.3. Parallel Transaction Processing (Sealevel)**
+    * SVM (Solana/Sealevel Virtual Machine)
+    * Conflict Resolution
+    * Execution Flow & Architecture
+* **3.4. Turbine: Block Propagation**
+    * Inspiration and Goal
+    * Shredding and Erasure Coding
+    * Turbine Tree Structure (Stake-Layered)
+* **3.5. Transaction Validation Unit (TVU)**
+    * Role in Block Validation
+    * Validation Stages (Shred Fetch, Replay, PoH Verification)
+* **3.6. Tower BFT: Consensus**
+    * Adaptation of PBFT with PoH
+    * Voting Process and Rewards
+    * Fork Resolution
+    * Transaction Status Stages (Processed, Confirmed, Finalized)
+* **3.7. Gossip Network**
+    * Function as the Control Plane
+    * Node Discovery
+    * Protocol and Operation
+* **3.8. Archive Storage**
+    * Purpose and Operators
+    * Archive Types (Ledger and Bigtable)
+
+***
+
+### **4. State and Accounts**
+* **4.1. AccountsDB & Global State**
+    * Structure and Scale
+* **4.2. Types of Accounts**
+    * User, Data, Program, and Native Program Accounts
+* **4.3. Program Behavior**
+    * Separation of Code and State
+    * Native Programs
+* **4.4. Rent Mechanism**
+    * Purpose and Rent-Exemption
+    * Rent Refunds and Account Cleanup
+* **4.5. Ownership Model**
+    * Program Owners
+    * Program Derived Addresses (PDAs)
+
+***
+
+### **5. Staking, Rewards, and MEV**
+* **5.1. Inflation & Staking Rewards**
+    * Inflation Mechanism and Schedule
+    * Delegation Process
+    * Validator Credits and Reward Calculation
+* **5.2. Block Rewards**
+    * Fee Distribution
+* **5.3. Liquid Staking**
+    * Process and Benefits
+    * Reward Mechanisms
+* **5.4. Jito and MEV**
+    * Jito Validator Client Overview
+    * Jito Relayer and Blockspace Auctions
+    * Tips and Fee Model
+
 ##  Transaction Lifecycle:
 ![alt text](image.png)
 
