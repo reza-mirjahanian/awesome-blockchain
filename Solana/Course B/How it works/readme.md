@@ -721,3 +721,19 @@ leader mode and beginning block production.
 
 
 ![alt text](image-19.png)
+
+Above: once a block becomes rooted, account updates from earlier banks 
+that are not ancestors of the finalized bank are pruned
+
+
+# Forks and Consensus in Solana
+
+* Validators may encounter **competing forks** — different chains of blocks produced by different leaders.
+* Validators must **vote** on these forks and rely on Solana’s consensus algorithm to decide which fork to adopt.
+* Only one fork will ultimately be **finalized**; blocks from discarded forks are abandoned.
+
+## Leader Slots and Fork Limits
+
+* Each slot has a **predetermined leader**.
+* Only the leader’s block for that slot will be accepted — no two blocks can occupy the same slot.
+* As a result, the set of possible forks is constrained to a **“there / not there” skip list**, where forks can only emerge at the boundaries between leader rotation slots.
