@@ -376,6 +376,8 @@ The Solana ecosystem also includes other validator clients in various stages of 
 
 This growing variety of validator clients underscores the Solana community's commitment to decentralization and network stability. By having multiple, independently developed clients, the Solana network is becoming more robust and less susceptible to issues that could arise from a single software implementation.
 
+![alt text](image-9.png)
+### Proof of History
 
 Proof of History (PoH) is Solana’s cryptographic clock, providing a verifiable sequence of events and a trusted notion of time across the network. It reduces reliance on node-to-node communication by replacing coordination overhead with local computation.
 
@@ -397,3 +399,64 @@ PoH is built on SHA-256 hashing, leveraging these properties:
 - **Collision Resistance**: Infeasible to find two inputs with same hash.
 
 PoH creates a chain by repeatedly hashing the previous output. Each hash serves as a timestamp, proving that a given event occurred in sequence. This enables a trustless, high-frequency timeline that underpins Solana’s scalability.
+![alt text](image-10.png)
+![alt text](image-11.png)
+## **Proof of History Service in Validators**  
+
+Each **validator client** runs a dedicated **Proof of History (PoH) service** that continually executes the **SHA-256 hash algorithm**, producing a **chain of hashes**.  
+
+- **Hash Linking:** Each hash’s input is the output of the previous hash.  
+- **Verifiable Delay Function (VDF):**  
+  - Hashes must be generated **sequentially**.  
+  - The result of future hashes **cannot be predicted** in advance.  
+- **Time Proof:** If a PoH service produces 1,000 hashes, it is proof that the required time to compute them has elapsed.  
+
+---
+
+### **Properties and Performance**  
+
+- Acts as a **“micro proof of work”** during a leader’s slot.  
+- Difficult to **generate** but easy to **verify**:  
+  - Verification is parallelized since all hash input/output pairs are broadcast to the network.  
+- **CPU-bound:** Performance differences across high-end CPUs are small, and SHA-256 optimization is already near the upper limit — partly due to years of Bitcoin-related optimizations.  
+
+---
+
+### **Process During Block Production**  
+
+1. **Input from Banking Stage:**  
+   - The PoH service receives newly processed entries.  
+
+2. **Hash Combination:**  
+   - The *current PoH hash* is combined with a *hash of all transactions in the entry* to produce the **next PoH hash**.  
+
+3. **Timestamp & Ordering:**  
+   - This hash serves as a timestamp, recording the sequence of processed transactions.  
+
+4. **High-Frequency Hashing:**  
+   - A single block contains roughly **800,000 hashes**.  
+
+5. **Ticks:**  
+   - PoH stream also includes **“ticks”** — empty entries marking the leader’s liveness and the continued passage of time.  
+
+
+   ## **Key Benefit of PoH**  
+
+The primary benefit of **Proof of History (PoH)** is that it enforces strict adherence to the **leader schedule**, even if a block producer is **offline** (*delinquent*).  
+
+- Prevents **malicious validators** from producing blocks **before** their designated turn.  
+
+---
+
+## **Ticks and Timing**  
+
+- **Tick Interval:** Every **6.25 milliseconds**.  
+- **Ticks per Block:** **64 ticks** per block.  
+- **Block Time:** **400 milliseconds** total.  
+
+---
+
+## **Continuous Operation**  
+
+- Validators run the **PoH clock** at all times, not just when they are leaders.  
+- This clock is crucial for **synchronization** across the network, ensuring a unified, verifiable sequence of events.  
