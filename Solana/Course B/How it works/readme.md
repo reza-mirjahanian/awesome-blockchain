@@ -552,3 +552,49 @@ The primary benefit of **Proof of History (PoH)** is that it enforces strict adh
     - Guarantees that **only the program can modify the PDA’s state**.  
 
 ![alt text](image-13.png)
+
+**Above**: Solana token accounts are specific examples of Program Derived Addresses (PDAs). They are used to hold tokens and live “off-curve.” The Associated Token Account (ATA) program ensures that each wallet can  only have one associated token account for each token type, providing a standardized way to manage token 
+accounts.
+
+
+## **Turbine: Block Propagation in Solana**  
+
+### **From Banking Stage to Turbine**  
+- After the **banking stage**, transactions are organized into **entries** and sent to the **Proof of History (PoH) stream** for timestamping.  
+- The **block’s bank** is updated.  
+- Entries are passed to **Turbine**, the block propagation system.  
+
+---
+
+### **Turbine Overview**  
+- **Purpose:** Propagates the leader’s block to all validators quickly and efficiently.  
+- **Inspiration:** Based on **BitTorrent**’s peer-to-peer distribution model.  
+- **Goal:** Reduce communication overhead and minimize the amount of data a leader must send directly.  
+
+---
+
+### **Shredding Process**  
+- Transactions are split into small packets called **shreds** via **shredding**.  
+- **Shreds:**  
+  - Comparable to video frames; individually useless but reconstructable into the full block.  
+  - Sent between validators using **UDP**.  
+  - Redundancy and reliability provided through **erasure coding**.  
+
+---
+
+### **Erasure Coding**  
+- Polynomial-based **error detection and correction**.  
+- Ensures the block is recoverable even if some shreds are missing due to network loss or malicious dropping.  
+- **Forward Error Correction (FEC) Batches:**  
+  - Default: **64 shreds** = 32 data shreds + 32 recovery shreds.  
+  - Can recover from up to **50% packet loss** within a batch.  
+
+---
+
+### **Authentication & Integrity**  
+- Each **64-shred batch** is **merkelized**:  
+  - Merkle root is signed by the leader.  
+  - Root is chained to the **previous batch’s root**.  
+- This chained Merkle proof allows validators to securely obtain shreds from **any node** while ensuring verifiable authenticity and integrity.  
+
+![alt text](image-14.png)
