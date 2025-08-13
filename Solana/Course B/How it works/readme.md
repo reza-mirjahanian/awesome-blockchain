@@ -1010,3 +1010,36 @@ The LST price remains rational through:
 | Primary incentive        | Tips to validators                             |
 | Initial transaction path | Sent to **Jito-Relayer** when leader uses Jito |
 | Main adoption reason     | Extra economic incentives (tips)               |
+
+
+## **Jito Relayer & Blockspace Auctions**  
+
+---
+
+### **Relayer Functionality**  
+- **Purpose:** Acts as a **transaction proxy router** for Solana leaders.  
+- **Network Transparency:**  
+  - Other nodes are **unaware** of the relayer’s existence.  
+  - Transactions are sent to the leader’s advertised **`ingress_socket`** over the gossip network, but actually reach the relayer.  
+- **Speed Bump:**  
+  - Relayer **holds transactions for 200ms** before forwarding to the leader.  
+  - This delay creates a short window to run **blockspace auctions**.  
+- **Forwarding Logic:** After 200ms, transactions are **released regardless** of auction results.  
+
+---
+
+### **Blockspace Auctions**  
+- **Execution Venue:** Conducted **off-chain** via the **Jito Block Engine**.  
+- **Participants:** Searchers and applications.  
+- **Bundles:**  
+  - Groups of **atomically executed transactions**.  
+  - Often time-sensitive (e.g., arbitrage, liquidation opportunities).  
+- **Fees:**  
+  - **5% fee** on all tips paid to Jito.  
+  - Minimum tip: **10,000 lamports**.  
+
+---
+
+### **Tips & Fee Model**  
+- Tips are **out-of-protocol** — not part of Solana’s in-protocol **base** or **priority** fee system.  
+- Legacy: Jito formerly ran a **canonical out-of-protocol mempool service**, now **deprecated**.  
