@@ -929,3 +929,84 @@ that are not ancestors of the finalized bank are pruned
 ```rust
  Price of LST = (total staked SOL in pool * price of SOL) / total LST minted
 ``` 
+
+# Solana Staking and Rewards System
+
+## Block Rewards Distribution
+
+Block rewards are structured as follows:
+
+- **50%** of base fees
+- **50%** of priority fees
+
+The remaining fees are burned.
+
+### Key Characteristics:
+- **Exclusive to block producer**: Only the validator who produced the block receives these rewards
+- **Instant distribution**: Unlike staking rewards (distributed per epoch), block rewards are immediately credited to the validator's identity account upon block production
+
+## Liquid Staking
+
+Liquid staking has emerged as a popular alternative to native staking, offering enhanced capital efficiency.
+
+### How It Works:
+
+1. **Token Exchange**: Participants stake their SOL and receive a Liquid Staking Token (LST) or Liquid Staking Derivative (LSD)
+2. **Pooled Delegation**: SOL is typically staked in a pool that delegates tokens across multiple validators
+3. **Ownership Representation**: LST tokens represent the user's proportional share of the staked SOL
+
+### Benefits:
+
+- **Liquidity**: LST tokens can be freely traded
+- **DeFi Integration**: Tokens can be utilized across Solana's DeFi ecosystem
+- **Continuous Rewards**: Users continue earning staking rewards while maintaining liquidity
+
+### Reward Mechanisms:
+
+| Staking Type | Reward Distribution |
+|--------------|-------------------|
+| **Native Staking** | Stakers directly accrue additional SOL over time |
+| **Liquid Staking** | Rewards are reinvested into the pool, increasing the LST's fair value |
+
+### Price Stability:
+
+The LST price remains rational through:
+- **Redemption mechanisms** for converting LSTs back to underlying staked SOL
+- **Arbitrage traders** who capitalize on price discrepancies
+
+
+![alt text](image-20.png)
+
+# Jito
+
+**Overview**
+
+* **Client lineage:** Fork of the original **Agave** client
+* **Adoption:** > **80% of stake** on Solana uses the Jito validator client (as of writing)
+* **Core feature:** **Out-of-protocol blockspace auction** that supplies validators with additional economic incentives via **tips**
+* **Routing behavior:** When a leader runs the Jito client, their transactions are **initially routed to the Jito-Relayer**
+
+**Key points**
+
+* **Out-of-protocol auction**
+
+  * Operates outside on-chain consensus
+  * Matches blockspace with paying transactions/tips to increase validator revenue
+* **Economic impact**
+
+  * Provides direct monetary incentives (tips) to validators
+  * Primary driver of adoption among validators
+* **Operational flow**
+
+  * Leader → *Jito-Relayer* (initial handling of transactions) → Inclusion path determined by relayer/leader logic
+
+**Reference table**
+
+| Aspect                   | Details                                        |
+| ------------------------ | ---------------------------------------------- |
+| Client origin            | Fork of Agave                                  |
+| Stake using client       | >80% (as of writing)                           |
+| Auction type             | Out-of-protocol blockspace auction             |
+| Primary incentive        | Tips to validators                             |
+| Initial transaction path | Sent to **Jito-Relayer** when leader uses Jito |
+| Main adoption reason     | Extra economic incentives (tips)               |
