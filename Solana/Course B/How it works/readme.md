@@ -737,3 +737,86 @@ that are not ancestors of the finalized bank are pruned
 * Each slot has a **predetermined leader**.
 * Only the leader’s block for that slot will be accepted — no two blocks can occupy the same slot.
 * As a result, the set of possible forks is constrained to a **“there / not there” skip list**, where forks can only emerge at the boundaries between leader rotation slots.
+
+
+## **Fork Commitment, Slot Skips, and Finalization in Solana**  
+
+---
+
+### **Fork Commitment & Lockouts**  
+- Once a validator **votes for a fork**, it is bound to that fork until its **lockout period** expires.  
+- Lockout ensures validators maintain consistency and prevents rapid switching between forks.  
+
+---
+
+### **Skipped Slots & Causes**  
+- **Skip Rate:** Typically **2%–10%** of slots produce no block.  
+- **Primary Cause:** Forks from competing blocks linked to the same parent.  
+- **Other Causes:**  
+  - Start of a **new epoch** (leader schedule transition)  
+  - **Offline leader** failing to produce a block  
+  - **Invalid block** generation by the leader  
+
+---
+
+### **Bank Finalization & State Management**  
+- Each block has an associated **bank** that contains its state.  
+- **Finalization Process:**  
+  1. When a bank is finalized, account updates from it and its ancestors are **flushed to disk**.  
+  2. Account updates from earlier, **non-ancestor banks** are **pruned**.  
+  3. This enables **efficient state management** while tracking multiple possible forks.  
+
+---
+
+### **Transaction Status Stages**  
+1. **Processed:** Transaction is in a produced block.  
+2. **Confirmed:** Block has **two-thirds supermajority votes**.  
+3. **Finalized:** More than **31 blocks** have been built on top of the transaction’s block.  
+
+---
+
+### **Reliability Note**  
+- In Solana’s history, **no optimistically confirmed block** has ever failed to reach **finalization**.  
+
+
+## **Solana Gossip Network**  
+
+---
+
+### **Role in the Network**  
+- Serves as the **control plane** of Solana.  
+- **Control Plane vs. Data Plane:**  
+  - *Data Plane* handles transaction flows.  
+  - *Control Plane* disseminates **metadata** about the network state, including:  
+    - Validator/RPC contact info  
+    - Ledger height  
+    - Vote information  
+- Enables **decentralized state awareness** without relying on a central source.  
+
+---
+
+### **Node Discovery & Communication**  
+- Without gossip, validators and RPC nodes would not know which **addresses and ports** are open across services.  
+- Allows **new nodes** to discover peers and join the network efficiently.  
+
+---
+
+### **Protocol & Broadcast Model**  
+- **Design:** Peer-to-peer communication using a **tree broadcast** approach based on a modified **PlumTree** algorithm.  
+- **Purpose:** Ensures fast, efficient, and redundant information propagation through the network.  
+- Operates largely **independently** from other validator components.  
+
+---
+
+### **Operation & Message Characteristics**  
+- Validators and RPCs share **signed data objects** every **0.1 seconds** over **UDP**.  
+- **Message Constraints:**  
+  - Size must be ≤ **1280 bytes** (*packet struct* in the codebase).  
+  - Broadcast in small, frequent updates to maintain consistency across nodes.  
+
+---
+
+### **Gossip Records**  
+- Represent the actual **data objects** exchanged.  
+- **Properties:** Signed, versioned, timestamped for integrity and freshness.  
+- **Types:** ~10 record types, each serving different purposes (e.g., vote info, ledger updates, contact metadata).  
