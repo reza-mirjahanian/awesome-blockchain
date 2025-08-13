@@ -820,3 +820,28 @@ that are not ancestors of the finalized bank are pruned
 - Represent the actual **data objects** exchanged.  
 - **Properties:** Signed, versioned, timestamped for integrity and freshness.  
 - **Types:** ~10 record types, each serving different purposes (e.g., vote info, ledger updates, contact metadata).  
+
+## **Solana Archive Storage (Warehouse Nodes)**  
+
+---
+
+### **Purpose**  
+- Ensures **long-term availability** of full transaction history for the network.  
+- Supports **data replay**, **analytics**, and **historical queries**.  
+
+---
+
+### **Operators**  
+- Managed by:  
+  - **Professional RPC service providers**  
+  - **Solana Foundation**  
+  - Other **ecosystem participants** committed to history preservation  
+
+---
+
+### **Archive Types**  
+1. **Ledger Archive**  
+   - Contains **raw ledger data** and **AccountsDB snapshots**.  
+   - Enables **full state replay from scratch** for node bootstrap or forensic analysis.  
+2. **Google Bigtable Instance**  
+   - Stores processed **block data** for fast historical queries and indexing.  
