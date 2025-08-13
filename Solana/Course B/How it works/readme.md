@@ -262,3 +262,73 @@ The **Transaction Processing Unit (TPU)** is the validator’s **core block prod
    - **Permanent State:** The blockchain’s final state is the sum of all confirmed transactions, which can be **deterministically reconstructed** from history.  
 
    ![alt text](image-7.png)
+
+
+   Here's the cleaned and organized version:
+
+**Parallel Transaction Processing in Solana**
+
+- Transactions are processed in parallel and packaged into **ledger entries**, where each entry contains a batch of 64 non-conflicting transactions.
+- Each transaction must specify all accounts it will read from or write to, enabling efficient parallel processing.
+  
+**Conflict Resolution Mechanism:**
+- Transactions conflict when they:
+  - Both attempt to write to the same account (write-write conflict)
+  - One reads while another writes to the same account (read-write conflict)
+- Non-conflicting transactions are executed in parallel within the same entry
+- Conflicting transactions are placed in separate entries and executed sequentially
+
+**Design Tradeoffs:**
+- Places additional burden on developers to declare all accessed accounts
+- Enables validators to easily:
+  - Identify non-conflicting transactions
+  - Avoid race conditions
+  - Maximize parallel execution efficiency
+
+
+  ---------
+
+  Here's the cleaned and organized version:
+
+**SVM Terminology Clarification**
+- "SVM" may refer to either:
+  - Solana Virtual Machine
+  - Sealevel Virtual Machine
+- Both terms describe the same concept (Sealevel being Solana's runtime environment)
+- The terminology remains inconsistently applied despite recent standardization efforts
+
+**Parallel Processing Architecture**
+- 6 dedicated processing threads:
+  - 4 for normal transactions
+  - 2 for vote transactions (critical for consensus)
+- Parallelization achieved exclusively through CPU cores (no GPU requirements)
+
+**Transaction Execution Flow**
+1. **Pre-execution Preparation**
+   - Transactions grouped into entries
+   - Required accounts are locked
+   - Validation checks performed:
+     - Transaction recency verification
+     - Duplicate processing prevention
+
+2. **Execution Phase**
+   - Accounts loaded into memory
+   - Transaction logic executed via:
+     - Solana's modified rBPF implementation
+     - JIT-compiled eBPF virtual machine
+   - Account states updated
+
+3. **Post-execution Settlement**
+   - Entry hash sent to Proof of History service
+   - On successful recording:
+     - Changes committed to the bank
+     - Account locks released
+
+**Implementation Notes**
+- Validators have full discretion over:
+  - Transaction ordering within blocks
+  - Optimization strategies
+- This flexibility enables specialized implementations (e.g., Jito's approach)
+
+
+![alt text](image-8.png)
