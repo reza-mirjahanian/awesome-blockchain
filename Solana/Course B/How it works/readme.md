@@ -632,3 +632,92 @@ accounts.
 
   ![alt text](image-15.png)
   ![alt text](image-16.png)
+
+  ![alt text](image-17.png)
+
+
+  # Transaction Validation Unit (TVU) Flow
+
+Once a validator receives a new block from the leader via **Turbine**, it must:
+
+1. **Validate all transactions** in the order dictated by **Proof of History (PoH)**.
+2. **Update its local bank** with the results.
+
+This work is handled by the **Transaction Validation Unit (TVU)** — the validator-side counterpart to the leader’s **Transaction Processing Unit (TPU)**. The TVU is responsible for processing incoming shreds and validating entire blocks.
+
+## TVU Stages
+
+1. **Shred Fetch Stage** — Receives shreds over Turbine.
+2. **Reassembly & Replay** — Reconstructs the full block from shreds and replays all transactions.
+3. **PoH Verification** — Validates PoH hashes in parallel to ensure transaction order integrity.
+4. **State Update** — Applies all verified transactions to the local bank.
+
+![alt text](image-18.png)
+Above: the replay stage is responsible for switching the validator into 
+leader mode and beginning block production. 
+
+# Additional TVU Stages
+
+## Shred Verify Leader Signature Stage
+
+* Performs multiple sanity checks on incoming shreds.
+* Most critical check: verifying the **leader’s signature** to confirm the shreds originated from the correct leader.
+
+## Retransmit Stage
+
+* Forwards validated shreds to appropriate downstream validators to continue network propagation.
+
+## Replay Stage (Block Validation)
+
+* Replays each transaction **exactly** and **in the correct PoH order** while updating the local bank.
+* Functionally equivalent to the **banking stage** in the TPU.
+* Considered the **core block validation stage**.
+* Operates as a **single-threaded process loop** that coordinates:
+
+  * Voting
+  * Resetting the PoH clock
+  * Switching banks
+
+
+## **Tower BFT (Solana’s Consensus Mechanism)**  
+
+- **Algorithm Basis:** Custom implementation of **Practical Byzantine Fault Tolerance (PBFT)**, adapted for Solana as **Tower BFT**.  
+- **Byzantine Assumption:** Designed to tolerate a fraction of **malicious or faulty nodes** in the validator set.  
+
+---
+
+### **Key Differentiator: Proof of History Integration**  
+- **Traditional PBFT:** Requires multiple communication rounds to agree on transaction order.  
+- **Tower BFT in Solana:**  
+  - Uses the **synchronized PoH clock** to establish a pre-agreed timestamp/ordering of events.  
+  - Eliminates the need for heavy multi-round messaging.  
+  - **Result:** Lower latency and reduced consensus overhead.  
+
+---
+
+### **Voting Process and Incentives**  
+- **Participation:** Validators submit **vote transactions** for blocks they deem valid.  
+- **Vote Criteria:** Block must be free of errors such as **double spends** or **invalid signatures**.  
+- **Fee Requirement:** Votes incur a **transaction fee** and are processed alongside normal transactions.  
+- **Rewards:**  
+  - Correct votes earn validators a **credit**.  
+  - Credits translate into staking rewards.  
+  - Encourages voting for the **heaviest fork** (one most likely to be finalized).  
+
+---
+
+### **Vote vs. Non-Vote Transactions**  
+- **Vote Transactions:** Validator consensus messages, prioritized to ensure network finality.  
+- **Non-Vote Transactions:** User and application-level operations.  
+- **Execution Separation:** Handled by **dedicated voting threads** (2 out of 6 total TPU threads).  
+
+---
+
+### **Forks in Solana**  
+- **Reason:** Solana does **not** stall block production while waiting for global agreement.  
+- **Effect:**  
+  - Multiple blocks may connect to the **same parent block**, creating forks.  
+  - Fork resolution handled by **voting and fork selection rules** under Tower BFT.  
+
+
+![alt text](image-19.png)
