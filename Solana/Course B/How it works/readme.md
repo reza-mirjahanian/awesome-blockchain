@@ -375,3 +375,25 @@ The Solana ecosystem also includes other validator clients in various stages of 
 *   **Mithril:** A full node client developed in Golang, designed with lower hardware requirements.
 
 This growing variety of validator clients underscores the Solana community's commitment to decentralization and network stability. By having multiple, independently developed clients, the Solana network is becoming more robust and less susceptible to issues that could arise from a single software implementation.
+
+
+Proof of History (PoH) is Solana’s cryptographic clock, providing a verifiable sequence of events and a trusted notion of time across the network. It reduces reliance on node-to-node communication by replacing coordination overhead with local computation.
+
+In traditional blockchains, communication complexity increases with network size. Solana mitigates this by using PoH to pre-order transactions. Validators can commit blocks after just one round of voting, as the order and timing of events are already established.
+
+PoH ensures:
+- A verifiable sequence of transactions.
+- That validators cannot produce blocks prematurely.
+- Adherence to the leader schedule by requiring a minimum number of PoH ticks before block submission.
+
+PoH is not a consensus mechanism. It works alongside Solana’s Proof of Stake (PoS) consensus to enhance throughput and reduce latency.
+
+PoH is built on SHA-256 hashing, leveraging these properties:
+- **Deterministic**: Same input → same output.
+- **Fixed Size**: Output is always 256 bits.
+- **Efficient**: Fast to compute for any input.
+- **Preimage Resistance**: Infeasible to reverse hash to find input.
+- **Avalanche Effect**: Small input change → vastly different hash.
+- **Collision Resistance**: Infeasible to find two inputs with same hash.
+
+PoH creates a chain by repeatedly hashing the previous output. Each hash serves as a timestamp, proving that a given event occurred in sequence. This enables a trustless, high-frequency timeline that underpins Solana’s scalability.
