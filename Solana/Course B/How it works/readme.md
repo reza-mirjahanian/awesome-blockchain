@@ -598,3 +598,37 @@ accounts.
 - This chained Merkle proof allows validators to securely obtain shreds from **any node** while ensuring verifiable authenticity and integrity.  
 
 ![alt text](image-14.png)
+
+## **Turbine Tree Structure and Data Flow**  
+
+- **Initial Broadcast:**  
+  - The **leader** sends shreds to a **single root node**.  
+  - The root node relays them to other validators.  
+  - The designated root node **changes with each shred**.  
+
+---
+
+### **Validator Layering**  
+- Validators are arranged into **layers**, forming the **Turbine Tree**.  
+- **Placement by Stake:**  
+  - Higher-stake validators are typically nearer the **top**.  
+  - Lower-stake validators are positioned toward the **bottom**.  
+- **Tree Depth:** Usually spans **2–3 hops** depending on active validator count.  
+
+---
+
+### **Rotation & Security**  
+- **Tree order rotates** for every new shred batch to prevent targeted attacks or predictable relay paths.  
+
+---
+
+### **Load Distribution**  
+- Primary objective: **reduce outbound data load** on the leader and root node.  
+- Achieved via a **transmit-and-retransmit** system:  
+  - Leader sends to a few nodes.  
+  - Those nodes retransmit to others.  
+  - Spreads network load and reduces strain on any single participant.  
+
+
+  ![alt text](image-15.png)
+  ![alt text](image-16.png)
