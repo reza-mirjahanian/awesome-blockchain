@@ -198,7 +198,7 @@ This allocation mirrors **priority lanes on highways** — drivers pay a toll to
 ---
 
 ## **A QUIC Note**  
-
+![alt text](image-6.png)
 In **late 2022**, Solana adopted the **QUIC networking protocol** for transaction message transmission to leaders.  
 
 - **Reason for Adoption:** Network disruptions caused by **bot-driven NFT mint spamming**.  
@@ -222,3 +222,43 @@ In **late 2022**, Solana adopted the **QUIC networking protocol** for transactio
 - **Gossip network message propagation**  
 
 Validators with **greater stake** receive **higher trust** and **priority roles** in the network.  
+
+----
+
+## **Continuous Block Building in Solana**  
+
+Most blockchain networks use **discrete block building** — constructing entire blocks before broadcasting them. **Solana** instead implements **continuous block building**, where blocks are assembled and streamed **dynamically** during an allocated time slot. This design significantly **reduces latency**.  
+
+- **Slot Duration:** 400 milliseconds  
+- **Leader Rotation:** Each leader is assigned **four consecutive slots** (1.6 seconds) before rotating to the next leader.  
+- **Block Acceptance Requirement:** All transactions must be **valid** and **reproducible**.  
+
+---
+
+## **Leader Preparation Phase**  
+
+Two slots before becoming leader, a validator halts transaction forwarding to prepare for its workload.  
+
+- **Traffic Surge:** Incoming network traffic spikes to **1+ GB/s** as the entire cluster directs packets to the upcoming leader.  
+
+---
+
+## **Transaction Processing Pipeline (TPU)**  
+
+The **Transaction Processing Unit (TPU)** is the validator’s **core block production logic**.  
+
+1. **Fetch Stage**  
+   - Transactions are received via **QUIC**.  
+
+2. **SigVerify Stage**  
+   - Verifies transaction signatures.  
+   - Ensures the correct number of signatures.  
+   - Removes duplicate transactions.  
+
+3. **Banking Stage (Block-Building Stage)**  
+   - Named after **“bank”**, representing the state at a given block.  
+   - **Per-block bank:** Tracks and updates state during block creation.  
+   - **Finalization:** Once enough validators vote on a block, account updates are flushed from the bank to disk.  
+   - **Permanent State:** The blockchain’s final state is the sum of all confirmed transactions, which can be **deterministically reconstructed** from history.  
+
+   ![alt text](image-7.png)
