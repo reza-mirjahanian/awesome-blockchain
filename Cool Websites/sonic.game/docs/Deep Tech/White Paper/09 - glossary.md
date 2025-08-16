@@ -1,4 +1,4 @@
-```markdown
+
 # 📖 Glossary  
 
 1. **HyperGrid**  
@@ -46,6 +46,3 @@
 
 15. **NFT (Non-Fungible Token)**  
     *Digital assets that represent real-world objects like art, music, in-game items, and videos, which can be bought, sold, and traded online.*  
-```
-
-Do you want me to also **add icons** to each glossary term to make it easier to scan visually, similar to how I did with the Data Availability summary earlier?
