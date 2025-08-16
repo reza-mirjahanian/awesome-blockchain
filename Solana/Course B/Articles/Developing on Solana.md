@@ -127,3 +127,12 @@ solana program deploy ./my_program.so
 # Airdrop on devnet
 solana airdrop 2
 ```
+
+
+-   [Solana Command-line Guide](https://docs.solana.com/cli)
+-   [Solana Wiki - Account Model](https://solana.wiki/zh-cn/docs/account-model/)
+-   [An Introduction to Account Abstraction](https://squads.so/blog/what-is-account-abstraction-ethereum-vs-solana)
+-   [Garbage Collection](https://docs.solana.com/implemented-proposals/persistent-account-storage#garbage-collection)
+-   [Address Lookup Tables (ALTs)](https://docs.solana.com/developing/lookup-tables)
+-   [Versioned Transactions](https://solanacookbook.com/guides/versioned-transactions.html#facts)
+-   [Crate solana\_sdk](https://docs.rs/solana-sdk/latest/solana_sdk/index.html)
