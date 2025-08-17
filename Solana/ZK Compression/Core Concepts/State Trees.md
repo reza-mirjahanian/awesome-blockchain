@@ -2,6 +2,7 @@
 
 > **Merkle trees** on steroids, living **inside Solana blocks**.
 ![alt text](image.png)
+![alt text](image-1.png)
 ---
 
 ## 1️⃣ What Is a State Tree?
