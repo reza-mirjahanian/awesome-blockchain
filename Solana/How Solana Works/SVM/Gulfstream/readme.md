@@ -1,3 +1,22 @@
+**Overview of Gulf Stream**
+---------------------------
+
+**Mempool-less Architecture**: Unlike traditional blockchains that utilize a mempool (a temporary storage area for unconfirmed transactions), Gulf Stream allows transactions to be forwarded directly to the next expected leader in the network. This approach significantly reduces latency and increases throughput, as transactions do not need to wait in a queue for confirmation.
+
+**Transaction Forwarding**: In Gulf Stream, validators send transactions directly to the current and upcoming leaders based on a predetermined leader schedule. This means that every validator knows in advance who will be the next leader, allowing for a more organized and efficient flow of information. This method minimizes network congestion and enhances the overall speed of transaction processing.
+
+**Stake-Weighted Quality of Service (SWQoS)**: To prevent spam attacks and ensure that legitimate transactions are prioritized, Gulf Stream employs a stake-weighted system. Validators with a higher stake in the network are given preferential treatment, allowing them to transmit transactions more efficiently. This mechanism helps maintain network integrity and prevents denial-of-service attacks.
+
+**Benefits of Gulf Stream**
+---------------------------
+
+-   **Increased Speed**: By eliminating the mempool, Gulf Stream can process transactions much faster, with some reports indicating improvements in transaction speed by up to 4000% compared to traditional systems.
+
+-   **Scalability**: The architecture is designed to scale effectively as the network grows, accommodating an increasing number of transactions without compromising performance. This scalability is crucial for supporting complex decentralized applications that require rapid transaction processing.
+
+-   **Enhanced User Experience**: The reduction in transaction confirmation times leads to a smoother user experience, making Solana an attractive platform for developers and users alike.
+
+
 ### Gulfstream in Solana
 
 **Gulfstream** is a key innovation in the Solana blockchain ecosystem, designed to enhance transaction processing efficiency by eliminating the traditional mempool. Here’s a detailed overview of what Gulfstream is and how it functions within the Solana network.
