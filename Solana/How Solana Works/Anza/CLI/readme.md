@@ -1,0 +1,1 @@
+https://docs.anza.xyz/cli/usage#solana-verify-offchain-signature
