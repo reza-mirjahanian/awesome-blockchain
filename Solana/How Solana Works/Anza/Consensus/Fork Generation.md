@@ -1,4 +1,4 @@
-# 🌿 Fork Generation in Solana
+#  Fork Generation in Solana
 
 > **TL;DR**:  
 > Solana **does not wait** for global agreement before producing the next block → **forks are normal**.  
