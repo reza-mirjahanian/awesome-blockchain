@@ -77,4 +77,3 @@
   - Faster bridges.  
   - More integrations (e.g., Serum price feeds for Ethereum DeFi).  
 
-> *"The walls between chains will come down as cryptography improves."* – Anatoly Yakovenko
