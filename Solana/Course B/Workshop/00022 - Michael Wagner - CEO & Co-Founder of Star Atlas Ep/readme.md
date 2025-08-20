@@ -162,4 +162,3 @@ Here’s a **PowerPoint-style structured text** from the transcript you provided
 
 ---
 
-Would you like me to also **add sample code snippets** (e.g., Solana NFT minting, DAO governance examples, token economics in Solidity/Rust) to make the slides even more technical for a blockchain-savvy audience?
