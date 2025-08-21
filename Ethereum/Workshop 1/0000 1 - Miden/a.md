@@ -39,6 +39,8 @@
 
 ## 🔑 Key Innovations
 
+![alt text](image-3.png)
+
 ### 1. Client-Side Zero Knowledge Proofs
 
 * User computes → Network verifies
