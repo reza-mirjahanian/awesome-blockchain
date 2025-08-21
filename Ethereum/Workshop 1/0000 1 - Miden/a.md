@@ -1,6 +1,6 @@
 
 # 🚀 Miden: Unbounded Scalability, Privacy, and Safety
-
+![alt text](image-2.png)
 ---
 
 ## 🌍 The Problem with Current Blockchains

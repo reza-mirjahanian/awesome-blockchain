@@ -1,6 +1,7 @@
 Miden Miden is a next-generation blockchain protocol designed to address the limitations of current web3/crypto solutions, specifically focusing on scalability, privacy, and safety.
 
 ![alt text](image.png)
+![alt text](image-1.png)
 
 The core problems Miden aims to solve are:
 
