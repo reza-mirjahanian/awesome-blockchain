@@ -92,3 +92,75 @@ Key Benefits:
 - No standardized format: Each validator uses preferred ZK system (e.g., Succinct, Risc0)  
 - Multiple proofs: Same trace may require different formats for different zkE clients  
 - Consensus standardizes **state access proof format only**, not ZK implementation
+
+
+----
+
+## 🌐 Rollup Comparison: Optimistic vs ZK Native
+
+| Feature       | Optimistic Native Rollups                                                                 | ZK Native Rollups                                                                 |
+|--------------|--------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------|
+| **Data Availability (DA)** | - Normally cheap (Alt-DA possible)  <br> - Ethereum DA only during disputes                  | - All data on Ethereum  <br> - Validators need immediate access                   |
+| **Batches**   | - Arbitrarily large  <br> - `EXECUTE` verifies disputed segments only                      | - Constrained by `EXECUTE_CUMULATIVE_GAS_LIMIT`                                   |
+| **Finality**  | - Challenge period delays                                                                 | - Real-time settlement  <br> - One-slot delayed execution                         |
+| **Economics** | *(Not specified)*                                                                         | - ZK often more economical due to capital efficiency gains from fast finality     |
+
+
+
+## ⚙️ Current Ethereum Consensus Limitations
+
+### 🧑‍💻 Current Roles
+- **Proposers**
+  - Handle consensus and execution
+  - Receive all rewards
+- **Attesters**
+  - Vote on block validity for finalization
+
+---
+
+### 🚧 Problems
+- Single proposer must do both jobs in a 12-second slot
+- Insufficient time for complex cryptographic operations
+- PBS (Proposer-Builder Separation) helps but doesn’t solve timing constraints
+
+---
+
+### ⏱️ Need
+- Separate timing for consensus vs execution work
+
+
+### Attester-Proposer Separation (APS)
+
+## 🧱 Role & Timing Structure in Decentralized Protocols
+
+### 🔄 Role Separation
+- ➔ **Beacon proposers**:  
+  - Handle consensus only  
+  - Receive beacon rewards  
+  - Selected by protocol
+
+- ➔ **Execution proposers**:  
+  - Handle block execution  
+  - Receive execution rewards  
+  - Determined by market
+
+- ➔ **Builders**:  
+  - Construct blocks  
+  - Compatible with both proposer roles
+
+---
+
+### ⏱️ Timing Structure
+- ➔ **Slot N**: Beacon proposer handles consensus
+- ➔ **Slot N+1**: Execution proposer handles execution for Slot N
+![alt text](image-1.png)
+---
+
+### ⚠️ Critical for Native Rollups
+- Execution proposers get full 12 seconds for SNARK generation  
+  *(instead of just milliseconds)*
+
+---
+
+### 🧩 Compatibility Note
+- APS and PBS are **compatible**, not mutually exclusive
