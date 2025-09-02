@@ -1,33 +1,48 @@
 ### Native Rollup Verification Approaches
 ![alt text](image.png)
 
-**Current rollups face significant challenges:**
-➔ Complex custom verification: Thousands of lines of fraud proof games or SNARK verifiers with high
-vulnerability risk
-➔ Proving circuit vulnerabilities: Incorrect opcode implementations can validate invalid state
-transitions as cryptographically correct
-➔ Centralized fallbacks: Security councils and centralized sequencing as safeguards
-➔ Manual EVM upgrades: Governance required, breaking true EVM equivalence
-➔ Expensive onchain verification: Forces infrequent settlement
-Current rollups are separate systems with their own trust assumptions
+## ⚠️ The Problem with Current Rollups
+
+### 🔧 Key Issues
+1. **Complex Custom Verification**  
+   - Thousands of lines of fraud-proof logic or SNARK verifiers  
+   - High vulnerability risk
+
+2. **Proving Circuit Vulnerabilities**  
+   - Incorrect opcode implementations can falsely validate state transitions
+
+3. **Centralized Fallbacks**  
+   - Reliance on security councils and centralized sequencers
+
+4. **Manual EVM Upgrades**  
+   - Requires governance intervention  
+   - Breaks true EVM equivalence
+
+5. **Expensive Onchain Verification**  
+   - High costs force infrequent settlement
+
+---
+
+> *Current rollups are separate systems with their own trust assumptions.*
 
 
-**What are Native Rollups?**
+# What are Native Rollups?
 
 Native Rollups use Ethereum's native execution engine directly
 
-**The EXECUTE Precompile:**
+## The EXECUTE Precompile:
 
-* Exposes Ethereum's built-in EVM execution engine to rollups
-* Rollups call precompile with transaction traces instead of building custom verification
-* Ethereum validators re-execute or verify proofs offchain using diverse zkEL clients
+- → Exposes Ethereum's built-in EVM execution engine to rollups  
+- → Rollups call precompile with transaction traces instead of building custom verification  
+- → Ethereum validators re-execute or verify proofs offchain using diverse zkEL clients  
 
-Key Benefits:
+## Key Benefits:
 
-* Eliminates complex custom verification systems
-* Enables trustless rollups through L1 security inheritance
-* Cost benefits from batching efficiencies, not computational efficiency
+- → Eliminates complex custom verification systems  
+- → Enables trustless rollups through L1 security inheritance  
+- → Cost benefits from batching efficiencies, not computational efficiency  
 
+> "Programmable execution shards that wrap the precompile" - Justin Drake
 "Programmable execution shards that wrap the precompile" - Justin Drake
 
 
@@ -164,3 +179,106 @@ Key Benefits:
 
 ### 🧩 Compatibility Note
 - APS and PBS are **compatible**, not mutually exclusive
+
+----
+
+## ⏳ Delayed Execution & Proof Generation
+
+### 🕒 1. Delayed Execution
+- Validators approve blocks *before* executing transactions  
+- Makes Ethereum **5× faster**  
+- Maintains security via **economic incentives**
+
+---
+
+### 🔁 2. One-Slot Delayed Proofs
+- Block executed in **Slot N**, proof generated in **Slot N+1**  
+- Attesters attest to **Slot N+1** only if proofs exist for **Slot N**
+
+---
+
+### ⚡ 3. Same-Slot Proof Solution (Latest)
+- Builders prove their own blocks to claim rewards  
+- If proofs are missing → automatic **“no-op” execution**  
+  *(pre-state carries forward)*
+- Eliminates altruistic prover 
+dependencies
+![alt text](image-2.png)
+![alt text](image-3.png)
+
+## 🛠️ Technical Benefits
+
+### 🔐 Security & Trust
+- Direct **Layer 1 (L1)** security inheritance  
+- No additional trust assumptions  
+- Eliminates fraud-proof games & custom SNARK verifiers
+
+---
+
+### ⚙️ EVM Equivalence
+- Automatic inheritance of Ethereum upgrades  
+- No governance overhead  
+- Perfect alignment between **L1 and L2 execution**
+
+---
+
+### 🔗 Cross-Rollup Composability
+- Trustless state verification between rollups  
+- Direct **ZK interoperability**  
+- Seamless cross-rollup transactions
+
+---
+
+### 🧹 Operational Simplification
+- Rollups act as **Ethereum extensions**, not separate systems  
+- Unified security model reduces ecosystem fragmentation
+
+## 🧩 Implementation Challenges & Timeline
+
+### ⚠️ Technical Challenges
+- **Data Constraints**:  
+  Witness data requirements cause a **5–10× increase** in data availability (DA) needs  
+- **Gas Constraints**:  
+  Initial `EXECUTE_CUMULATIVE_GAS_LIMIT` will **limit throughput**  
+- **Migration Complexity**:  
+  Existing rollups require **extensive refactoring**  
+- **Standardization**:  
+  Deposit/withdrawal interfaces need to be **developed and unified**
+
+---
+
+### 🗓️ Roadmap
+- **EIPs Needed**:  
+  - `EXECUTE` precompile  
+  - One-slot delayed execution  
+- **Timeline**:  
+  - **Not expected before 2026**  
+- **Phases**:  
+  - Re-execution → Hybrid → Full SNARK verification
+
+
+  ## 🌐 Native Rollup Vision & Upcoming Infrastructure
+
+### 🚀 Native Rollup Vision
+- **Unified Security**:  
+  All rollups inherit Ethereum’s guarantees  
+- **Seamless Interoperability**:  
+  Cross-rollup transactions without trust assumptions  
+- **Capital Efficiency**:  
+  Fast finality enables efficient bridging protocols  
+- **Simplified Development**:  
+  No custom verification, automatic upgrades
+
+---
+
+### 🏗️ Upcoming Infrastructure
+- **Shared Sequencers**:  
+  Enable cross-rollup coordination  
+- **zkVM Infrastructure**:  
+  Practical real-time proving  
+- **Settlement Layers**:  
+  Provide advanced security
+
+---
+
+> **"The endgame for Ethereum's L2 scaling—blurring lines between L1 and L2."**
