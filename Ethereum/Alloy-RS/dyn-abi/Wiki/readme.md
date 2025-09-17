@@ -118,7 +118,6 @@ sequenceDiagram
 
 -----
 
-## प्रोजेक्ट का विवरण
 
 This project, `alloy-dyn-abi`, is a Rust crate designed to handle **dynamic ABI (Application Binary Interface) data for Ethereum**. Its primary purpose is to allow you to encode and decode Solidity data when you don't know the specific data types at compile time. This is incredibly useful for building general-purpose tools, explorers, and clients that need to interact with any smart contract.
 
