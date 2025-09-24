@@ -597,3 +597,5 @@
 
 200. **Question:** Describe future of Cosmos SDK.
     **Answer:** Focus on modularity, scalability with ABCI++, and interchain innovations.
+
+    
