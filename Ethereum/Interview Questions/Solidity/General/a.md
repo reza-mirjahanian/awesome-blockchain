@@ -143,7 +143,7 @@ Q47: How do you send Ether from a contract?
 A: payable(address).transfer(amount) or .send(amount).
 
 Q48: What makes a function payable?  
-A: The 'payable' keyword, allowing it to receive Ether.
+A: The '**payable**' keyword, allowing it to receive Ether.
 
 Q49: What is 'block.timestamp'?  
 A: The current block's timestamp in seconds since Unix epoch.
