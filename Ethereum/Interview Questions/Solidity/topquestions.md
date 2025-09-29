@@ -272,3 +272,20 @@ A: Universal Upgradeable Proxy Standard (ERC-1967).
 
 Q98: What is transparent proxy?  
 A: Proxy that handles upgrades transparently.
+
+---
+
+Q88: What is SafeMath?  
+A: Library to prevent overflow/underflow (built-in since 0.8.0).
+
+Q89: How does Solidity 0.8+ handle overflows?  
+A: Automatically checks and reverts on overflow.
+
+Q90: What is unchecked block?  
+A: { unchecked { i++; } } to disable overflow checks for gas savings.
+
+Q91: What is a reentrancy attack?  
+A: Attacker calls back into contract before state update.
+
+Q92: How to prevent reentrancy?  
+A: Use Checks-Effects-Interactions pattern or ReentrancyGuard.
