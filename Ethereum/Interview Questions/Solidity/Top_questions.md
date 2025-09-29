@@ -343,3 +343,46 @@ Answer: call executes code in another contract in its own context. delegatecall 
 What is the difference between transfer() and send()?
 
 Answer: Both send Ether. send() returns a bool on failure, transfer() reverts. transfer() is generally safer
+
+What is a Custom Error and why is it better than a string?
+
+Answer: Defined with error MyError();. It's more gas-efficient because it uses only 4 bytes of selector instead of a full string.
+What is the difference between block.chainid and address(this).codehash?
+
+Answer: block.chainid identifies the network (e.g., Mainnet=1). address(this).codehash is the hash of the contract's runtime code.
+What is type(X).name and type(X).creationCode?
+
+Answer: Returns the name of contract X and its creation bytecode, respectively.
+What is unchecked and when would you use it?
+
+Answer: A block that disables automatic overflow checks for gas optimization, to be used only where arithmetic is guaranteed to be safe.
+
+
+What are the different types of Proxies? (Transparent vs UUPS)
+
+Answer: Transparent: Upgrade logic is in the Proxy admin. UUPS: Upgrade logic is in the Implementation contract itself. UUPS is more gas-efficient but riskier if the implementation lacks upgrade function.
+What is a Beacon Proxy?
+
+Answer: Many Proxies point to a single "Beacon" contract that holds the implementation address. Updating the Beacon updates all proxies at once.
+Explain the Diamond Pattern (EIP-2535).
+
+Answer: A multi-facet proxy that allows adding/replacing/removing any number of functions from a single contract address, solving code size limits.
+What is an Initializer function and why is it used?
+
+Answer: Replaces the constructor in upgradeable contracts, called manually after deployment to set up initial state.
+What is the "Constructor" problem in Proxies?
+
+Answer: The constructor of the Logic contract only runs once during its deployment, not when the Proxy uses it via delegatecall. Hence, the Proxy's state is not initialized by it.
+
+
+Design a DEX. How do you handle price, liquidity, and swaps?
+* Answer: Constant Product Formula (x*y=k), LP tokens, fee structure, flash loan resistance, and oracle security (TWAP).
+
+Your contract is at the 24KB size limit. How do you reduce it?
+* Answer: Use a Proxy pattern, move logic to external libraries, use modifiers sparingly, shorten error names, use Solidity optimizer.
+
+Gas costs are too high for your users. What are your optimization strategies?
+* Answer: Audit gas usage, implement all gas optimizations, consider moving to an L2 (Arbitrum, Optimism, Base), or implement meta-transactions.
+
+
+A Sybil attack in a blockchain context, including those built with Solidity, is an attempt to control a network by creating a large number of fake identities (Sybils) from a single or small number of malicious actors.
