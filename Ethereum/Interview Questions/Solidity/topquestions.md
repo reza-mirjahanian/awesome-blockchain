@@ -77,3 +77,66 @@ A: Use TWAP (Time-Weighted Average Price).
 
 Q185: What is integer overflow edge case?  
 A: In <0.8, uint256 max +1 =0; now reverts.
+
+Q179: What is MEV?  
+A: Miner/Maximal Extractable Value from tx ordering.
+
+Q180: How to protect from MEV?  
+A: Use Flashbots or private relays.
+
+---
+
+Q175: What is account abstraction?  
+A: EIP-4337: UserOperations for custom validation.
+
+Q176: How does ERC-4337 work?  
+A: EntryPoint contract handles bundles, paymasters.
+
+Q177: What is a paymaster?  
+A: Pays gas for users in account abstraction.
+
+Q178: What is a bundler?  
+A: Relays UserOps to EntryPoint.
+
+---
+
+Q159: What is Yul?  
+A: Intermediate language for Solidity, like assembly.
+
+Q160: How to use inline assembly?  
+A: assembly { let x := add(1, 2) }
+
+Q161: What is mload?  
+A: Loads 32 bytes from memory.
+
+Q162: What is mstore?  
+A: Stores 32 bytes to memory.
+
+Q163: What is sload?  
+A: Loads from storage slot.
+
+Q164: What is sstore?  
+A: Stores to storage slot.
+
+Q165: What is a storage slot?  
+A: 256-bit location in contract storage.
+
+Q166: How are mappings stored?  
+A: keccak256(key . slot) as storage key.
+
+Q167: How are dynamic arrays stored?  
+A: Length at slot, elements at keccak256(slot).
+
+Q168: What is packing in storage?  
+A: Combining small types into one slot to save gas.
+
+Q169: Example of packing?  
+A: uint128 a; uint128 b; // in one slot.
+
+Q170: What is dirty storage write?  
+A: Changing a slot costs more if it was zero.
+
+Q171: Gas cost of sstore?  
+A: 20,000 if new, 5,000 if dirty, refunds possible.
+
+---
