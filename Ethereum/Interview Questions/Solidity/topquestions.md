@@ -60,3 +60,20 @@ A: Random inputs to find bugs.
 
 Q203: What is invariant testing?  
 A: Properties that always hold, e.g., totalSupply == sum balances.
+
+Q195: How to audit Solidity code?  
+A: Use Slither, MythX, manual review.
+
+Q191: Tricky: msg.value in delegatecall?  
+A: 0, since no value forwarded.
+
+Q188: What happens on uint256 overflow in unchecked?  
+A: Wraps around modular arithmetic.
+
+
+Q183: How to mitigate oracle issues?  
+A: Use TWAP (Time-Weighted Average Price).
+
+
+Q185: What is integer overflow edge case?  
+A: In <0.8, uint256 max +1 =0; now reverts.
