@@ -140,3 +140,135 @@ Q171: Gas cost of sstore?
 A: 20,000 if new, 5,000 if dirty, refunds possible.
 
 ---
+Q155: What is ABI?  
+A: Application Binary Interface for encoding/decoding calls.
+
+Q156: How to generate ABI?  
+A: Compiled output from solc.
+
+Q157: What is solc?  
+A: Solidity compiler.
+
+---
+
+Q138: What is Chainlink?  
+A: Oracle network for off-chain data.
+
+Q139: How to use Chainlink in Solidity?  
+A: Inherit VRFConsumerBase or AggregatorV3Interface.
+
+Q140: What is VRF?  
+A: Verifiable Random Function for randomness.
+
+Q141: What is a keeper?  
+A: Automated bot for upkeep, e.g., Chainlink Keepers.
+
+Q142: What is Gelato?  
+A: Automation network similar to keepers.
+
+Q143: What is The Graph?  
+A: Indexing protocol for querying blockchain data.
+
+--
+
+Q134: What is constant product formula?  
+A: x * y = k for liquidity pools.
+
+Q135: How to interact with Uniswap in Solidity?  
+A: Call router functions like swapExactTokensForTokens.
+
+Q136: What is slippage?  
+A: Difference between expected and actual price due to trade size.
+
+Q137: What is impermanent loss?  
+A: LP value loss from price divergence.
+
+---
+
+Q124: What is domain separator in EIP-712?  
+A: Prevents replay across chains/apps.
+
+Q125: What is a nonce?  
+A: Counter to prevent replay attacks.
+
+Q126: What is AccessControl in OpenZeppelin?  
+A: Role-based access with grant/revoke roles.
+
+Q127: What is TimelockController?  
+A: Delays execution for governance.
+
+Q128: What is Governor contract?  
+A: For DAO voting and proposals.
+
+Q129: What is ERC-2612?  
+A: Permit for gasless approvals via signatures.
+
+Q130: How does permit work?  
+A: approve via signature, using nonces.
+
+Q119: What is Merkle tree?  
+A: Hash tree for efficient proofs, used in airdrops.
+
+Q120: How to use Merkle proof in Solidity?  
+A: Verify leaf against root using keccak256.
+
+Q121: What is ECDSA?  
+A: Elliptic Curve Digital Signature Algorithm for signing.
+
+---
+
+Q113: What is a multicall?  
+A: Pattern to batch multiple calls in one transaction.
+
+Q114: What is flash loan?  
+A: Borrow and repay in one transaction, e.g., via Aave.
+
+Q115: How to implement flash loan in Solidity?  
+A: Provide callback to borrower, ensure repayment.
+
+Q116: What is ERC-1155?  
+A: Multi-token standard for fungible and non-fungible.
+
+Q117: What is safeTransferFrom?  
+A: In ERC-721/1155, checks if recipient can handle tokens.
+
+---
+
+Q106: How to deploy a contract from Solidity?  
+A: new MyContract(args);
+
+Q107: What is CREATE opcode?  
+A: EVM opcode for deploying contracts.
+
+Q108: What is CREATE2?  
+A: Deterministic deployment with salt for predictable addresses.
+
+Q109: How to use CREATE2 in Solidity?  
+A: new MyContract{salt: salt}(args);
+
+Q110: What is address(this)?  
+A: Current contract's address.
+
+Q111: What is balance of an address?  
+A: address.balance (in wei).
+
+---
+
+Q102: What is tx.origin?  
+A: Original sender of the transaction (not reliable for auth).
+
+Q103: Difference between msg.sender and tx.origin?  
+A: msg.sender is immediate caller; tx.origin is transaction initiator.
+
+Q104: Why avoid tx.origin?  
+A: Vulnerable to phishing-like attacks.
+---
+
+Q96: What is a proxy contract?  
+A: For upgradability, delegates calls to implementation.
+
+Q97: What is UUPS proxy?  
+A: Universal Upgradeable Proxy Standard (ERC-1967).
+
+Q98: What is transparent proxy?  
+A: Proxy that handles upgrades transparently.
