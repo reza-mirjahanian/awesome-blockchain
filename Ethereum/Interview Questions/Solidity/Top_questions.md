@@ -322,3 +322,24 @@ A: For functions, callable only from outside.
 
 Q71: How do you optimize gas?  
 A: Use immutables, pack variables, avoid loops.
+
+---
+
+What is the msg.sender and msg.value?
+
+Answer: msg.sender is the immediate caller of the function. msg.value is the amount of native Ether (in wei) sent with the call.
+What is a function selector?
+
+Answer: The first 4 bytes of the keccak hash of the function signature, used to identify which function to call.
+What is an Event and why is it important?
+
+Answer: Logged data on-chain, stored cheaply and is queryable off-chain. Crucial for dApp frontends and tracking contract state.
+What is the difference between call, delegatecall, and staticcall?
+
+Answer: call executes code in another contract in its own context. delegatecall executes code in another contract in the context of the caller. staticcall is like call but reverts if state is modified.
+
+---
+
+What is the difference between transfer() and send()?
+
+Answer: Both send Ether. send() returns a bool on failure, transfer() reverts. transfer() is generally safer
