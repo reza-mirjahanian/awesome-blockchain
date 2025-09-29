@@ -289,3 +289,36 @@ A: Attacker calls back into contract before state update.
 
 Q92: How to prevent reentrancy?  
 A: Use Checks-Effects-Interactions pattern or ReentrancyGuard.
+
+----
+
+Q75: What is keccak256?  
+A: Hash function, e.g., keccak256(abi.encodePacked(data)).
+
+Q76: What is abi.encode?  
+A: Encodes data to ABI format for calls.
+
+Q77: What is abi.decode?  
+A: Decodes ABI-encoded data.
+
+Q78: What is 'pure' function modifier?  
+A: Does not read or write state, only computes.
+
+Q79: What is 'view' function modifier?  
+A: Reads state but does not write.
+
+Q80: Difference between 'pure' and 'view'?  
+A: 'pure' cannot read state; 'view' can read but not write.
+
+Q81: What is 'private' visibility?  
+A: Accessible only within the current contract.
+
+Q82: What is 'internal' visibility?  
+A: Accessible within current and derived contracts.
+
+Q83: What is 'external' visibility?  
+A: For functions, callable only from outside.
+--
+
+Q71: How do you optimize gas?  
+A: Use immutables, pack variables, avoid loops.
